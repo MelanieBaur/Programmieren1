@@ -1,40 +1,43 @@
 <!--
-
 author: Melanie Baur
 language: de
-version: 0.01
+version: 0.0.1
 narrator: Deutsch Female
+mode: Textbook
 
-comment: Ein erster Test für Programmieren 1
+comment: Erster Test für Programmieren 1
 
 import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
 -->
 
-# Vorwort
+# Programmieren 1 in Java
+<article>
 Dieses Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java in den Studiengängen Informatik und Wirtschaftsinformatik im 1. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert.
 
 Als Arbeitsweise wird für die Teilnehmenden der oben genannten Vorlesungen vorgeschlagen, jede Woche ein Kapitel durchzuarbeiten inkl. der zur Verfügung stehenden Programmieraufgaben. Der geschätze Zeitaufwand beträgt ohne Vorkenntnisse pro Woche 16 Stunden. Hiervon werden 6 Stunden an der Hochschule erbracht, ein:e Professor:in und/oder ein:e Assistent:in stehen hierbei für Fragen zur Verfügung. 10 Stunden sollen selbständig absolviert werden.
 
-
+</article>
 TODO:
 Viele Beispiele können direkt im Buch ausgeführt werden. --> Erklärung folgt
 
 
-# Einführung
+
+## Einführung
 
 Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt. 
 
-- Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
-- Haben Sie Schwimmen oder Radfahren aus Büchern erlernt? 
-- Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
-- Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
+* Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
+* Haben Sie Schwimmen oder Radfahren aus Büchern erlernt? 
+* Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
+* Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
 
-## Was ist Programmieren?
+### Was ist Programmieren?
 Unter Programmieren versteht man das Erstellen von Anweisungen für eine Maschine. 
 Im Rahmen der nächsten zwei Semester werden Sie folgendes Lernen: 
-- Programmieren 1: Erwerb der Fähigkeit, ein (mittelgroßes) Java-Programm zu schreiben
-- Programmieren 2: Erweiterung um die „Kommunikation mit der Außenwelt“ und Einführung in die Web-Programmierung
+
+* Programmieren 1: Erwerb der Fähigkeit, ein (mittelgroßes) Java-Programm zu schreiben
+* Programmieren 2: Erweiterung um die „Kommunikation mit der Außenwelt“ und Einführung in die Web-Programmierung
 
 Ein Programm ist vergleichbar mit einem Kochrezept:
 Ziel ist es einen bzw. mehrere fertige Pfannkuchen aus verschiedenen einzelnen Zutaten zu kochen.
@@ -69,7 +72,7 @@ Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuv
 
 
 
-# Was ist eigentlich Code?
+### Was ist eigentlich Code?
 
 Diese vorhergehenden Erklärungen waren für die meisten wahrscheinlich noch nicht total einleuchtend. Bei komplexen Themen wie Programmieren haben wir oft ein Henne-Ei-Problem bei der Einführung. Es wird sich lichten.
 
@@ -78,10 +81,10 @@ Mit Inspiration von [Stanford CS101](https://web.stanford.edu/class/cs101/)
 -> hier fehlt noch Text
 
 
-# Arrays
+## Arrays
 
-## Arrays: Motivation
-Um zu messen wie schnell Sie Java-Code tippen, können sind Sie wie folgt vorgegangen:
+### Arrays: Motivation
+Um zu messen wie schnell Sie Java-Code tippen können, sind Sie wie folgt vorgegangen:
 
 - Täglich üben und `wpm` messen
 - Wert in einer Variable für diesen Tag eintragen
@@ -150,7 +153,8 @@ int[] wpm = {55, 57, 49, 63, 0, 56, 70};
 Im Speicher wird Platz für 7 direkt hintereinanderliegende int-Werte reserviert und befüllt:
 
 TODO: Die Tabelle sieht doof aus
-<!-- data-transpose style="color: grey"-->
+
+
 | Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |-------|---|---|---|---|---|---|---|
 | Wert  | 55| 57| 49| 63| 0 | 56| 70|
@@ -187,16 +191,16 @@ class Demo{
 @LIA.java(Demo)
 
 
-## Array Basics
+### Array Basics
 
-## For-Each-Schleife
+### For-Each-Schleife
 
-## Zählschleife ("normale for-Schleife")
+### Zählschleife ("normale for-Schleife")
 
-## Mehrdimensionale Arrays
+### Mehrdimensionale Arrays
 
-## Abschluss und Aufgaben
+### Abschluss und Aufgaben
 
-# Kapitel 2
-# Kapitel 3
-# Kapitel 4
+## Kapitel 2
+## Kapitel 3
+## Kapitel 4
