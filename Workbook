@@ -1,11 +1,11 @@
 <!--
 author: Melanie Baur
 language: de
-version: 0.0.1
+version: 0.0.2
 narrator: Deutsch Female
 mode: Textbook
 
-comment: Erster Test für Programmieren 1
+comment: Vorlesung Programmieren 1 an der HFT Stuttgart, content adaptiert von Sebastian Speiser
 
 import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
@@ -13,18 +13,43 @@ import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
 # Programmieren 1 in Java
 <article>
-Dieses Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java in den Studiengängen Informatik und Wirtschaftsinformatik im 1. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert.
+Dieses Online-Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java zunächst in den Studiengängen Informatik und Wirtschaftsinformatik im 1. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert.
 
 Als Arbeitsweise wird für die Teilnehmenden der oben genannten Vorlesungen vorgeschlagen, jede Woche ein Kapitel durchzuarbeiten inkl. der zur Verfügung stehenden Programmieraufgaben. Der geschätze Zeitaufwand beträgt ohne Vorkenntnisse pro Woche 16 Stunden. Hiervon werden 6 Stunden an der Hochschule erbracht, ein:e Professor:in und/oder ein:e Assistent:in stehen hierbei für Fragen zur Verfügung. 10 Stunden sollen selbständig absolviert werden.
 
+Lesen Sie gerne ein "echtes" Buch? So empfehlen wir die Lektüre von Philipp Ackermann: Schrödinger programmiert Java, Rheinwerk. Sie finden dieses Buch als eBook in der HFT Bibliothek.
+
+Die wichtigsten Informationen finden Sie aber in diesem Online-Buch. Dieses besteht nicht nur aus Text, sondern auch aus Links zu externen Webseiten. Für diese übernehmen wir keinerlei Haftung. Weiterhin gibt es natürlich viele Code-Beispiele. Diese können Sie direkt im Online-Buch ausführen. 
+
+Zum Beispiel ist das folgende ein Programm-Code, bei dem etwas auf der Konsole ausgegeben wird.
+
+```java
+class HalloWelt{
+    public static void main(String args[]){
+        System.out.println("Hallo Welt");
+    }
+}
+```
+@LIA.java(HalloWelt)
+
+Klicken Sie nun auf </> im kleinen Kreis unter der Code-Zeile, so wird der Code ausgeführt und Sie sehen im schwarzen Kästchen, das dann erscheint, das Ergebnis.
+
 </article>
-TODO:
-Viele Beispiele können direkt im Buch ausgeführt werden. --> Erklärung folgt
+
+Natürlich sollen Sie nicht nur lesen, sondern insbesondere auch viel selbst machen. Hier kommt die erste Aufgabe.
+
+**Aufgabe:**
+Geben Sie nun statt "Hallo Welt" einen anderen Text zwischen den Anführungszeichen ein. Führen Sie den Code erneut aus. Was fällt Ihnen auf?
+
+Auf der rechten Seiten unterhalb des Codes, können Sie nun mit den Pfeilen zwischen den verschiedenen Codes hin- und herwechseln. Gehen Sie mit dem Pfeil nach links zurück auf den ursprünglichen Code und dann mit dem Pfeil nach rechts wieder zu Ihrem neuen Code.
+
+
+**Übungen:**
+Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) zu jedem Kapitel Übungen bereit gestellt. Sie werden im Laufe des Buchs immer wieder zu diesen Übungen aufgefordert. Führen Sie die Aufgaben gewissenhaft aus. Bei Problemen fragen Sie einfach in der nächsten Mentoringstunde. 
 
 
 
 ## Einführung
-
 Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt. 
 
 * Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
@@ -32,9 +57,68 @@ Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tät
 * Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
 * Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
 
+### Was ist Code?
+* Code ist eine Reihe von Anweisungen,
+*Jede Anweisung beschreibt welche Operation (z.B. Addition) der Computer mit welchen Operanden (z.B. 5 und 3) ausführen soll
+* Der Computer führt eine Anweisung nach der anderen aus
+
+Programme bestehen nun aus Millionen von Anweisungen. Die Anweisungen sind wiederum Zahlen,  - hier als Hexadezimal-codierter x86-Code (erstellt mit [godbolt.org](https://godbolt.org/z/WYorj7EG5)):. 
+
+```
+    55 48 89 e5\n
+    89 7d fc 8b\n
+    45 fc 0f c0\n
+    5d c3\n
+```
+    
+So zu entwickeln ist sehr kompliziert und fehleranfällig, also gibt es ein Abstraktionsniveau höher Assembler - menschenmerkbare Abkürzungen für die Befehle und Hilfe bei der Berechnung von Speicheradressen, wo Daten abgespeichert sind, z.B.:
+
+  ```
+push   rbp
+ mov    rbp,rsp
+ mov    DWORD PTR [rbp-0x4],edi
+ mov    eax,DWORD PTR [rbp-0x4]
+ imul   eax,eax
+ pop    rbp
+ ret    
+main:
+ push   rbp
+ mov    rbp,rsp
+ mov    eax,0x0
+ pop    rbp
+ ret  
+  ```
+
+Auch dies ist noch recht aufwändig - und zudem noch an eine konkrete Prozessorarchitektur gebunden. Als nächstes Abstraktionsniveau kann man dann eine höhere Programmiersprache nehmen, z.B.:
+
+```
+int square(int num) {
+    return num * num;
+}
+```
+
+Wir nutzen als Programmiersprache Java. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird.
+
+### Welcher Code wird ausgeführt?
+Das Betriebssystem startet den binären Code bei der ersten Anweisung - aber wo ist das in unserem Code der höheren Programmiersprache?
+
+Im allgemeinen Java-Programm: die Main-Methode der Hauptklasse.
+
+### Wo kommen Sie ins Spiel?
+* Computer führen exakt den Code aus, den sie vorgesetzt bekommen
+* Compiler übersetzen genau das was im Programmtext steht in Maschinencode
+* Programmierer:
+    * Analysieren Problemen
+    * Überlegen sich Lösungen
+    * Übersetzen Lösungen in Programmtext
+
+Der Computer ist nicht kreativ und findet keine Lösungen. Dafür gibt es die glorreiche Tätigkeit des Programmierens.
+
+
 ### Was ist Programmieren?
-Unter Programmieren versteht man das Erstellen von Anweisungen für eine Maschine. 
-Im Rahmen der nächsten zwei Semester werden Sie folgendes Lernen: 
+Unter Programmieren versteht man das Erstellen von Anweisungen für eine Maschine. Dies hat historisch eine viel längere Geschichte, als Sie wahrscheinlich vermuten. Besuchen Sie diese [Seite](https://www.cs101.com/) und überzeugen Sie sich selbst. 
+
+Im Rahmen der nächsten zwei Semester werden Sie nun folgendes Lernen: 
 
 * Programmieren 1: Erwerb der Fähigkeit, ein (mittelgroßes) Java-Programm zu schreiben
 * Programmieren 2: Erweiterung um die „Kommunikation mit der Außenwelt“ und Einführung in die Web-Programmierung
@@ -66,19 +150,139 @@ pfannkuchen_machen {
 }
 ```
 
-### Aufgabe
-Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+### Java
+Sie werden im 1. Semester also zunächst Java erlernen. 
+
+* Java ist eine weitverbreitete Programmiersprache.
+* Java unterstützt viele Programmierparadigmen.
+* Java wird ständig weiter entwickelt und um moderne Konzepte ergänzt
+* Mit Java stellen wir uns auf „die Schultern eines Riesen“:
+    * Hunderte Paket
+    * Tausende vordefinierte Klassen
+
+
+### Das erste Programm
+Der Grundbaustein sind Anweisungen mit verschiedenen Untertypen:
+
+1. Variablen deklarieren: Speicher für Daten reservieren
+2. Variablen zuweisen: Werte oder Berechnungen im reservierten Speicher ablegen
+3. Methodendeklarationen: eine bestimmte Sammlung von Anweisungen definieren, die unter einem Namen abgerufen werden kann, ggfs. mit Parametern
+4. If-Anweisungen: Je nach Wert einer Bedingung, eine von mehreren Anweisungsblöcken ausführen
+5. Schleifen: einen Anweisungsblock wiederholt ausführen
+
+#### Variablen deklarieren
+Der Speicher im Computer besteht nur aus einer langen Folge von 0en und 1en. Jeweils 8 werden zu einem Byte zusammengefasst. Die Bytes werden durchnummeriert (beginnend bei 0). Die Nummer eines Bytes ist dessen Adresse.
+
+Variablen geben einer bestimmten Speicherstelle einen Namen und einen Typen:
+
+* Einfacher zu merken als eine Speicheradresse
+* Kann gleich bleiben auch wenn sich die Speicheradresse ändert
+* Der Typ kann bestimmte Arten von Programmfehlern verhindern und bestimmt wie viele Bytes die Variable umfasst
+
+Eine Variable ist alsoeine Art Gefäß im Speicher. Werte können überprüft, verändert und vor allem gespeichert werden.
+Variablen haben einen bestimmten TYP, eine ADRESSE im Speicher, einem NAMEN und natürlich einem WERT. Java ist eine statisch typisierte Programmiersprache. Das bedeutet, dass jede Variable einen festen Typ hat, der bereits zur Übersetzungszeit bekannt ist (hierzu später mehr).
+
+Wie funktioniert nun die Deklaration von Variablen in Java:
+
+```
+int schuhgroesse;  // Das hier ist übrigens ein Kommentar
+char buchstabe1, buchstabe2, buchstabe3; // Hiervon braucht man oft mehrere
+double temperatur; // Kommazahl
+boolean sonnigerTag; // wahr/falsch, ja/nein -> boolean
+```
+
+In Java können wir Variablen direkt bei der Deklaration mit einem Wert initialisieren, hier *Literals* also Konstanten im Programmtext:
+
+```
+int schuhgroesse = 42;
+double temperatur = 20.2; // Ohne Einheit - müssen wir uns separat merken
+double wunschEinkommen = 50_000; // Euro? Brutto/Netto? Im Jahr oder Monat?
+boolean sonnigerTag = true;
+```
+
+Allgemein also: 
+
+```
+Datentyp Variablenname = Wert;
+```
+
+Hinweis: Man muss einer Variable nicht sofot einen Wert geben. Dies kann auch später geschehen. Die Variable erhält dann zunächst einen Standardwert - je nach Datentyp. 
+
+
+Hier finden Sie eine Übersicht über verschiedene primitive Datentypen, das sind die elementaren Datentypen:
+
+| Datentyp   | Bit   | Minimum   | Maximum   |
+| :--------- | :--------- | :--------- | :--------- |
+| byte    | 8-Bit     | -128    | 127    |
+| short    | 16-Bit     | -32768    | 32767    |
+| int    | 32-Bit     | -2147483648    | 2147483647   |
+| long    | 64-Bit     | -9223372036854775808    | 9223372036854775807    |
+| float    | 32-Bit     | -3.4 * (10<sup>38</sup>)    | 3.4 * (10<sup>38</sup>)      |
+| double    | 64-Bit     | -1.7 * (10<sup>308</sup>)    | 1.7 * (10<sup>308</sup>)    |
+
+Weiterhin gibt es noch die beiden Datentypen `boolean` und `char`: 
+
+| Datentyp   | Bit   |Werte   |
+| :--------- | :--------- | :--------- | 
+| boolean    | 1 Byte     | true / false   | 
+| char    | 2 Byte     | Ein Unicode-Zeichen  | 
+
+Primitive Typen werden immer klein geschrieben. 
+
+#### Variablen zuweisen: Ausdrücke
+Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
+
+```
+temperatur = 18.7;
+```
+
+Das ist eine Zuweisungs-Anweisung. Links vom Gleichheitszeichen steht der Name einer bereits deklarierten Variable. Rechts vom Gleichheitszeichen steht ein Ausdruck.
+
+Für Ausdrücke gibt es verschiedene Aufbauten:
+
+* Literale - das sind konstante Werte, die direkt im Programmtext geschrieben werden, z.B. `8`, `17.4`, `'a'`, `"Hallo Welt"`
+* Variablen - der Name einer bestehenden Variable, dieser wird bei der Auswertung des Ausdrucks mit dem aktuellen Wert der Variable ersetzt, z.B. `schuhgroesse`
+* Methodenaufrufe - siehe unten. Es wird Code, der unter dem Methodennamen abgespeichert ist ausgeführt und das Ergebnis zurück geliefert, z.B. `readInt()`, manche Methoden nehmen Parameter (wiederum Ausdrücke), z.B. `System.out.println("Hallo Welt")`
+* Operationen: hier werden eine oder mehrere (meistens zwei) Ausdrücke mit einem Operator verknüpft, z.B. `schuhgroesse + wunschEinkommen`
+
+In Java müssen wir den Wert eines Ausdrucks einer Variable zuweisen:
+
+```
+double komischeZahl = schuhgroesse + wunschEinkommen;
+```
+oder uns per Methodenaufruf ausgeben:
+```
+System.out.println("Hallo " + "Programmieren " + 1)
+```
+Mit Operationen und Methodenaufrufen können komplexe Ausdrücke geschafften werden, z.B.:
+```
+System.out.println("In Fahrenheit: " + ((readDouble() * 9.0/5.0) + 32))
+```
+Auch dazu später mehr.
+
+Ausdrücke werden von innen nach außen ausgewertet, d.h. bei verschachtelten Ausdrücken erst die Sachen in Klammern, bzw. nach Prioritäten ("Punkt vor Strich).
+
+Bei Zuweisungen wird erst die rechte Seite berechnet und dann erst die links genannte Variable aktualisiert:
+
+```
+int wert = 10;
+wert
+```
+
+```
+wert = wert + 1;
+wert
+```
+
+### Aufgaben - Übung 1
+1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+
+2) Um Code auszuführen benötigen wir
+
+3) Entwicklungsumgebung.
 
 
 
-
-### Was ist eigentlich Code?
-
-Diese vorhergehenden Erklärungen waren für die meisten wahrscheinlich noch nicht total einleuchtend. Bei komplexen Themen wie Programmieren haben wir oft ein Henne-Ei-Problem bei der Einführung. Es wird sich lichten.
-
-Mit Inspiration von [Stanford CS101](https://web.stanford.edu/class/cs101/)
-
--> hier fehlt noch Text
 
 
 ## Arrays
