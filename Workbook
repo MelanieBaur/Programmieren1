@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur
 language: de
-version: 0.0.2
+version: 0.0.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -57,23 +57,25 @@ Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tät
 * Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
 * Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
 
+Sie lernen zunächst, was Code und was ein Programm ist. Am Ende des Kapitels werden Sie Ihr erstes eigenes Programm schreiben und ausführen.
+
 ### Was ist Code?
 * Code ist eine Reihe von Anweisungen,
-*Jede Anweisung beschreibt welche Operation (z.B. Addition) der Computer mit welchen Operanden (z.B. 5 und 3) ausführen soll
+* Jede Anweisung beschreibt, welche Operation (z.B. Addition) der Computer mit welchen Operanden (z.B. 5 und 3) ausführen soll
 * Der Computer führt eine Anweisung nach der anderen aus
 
-Programme bestehen nun aus Millionen von Anweisungen. Die Anweisungen sind wiederum Zahlen,  - hier als Hexadezimal-codierter x86-Code (erstellt mit [godbolt.org](https://godbolt.org/z/WYorj7EG5)):. 
+Programme bestehen nun aus Millionen von Anweisungen. Die Anweisungen sind wiederum Zahlen - hier als Hexadezimal-codierter x86-Code (erstellt mit [godbolt.org](https://godbolt.org/z/WYorj7EG5)):. 
 
 ```
-    55 48 89 e5\n
-    89 7d fc 8b\n
-    45 fc 0f c0\n
-    5d c3\n
+55 48 89 e5
+89 7d fc 8b
+45 fc 0f c0
+5d c3\n
 ```
     
 So zu entwickeln ist sehr kompliziert und fehleranfällig, also gibt es ein Abstraktionsniveau höher Assembler - menschenmerkbare Abkürzungen für die Befehle und Hilfe bei der Berechnung von Speicheradressen, wo Daten abgespeichert sind, z.B.:
 
-  ```
+```
 push   rbp
  mov    rbp,rsp
  mov    DWORD PTR [rbp-0x4],edi
@@ -87,7 +89,7 @@ main:
  mov    eax,0x0
  pop    rbp
  ret  
-  ```
+```
 
 Auch dies ist noch recht aufwändig - und zudem noch an eine konkrete Prozessorarchitektur gebunden. Als nächstes Abstraktionsniveau kann man dann eine höhere Programmiersprache nehmen, z.B.:
 
@@ -97,14 +99,14 @@ int square(int num) {
 }
 ```
 
-Wir nutzen als Programmiersprache Java. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird.
+Wir nutzen als Programmiersprache Java. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird. Aber hierzu am Ende das Kapitels mehr.
 
-### Welcher Code wird ausgeführt?
+**Welcher Code wird ausgeführt?**
 Das Betriebssystem startet den binären Code bei der ersten Anweisung - aber wo ist das in unserem Code der höheren Programmiersprache?
 
 Im allgemeinen Java-Programm: die Main-Methode der Hauptklasse.
 
-### Wo kommen Sie ins Spiel?
+**Wo kommen Sie ins Spiel?**
 * Computer führen exakt den Code aus, den sie vorgesetzt bekommen
 * Compiler übersetzen genau das was im Programmtext steht in Maschinencode
 * Programmierer:
@@ -150,7 +152,7 @@ pfannkuchen_machen {
 }
 ```
 
-### Java
+### Java und das erste Programm
 Sie werden im 1. Semester also zunächst Java erlernen. 
 
 * Java ist eine weitverbreitete Programmiersprache.
@@ -161,7 +163,7 @@ Sie werden im 1. Semester also zunächst Java erlernen.
     * Tausende vordefinierte Klassen
 
 
-### Das erste Programm
+**Das erste Programm**
 Der Grundbaustein sind Anweisungen mit verschiedenen Untertypen:
 
 1. Variablen deklarieren: Speicher für Daten reservieren
