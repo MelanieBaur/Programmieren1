@@ -1,16 +1,15 @@
 <!--
 author: Melanie Baur
 language: de
-version: 0.0.1
+version: 0.0.2
 narrator: Deutsch Female
 mode: Textbook
 
-comment: Vorlesung Programmieren 1 an der HFT Stuttgart, content adaptiert von Sebastian Speiser
+comment: Vorlesung Programmieren 1 an der HFT Stuttgart, content adaptiert von Sebastian Speiser und weiteren Professoren und Hiwis der HFT Stuttgart
 
 import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
 -->
-
 # Programmieren 1 in Java
 <article>
 Dieses Online-Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java zunächst in den Studiengängen Informatik und Wirtschaftsinformatik im 1. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert.
@@ -49,7 +48,7 @@ Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](
 
 
 
-## Einführung
+## Einführung 
 Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt. 
 
 * Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
@@ -57,7 +56,7 @@ Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tät
 * Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
 * Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
 
-Sie lernen zunächst, was Code und was ein Programm ist. Am Ende des Kapitels werden Sie Ihr erstes eigenes Programm schreiben und ausführen.
+Sie lernen zunächst, was Code und was ein Programm ist. Am Ende des Kapitels werden Sie Ihr erstes eigenes Programm in der Programmiersprache schreiben und ausführen.
 
 ### Was ist Code?
 * Code ist eine Reihe von Anweisungen,
@@ -102,11 +101,18 @@ int square(int num) {
 Wir nutzen als Programmiersprache Java. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird. Aber hierzu am Ende das Kapitels mehr.
 
 **Welcher Code wird ausgeführt?**
+
 Das Betriebssystem startet den binären Code bei der ersten Anweisung - aber wo ist das in unserem Code der höheren Programmiersprache?
 
-Im allgemeinen Java-Programm: die Main-Methode der Hauptklasse.
+Im allgemeinen Java-Programm: die Main-Methode der Hauptklasse: 
+
+```
+public static void main(String[] args) {
+}
+```
 
 **Wo kommen Sie ins Spiel?**
+
 * Computer führen exakt den Code aus, den sie vorgesetzt bekommen
 * Compiler übersetzen genau das was im Programmtext steht in Maschinencode
 * Programmierer:
@@ -164,6 +170,7 @@ Sie werden im 1. Semester also zunächst Java erlernen.
 
 
 **Das erste Programm**
+
 Der Grundbaustein sind Anweisungen mit verschiedenen Untertypen:
 
 1. Variablen deklarieren: Speicher für Daten reservieren
@@ -171,6 +178,99 @@ Der Grundbaustein sind Anweisungen mit verschiedenen Untertypen:
 3. Methodendeklarationen: eine bestimmte Sammlung von Anweisungen definieren, die unter einem Namen abgerufen werden kann, ggfs. mit Parametern
 4. If-Anweisungen: Je nach Wert einer Bedingung, eine von mehreren Anweisungsblöcken ausführen
 5. Schleifen: einen Anweisungsblock wiederholt ausführen
+
+Aber nun erst einmal langsam, wir machen das Schritt für Schritt. 
+
+**Aufbau eines Programms**
+
+* Ein Java-Programm ist in (Klassen), Methoden und Blöcke aufgeteilt, die ineinander verschachtelt sind.
+* Blöcke werden durch die {}-Klammern geschachtelt.
+* Der äußere Block umfasst die Klasse Uebung, der innere Block bildet den Methodenrumpf von `main` mit dem Aufruf der Methode `tue_was`.
+
+
+TODO: Bild (EF)
+
+Genauer: 
+
+* Hauptklasse oder Startklasse: Oberste Struktureinheit in Java
+* Hauptmethode oder main-Methode genannt: Hier läuft das eigentliche Programm ab, ohne die main-Methode läuft das Programm nicht.
+* Weitere Methoden: Es können für Teilberechnungen weitere Methoden definiert werden, die dann von der main-Methode aufgerufen werden.
+    * Methoden sind gespeicherte Anweisungen innerhalb eines Programms. Sie werden für einen bestimmten Zweck geschrieben und aufgerufen.
+    * Methoden kann man auch als Werkzeug betrachten. Man kann ein Werkzeug besitzen, aber es gar nicht einsetzen. 
+
+
+
+### Übersetzen und Ausführen eines Programms
+
+* Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. Source!)
+* Der Java-Compiler javac übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
+* Die Java-Laufzeitumgebung (engl. Runtime Environment) java führt den Bytecode aus.
+* Das erste Java-Programm gibt den Text „Hello World“ am Bildschirm aus.
+
+
+* Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
+
+
+![Alt text](image.png)
+
+* Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
+
+![Alt text](image-1.png)
+
+TODO: weitermachen
+
+### Übungen
+1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+2) Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel xy.
+
+## Variablen und Datentypen 
+
+Schauen Sie sich folgendes Beispiel an und überlegen Sie sich für jede Zeile, was das Programm tun könnte und welche Ausgabe der Code Ihrer Meinung nach erzeugt.
+
+```java
+public class Variablen {
+    public static void main(String[] args) {
+
+        byte b = 1;
+        System.out.println(b);
+
+        short s = 250;
+        System.out.println(s);
+
+        int i = 5;
+        System.out.println(i);
+
+        long l = 105464560L;
+        System.out.println(l);
+
+        float f = 1.5f;
+        System.out.println(f);
+
+        double d = 1.8;
+        System.out.println(d);
+
+        char c = 'a';
+        System.out.println(c);
+
+        char c2 = 65;
+        System.out.println(c2);
+
+        boolean bl = true;
+        System.out.println(bl);
+    }
+}
+```
+@LIA.java(Variablen)
+
+
+* Führen Sie nun den Code aus und überprüfen Sie Ihre Vermutung. 
+
+* Ändern Sie den Code ab und probieren Sie aus, ob das Programm noch läuft und was die Ausgabe ist. 
+
+Achtung: Wenn Sie eine rote Ausgabe erhalten, haben Sie einen fehlerhaften Code erzeugt.Können Sie den Code wieder berichtigen?
+
+* Gehen Sie nun auf die nächste Seite und arbeiten Sie die Erklärungen durch.
+
 
 #### Variablen deklarieren
 Der Speicher im Computer besteht nur aus einer langen Folge von 0en und 1en. Jeweils 8 werden zu einem Byte zusammengefasst. Die Bytes werden durchnummeriert (beginnend bei 0). Die Nummer eines Bytes ist dessen Adresse.
@@ -181,7 +281,7 @@ Variablen geben einer bestimmten Speicherstelle einen Namen und einen Typen:
 * Kann gleich bleiben auch wenn sich die Speicheradresse ändert
 * Der Typ kann bestimmte Arten von Programmfehlern verhindern und bestimmt wie viele Bytes die Variable umfasst
 
-Eine Variable ist alsoeine Art Gefäß im Speicher. Werte können überprüft, verändert und vor allem gespeichert werden.
+Eine Variable ist also eine Art Gefäß im Speicher. Werte können überprüft, verändert und vor allem gespeichert werden.
 Variablen haben einen bestimmten TYP, eine ADRESSE im Speicher, einem NAMEN und natürlich einem WERT. Java ist eine statisch typisierte Programmiersprache. Das bedeutet, dass jede Variable einen festen Typ hat, der bereits zur Übersetzungszeit bekannt ist (hierzu später mehr).
 
 Wie funktioniert nun die Deklaration von Variablen in Java:
@@ -231,6 +331,19 @@ Weiterhin gibt es noch die beiden Datentypen `boolean` und `char`:
 
 Primitive Typen werden immer klein geschrieben. 
 
+Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
+
+* Am Anfang muss ein Buchstabe (oder `_`) stehen.
+* Danach können Buchstaben oder Ziffern folgen.
+* Erlaubt (aber nicht empfohlen) sind: `$, _, ä, ö, ü, ß, €, …` (wobei `$` oft für generierte Namen verwendet wird.)
+* Nicht erlaubt sind Sonderzeichen wie `!, ?, *, /, … `
+* Groß- und Kleinschreibung ist relevant. Das bedeutet, dass Variablennamen wie `glueckszahl` und `gluecksZahl` unterschiedlich sind.
+* Variablennamen sollten zusammengeschrieben werden, also ohne Leerzeichen.
+* Eine häufige Konvention ist die Verwendung von „CamelCase“:
+  * Variablen, Methoden und Pakete beginnen klein und jedes neue Wort beginnt groß, z.B. kleinAnfangenUndJedesWortGrossBeginnen.
+  * Klassennamen beginnen groß und jedes neue Wort beginnt groß, z.B. GrossAnfangenUndJedesWortGrossBeginnen.
+
+
 #### Variablen zuweisen: Ausdrücke
 Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
 
@@ -276,15 +389,77 @@ wert = wert + 1;
 wert
 ```
 
-### Aufgaben - Übung 1
-1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+#### Operatoren
+Übersicht über wichtige Java-Operatoren:
 
-2) Um Code auszuführen benötigen wir
+| Operator | Beschreibung                                    |
+|----------|-------------------------------------------------|
+| +        | Addition von Zahlen oder Verkettung von Strings |
+| -        | Subtraktion von Zahlen                          |
+| *        | Multiplikation von Zahlen                       |
+| /        | Division von Zahlen                             |
+| %        | Modulo (Rest bei der Division)                  |
+| +=       | Addition und Zuweisung                          |
+| -=       | Subtraktion und Zuweisung                       |
+| ++       | Inkrement (Erhöhung um eins)                    |
+| --       | Dekrement (Verminderung um eins)                |
 
-3) Entwicklungsumgebung.
 
+Von den Standardoperatoren `+`, `-`, `*` (Mal), `/` (geteilt durch) für Zahlen gibt es auch jeweils eine Version, die gleich die Zuweisung integriert, z.B.:
 
+```
+int x = 5;
+x += 5; // Gleichbedeutend mit x = x + 5
+x // Hier wäre x = 10
+```
 
+```
+int y = 2;
+y *= y; // Gleichbedeutend mit y = y * y;
+y // Hier wäre y = 4
+```
+Häufig zählen wir Variablen um eins nach oben oder eins nach unten, hier gibt die Kurzformen `i++` und `i--`. Sie liefern den Wert von `i` zurück und danach wird `i` inkrementiert bzw. dekrementiert:
+
+```
+int i = 0;
+System.out.println(i++); // Gibt 0 aus und erhöht dann i auf 1
+System.out.println(i); // Gibt den neuen Wert von i (1) aus
+System.out.println(i--); // Gibt 1 aus und verringert dann i auf 0
+System.out.println(i); // Gibt den neuen Wert von i (0) aus
+```
+
+Weniger verbreitet sind die Formen `++i` und `--i`, die zuerst `i` inkrementieren bzw. dekrementieren und dann den Wert zurückliefern:
+
+```
+int i = 0;
+System.out.println(++i); // Erhöht i zuerst auf 1 und gibt dann 1 aus
+System.out.println(i); // Gibt den aktuellen Wert von i (1) aus
+System.out.println(--i); // Verringert i zuerst auf 0 und gibt dann 0 aus
+System.out.println(i); // Gibt den aktuellen Wert von i (0) aus
+```
+
+Überraschend nützlich ist der Modulo-Operator `%` - er liefert den Rest bei einer Ganzzahlendivision, z.B.:
+
+```
+int zahl = 22;
+int divisor = 4;
+int rest = zahl % divisor;
+rest // Der Wert ist 2, da 22/4 = 5 Rest 2 ist
+```
+
+Weitere Operatoren sind Vergleichsoperatoren (`==`, `!=`, `<=`, `>=`, `<`, `>`), Bit-Operatoren (`&`, `|`, `<<`, `>>`) und logische Operatoren (`&&`, `||`)
+
+### Übungen
+
+*  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
+
+* TODO: Quiz (EF)
+
+Variablentypen:
+* Temparatur 42,2 Grad speichern
+* Einzelne Buchstaben speichern
+* alle Menschen auf der Welt nummerieren
+* Satz speichern
 
 
 ## Arrays
@@ -336,8 +511,6 @@ Neben der vielen Tipparbeit ist das auch noch:
 Für sich wiederholende Berechnungen haben wir bereits die Schleife kennengelernt. Dabei konnten wir z.B. einen Zähler hochzählen:
 
 ```java
-import java.io.*;
-
 class Demo{
     public static void main(String args[]){
         int zaehler = 0;
@@ -378,8 +551,6 @@ Variablen vom Array-Typ haben eine  `.length`-Eigenschaft, die angibt wie viele 
 Nun können wir eine Schleife verwenden, um den Mittelwert zu bilden:
 
 ```java
-import java.io.*;
-
 class Demo{
     public static void main(String args[]){
         int i = 0;
@@ -396,17 +567,24 @@ class Demo{
 ```
 @LIA.java(Demo)
 
+### Mehrdimensionale Arrays
 
-### Array Basics
+## Kontrollflusss
+
+### If-Verzweigung
 
 ### For-Each-Schleife
 
 ### Zählschleife ("normale for-Schleife")
 
-### Mehrdimensionale Arrays
-
 ### Abschluss und Aufgaben
 
-## Kapitel 2
-## Kapitel 3
-## Kapitel 4
+
+
+## Strings
+## Klassen, Objekte, Methoden
+## Vererbung
+## Abstrakte Klassen, Interfaces
+## Collections & Maps
+## Exceptions
+## Generics (optional)
