@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur
 language: de
-version: 0.0.2
+version: 0.0.3
 narrator: Deutsch Female
 mode: Textbook
 
@@ -451,28 +451,313 @@ Weitere Operatoren sind Vergleichsoperatoren (`==`, `!=`, `<=`, `>=`, `<`, `>`),
 
 ### Übungen
 
+* Führen Sie folgendes Quiz durch und testen Sie Ihr Wissen: 
+
+
+**Frage 1**
+
+Welcher Variablentyp würde am besten verwendet werden, um die Temperatur `42,2` Grad zu speichern?
+
+[( )] Integer
+[(x)] Float
+[( )] String
+[( )] Boolean
+
+---
+
+**Frage 2**
+
+Welcher Variablentyp wird verwendet, um einzelne Buchstaben zu speichern?
+
+[(x)] Char
+[( )] Integer
+[( )] Float
+[( )] String
+
+---
+
+**Frage 3**
+
+Welcher Variablentyp könnte verwendet werden, um alle Menschen auf der Welt zu nummerieren?
+
+[( )] Char
+[( )] Float
+[(x)] Long
+[( )] Integer
+
+---
+
+**Frage 4**
+
+Welcher Variablentyp wird verwendet, um einen Satz zu speichern?
+
+[( )] Char
+[( )] Integer
+[( )] Float
+[(x)] String
+
 *  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
 
-* TODO: Quiz (EF)
 
-Variablentypen:
-* Temparatur 42,2 Grad speichern
-* Einzelne Buchstaben speichern
-* alle Menschen auf der Welt nummerieren
-* Satz speichern
+
+## Kontrollflusss
+
+Der Kontrollfluss in Java ermöglicht es uns, den Ablauf unseres Codes zu steuern, indem wir Entscheidungen treffen und Schleifen verwenden. Kontrollflussstrukturen wie bedingte Anweisungen und Schleifen ermöglichen es uns, unseren Code dynamisch zu gestalten und verschiedene Pfade je nach Bedingungen oder Anforderungen auszuführen.
+
+```java
+class Demo{
+    public static void main(String args[]){
+        int zahl = 10;
+
+        if (zahl % 2 == 0) {
+            System.out.println(zahl + " ist eine gerade Zahl.");
+        } else {
+            System.out.println(zahl + " ist eine ungerade Zahl.");
+        }
+        
+        System.out.println("Zahlen von 1 bis 5:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }
+    }
+}
+```
+@LIA.java(Demo)
+
+### If-Verzweigung
+Die if-Anweisung ist die einfachste Kontrollstruktur:
+
+```
+if (Bedingung) {
+    //Wenn die Bedingung `true` ist
+    Anweisung;
+}
+```
+
+Ist die Bedingung wahr, werden die Anweisungen der nächsten Zeile, bzw. des Blockes ausgeführt, ansonsten passiert nichts!
+
+Beim Auswerten der Bedingung muss ein Boolescher Wert entstehen.
+
+**Wie können diese Bedingungen aussehen?**
+
+In Programmiersprachen werden häufig Vergleiche zwischen Werten mittels Operatoren durchgeführt, um Bedingungen zu überprüfen. Hier sind einige gängige Vergleiche:
+
+- `a > 0`: Überprüft, ob der Wert von "a" größer als 0 ist.
+  
+- `c == d`: Überprüft, ob der Wert von "c" gleich dem Wert von "d" ist, zum Beispiel, ob zwei Ganzzahlen gleich sind.
+  
+- `e != 1`: Überprüft, ob der Wert von "e" ungleich 1 ist.
+  
+- `"Müller".equals("Meier")`: Überprüft die Gleichheit von zwei Strings, in diesem Fall, ob der String "Müller" gleich dem String "Meier" ist.
+
+Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Zum Beispiel:
+
+```
+if (f > 5) {
+    // Führe diesen Codeblock aus, wenn "f" größer als 5 ist
+}
+```
+**Logische Operatoren können wie folgt aussehen:**
+
+| Operator | Beschreibung                                                                                        |
+|----------|-----------------------------------------------------------------------------------------------------|
+| !        | Negation: Dreht den Wahrheitswert um (aus `true` wird `false` und aus `false` wird `true`)      |
+| &        | Und mit vollständiger Auswertung: Liefert `true`, wenn beide Ausdrücke `true` sind               |
+| \|       | Oder mit vollständiger Auswertung: Liefert `true`, wenn einer oder beide Ausdrücke `true` sind   |
+| &&       | Und mit verkürzter Auswertung: Wie &, jedoch wird sofort `false` zurückgegeben, wenn der erste Ausdruck `false` ist |
+| \|\|     | Oder mit verkürzter Auswertung: Wie \|, jedoch wird sofort `true` zurückgegeben, wenn der erste Ausdruck `true` ist  |
+| \^       | Exklusives Oder: Liefert nur `true`, wenn genau einer der beiden Ausdrücke `true` ist             |
+
+**if/else Anweisungen**
+
+Die `else`-Anweisung erweitert die Kontrollstruktur von `if`, um einen Zweig hinzuzufügen, der ausgeführt wird, wenn die Bedingung der `if`-Anweisung nicht erfüllt ist. Die `else`-Anweisung hat die folgende Syntax:
+
+```java
+if (Bedingung) {
+    // Wenn die Bedingung `true` ist
+    Anweisung;
+} else {
+    // Wenn die Bedingung `false` ist
+    Alternative_Anweisung;
+}
+```
+
+Wenn die Bedingung der `if`-Anweisung wahr ist, werden die Anweisungen innerhalb des `if`-Blocks ausgeführt. Andernfalls werden die Anweisungen innerhalb des `else`-Blocks ausgeführt.
+
+Die `else`-Anweisung ist optional und kann allein oder in Kombination mit einer `if`-Anweisung verwendet werden, um alternative Aktionen basierend auf Bedingungen auszuführen.
+
+Beispiel:
+
+```java
+if ( bestimmeSemester() == 1 ) {
+  System.out.println("Ihr Fach ist PRO1");
+} else {
+  System.out.println("Ihr Fach ist PRO2");
+}
+```
+
+Die `else`-Anweisung kann auch mit verschachtelten `if`-Anweisungen verwendet werden, um komplexere Entscheidungsstrukturen zu erstellen.
+
+```
+if ( Bedingung 1 ){   
+    Anweisung1;
+} else {    
+    if ( Bedingung 2 ){        
+        Anweisung2;    
+    } else {        
+        Anweisung3;    
+    }
+}      
+```
+
+Enthält der `else`-Zweig lediglich ein weiteres if (ggf. mit else), können die Anweisungen auch fortgesetzt werden:
+
+```
+if ( Bedingung 1 ) {
+        Anweisung1;
+    } else if ( Bedingung 2 ){ 
+        Anweisung2;
+    } else if ( Bedingung 3 ){   		
+        Anweisung3;
+    } else {    
+        Anweisung4;
+    }
+```
+
+**Der bedingte Ausdruck**
+
+- Der bedingte Ausdruck ist keine Anweisung sondern ein Operatorausdruck, also etwas, das in einem Ausdruck (z.B. einer Formel) eingesetzt werden kann. Vergleichbar mit der WENN( ; ; ) Formel in Excel: (Bedingung) ? Ausdruck1 : Ausdruck2
+ 
+- Wenn die Bedingung wahr ist, so ist der Wert des Ausdrucks identisch mit Ausdruck1, sonst mit Ausdruck2
+Beide Ausdrücke müssen vom selben Werttyp (int, char, String, etc.) sein
+
+Beispiel:
+
+```
+int urlaubstage = (alter > 28 ? 30 : 25);
+```
+
+**switch/case**
+
+Die switch-Anweisung bietet eine alternative Methode zur Kontrollstruktur if, insbesondere wenn eine Variable auf verschiedene Werte geprüft werden soll und abhängig vom Wert unterschiedliche Aktionen ausgeführt werden sollen.
+
+Die Syntax einer `switch`-Anweisung sieht folgendermaßen aus:
+![](switchcase.JPG)
+
+- Der switch-Ausdruck muss Ergebnisse vom Typ byte, short, int, char, String oder Enumeration zurückliefern
+- Im case-Teil müssen Konstanten stehen (keine Variablen, Funktionsaufrufe o.ä.)
+- Die Konstanten im case-Teil müssen vom gleichen Typ wie der switch-Ausdruck sein (also auch byte, short, int, char oder String)
+- Kein Wert der Konstanten dieser case-Zweige darf doppelt auftreten. Die Reihenfolge ist egal.
+- Nach dem case kommt eine Folge von Anweisungen; üblicherweise abgeschlossen durch ein return oder break
+- break ist optional – wenn es fehlt, wird die Bearbeitung mit dem nächsten case (ohne Prüfung!) fortgesetzt – aber Vorsicht: Fehler durch vergessene break sind schwierig zu finden.
+- der default-Zweig ist optional; es ist höchstens einer zulässig
+
+
+
+### Zählschleife ("normale for-Schleife")
+Die Schleife wird von einer Anfangszahl bis zu einer Endzahl mit einer vorgegebenen Schrittweite wiederholt.
+
+```java
+class Demo{
+    public static void main(String args[]){
+        for (int i = 0; i < 10; i++){
+          System.out.println(i);
+        }
+    }
+}
+```
+@LIA.java(Demo)
+
+**Anmerkungen**
+
+- Eine im Schleifenkopf deklarierte Variable ist nur innerhalb der Schleife sichtbar.
+- `break` verlässt die Schleife
+- `continue` springt zum Ende der Schleife
+- Teile des Kopfes können leer bleiben (z.B. stellt for(;;) eine Endlosschleife dar).
+
+**Weiteres Beispiel**
+
+```java
+class Demo{
+    public static void main(String args[]){
+        int n = 4;
+        int fakultaet = 1;
+        for(int i = 1; i<=n; i++) {
+            fakultaet *= i;
+        }
+        System.out.println(n + "! ? " + fakultaet);
+    }
+}
+```
+### For-Each-Schleife
+
+Schleife führt den Rumpf für jedes Element der Menge aus
+
+```java
+class Demo{
+    public static void main(String args[]){
+        String[] f = {"eins", "zwei", "drei"}; //Dies ist ein Array und wird im nächsten Kapitel erklärt
+        for(String s : f) {
+            System.out.println(s);
+        }
+    }
+}
+```
+@LIA.java(Demo)
+### while-Schleife
+Die while-Schleife wird verwendet, um einen Codeblock wiederholt auszuführen, solange eine bestimmte Bedingung erfüllt ist. Die Bedingung wird vor jeder Ausführung des Codeblocks überprüft.
+
+```java
+class Demo{
+    public static void main(String args[]){
+        int count = 0;
+        while (count < 5) {
+            System.out.println(count);
+            count++;
+        }
+    }
+}
+```
+@LIA.java(Demo)
+
+**Anmerkungen**
+
+- Die Bedingung der `while`-Schleife wird vor der Ausführung des Codeblocks überprüft. Wenn die Bedingung falsch ist, wird der Codeblock nicht ausgeführt und die Schleife wird beendet.
+- Es ist wichtig, sicherzustellen, dass sich die Bedingung im Verlauf der Schleife ändert, um eine Endlosschleife zu vermeiden.
+- `break` kann verwendet werden, um die Schleife vorzeitig zu beenden, und `continue` springt zum nächsten Schleifendurchlauf.
+
+Die `while`-Schleife ist besonders nützlich, wenn die Anzahl der Iterationen im Voraus nicht bekannt ist, sondern von einer Bedingung abhängt.
+
+### Abschluss und Aufgaben
+
+Führen Sie die Aufgaben aus der Aufgabendatenkbank Kapitel 2 durch. Hierfür benötigen Sie den `Scanner`:
+
+Vor der Klassendeklaration importieren Sie  `java.util.Scanner`. In der Hauptmethode verwenden Sie folgende Befehle:
+
+```
+Scanner scanner = new Scanner(System.in);
+System.out.println("Bitte geben Sie an, wie viele Primzahlen
+berechnet werden sollen: ");
+int n = scanner.nextInt();
+```
+
+TODO (MB): Aufgaben in Datenbank stellen
+
+**Aufgabe 1:**  pinCodeGenerator (im Ordner schleifen)
+
+**Aufgabe 2:**  maximum (im Ordner verzweigungen)
+
+**Aufgabe 3:**  switch-case (im Ordner verzweigungen)
+
 
 
 ## Arrays
 
-### Arrays: Motivation
-Um zu messen wie schnell Sie Java-Code tippen können, sind Sie wie folgt vorgegangen:
+Schauen Sie sich folgenden Code an: 
+- Was passiert hier?
+- Welches Anwendungsszenario könnte hier wiedergegeben sein?
+- Worin bestehen die Vor- und Nachteile in diesem Code?
 
-- Täglich üben und `wpm` messen
-- Wert in einer Variable für diesen Tag eintragen
-- Summe über alle Tages-Variablen bilden
-- Durchschnitt berechnen
-
-Das ist ziemlich repetetiv:
 
 ```java
 import java.io.*;
@@ -503,7 +788,16 @@ class Demo{
 ```
 @LIA.java(Demo)
 
-Neben der vielen Tipparbeit ist das auch noch:
+Ein mögliches Anwendungsszenario könnte sein:
+
+Sie haben gemessen, wie schnell Sie Java-Code tippen können und sind dabei wie folgt vorgegangen:
+
+- Täglich üben und `wpm` messen
+- Wert in einer Variable für diesen Tag eintragen
+- Summe über alle Tages-Variablen bilden
+- Durchschnitt berechnen
+
+Das ist ziemlich repetetiv, denn neben der vielen Tipparbeit ist das auch noch:
 
 - Fehleranfällig: einen Tag vergessen, einen Tag doppelt nehmen
 - Unflexibel: was ist, wenn wir länger als exakt eine Woche üben?
@@ -567,21 +861,129 @@ class Demo{
 ```
 @LIA.java(Demo)
 
+### Arrays: Basics
+
+Der Datentyp eines Arrays ergibt sich aus dem Basisdatentyp (der Datentyp jedes einzelnen Elements) mit angehängten eckigen Klammern `[]`, also z.B.
+`int[], double[], boolean[], char[]`.
+
+Arrays müssen immer initialisiert werden, sonst passiert sowas:
+
+```java
+class Demo{
+    public static void main(String args[]){
+        int[] meinArray;
+        System.out.println(meinArray);
+    }
+}
+```
+@LIA.java(Demo)
+
+Initialisieren können wir entweder mit Werten/Literalen, wie oben bei `wpm` oder z.B.:
+
+```
+char message[] = {'H', 'a', 'l', 'l', 'o'};
+```
+
+Oder per Schlüsselwort `new` - hier wird Speicher reserviert aber keine Werte hinterlegt:
+
+```
+double[] tagesTemperaturen2022 = new double[365];
+```
+
+Die Größe lässt sich nicht nachträglich nicht mehr ändern (hier 365)
+
+<br>
+
+Auf einzelne Werte wird per Zahl zugegriffen:
+
+```
+message[1] //wäre in dem Fall der Buchstabe a
+```
+
+Eine einzelne Position im Array verhält sich wie eine Variable - letztendlich lässt sich über die Adresse des Arrays, den Index und die Größe jedes Elements ja auch die Speicheradresse ermitteln. Somit kann ein Arrayzugriff auch links vom Zuweisungsoperator `=` stehen:
+
+```
+tagesTemperaturen2022[30] = 8.5;
+```
+
+Die Anzahl der Element im Array `a` ergibt sich mit `a.length`. Niemals nehmen wir ein Literal mit der aktuellen Länge! Das erste Element befindet sicht immer an Position 0. Somit ist das letzte Element an Position `length - 1`:
+
+```
+message[message.length - 1]
+```
+
+Wie gerade (und oben schon) gesehen, kann die Position im Array (der *Index*) nicht nur als Literal, sondern als beliebiger `int`-Ausdruck angegeben werden:
+
+```
+System.out.println("Den wie vielten Buchstaben?");
+char buchstabe = message[readInt() - 1]; // Der Computer zählt ab 0, der Mensch meist ab 1
+System.out.println(buchstabe);
+```
+
+Es gibt verschiedene Möglichkeiten, Arrays auszugeben. Eine davon, die Ihnen bereits bekannt ist, ist diese
+
+```
+int [] liste = {0, 1, 2};		
+System.out.println(liste[0]);	
+System.out.println(liste[1]);	
+System.out.println(liste[2]);
+```
+Diese Methode ist jedoch nicht besonders effizient. Daher verwenden wir Schleifen, um die Effizienz zu verbessern:
+
+```
+int zaehler = 0;
+while (zaehler < 3) {
+    zaehler++;
+}
+```
+
+Durch die Kombination des Arrays mit einer Schleife erhalten wir dann folgende Ausgabe:
+
+```
+int [] liste = {0, 1, 2};
+int zaehler = 0;
+while (zaehler < 3) {
+    System.out.println(liste[zaehler]);
+    zaehler++;
+}
+```
 ### Mehrdimensionale Arrays
 
-## Kontrollflusss
+Arrays können auch mit mehrdimensionalen Indizes gebaut werden - in Java sind das technisch gesehen Arrays mit einem weiteren Array als Basisdatentyp. Beispiele für Anwendungen:
+- Tabellen, z.B. Stundenplan mit Tagen als Spalten und Vorlesungsblöcken als Zeilen und Vorlesungsbezeichnung
+- Bilder - 2 dimensionale Anordnungen von Pixel (Farbwerten)
+- Welten in Computerspielen: zwei- oder dreidimensionale Anordnungen von Feldern
 
-### If-Verzweigung
+Durchwandern können wir diese Arrays mit geschachtelten Schleifen.
 
-### For-Each-Schleife
+Ein zweidimensionales Array kann auch wieder per Literale oder per `new` konstruiert werden, z.B.:
 
-### Zählschleife ("normale for-Schleife")
+```
+// 5x5 Array mit true (Schwarz) / false (Weiss) Werten
+boolean[][] schwarzweissBild = {{false, false, true, false, false}, 
+                                {false, true, false, true, false},
+                                {true, true, true, true, true},
+                                {true, false, false, false, true},
+                                {true, true, true, true, true}};
 
-### Abschluss und Aufgaben
+// Array für Klausurpunkte
+int nStudierende = 30;
+int nAufgaben = 10;
+int[][] punkte = new int[nStudierende][nAufgaben];
+```
 
+### Übungen
+
+TODO (MB): Aufgaben in Aufgabendatenbank
+
+- 1. array-und-schleife
+- 2. bubblesort
+- 3. geschachtelte-arrays-for
 
 
 ## Strings
+
+
 ## Klassen, Objekte, Methoden
 ## Vererbung
 ## Abstrakte Klassen, Interfaces
