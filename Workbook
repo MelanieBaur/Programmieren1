@@ -218,10 +218,14 @@ Genauer:
 
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
-<img src="programmausfuehren.png" alt="AProgrammAusfuehren" width="200">
+<p align="center">
+<img src="programmausfuehren.png" alt="ProgrammAusfuehren" width="600">
+</p>
+
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
-<img src="bytecode.png" alt="Bytecode" width="200">
+<img src="bytecode.png" alt="Bytecode" width="600">
+
 Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt: 
 * Einen Java-Compiler
 * Einen Java-Interpreter
