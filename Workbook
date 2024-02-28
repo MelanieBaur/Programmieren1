@@ -1,11 +1,11 @@
 <!--
-author: Melanie Baur
+author: Melanie Baur and other professors and students of HFT Stuttgart
 language: de
-version: 0.0.4
+version: 0.0.5
 narrator: Deutsch Female
 mode: Textbook
 
-comment: Vorlesung Programmieren 1 an der HFT Stuttgart, content adaptiert von Sebastian Speiser und weiteren Professoren und Hiwis der HFT Stuttgart
+comment: Vorlesung Programmieren 1 an der HFT Stuttgart
 
 import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
@@ -211,8 +211,8 @@ Genauer:
 ### Übersetzen und Ausführen eines Programms
 
 * Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. source)
-* Der Java-Compiler javac übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
-* Die Java-Laufzeitumgebung (engl. Runtime Environment) java führt den Bytecode aus.
+* Der Java-Compiler `javac` übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
+* Die Java-Laufzeitumgebung (engl. Runtime Environment) `java` führt den Bytecode aus.
 * Das erste Java-Programm gibt den Text „Hello World“ am Bildschirm aus.
 
 
@@ -234,12 +234,41 @@ Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor
 
 Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Hause programmieren können.
 
+
+* Führen Sie folgendes Quiz durch und testen Sie Ihr Wissen: 
+
+**Frage 1**
+
+Was macht der Compiler?
+
+[(x)] Er erstellt .class-Dateien
+[( )] Er verarbeitet .class-Dateien
+[( )] Er führt das Programm aus
+
+---
+
+**Frage 2**
+
+Was macht der Befehl `java`?
+
+[( )] Er macht aus Qullcode Bytecode
+[(x)] Er führt das Programm aus
+[( )] Er verarbeitet .java-Dateien
+
+---
 ###  Installation
 
 
 ### Übungen
 1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
-2) Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 00.
+
+2) Erstellen Sie mit Hilfe eines einfachen Texteditors ein Programm `HalloStudent.java`, welches Ihren Namen auf Konsole ausgibt. 
+
+* Übersetzen Sie das Programm mit `javac HalloStudent.java`
+* Führen Sie es mit `java HalloStudent` aus
+* Suchen Sie den erzeugten Binärcode
+
+3) Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse
 
 
 
@@ -519,6 +548,15 @@ Welcher Variablentyp wird verwendet, um einen Satz zu speichern?
 
 *  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
 
+### Ablage / Merke
+* Variablen: Lower Camel Case
+* Klassen: Upper Camel­Case
+* Paketnamen: immer kleingeschrieben
+* Konstanten (ändern sich nicht): komplett in Großbuchstaben (als Trennzeichen typischerweise Unterstrich)
+
+* Vervollständigung: Strg + Leertaste
+* Formatieren: Source -> Format oder Strg+Shift+F
+* Umbenennen: rechte Maustaste -> Refactor -> Rename
 
 
 ## Kontrollflusss
