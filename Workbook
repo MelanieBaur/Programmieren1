@@ -345,7 +345,7 @@ Achtung: Wenn Sie eine rote Ausgabe erhalten, haben Sie einen fehlerhaften Code 
 * Gehen Sie nun auf die nächste Seite und arbeiten Sie die Erklärungen durch.
 
 
-#### Variablen deklarieren
+### Variablen deklarieren
 Der Speicher im Computer besteht nur aus einer langen Folge von 0en und 1en. Jeweils 8 werden zu einem Byte zusammengefasst. Die Bytes werden durchnummeriert (beginnend bei 0). Die Nummer eines Bytes ist dessen Adresse.
 
 Variablen geben einer bestimmten Speicherstelle einen Namen und einen Typen:
@@ -428,7 +428,7 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
   * Klassennamen beginnen groß und jedes neue Wort beginnt groß, z.B. GrossAnfangenUndJedesWortGrossBeginnen.
 
 
-#### Variablen zuweisen: Ausdrücke
+### Variablen zuweisen
 Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
 
 ```java
@@ -488,7 +488,7 @@ public class Wert {
 @LIA.java(Wert)
 
 
-#### Operatoren
+### Operatoren
 Übersicht über wichtige Java-Operatoren:
 
 | Operator | Beschreibung                                    |
