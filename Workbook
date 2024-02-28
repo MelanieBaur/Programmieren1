@@ -170,7 +170,7 @@ pfannkuchen_machen {
 }
 ```
 
-### Das erste Programm
+### Aufbau eines Programms
 
 Der Grundbaustein für ein Programm sind Anweisungen mit verschiedenen Untertypen:
 
@@ -182,7 +182,6 @@ Der Grundbaustein für ein Programm sind Anweisungen mit verschiedenen Untertype
 
 Aber nun erst einmal langsam, wir machen das Schritt für Schritt. 
 
-**Aufbau eines Programms**
 
 * Ein Java-Programm ist in (Klassen), Methoden und Blöcke aufgeteilt, die ineinander verschachtelt sind.
 * Blöcke werden durch die {}-Klammern geschachtelt.
@@ -201,10 +200,7 @@ Genauer:
 
 * Hauptklasse oder Startklasse: Oberste Struktureinheit in Java
 * Hauptmethode oder main-Methode genannt: Hier läuft das eigentliche Programm ab, ohne die main-Methode läuft das Programm nicht.
-* Weitere Methoden: Es können für Teilberechnungen weitere Methoden definiert werden, die dann von der main-Methode aufgerufen werden.
-    
-    * Methoden sind gespeicherte Anweisungen innerhalb eines Programms. Sie werden für einen bestimmten Zweck geschrieben und aufgerufen.
-    * Methoden kann man auch als Werkzeug betrachten. Man kann ein Werkzeug besitzen, aber es gar nicht einsetzen. 
+* Weitere Methoden: Es können für Teilberechnungen weitere Methoden definiert werden, die dann von der main-Methode aufgerufen werden. D.h. Methoden sind gespeicherte Anweisungen innerhalb eines Programms. Sie werden für einen bestimmten Zweck geschrieben und aufgerufen. Weiterhin kann man Methoden auch als Werkzeug betrachten. Man kann ein Werkzeug besitzen, aber es gar nicht einsetzen. 
 
 
 
@@ -213,25 +209,37 @@ Genauer:
 * Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. source)
 * Der Java-Compiler `javac` übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
 * Die Java-Laufzeitumgebung (engl. Runtime Environment) `java` führt den Bytecode aus.
-* Das erste Java-Programm gibt den Text „Hello World“ am Bildschirm aus.
+* Das Java-Programm von der Einführung gibt den Text „Hello World“ am Bildschirm aus.
 
+```java
+class HalloWelt{
+    public static void main(String args[]){
+        System.out.println("Hallo Welt");
+    }
+}
+```
+@LIA.java(HalloWelt)
+
+Aber was passiert hier im Hintergrund?
 
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
 <p align="center">
-<img src="programmausfuehren.png" alt="ProgrammAusfuehren" width="600">
+<img src="programmausfuehren.png" alt="ProgrammAusfuehren" width="60%">
 </p>
 
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
-<img src="bytecode.png" alt="Bytecode" width="600">
+<p align="center">
+<img src="bytecode.png" alt="Bytecode" width="60%">
+</p>
 
-Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt: 
+Wir wollen nun das Programm selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt:
+
 * Einen Java-Compiler
 * Einen Java-Interpreter
 
-Auf den Rechner in der Hochschule ist alles bereits installiert. 
-Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor.
+Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor. Im nächsten Kapitel erklören wir Ihnen die Installation. Arbeiten Sie dieses zu Hause durch, so dass Sie auch zu Hause programmieren können.
 
 ---
 
@@ -257,11 +265,17 @@ Was macht der Befehl `java`?
 
 ---
 
-Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Hause programmieren können.
-
 
 ###  Installation
 
+TODO: EF
+
+Teil 1: 
+Etwas besser erklären mit Texteditor und Kommandozeile
+
+Teil 2: 
+Installation Eclipse und Java
+Projekt anlegen, etc., so dass die Studis HelloWorld ausprobieren können
 
 ### Übungen
 1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
@@ -273,7 +287,6 @@ Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Ha
 * Suchen Sie den erzeugten Binärcode
 
 3) Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse
-
 
 
 
