@@ -219,11 +219,10 @@ Genauer:
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
 
-![Alt text](programmausfuehren.png)
-
+![ProgrammAusfuehren](programmausfuehren.png)<!--width="150">
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
-![Alt text](bytecode.png)
+![Bytecode](bytecode.png)<!--width="150">
 
 Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt: 
 * Einen Java-Compiler
@@ -232,10 +231,9 @@ Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötig
 Auf den Rechner in der Hochschule ist alles bereits installiert. 
 Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor.
 
-Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Hause programmieren können.
+---
 
-
-* Führen Sie folgendes Quiz durch und testen Sie Ihr Wissen: 
+Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
 **Frage 1**
 
@@ -256,6 +254,10 @@ Was macht der Befehl `java`?
 [( )] Er verarbeitet .java-Dateien
 
 ---
+
+Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Hause programmieren können.
+
+
 ###  Installation
 
 
