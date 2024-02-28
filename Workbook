@@ -239,7 +239,7 @@ Wir wollen nun das Programm selbst schreiben. Hierzu benötigen Sie wie das Bild
 * Einen Java-Compiler
 * Einen Java-Interpreter
 
-Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor. Im nächsten Kapitel erklören wir Ihnen die Installation. Arbeiten Sie dieses zu Hause durch, so dass Sie auch zu Hause programmieren können.
+Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor. Im nächsten Kapitel erklären wir Ihnen die Installation. Arbeiten Sie dieses zu Hause durch, so dass Sie auch zu Hause programmieren können.
 
 ---
 
@@ -334,7 +334,7 @@ public class Variablen {
 
 * Ändern Sie den Code ab und probieren Sie aus, ob das Programm noch läuft und was die Ausgabe ist. 
 
-Achtung: Wenn Sie eine rote Ausgabe erhalten, haben Sie einen fehlerhaften Code erzeugt.Können Sie den Code wieder berichtigen?
+Achtung: Wenn Sie eine rote Ausgabe erhalten, haben Sie einen fehlerhaften Code erzeugt. Können Sie den Code wieder berichtigen?
 
 * Gehen Sie nun auf die nächste Seite und arbeiten Sie die Erklärungen durch.
 
@@ -345,7 +345,7 @@ Der Speicher im Computer besteht nur aus einer langen Folge von 0en und 1en. Jew
 Variablen geben einer bestimmten Speicherstelle einen Namen und einen Typen:
 
 * Einfacher zu merken als eine Speicheradresse
-* Kann gleich bleiben auch wenn sich die Speicheradresse ändert
+* Kann gleich bleiben, auch wenn sich die Speicheradresse ändert
 * Der Typ kann bestimmte Arten von Programmfehlern verhindern und bestimmt wie viele Bytes die Variable umfasst
 
 Eine Variable ist also eine Art Gefäß im Speicher. Werte können überprüft, verändert und vor allem gespeichert werden.
@@ -374,6 +374,17 @@ Allgemein also:
 ```
 Datentyp Variablenname = Wert;
 ```
+In einem kleinen Programm könnte das so aussehen: 
+
+```java
+public class Schuhgroesse {
+    public static void main(String[] args) {
+        int schuhgroesse = 42;
+        System.out.println("Meine Schuhgröße ist: " + schuhgroesse);
+   }
+}
+```
+@LIA.java(Schuhgroesse)
 
 Hinweis: Man muss einer Variable nicht sofot einen Wert geben. Dies kann auch später geschehen. Die Variable erhält dann zunächst einen Standardwert - je nach Datentyp. 
 
@@ -414,11 +425,20 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
 #### Variablen zuweisen: Ausdrücke
 Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
 
+```java
+public class Temperatur {
+    public static void main(String[] args) {
+        double temperatur = 18.1;
+        System.out.println("Die Temperatur ist: " + temperatur + " Grad.");
+        System.out.println("Die Sonne scheint...");
+        temperatur = 24.5;
+        System.out.println("Nun ist die Temperatur: " + temperatur + " Grad.");
+   }
+}
 ```
-temperatur = 18.7;
-```
+@LIA.java(Temperatur)
 
-Das ist eine Zuweisungs-Anweisung. Links vom Gleichheitszeichen steht der Name einer bereits deklarierten Variable. Rechts vom Gleichheitszeichen steht ein Ausdruck.
+Sie sehen im Programmcode die Zuweisungen. Links vom Gleichheitszeichen steht der Name einer bereits deklarierten Variable. Rechts vom Gleichheitszeichen steht ein Ausdruck.
 
 Für Ausdrücke gibt es verschiedene Aufbauten:
 
@@ -432,11 +452,14 @@ In Java müssen wir den Wert eines Ausdrucks einer Variable zuweisen:
 ```
 double komischeZahl = schuhgroesse + wunschEinkommen;
 ```
+
 oder uns per Methodenaufruf ausgeben:
+
 ```
 System.out.println("Hallo " + "Programmieren " + 1)
 ```
 Mit Operationen und Methodenaufrufen können komplexe Ausdrücke geschafften werden, z.B.:
+
 ```
 System.out.println("In Fahrenheit: " + ((readDouble() * 9.0/5.0) + 32))
 ```
@@ -444,17 +467,20 @@ Auch dazu später mehr.
 
 Ausdrücke werden von innen nach außen ausgewertet, d.h. bei verschachtelten Ausdrücken erst die Sachen in Klammern, bzw. nach Prioritäten ("Punkt vor Strich).
 
-Bei Zuweisungen wird erst die rechte Seite berechnet und dann erst die links genannte Variable aktualisiert:
+Bei Zuweisungen wird erst die rechte Seite berechnet und dann erst die links genannte Variable aktualisiert. Überlegen Sie, was folgender Programmcode somit ausgibt. Probieren Sie dies dann aus.
 
+```java
+public class Wert {
+    public static void main(String[] args) {
+       int wert = 10;
+       System.out.println("Der Wert ist: " + wert);
+       wert = wert + 1;
+       System.out.println("Der Wert ist nun: " + wert);
+   }
+}
 ```
-int wert = 10;
-wert
-```
+@LIA.java(Wert)
 
-```
-wert = wert + 1;
-wert
-```
 
 #### Operatoren
 Übersicht über wichtige Java-Operatoren:
@@ -472,47 +498,80 @@ wert
 | --       | Dekrement (Verminderung um eins)                |
 
 
-Von den Standardoperatoren `+`, `-`, `*` (Mal), `/` (geteilt durch) für Zahlen gibt es auch jeweils eine Version, die gleich die Zuweisung integriert, z.B.:
+Von den Standardoperatoren `+`, `-`, `*` (Mal), `/` (geteilt durch) für Zahlen gibt es auch jeweils eine Version, die gleich die Zuweisung integriert. 
 
-```
-int x = 5;
-x += 5; // Gleichbedeutend mit x = x + 5
-x // Hier wäre x = 10
-```
+Überlegen Sie, welchen Wert `x` hat. Fügen Sie eine Zeile im Programmcode für die Ausgabe hinzu und überprüfen Sie Ihre Überlegung.
 
-```
-int y = 2;
-y *= y; // Gleichbedeutend mit y = y * y;
-y // Hier wäre y = 4
-```
-Häufig zählen wir Variablen um eins nach oben oder eins nach unten, hier gibt die Kurzformen `i++` und `i--`. Sie liefern den Wert von `i` zurück und danach wird `i` inkrementiert bzw. dekrementiert:
 
+```java
+public class Operatoren1 {
+    public static void main(String[] args) {
+        int x = 5;
+        x += 5; // Gleichbedeutend mit x = x + 5
+   }
+}
 ```
-int i = 0;
-System.out.println(i++); // Gibt 0 aus und erhöht dann i auf 1
-System.out.println(i); // Gibt den neuen Wert von i (1) aus
-System.out.println(i--); // Gibt 1 aus und verringert dann i auf 0
-System.out.println(i); // Gibt den neuen Wert von i (0) aus
-```
+@LIA.java(Operatoren1)
 
-Weniger verbreitet sind die Formen `++i` und `--i`, die zuerst `i` inkrementieren bzw. dekrementieren und dann den Wert zurückliefern:
 
-```
-int i = 0;
-System.out.println(++i); // Erhöht i zuerst auf 1 und gibt dann 1 aus
-System.out.println(i); // Gibt den aktuellen Wert von i (1) aus
-System.out.println(--i); // Verringert i zuerst auf 0 und gibt dann 0 aus
-System.out.println(i); // Gibt den aktuellen Wert von i (0) aus
-```
+Was ist `y` am Ende des folgenden Programmcodes? Fügen Sie auch hier eine Zeile für die Ausgabe hinzu, um Ihre Überlegung zu überprüfen.
 
-Überraschend nützlich ist der Modulo-Operator `%` - er liefert den Rest bei einer Ganzzahlendivision, z.B.:
+```java
+public class Operatoren2 {
+    public static void main(String[] args) {
+        int y = 2;
+        y *= y; // Gleichbedeutend mit y = y * y;
+   }
+}
+```
+@LIA.java(Operatoren2)
 
+
+Häufig zählen wir Variablen um eins nach oben oder eins nach unten, hier gibt die Kurzformen `i++` und `i--`. Sie liefern den Wert von `i` zurück und danach wird `i` inkrementiert bzw. dekrementiert. Versuchen Sie folgenden Code nachzuvollziehen:
+
+
+```java
+public class Operatoren3 {
+    public static void main(String[] args) {
+        int i = 0;
+        System.out.println(i++); // Gibt 0 aus und erhöht dann i auf 1
+        System.out.println(i); // Gibt den neuen Wert von i (1) aus
+        System.out.println(i--); // Gibt 1 aus und verringert dann i auf 0
+        System.out.println(i); // Gibt den neuen Wert von i (0) aus
+   }
+}
 ```
-int zahl = 22;
-int divisor = 4;
-int rest = zahl % divisor;
-rest // Der Wert ist 2, da 22/4 = 5 Rest 2 ist
+@LIA.java(Operatoren3)
+
+
+Weniger verbreitet sind die Formen `++i` und `--i`, die zuerst `i` inkrementieren bzw. dekrementieren und dann den Wert zurückliefern. Dies liefert folgendes, doch etwas überraschende Eregebnis:
+
+```java
+public class Operatoren4 {
+    public static void main(String[] args) {
+        int i = 0;
+        System.out.println(++i); // Erhöht i zuerst auf 1 und gibt dann 1 aus
+        System.out.println(i); // Gibt den aktuellen Wert von i (1) aus
+        System.out.println(--i); // Verringert i zuerst auf 0 und gibt dann 0 aus
+        System.out.println(i); // Gibt den aktuellen Wert von i (0) aus
+   }
+}
 ```
+@LIA.java(Operatoren4)
+
+Nützlich ist der Modulo-Operator `%` - er liefert den Rest bei einer Ganzzahlendivision, z.B.:
+
+```java
+public class Operatoren5 {
+    public static void main(String[] args) {
+        int zahl = 22;
+        int divisor = 4;
+        int rest = zahl % divisor;
+        System.out.println(rest); // Der Wert ist 2, da 22/4 = 5 Rest 2 ist
+   }
+}
+```
+@LIA.java(Operatoren5)
 
 Weitere Operatoren sind Vergleichsoperatoren (`==`, `!=`, `<=`, `>=`, `<`, `>`), Bit-Operatoren (`&`, `|`, `<<`, `>>`) und logische Operatoren (`&&`, `||`)
 
@@ -565,11 +624,13 @@ Welcher Variablentyp wird verwendet, um einen Satz zu speichern?
 
 *  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
 
-### Ablage / Merke
-* Variablen: Lower Camel Case
-* Klassen: Upper Camel­Case
-* Paketnamen: immer kleingeschrieben
-* Konstanten (ändern sich nicht): komplett in Großbuchstaben (als Trennzeichen typischerweise Unterstrich)
+### Ablage 
+
+* Variablen: Werden in Lower Camel Case benannt, wie z.B. alterInTagen
+* Klassen: Werden in Upper Camel­Case benannt, wie z.B. TageDesJahres
+* Konstanten (ändern sich nicht): komplett in Großbuchstaben (als Trennzeichen typischerweise Unterstrich), wie z.B. ANZAHL_JAHRESZEITEN
+
+Und noch ein paar Tipps für die Arbeit in Eclipse:
 
 * Vervollständigung: Strg + Leertaste
 * Formatieren: Source -> Format oder Strg+Shift+F
@@ -580,8 +641,10 @@ Welcher Variablentyp wird verwendet, um einen Satz zu speichern?
 
 Der Kontrollfluss in Java ermöglicht es uns, den Ablauf unseres Codes zu steuern, indem wir Entscheidungen treffen und Schleifen verwenden. Kontrollflussstrukturen wie bedingte Anweisungen und Schleifen ermöglichen es uns, unseren Code dynamisch zu gestalten und verschiedene Pfade je nach Bedingungen oder Anforderungen auszuführen.
 
+Schauen Sie sich folgendes Beispiel an und überlegen Sie sich für jede Zeile, was das Programm tun könnte und welche Ausgabe der Code Ihrer Meinung nach erzeugt.
+
 ```java
-class Demo{
+class DemoKontrollfluss{
     public static void main(String args[]){
         int zahl = 10;
 
@@ -598,10 +661,20 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(DemoKontrollfluss)
+
+Führen Sie nun den Code aus und überprüfen Sie Ihre Vermutung.
+
+
 
 ### If-Verzweigung
-Die if-Anweisung ist die einfachste Kontrollstruktur:
+Die if-Anweisung ist die einfachste Kontrollstruktur. Man kann sich diese wie folgt vorstellen:
+
+<p align="center">
+<img src="if.png" alt="if-Anweisung" width="25%">
+</p>
+
+Sie wird wie folgt dargestellt:
 
 ```
 if (Bedingung) {
@@ -610,9 +683,9 @@ if (Bedingung) {
 }
 ```
 
-Ist die Bedingung wahr, werden die Anweisungen der nächsten Zeile, bzw. des Blockes ausgeführt, ansonsten passiert nichts!
+Ist die Bedingung wahr, werden die Anweisungen der nächsten Zeile, bzw. des Blockes ausgeführt, ansonsten passiert nichts! Beim Auswerten der Bedingung muss immer ein Boolescher Wert entstehen.
 
-Beim Auswerten der Bedingung muss ein Boolescher Wert entstehen.
+
 
 **Wie können diese Bedingungen aussehen?**
 
@@ -626,13 +699,23 @@ In Programmiersprachen werden häufig Vergleiche zwischen Werten mittels Operato
   
 - `"Müller".equals("Meier")`: Überprüft die Gleichheit von zwei Strings, in diesem Fall, ob der String "Müller" gleich dem String "Meier" ist.
 
-Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Zum Beispiel:
+Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Ändern und ergänzen Sie folgendes Programm so, dass in der if-Verzweigung `"Der if-Block wurde ausgeführt` ausgegeben wird. 
 
-```
-if (f > 5) {
-    // Führe diesen Codeblock aus, wenn "f" größer als 5 ist
+
+```java
+class IfAnweisung{
+    public static void main(String args[]){
+    int f = 3;
+    if (f > 5) {
+        // Führe diesen Codeblock aus, wenn "f" größer als 5 ist
+        }
+    }
 }
 ```
+@LIA.java(IfAnweisung)
+
+
+
 **Logische Operatoren können wie folgt aussehen:**
 
 | Operator | Beschreibung                                                                                        |
@@ -644,9 +727,57 @@ if (f > 5) {
 | \|\|     | Oder mit verkürzter Auswertung: Wie \|, jedoch wird sofort `true` zurückgegeben, wenn der erste Ausdruck `true` ist  |
 | \^       | Exklusives Oder: Liefert nur `true`, wenn genau einer der beiden Ausdrücke `true` ist             |
 
+
+
+Welche Anweisungen eigenen sich für Bedingungen?
+
+1. 4<10
+[(x)] wahr
+[( )] falsch
+
+2. int a = 0;
+[( )] wahr
+[(x)] falsch
+
+3. String name = "Schulze"; name.equals("Meier") 
+[(x)] wahr
+[( )] falsch
+
+4. 4 == 4 && 5 == 5 
+[(x)] wahr
+[( )] falsch
+
+5. 4 == 4 && 5 == 5 
+[(x)] wahr
+[()] falsch
+
+
+Ändern und ergänzen Sie folgendes Programm nun so, dass der if-Block dann ausgeführt wird, wenn f < 5 und gleichzeitig t = 7 ist. 
+
+```java
+class If{
+    public static void main(String args[]){
+    int f = 3;
+    if (f > 5) {
+        System.out.println("Der if-Block wird gerade ausgeführt.");
+        }
+    }
+}
+```
+@LIA.java(If)
+
+
+
 **if/else Anweisungen**
 
-Die `else`-Anweisung erweitert die Kontrollstruktur von `if`, um einen Zweig hinzuzufügen, der ausgeführt wird, wenn die Bedingung der `if`-Anweisung nicht erfüllt ist. Die `else`-Anweisung hat die folgende Syntax:
+Die `else`-Anweisung erweitert die Kontrollstruktur von `if`, um einen Zweig hinzuzufügen, der ausgeführt wird, wenn die Bedingung der `if`-Anweisung nicht erfüllt ist. 
+
+<p align="center">
+<img src="ifelse.png" alt="if/else-Anweisung" width="35%">
+</p>
+
+
+Die `if/else`-Anweisung hat die folgende Syntax:
 
 ```java
 if (Bedingung) {
@@ -665,12 +796,20 @@ Die `else`-Anweisung ist optional und kann allein oder in Kombination mit einer 
 Beispiel:
 
 ```java
-if ( bestimmeSemester() == 1 ) {
-  System.out.println("Ihr Fach ist PRO1");
-} else {
-  System.out.println("Ihr Fach ist PRO2");
+class Semester{
+    public static void main(String args[]){
+        int semester = 2;
+        if ( semester == 1 ) {
+        System.out.println("Ihr Fach ist PRO1");
+        } else {
+        System.out.println("Ihr Fach ist PRO2");
+        }       
+    }
 }
 ```
+@LIA.java(Semester)
+
+Was müssen Sie abändern, wenn Ihr Fach dieses Semester PRO1 ist?
 
 Die `else`-Anweisung kann auch mit verschachtelten `if`-Anweisungen verwendet werden, um komplexere Entscheidungsstrukturen zu erstellen.
 
@@ -697,8 +836,26 @@ if ( Bedingung 1 ) {
         Anweisung3;
     } else {    
         Anweisung4;
-    }
+    }   
 ```
+
+
+Schreiben Sie eine if/else-Verzweigung für den folgenden Fall:
+
+* Wenn die Temperatur unter 20°C liegt, geben Sie „Jacke!“ aus, 
+* Wenn sie zwischen 20°C und 28°C liegt, geben Sie „T-Shirt!“ aus, 
+* wenn sie über 28°C liegt, „Badeanzug!“
+
+
+```java
+class Temperatur2{
+    public static void main(String args[]){
+      
+    }
+}
+```
+@LIA.java(Temperatur2)
+
 
 **Der bedingte Ausdruck**
 
@@ -707,11 +864,23 @@ if ( Bedingung 1 ) {
 - Wenn die Bedingung wahr ist, so ist der Wert des Ausdrucks identisch mit Ausdruck1, sonst mit Ausdruck2
 Beide Ausdrücke müssen vom selben Werttyp (int, char, String, etc.) sein
 
-Beispiel:
-
 ```
 int urlaubstage = (alter > 28 ? 30 : 25);
 ```
+
+Erstellen Sie ein Programm, dass Ihnen Ihre an Urlaubstage ausgibt. Wenn Sie älter als 30 Jahre sind, haben Sie 32 Urlaubstage, wenn Sie jünger sind, nur 28 Tage. 
+
+
+```java
+class Urlaubstage{
+    public static void main(String args[]){
+      
+    }
+}
+```
+@LIA.java(Urlaubstage)
+
+
 
 **switch/case**
 
@@ -728,13 +897,23 @@ Die Syntax einer `switch`-Anweisung sieht folgendermaßen aus:
 - break ist optional – wenn es fehlt, wird die Bearbeitung mit dem nächsten case (ohne Prüfung!) fortgesetzt – aber Vorsicht: Fehler durch vergessene break sind schwierig zu finden.
 - der default-Zweig ist optional; es ist höchstens einer zulässig
 
+Testen Sie Ihr Wissen nun, in dem Sie ein Programm schreiben das den heutigen Wochentag als Variable initalisiert und dann Ihre Vorlesungen für den jeweiligen Wochentag auf der Konsole ausgibt.
+
+```java
+class Stundenplan{
+    public static void main(String args[]){
+      
+    }
+}
+```
+@LIA.java(class Stundenplan)
 
 
 ### Zählschleife ("normale for-Schleife")
 Die Schleife wird von einer Anfangszahl bis zu einer Endzahl mit einer vorgegebenen Schrittweite wiederholt.
 
 ```java
-class Demo{
+class Zaehlschleife{
     public static void main(String args[]){
         for (int i = 0; i < 10; i++){
           System.out.println(i);
@@ -742,7 +921,7 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(Zaehlschleife)
 
 **Anmerkungen**
 
@@ -754,7 +933,7 @@ class Demo{
 **Weiteres Beispiel**
 
 ```java
-class Demo{
+class Zaehlschleife2{
     public static void main(String args[]){
         int n = 4;
         int fakultaet = 1;
@@ -765,6 +944,9 @@ class Demo{
     }
 }
 ```
+@LIA.java(Zaehlschleife2)
+
+
 ### For-Each-Schleife
 
 Schleife führt den Rumpf für jedes Element der Menge aus
