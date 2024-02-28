@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur
 language: de
-version: 0.0.3
+version: 0.0.4
 narrator: Deutsch Female
 mode: Textbook
 
@@ -49,27 +49,47 @@ Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](
 
 
 ## Einführung 
-Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt. 
+Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt, denn die Computer führen exakt den Code aus, den sie vorgesetzt bekommen und die Compiler übersetzen genau das was im Programmtext steht in Maschinencode. 
 
+Sie als Programmierer:
+* Analysieren Problemen
+* Überlegen sich Lösungen
+* Übersetzen Lösungen in Programmtext
+Der Computer ist nicht kreativ und findet keine Lösungen. Dafür gibt es die glorreiche Tätigkeit des Programmierens.
+
+Um dies zu können, müssen Sie viel üben:
 * Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
 * Haben Sie Schwimmen oder Radfahren aus Büchern erlernt? 
 * Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
 * Wie viele Jahre hat ein Musiker vor dem ersten Klavierkonzert geübt?
 
-Sie lernen zunächst, was Code und was ein Programm ist. Am Ende des Kapitels werden Sie Ihr erstes eigenes Programm in der Programmiersprache schreiben und ausführen.
+Was könnte Beispiele für kleine Programme sein?
+
+* Zwei Zahlen addieren
+* Eine Zahl abspeichern
+* Eine Zahl laden
+* Zwei Zahlen miteinander vergleichen
+
+Das können Sie sicherlich auch, aber Computer können das:
+* Sehr schnell: Milliarden von Operationen pro Sekunde
+* Sehr genau: Milliarden von Zahlen speichern und exakt so wieder abrufen
+
+Sie lernen zunächst, was Code und was ein Programm ist. Am Ende des Kapitels werden Sie Ihr erstes eigenes Programm in der Programmiersprache Java schreiben und ausführen.
+
+
 
 ### Was ist Code?
 * Code ist eine Reihe von Anweisungen,
 * Jede Anweisung beschreibt, welche Operation (z.B. Addition) der Computer mit welchen Operanden (z.B. 5 und 3) ausführen soll
 * Der Computer führt eine Anweisung nach der anderen aus
 
-Programme bestehen nun aus Millionen von Anweisungen. Die Anweisungen sind wiederum Zahlen - hier als Hexadezimal-codierter x86-Code (erstellt mit [godbolt.org](https://godbolt.org/z/WYorj7EG5)):. 
+Programme bestehen nun aus Millionen von Anweisungen. Die Anweisungen sind wiederum Zahlen - hier als Hexadezimal-codierter x86-Code (erstellt mit [godbolt.org](https://godbolt.org/z/WYorj7EG5)):
 
 ```
 55 48 89 e5
 89 7d fc 8b
 45 fc 0f c0
-5d c3\n
+5d c3
 ```
     
 So zu entwickeln ist sehr kompliziert und fehleranfällig, also gibt es ein Abstraktionsniveau höher Assembler - menschenmerkbare Abkürzungen für die Befehle und Hilfe bei der Berechnung von Speicheradressen, wo Daten abgespeichert sind, z.B.:
@@ -98,7 +118,10 @@ int square(int num) {
 }
 ```
 
-Wir nutzen als Programmiersprache Java. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird. Aber hierzu am Ende das Kapitels mehr.
+Wir nutzen in unserer Vorlesung Java als Programmiersprache. Im Hintergrund gibt es einen Compiler, der Java in Maschinensprache übersetzt. Die Maschinensprache wird auf unseren Wunsch hin vom Betriebssystem geladen und dann zur Ausführung gebracht. 
+Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinensprache nutzt, die unabhängig von der genutzten Prozessorarchitektur ist und erst zur Laufzeit von einer weiteren Programmkomponente in die konkrete Maschinensprache übersetzt wird. 
+Aber hierzu später mehr
+
 
 **Welcher Code wird ausgeführt?**
 
@@ -110,17 +133,6 @@ Im allgemeinen Java-Programm: die Main-Methode der Hauptklasse:
 public static void main(String[] args) {
 }
 ```
-
-**Wo kommen Sie ins Spiel?**
-
-* Computer führen exakt den Code aus, den sie vorgesetzt bekommen
-* Compiler übersetzen genau das was im Programmtext steht in Maschinencode
-* Programmierer:
-    * Analysieren Problemen
-    * Überlegen sich Lösungen
-    * Übersetzen Lösungen in Programmtext
-
-Der Computer ist nicht kreativ und findet keine Lösungen. Dafür gibt es die glorreiche Tätigkeit des Programmierens.
 
 
 ### Was ist Programmieren?
@@ -158,20 +170,9 @@ pfannkuchen_machen {
 }
 ```
 
-### Java und das erste Programm
-Sie werden im 1. Semester also zunächst Java erlernen. 
+### Das erste Programm
 
-* Java ist eine weitverbreitete Programmiersprache.
-* Java unterstützt viele Programmierparadigmen.
-* Java wird ständig weiter entwickelt und um moderne Konzepte ergänzt
-* Mit Java stellen wir uns auf „die Schultern eines Riesen“:
-    * Hunderte Paket
-    * Tausende vordefinierte Klassen
-
-
-**Das erste Programm**
-
-Der Grundbaustein sind Anweisungen mit verschiedenen Untertypen:
+Der Grundbaustein für ein Programm sind Anweisungen mit verschiedenen Untertypen:
 
 1. Variablen deklarieren: Speicher für Daten reservieren
 2. Variablen zuweisen: Werte oder Berechnungen im reservierten Speicher ablegen
@@ -185,16 +186,23 @@ Aber nun erst einmal langsam, wir machen das Schritt für Schritt.
 
 * Ein Java-Programm ist in (Klassen), Methoden und Blöcke aufgeteilt, die ineinander verschachtelt sind.
 * Blöcke werden durch die {}-Klammern geschachtelt.
-* Der äußere Block umfasst die Klasse Uebung, der innere Block bildet den Methodenrumpf von `main` mit dem Aufruf der Methode `tue_was`.
+* Der äußere Block umfasst die Klasse `Uebung`, der innere Block bildet den Methodenrumpf von `main` mit dem Aufruf der Methode `tueWas`.
 
 
-TODO: Bild (EF)
+```
+public class Uebung{
+    public static void main(String args[]){
+        tueWas(0815);
+    }
+}
+```
 
 Genauer: 
 
 * Hauptklasse oder Startklasse: Oberste Struktureinheit in Java
 * Hauptmethode oder main-Methode genannt: Hier läuft das eigentliche Programm ab, ohne die main-Methode läuft das Programm nicht.
 * Weitere Methoden: Es können für Teilberechnungen weitere Methoden definiert werden, die dann von der main-Methode aufgerufen werden.
+    
     * Methoden sind gespeicherte Anweisungen innerhalb eines Programms. Sie werden für einen bestimmten Zweck geschrieben und aufgerufen.
     * Methoden kann man auch als Werkzeug betrachten. Man kann ein Werkzeug besitzen, aber es gar nicht einsetzen. 
 
@@ -202,7 +210,7 @@ Genauer:
 
 ### Übersetzen und Ausführen eines Programms
 
-* Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. Source!)
+* Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. source)
 * Der Java-Compiler javac übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
 * Die Java-Laufzeitumgebung (engl. Runtime Environment) java führt den Bytecode aus.
 * Das erste Java-Programm gibt den Text „Hello World“ am Bildschirm aus.
@@ -211,17 +219,30 @@ Genauer:
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
 
-![Alt text](image.png)
+![Alt text](programmausfuehren.png)
 
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
-![Alt text](image-1.png)
+![Alt text](bytecode.png)
 
-TODO: weitermachen
+Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt: 
+* Einen Java-Compiler
+* Einen Java-Interpreter
+
+Auf den Rechner in der Hochschule ist alles bereits installiert. 
+Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor.
+
+Arbeiten Sie zu Hause das Kapitel der Installation durch, so dass Sie auch zu Hause programmieren können.
+
+###  Installation
+
 
 ### Übungen
-1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie obige Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
-2) Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel xy.
+1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+2) Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 00.
+
+
+
 
 ## Variablen und Datentypen 
 
