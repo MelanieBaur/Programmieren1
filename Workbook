@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and other professors and students of HFT Stuttgart
 language: de
-version: 0.0.5
+version: 0.0.6
 narrator: Deutsch Female
 mode: Textbook
 
@@ -218,12 +218,10 @@ Genauer:
 
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
-
-![ProgrammAusfuehren](programmausfuehren.png)<!--width="150">
+<img src="programmausfuehren.png" alt="AProgrammAusfuehren" width="200">
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
-![Bytecode](bytecode.png)<!--width="150">
-
+<img src="bytecode.png" alt="Bytecode" width="200">
 Wir wollen nun das Programm von der Einleitung selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt: 
 * Einen Java-Compiler
 * Einen Java-Interpreter
