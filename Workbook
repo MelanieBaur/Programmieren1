@@ -243,6 +243,8 @@ Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigen
 
 ---
 
+**Aufgabe 1:** 
+
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
 **Frage 1**
@@ -278,15 +280,19 @@ Installation Eclipse und Java
 Projekt anlegen, etc., so dass die Studis HelloWorld ausprobieren können
 
 ### Übungen
-1) Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
 
-2) Erstellen Sie mit Hilfe eines einfachen Texteditors ein Programm `HalloStudent.java`, welches Ihren Namen auf Konsole ausgibt. 
+**Aufgabe 1:** 
+Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+
+**Aufgabe 2:** 
+Erstellen Sie mit Hilfe eines einfachen Texteditors ein Programm `HalloStudent.java`, welches Ihren Namen auf Konsole ausgibt. 
 
 * Übersetzen Sie das Programm mit `javac HalloStudent.java`
 * Führen Sie es mit `java HalloStudent` aus
 * Suchen Sie den erzeugten Binärcode
 
-3) Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse
+**Aufgabe 3:** 
+Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse
 
 
 
@@ -577,7 +583,9 @@ Weitere Operatoren sind Vergleichsoperatoren (`==`, `!=`, `<=`, `>=`, `<`, `>`),
 
 ### Übungen
 
-* Führen Sie folgendes Quiz durch und testen Sie Ihr Wissen: 
+**Aufgabe 1:** 
+
+Führen Sie folgendes Quiz durch und testen Sie Ihr Wissen: 
 
 
 **Frage 1**
@@ -622,7 +630,9 @@ Welcher Variablentyp wird verwendet, um einen Satz zu speichern?
 [( )] Float
 [(x)] String
 
-*  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
+**Weitere Aufgaben:**   
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 01.
 
 ### Ablage 
 
@@ -912,6 +922,13 @@ class Stundenplan{
 ### Zählschleife ("normale for-Schleife")
 Die Schleife wird von einer Anfangszahl bis zu einer Endzahl mit einer vorgegebenen Schrittweite wiederholt.
 
+<p align="center">
+<img src="forSchleife.png" alt="For-Schleife" width="70%">
+</p>
+
+
+Im Code sieht dies dann so aus:
+
 ```java
 class Zaehlschleife{
     public static void main(String args[]){
@@ -922,6 +939,9 @@ class Zaehlschleife{
 }
 ```
 @LIA.java(Zaehlschleife)
+
+Wie müssen Sie das Programm abändern, um die ungeraden Zahlen von 1 bis 20 aufzusummieren?
+
 
 **Anmerkungen**
 
@@ -947,12 +967,12 @@ class Zaehlschleife2{
 @LIA.java(Zaehlschleife2)
 
 
-### For-Each-Schleife
+### For-Each-Schleife (Mengenschleife)
 
-Schleife führt den Rumpf für jedes Element der Menge aus
+Die Schleife führt den Rumpf für jedes Element der Menge aus. 
 
 ```java
-class Demo{
+class ForEach{
     public static void main(String args[]){
         String[] f = {"eins", "zwei", "drei"}; //Dies ist ein Array und wird im nächsten Kapitel erklärt
         for(String s : f) {
@@ -961,22 +981,60 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
-### while-Schleife
-Die while-Schleife wird verwendet, um einen Codeblock wiederholt auszuführen, solange eine bestimmte Bedingung erfüllt ist. Die Bedingung wird vor jeder Ausführung des Codeblocks überprüft.
+@LIA.java(ForEach)
+
+Dies schauen wir uns später noch genauer an, wenn wir verschiedene Mengen betrachten, z.B. im Zusammenhang mit Collections.
+
+
+### While-Schleife
+Die while-Schleife wird verwendet, um einen Codeblock wiederholt auszuführen, solange eine bestimmte Bedingung erfüllt ist. Die Bedingung wird vor jeder Ausführung des Codeblocks überprüft und muss ein boolescher Ausdruck sein.
+
+<p align="center">
+<img src="while.png" alt="While-Schleife" width="25%">
+</p>
+
+
+Schauen Sie sich folgendes Programm an. Was passiert hier?
 
 ```java
-class Demo{
+class While{
     public static void main(String args[]){
-        int count = 0;
-        while (count < 5) {
-            System.out.println(count);
-            count++;
+        int zaehler = 15;
+        while (zaehler < 20) {
+            System.out.println(zaehler);
+            zaehler++;
         }
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(While)
+
+Können Sie es so modifizieren, dass alle geraden Zahlen ausgegeben werden?
+
+<p align="center">
+<img src="while2.png" alt="While-Schleife-Beispiel" width="25%">
+</p>
+
+Können Sie obiges Bild als Code darstellen?
+
+```java
+class WhileBeispiel{
+    public static void main(String args[]){
+
+       
+    }
+}
+```
+@LIA.java(WhileBeispiel)
+
+**Die "ewige" while-Schleife**
+
+Bei der ewigen while-Schleife wird die while-Anweisung  solange wiederholt, bis die Bedingung ´false´ liefert. Dieser Fall tritt hier jedoch nie ein, so dass das Programm immer weiter läuft.
+
+<p align="center">
+<img src="ewigeWhile.png" alt="ewige While-Schleife" width="20%">
+</p>
+
 
 **Anmerkungen**
 
@@ -986,27 +1044,28 @@ class Demo{
 
 Die `while`-Schleife ist besonders nützlich, wenn die Anzahl der Iterationen im Voraus nicht bekannt ist, sondern von einer Bedingung abhängt.
 
-### Abschluss und Aufgaben
 
-Führen Sie die Aufgaben aus der Aufgabendatenkbank Kapitel 2 durch. Hierfür benötigen Sie den `Scanner`:
 
-Vor der Klassendeklaration importieren Sie  `java.util.Scanner`. In der Hauptmethode verwenden Sie folgende Befehle:
+### Übungen
 
-```
-Scanner scanner = new Scanner(System.in);
-System.out.println("Bitte geben Sie an, wie viele Primzahlen
-berechnet werden sollen: ");
-int n = scanner.nextInt();
-```
+**Aufgabe 1:**  
+Berechnen Sie die Summe aller Zahlen von 0 bis zu einer vorgegebenen größten Zahl. Für das Beispiel 5 wäre das also 0+1+2+3+4+5 = 15.
 
-TODO (MB): Aufgaben in Datenbank stellen
+Lösen Sie das Problem auf mindestens drei verschiedene Arten. 
 
-**Aufgabe 1:**  pinCodeGenerator (im Ordner schleifen)
+**Weitere Aufgaben:**   Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 02.
 
-**Aufgabe 2:**  maximum (im Ordner verzweigungen)
 
-**Aufgabe 3:**  switch-case (im Ordner verzweigungen)
 
+
+### Ablage 
+
+Wann wird welche Schleife verwendet?
+
+* while -> Anzahl Durchläufe ist zu Beginn unbekannt
+* for -> Anzahl Durchläufe ist zu Beginn bekannt	
+* for each -> Zugriff auf die Elemente einer Menge
+* do-while -> Anzahl Durchläufe ist zu Beginn unbekannt, aber ein Durchlauf ist mindestens notwendig
 
 
 ## Arrays
@@ -1232,11 +1291,7 @@ int[][] punkte = new int[nStudierende][nAufgaben];
 
 ### Übungen
 
-TODO (MB): Aufgaben in Aufgabendatenbank
-
-- 1. array-und-schleife
-- 2. bubblesort
-- 3. geschachtelte-arrays-for
+**Weitere Aufgaben: **  Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 03.
 
 
 ## Strings
