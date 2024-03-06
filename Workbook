@@ -1249,16 +1249,15 @@ Wann wird welche Schleife verwendet?
 
 ## Arrays
 
-Schauen Sie sich folgenden Code an: 
-- Was passiert hier?
+Schauen Sie sich folgenden Code an und überlegen Sie sich folgende Fragen, bevor Sie weiterlesen:
+
+- Was passiert hier? Gehen Sie den Code durch und versuchen Sie diesen nachzuvollziehen!
 - Welches Anwendungsszenario könnte hier wiedergegeben sein?
 - Worin bestehen die Vor- und Nachteile in diesem Code?
 
 
 ```java
-import java.io.*;
-
-class Demo{
+class Arrays{
     public static void main(String args[]){
         int wpmMo = 55;
         int wpmDi = 57;
@@ -1282,7 +1281,7 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(Arrays)
 
 Ein mögliches Anwendungsszenario könnte sein:
 
@@ -1293,15 +1292,17 @@ Sie haben gemessen, wie schnell Sie Java-Code tippen können und sind dabei wie 
 - Summe über alle Tages-Variablen bilden
 - Durchschnitt berechnen
 
-Das ist ziemlich repetetiv, denn neben der vielen Tipparbeit ist das auch noch:
+Sie können dies selbst ausprobieren. Gehen Sie auf [Speedtyper](https://www.speedtyper.dev/) und testen Sie Ihre Tippgeschwindigkeit. Absoliveren Sie diese Übung immer wieder, um sich zu verbessern.
+
+Doch nun zurück zum Code: Das ist ziemlich repetetiv, denn neben der vielen Tipparbeit ist das auch noch:
 
 - Fehleranfällig: einen Tag vergessen, einen Tag doppelt nehmen
 - Unflexibel: was ist, wenn wir länger als exakt eine Woche üben?
 
-Für sich wiederholende Berechnungen haben wir bereits die Schleife kennengelernt. Dabei konnten wir z.B. einen Zähler hochzählen:
+Für sich wiederholende Berechnungen haben wir bereits die Schleife kennengelernt. Dabei konnten wir z.B. einen Zähler hochzählen. Wiederholen Sie: Was passiert hier?
 
 ```java
-class Demo{
+class SchleifeWiederholung{
     public static void main(String args[]){
         int zaehler = 0;
         while(zaehler < 7) {
@@ -1311,22 +1312,33 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(SchleifeWiederholung)
 
-Mit Arrays gibt es eine Datenstruktur, wo wir mit Hilfe eines solchen Zählers auf verschiedene Variablen zugreifen können. Statt einzelne Variablen für jeden Tag anzulegen speichern wie die `wpm` in einem Arrays:
+Mit Arrays gibt es eine Datenstruktur, bei der wir mit Hilfe eines solchen Zählers auf verschiedene Variablen zugreifen können. Statt einzelne Variablen für jeden Tag anzulegen, speichern wie die `wpm` nun besser in einem Array:
 
 ```
 int[] wpm = {55, 57, 49, 63, 0, 56, 70};
 ```
 
-Im Speicher wird Platz für 7 direkt hintereinanderliegende int-Werte reserviert und befüllt:
+Im Speicher wird Platz für 7 direkt hintereinanderliegende `int`-Werte reserviert und befüllt:
 
-TODO: Die Tabelle sieht doof aus
+<!-- data-type="None" -->
+| Index  | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|:-------|---|---|---|---|---|---|---|
+| Wert   | 55| 57| 49| 63| 0 | 56| 70|
 
 
-| Index | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
-|-------|---|---|---|---|---|---|---|
-| Wert  | 55| 57| 49| 63| 0 | 56| 70|
+Ein Array mit 7 Elementen, kann man sich in etwa so vorstellen: 
+
+<p align="center">
+<img src="array-1.png" alt="Array" width="55%">
+</p>
+
+Unser konkretes Array sieht dann so aus:
+
+<p align="center">
+<img src="array-2.png" alt="Array befüllt" width="45%">
+</p>
 
 Mit Hilfe des Index können wir auf die Werte zugreifen:
 
@@ -1336,12 +1348,15 @@ wpm[0];
 ```
 
 Variablen vom Array-Typ haben eine  `.length`-Eigenschaft, die angibt wie viele Werte vorhanden sind:
-```wpm.length```
+
+```
+wpm.length
+```
 
 Nun können wir eine Schleife verwenden, um den Mittelwert zu bilden:
 
 ```java
-class Demo{
+class Mittelwert{
     public static void main(String args[]){
         int i = 0;
         int sum = 0;
@@ -1355,24 +1370,34 @@ class Demo{
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(Mittelwert)
+
+* Versuchen Sie diesen Code nachzuvollziehen. 
+
+* Erstellen Sie nun ein eigenes Programm, in welchem Sie ein Array der Länge 10 mit beliebigen Werten befüllen und die Werte des Array dann aufsummieren. Nutzen Sie hierfür eine geeignete Schleife. Geben Sie die Summe anschließend auf der Konsole aus.
 
 ### Arrays: Basics
+
+
+**Datentyp von Arrays**
 
 Der Datentyp eines Arrays ergibt sich aus dem Basisdatentyp (der Datentyp jedes einzelnen Elements) mit angehängten eckigen Klammern `[]`, also z.B.
 `int[], double[], boolean[], char[]`.
 
+**Initialisierung von Arrays**
+
 Arrays müssen immer initialisiert werden, sonst passiert sowas:
 
 ```java
-class Demo{
+class ArrayKaputt{
     public static void main(String args[]){
         int[] meinArray;
         System.out.println(meinArray);
     }
 }
 ```
-@LIA.java(Demo)
+@LIA.java(ArrayKaputt)
+
 
 Initialisieren können wir entweder mit Werten/Literalen, wie oben bei `wpm` oder z.B.:
 
@@ -1386,7 +1411,7 @@ Oder per Schlüsselwort `new` - hier wird Speicher reserviert aber keine Werte h
 double[] tagesTemperaturen2022 = new double[365];
 ```
 
-Die Größe lässt sich nicht nachträglich nicht mehr ändern (hier 365)
+Die Größe lässt sich nicht nachträglich nicht mehr ändern (hier 365).
 
 <br>
 
@@ -1408,15 +1433,9 @@ Die Anzahl der Element im Array `a` ergibt sich mit `a.length`. Niemals nehmen w
 message[message.length - 1]
 ```
 
-Wie gerade (und oben schon) gesehen, kann die Position im Array (der *Index*) nicht nur als Literal, sondern als beliebiger `int`-Ausdruck angegeben werden:
+**Ausgabe von Arrays**
 
-```
-System.out.println("Den wie vielten Buchstaben?");
-char buchstabe = message[readInt() - 1]; // Der Computer zählt ab 0, der Mensch meist ab 1
-System.out.println(buchstabe);
-```
-
-Es gibt verschiedene Möglichkeiten, Arrays auszugeben. Eine davon, die Ihnen bereits bekannt ist, ist diese
+Es gibt verschiedene Möglichkeiten, Arrays auszugeben. Eine davon, die Ihnen bereits bekannt ist, ist diese:
 
 ```
 int [] liste = {0, 1, 2};		
@@ -1443,9 +1462,81 @@ while (zaehler < 3) {
     zaehler++;
 }
 ```
+
+**Übung**
+Versuchen Sie nun die obigen Erkenntnisse in ein lauffähiges Programm zu packen.
+
+```java
+class MeinArray{
+    public static void main(String args[]){
+        
+        
+    }
+}
+```
+@LIA.java(MeinArray)
+
+### Wachsende Arrays (für IF relevant)
+
+* Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt
+* Möchten man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
+bisherige Array in das neue Array umkopiert werden 
+* Diese Aktionen werden von der Standardfunktion `copyOf` effizient erledigt
+* Die Klasse `java.util.Arrays` enthält zahlreiche Funktionen zur Manipulation von Arrays wie z.B. das eben erwähnte `copyOf`
+
+**Hintergrund:** 
+In Java gibt es bereits sehr, sehr viele vorgefertigte Methoden, die wir nutzen können. Erklärungen hierzu finden Sie unter: [Java API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/module-summary.html). Mit diesem Link werden wir das kommende Jahr sehr viel arbeiten. 
+Unter java.util finden Sie die Klasse `Arrays`, die Methoden zum Manipulieren von Arrays enthält. So auch das oben genannte `java.util.Arrays`
+
+* Welche Länge hat in folgendem Code welches Array?
+* Was ist die Ausgabe der Schleife?
+
+```java
+import java.util.Arrays; // durch die Importanweisung wird die genutzte Methode gefunden
+class ArrayKopie{
+    public static void main(String args[]){
+        int[] meinArray = {0,1,2,3,4,5};
+        int[] neuesArray = Arrays.copyOf(meinArray,meinArray.length*2);
+        
+        System.out.println("Länge Array: " + meinArray.length);
+        System.out.println("Länge neues Array: " + neuesArray.length);
+
+        for(int i:neuesArray) {
+        	System.out.println(i);
+        }       
+    }
+}
+```
+@LIA.java(ArrayKopie)
+
+* Mit der Methode `arraycopy` der Klasse `System` können Sie die Kopie noch genauer steuern:
+
+```java
+class ArrayKopie2{
+    public static void main(String args[]){
+        int[] meinArray = {0,1,2,3,4,5};
+        int[] neuesArray = new int[meinArray.length*2];
+        System.arraycopy(meinArray, 0,neuesArray, 0,meinArray.length);
+        for(int i : neuesArray) {
+        	System.out.println(i);
+        }   
+    }
+}
+```
+@LIA.java(ArrayKopie2)
+
+* Suchen Sie die Methode `arraycopy` in der Java API und finden Sie heraus, was die Argumente in der Methode bedeuten. 
+* Ändern Sie die Argumente ab und schauen Sie sich das ergebnis an. 
+
+Hinweis: die Argumente einer Methode sind die Parameter, die in den Klammern der Methode stehen. Methoden lernen wir bald genauer kennen. 
+
+Lösungshinweis: Sie finden die Methode im Module `java.base`, im Paket `java.lang` und im Klassensystem unterhalb von `java.lang.Object`.
+
+
 ### Mehrdimensionale Arrays
 
 Arrays können auch mit mehrdimensionalen Indizes gebaut werden - in Java sind das technisch gesehen Arrays mit einem weiteren Array als Basisdatentyp. Beispiele für Anwendungen:
+
 - Tabellen, z.B. Stundenplan mit Tagen als Spalten und Vorlesungsblöcken als Zeilen und Vorlesungsbezeichnung
 - Bilder - 2 dimensionale Anordnungen von Pixel (Farbwerten)
 - Welten in Computerspielen: zwei- oder dreidimensionale Anordnungen von Feldern
