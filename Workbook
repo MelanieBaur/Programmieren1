@@ -1543,7 +1543,27 @@ Arrays können auch mit mehrdimensionalen Indizes gebaut werden - in Java sind d
 
 Durchwandern können wir diese Arrays mit geschachtelten Schleifen.
 
-Ein zweidimensionales Array kann auch wieder per Literale oder per `new` konstruiert werden, z.B.:
+Ein zweidimensionales Array kann auch wieder per Literale oder per `new` konstruiert werden. 
+
+Machen Sie sich mit folgendem Coding vertraut:
+
+```java
+class Tabelle{
+    public static void main(String args[]){
+		int[][] tabelle = 	{{11, 12, 13},
+							{21, 22, 23},
+							{31, 32, 33}};
+
+		System.out.println(tabelle[1][2]);
+    }
+}
+```
+@LIA.java(Tabelle)
+
+* Welches Element wird hier ausgegeben? 
+* Schreiben Sie eine doppelte Schleife, so dass alle Elemente ausgegeben werden.
+
+Hier finden Sie zwei weitere Beispiele: 
 
 ```
 // 5x5 Array mit true (Schwarz) / false (Weiss) Werten
