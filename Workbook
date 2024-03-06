@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and other professors and students of HFT Stuttgart
 language: de
-version: 0.0.6
+version: 0.0.7
 narrator: Deutsch Female
 mode: Textbook
 
@@ -239,7 +239,7 @@ Wir wollen nun das Programm selbst schreiben. Hierzu benötigen Sie wie das Bild
 * Einen Java-Compiler
 * Einen Java-Interpreter
 
-Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor. Im nächsten Kapitel erklären wir Ihnen die Installation. Arbeiten Sie dieses zu Hause durch, so dass Sie auch zu Hause programmieren können.
+Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigenen Rechner können Sie auf die Schnelle einen externen Web-Editor nutzen, wie z.B. https://www.online-ide.com/online_java_editor, wenn Sie gleich los programmieren wollen. Im nächsten Kapitel erklären wir Ihnen zunächst wie man auf der Kommandozeile arbeitet und dann, wie Eclipse mit allem drum und dran installiert wird. 
 
 ---
 
@@ -270,14 +270,193 @@ Was macht der Befehl `java`?
 
 ###  Installation
 
-TODO: EF
+**Arbeiten mit der Kommandozeile unter Windows:**
 
-Teil 1: 
-Etwas besser erklären mit Texteditor und Kommandozeile
+Zunächst machen wir ein paar Übungen auf der Kommandozeile:
 
-Teil 2: 
-Installation Eclipse und Java
-Projekt anlegen, etc., so dass die Studis HelloWorld ausprobieren können
+- Öffnen der Kommandozeile
+
+Um die Kommandozeile zu öffnen, drücken Sie `Windows + R` und geben Sie `cmd` in das Ausführen-Dialogfeld ein. Drücken Sie dann die Eingabetaste.
+
+- Überprüfen des Benutzernamens
+
+Um den Benutzernamen anzuzeigen, verwenden Sie den Befehl:
+
+```
+whoami
+```
+
+- Navigieren durch Verzeichnisse
+
+Verwenden Sie `cd`, um zwischen Verzeichnissen zu wechseln. Beispiele:
+
+```
+cd            # Aktuelles Verzeichnis anzeigen
+cd Desktop    # Zum Desktop wechseln
+```
+
+- Anzeigen des Verzeichnisinhalts
+
+Verwenden Sie `dir`, um den Inhalt des aktuellen Verzeichnisses anzuzeigen:
+
+```
+dir
+```
+
+- Erstellen und Löschen von Ordnern
+
+Verwenden Sie `mkdir` und `rmdir`, um Ordner zu erstellen und zu löschen:
+
+```
+mkdir practice    # Erstellt einen Ordner namens "practice"
+rmdir Test        # Löscht den Ordner "Test"
+```
+
+- Anzeigen der Java-Version
+
+Um die installierte Java-Version anzuzeigen, verwenden Sie:
+
+```
+java -version
+```
+
+- Überprüfen von Umgebungsvariablen
+
+Um Umgebungsvariablen wie `JAVA_HOME` oder `PATH` zu überprüfen, verwenden Sie:
+
+```
+echo %JAVA_HOME%
+echo %PATH%
+```
+
+- Beenden der Eingabeaufforderung
+
+Um die Eingabeaufforderung zu schließen, geben Sie einfach ein:
+
+```
+exit
+```
+
+**Kommandozeile und Java-Code**
+
+Um einen Java-Code im Texteditor zu erstellen und dann auf der Kommandozeile zu kompilieren und auszuführen, können Sie die folgenden Schritte befolgen:
+
+1. **Öffnen Sie Ihren Texteditor:** Verwenden Sie ein beliebiges Textbearbeitungsprogramm wie Notepad, Editor, TextPad, UltraEdit, Kate, gedit, Emacs, vi oder ein anderes, das "plain text" (unformatierten Text) speichern kann.
+
+2. **Schreiben Sie Ihren Java-Code:** Erstellen Sie eine neue Datei und geben Sie Ihren Java-Code ein. Zum Beispiel:
+
+```java
+public class HalloWelt {
+    public static void main(String[] args) {
+        System.out.println("Hallo Welt!");
+    }
+}
+```
+
+3. **Speichern Sie die Datei:** Speichern Sie die Datei mit der Erweiterung ".java". Zum Beispiel: "HalloWelt.java".
+
+4. **Öffnen Sie die Eingabeaufforderung oder das Terminal:** Navigieren Sie zu dem Verzeichnis, in dem sich Ihre Java-Datei befindet.
+
+5. **Kompilieren Sie den Java-Code:** Verwenden Sie den Befehl `javac`, um den Java-Code zu kompilieren. Wenn Sie möchten, können Sie die kompilierten Dateien in einem separaten Ordner speichern. Beispiel:
+
+```bash
+javac HalloWelt.java
+```
+
+oder
+
+```
+javac -d . HalloWelt.java
+```
+
+Der `-d`-Schalter gibt an, in welchem Verzeichnis die kompilierten `.class`-Dateien gespeichert werden sollen. Hier wird der Punkt verwendet, um die Dateien im aktuellen Verzeichnis zu speichern.
+
+6. **Führen Sie das Programm aus:** Verwenden Sie den Befehl `java`, um das Programm auszuführen. Verwenden Sie den Klassennamen ohne die Erweiterung ".class". Beispiel:
+
+```
+java HalloWelt
+```
+
+7. **Überprüfen Sie die Ausgabe:** Das Programm sollte ausgeführt werden und die Ausgabe auf der Konsole anzeigen. In diesem Fall würde es "Hallo Welt!" ausgeben.
+
+Durch das Befolgen dieser Schritte können Sie einen Java-Code im Texteditor erstellen, kompilieren und ausführen, ohne eine integrierte Entwicklungsumgebung (IDE) zu verwenden.
+
+**Installation von Eclipse**
+
+Führen Sie diese Schritte auf Ihrem Laptop oder Rechner zu Hause durch, so dass Sie für das Semester ausgerüstet sind. Auf den Rechnern der Hochschule ist alles bereits installiert. 
+
+1. Öffnen Sie Ihren Webbrowser und besuchen Sie die offizielle Eclipse-Website unter https://www.eclipse.org/downloads/.
+
+2. Herunterladen des Installationsprogramms („Download x86_64“)
+![](installation_1.JPG) <br>
+
+3. Bestätigung des Downloads vom ausgewählten Server
+![](installation_2.JPG)
+
+4. Wechsel in den „Downloads“-Ordner und Start des heruntergeladenen Programms
+`eclipse-inst-jre-win64.exe`
+
+5. Auswahl des Eintrags `Eclipse IDE for Java Developers`
+
+<p align="center">
+<img src="installation_3.JPG" alt="Auswahl Eintrag" width="60%">
+</p>
+
+
+
+6. Bestätigen der Standardeinträge für die JVM und den Installationsordner
+<p align="center">
+<img src="installation_4.JPG" alt="Bestätigung Installationsordner" width="60%">
+</p>
+
+7. Auswahl/Anlegen des Eclipse Workspace und "Launch"
+<p align="center">
+<img src="installation_5.JPG" alt="Auswahl des Eclipse Workspace" width="60%">
+</p>
+
+
+**Führung durch Eclipse:**
+
+Absolvieren Sie dann die Anleitung zum Erstellen eine Hello World-Projekts:
+
+<p align="center">
+<img src="installation_5b.JPG" alt="Hello World" width="75%">
+</p>
+
+**Start des ersten Projekts:**
+Ein Eclipse-Projekt starten Sie unter:
+<p align="center">
+<img src="installation_5d.JPG" alt="Java Projekt starten" width="75%">
+</p>
+
+
+Oder, wenn Sie den Start-Bildschirm nicht sehen, klicken Sie links oben auf File -> New -> Java Project -> Project name eingeben
+<p align="center">
+<img src="installation_6a.JPG" alt="Java Projekt starten" width="50%">
+</p>
+
+
+Geben Sie oben einen Projektnamen ein und deslektieren Sie das Häckchen der module-info.java!
+Danach klicken Sie auf `Finish`.
+<p align="center">
+<img src="installation_6b.JPG" alt="Projektname" width="60%">
+</p>
+
+Wir arbeiten zunächst ohne Module und auch ohne Packages. 
+
+Um nun eine Klasse zu erstellen, rechtsklicken Sie auf das Projekt `ErstesProjekt`, wählen Sie `New`, dann `Class`.
+<p align="center">
+<img src="installation_8b.JPG" alt="Klasse anlegen" width="60%">
+</p>
+
+ Geben Sie einen Namen für die Klasse ein, wählen Sie aus, dass die Main-  und klicken Sie auf `Finish`.
+<p align="center">
+<img src="installation_9b.JPG" alt="Klassenname" width="60%">
+</p>
+
+
+Erstellen Sie nun Ihr gewünschtes Programm. Zum Ausführen des Programms dann einfach den grünen `Run As` Button drücken:
+![](installation_10.jpg)
 
 ### Übungen
 
