@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and other professors and students of HFT Stuttgart
 language: de
-version: 0.0.7
+version: 0.0.8
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1586,6 +1586,202 @@ int[][] punkte = new int[nStudierende][nAufgaben];
 
 ## Strings
 
+
+Bisher haben wir uns mit primitiven Datentypen befasst, wie z.B. int, double und char, um einfache Werte zu speichern. Mit dem primitiven Datentyp char können wir einzelne Zeichen speichern, während ein char-Array Zeichenfolgen einer festen Länge speichern kann.
+
+Für die Arbeit mit Zeichenketten bietet Java die Klasse `String` an. Im Gegensatz zu primitiven Datentypen stellt die Klasse `String` einen Referenztyp dar. Das bedeutet, dass eine Variable vom Typ `String` nicht den tatsächlichen String selbst speichert, sondern eine Referenz auf das `String`-Objekt in der Speicherstruktur.
+
+Objekte eines Referenztyps, wie z.B. String-Objekte, können Methoden bereitstellen, die auf sie angewendet werden können. Die `String`-Klasse stellt eine Vielzahl von Methoden zur Verfügung, um Zeichenketten zu manipulieren, vergleichen, suchen und mehr.
+
+Was passiert in folgendem Programm? 
+
+* Versuchen Sie das Programm nachzuvollziehen.
+* Welche Ausgaben erscheinen auf der Konsole?
+* Wie wurden die einzelnen Strings gebaut?
+
+```java
+class StringBeispiel{
+    public static void main(String args[]){
+        String name_1 = new String("Speicherfresser"); 
+        String name_2 = "String-Pool"; 
+        char[] buchstaben = { 'E', 'i', 'n', 'z', 'e', 'l', 'n'};
+        String name_3 = new String(buchstaben); 
+        String name_4 = "Bau" + "meister"; 
+
+        System.out.println(name_1);  
+        System.out.println(name_2); 
+        System.out.println(name_3); 
+        System.out.println(name_4); 
+    }
+}
+```
+@LIA.java(StringBeispiel)
+
+
+
+### Nutzung von Zeichenketten
+
+Wir schauen uns in diesem Kapitel etwas genauer an, wie Strings erzeugt werden und wo diese gespeichert werden.
+
+- Mit dem Konstruktoraufruf `new String(…)` werden immer neue Stringobjekte angelegt.
+
+- `String`-Literale (Zeichenketten in doppelten Anführungszeichen) werden im String-Pool verwaltet.
+
+- Alle Java-Objekte werden auf dem Speicherbereich namens Heap angelegt
+
+Merke: Die Objekterzeugung mit `new()` umgeht den String-Pool
+
+Beachten Sie dabei folgende Abbildung. Versuchen Sie diese nachzuvollziehen. Wo wird welcher String gespeichert?
+
+![](zeichenketten_1.JPG)
+
+Schauen Sie das einführende Programm erneut an. Können Sie nun die Kommentare nachvollziehen?
+
+```java
+class StringBeispiel{
+    public static void main(String args[]){
+        String name_1 = new String("Speicherfresser"); // new belegt neuen Speicherplatz
+        String name_2 = "String-Pool"; // Zeichenkettenkonstaenten werden wiederverwendet
+
+        char[] buchstaben = { 'E', 'i', 'n', 'z', 'e', 'l', 'n'};
+        String name_3 = new String(buchstaben); // new belegt neuen Speicherplatz
+
+        String name_4 = "Bau" + "meister"; // Einzelteile werden wiederverwendet,
+                                        // aber + Operator erzeugt neues Objekt
+        System.out.println(name_1); //Ausgabe: Speicherfresser 
+        System.out.println(name_2); //Ausgabe: String-Pool
+        System.out.println(name_3); //Ausgabe: Einzeln
+        System.out.println(name_4); //Ausgabe: Baumeister
+    }
+}
+```
+@LIA.java(StringBeispiel)
+
+**Unveränderbare Zeichenketten**
+
+Objekte der Klasse `String` sind unveränderlich.
+
+- Methoden, die einen String ändern, liefern ein neues Objekt zurück.
+- Beispiel: Methode replace()
+- Versuchen Sie nun auch folgenden Code nachzuvollziehen, welche Ausgaben werden generiert?
+
+```java
+class StringLaeufer{
+    public static void main(String args[]){
+        String schachFigur = "Läufer";
+        String jemandDerVielLaeuft = "Läufer";
+        System.out.println(schachFigur == jemandDerVielLaeuft); 
+        schachFigur.replace("Läufer", "König"); // Das Objekt, auf das schachFigur zeigt, bleibt unverändert
+
+        System.out.println(schachFigur); 
+        System.out.println(jemandDerVielLaeuft); 
+        System.out.println(schachFigur == jemandDerVielLaeuft); 
+        schachFigur = schachFigur.replace("Läufer", "König"); // Die Variable schachFigur zeigt auf ein anderes Objekt
+        System.out.println(schachFigur); 
+        System.out.println(schachFigur == jemandDerVielLaeuft); 
+    }
+}
+```
+@LIA.java(StringLaeufer)
+
+### Veränderbare Zeichenketten
+
+- Objekte der Klassen StringBuffer und StringBuilder sind veränderbar. Analysieren Sie folgendes Beispiel:
+
+```java
+class StringBilder{
+    public static void main(String args[]){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("String"); //append() und insert() verändern dynamisch das darunterliegende Objekt
+        stringBuilder.append("-");
+        stringBuilder.append("Bilder");
+        stringBuilder.insert(8, "u");
+        System.out.println(stringBuilder.toString());
+    }
+}
+```
+@LIA.java(StringBilder)
+
+
+- Die Objekte können dynamisch ihre Größe ändern.
+- Optional kann man im Konstruktor der Klassen StringBuffer und StringBuilder bereits eine Größe mitgeben.
+
+- Die Klassen StringBuffer und StringBuilder bieten die gleichen Methoden an.
+- Die beiden Klassen unterscheiden sich in der Arbeitsweise:
+
+    - StringBuffer ist synchronisiert (= Thread-sicher bei zeitgleichem Zugriff mehrerer Programmteile)
+
+  - StringBuilder ist nicht synchronisiert (und etwas schneller)
+- Weitere Methoden
+
+    - delete(), deleteCharAt()
+
+  - replace()
+
+  - usw.
+
+
+
+### Zeichenkettenoperationen
+
+Beispiel:
+String satz = „Dies ist ein Satz.“;
+
+Was für Methoden können auf diesem String aufrufen werden? 
+
+Methoden: charAt(int index), length(), substring(int beginIndex) etc.
+
+- Zugriff auf ein Zeichen: charAt()
+- Länge eines Strings: length()
+- Zerlegen eines Strings: substring(), split()
+
+```java
+public class Zeichenkettenoperationen {
+    public static void main(String[] args) {
+        String satz = "Das ist ein Satz";
+        String[] woerter = satz.split(" "); //Teilt den String bei allen Leerzeichen
+        for(int i = 0; i < woerter.length; i++) {
+            System.out.println(woerter[i]);
+        } 
+
+        String teil = satz.substring(6, 10); //Beginn des Substrings an Position 6 und Ende an Position 10
+        System.out.println(teil);
+   }
+}
+```
+@LIA.java(Zeichenkettenoperationen)
+
+- Vergleichsoperationen in Java funktionieren nur für primitive Datentypen und nicht für Referenztypen wie z.B. String
+- Zeichenketten vergleicht man mit `equals()`, nicht mit == !!!
+- Wenn Teile von Strings verglichen werden sollen, kann man z.B. `endsWith()`, `startsWith()` oder `regionMatches()` verwenden
+- Mit `indexOf()`, `lastIndexOf()`, `contains()` kann man in Strings suchen
+- Veränderungen können mit `replace()`, `replaceFirst()`, `replaceAll()` erfolgen
+
+
+**Weitere Beispiele**
+
+Versuchen Sie nun auch folgenden Code nachzuvollziehen. Welche Ausgaben werden generiert und warum?
+
+```java
+class StringWeiteresBeispiel{
+    public static void main(String args[]){
+        String wort = "Urinstrinkt";
+        boolean sindGleich = wort.equals("Ur" + "instinkt");
+        System.out.println(sindGleich); 
+
+        System.out.println(wort.startsWith("Urin")); 
+        System.out.println(wort.endsWith("stinkt")); 
+
+        System.out.println("Autoschlüssel".regionMatches(5, "Schlüsselbund", 1,3)); 
+        System.out.println(wort.indexOf('i')); 
+        System.out.println(wort.lastIndexOf('i')); 
+    }
+}
+```
+@LIA.java(StringWeiteresBeispiel)
+
+### Übungen
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 04.
 
 ## Klassen, Objekte, Methoden
 ## Vererbung
