@@ -4,8 +4,8 @@ Hier finden Sie die Unterlagen für die Vorlesung Programmieren 1 im Bachelor In
 # Impressum
 Verantwortlich für GitHub-Inhalte unter dem Benutzerkonto MelanieBaur:
 
-Melanie Baur
-Schellingstr. 24
+Melanie Baur<br>
+Schellingstr. 24<br>
 70174 Stuttgart
 
 E-Mail: melanie.baur@hft-stuttgart.de
