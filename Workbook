@@ -1,7 +1,7 @@
 <!--
-author: Melanie Baur and other professors and students of HFT Stuttgart
+author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.0.8
+version: 0.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -209,7 +209,7 @@ Genauer:
 * Java-Programme können mit einem beliebigen Editor geschrieben werden. Die Dateiendung der Quell-Dateien lautet .java. Hier steht der Quellcode (engl. source)
 * Der Java-Compiler `javac` übersetzt die Quelldatei in sogenannten Bytecode, dieser wird in der mit der Endung .class gespeichert.
 * Die Java-Laufzeitumgebung (engl. Runtime Environment) `java` führt den Bytecode aus.
-* Das Java-Programm von der Einführung gibt den Text „Hello World“ am Bildschirm aus.
+* Das Java-Programm von der Einführung gibt den Text „Hallo Welt“ am Bildschirm aus.
 
 ```java
 class HalloWelt{
@@ -220,18 +220,18 @@ class HalloWelt{
 ```
 @LIA.java(HalloWelt)
 
-Aber was passiert hier im Hintergrund?
+Das bedeutet
 
 * Übersetzen: In Java wird Programmcode über einen Compiler in den Bytecode übersetzt (kompiliert). Dieser kann dann von einem Interpreter ausgeführt werden.
 
 <p align="center">
-<img src="programmausfuehren.png" alt="ProgrammAusfuehren" width="60%">
+<img src="programmausfuehren2.png" alt="ProgrammAusfuehren" width="60%">
 </p>
 
 * Eine Besonderheit von Java ist, dass ein Bytecode von verschiedenen Systemen verwendet werden kann: „Write once, run anywhere“
 
 <p align="center">
-<img src="bytecode.png" alt="Bytecode" width="60%">
+<img src="bytecode2.png" alt="Bytecode" width="60%">
 </p>
 
 Wir wollen nun das Programm selbst schreiben. Hierzu benötigen Sie wie das Bild zeigt:
@@ -268,7 +268,7 @@ Was macht der Befehl `java`?
 ---
 
 
-###  Installation
+###  Kommandozeile
 
 **Arbeiten mit der Kommandozeile unter Windows:**
 
@@ -353,7 +353,7 @@ public class HalloWelt {
 }
 ```
 
-3. **Speichern Sie die Datei:** Speichern Sie die Datei mit der Erweiterung ".java". Zum Beispiel: "HalloWelt.java".
+3. **Speichern Sie die Datei:** Speichern Sie die Datei mit der Erweiterung ".java". Zum Beispiel: "HalloWelt.java". Wichtig: Die Datei muss so heißen, wie Ihre Klasse heißt. In diesem Fall: HalloWelt
 
 4. **Öffnen Sie die Eingabeaufforderung oder das Terminal:** Navigieren Sie zu dem Verzeichnis, in dem sich Ihre Java-Datei befindet.
 
@@ -379,11 +379,13 @@ java HalloWelt
 
 7. **Überprüfen Sie die Ausgabe:** Das Programm sollte ausgeführt werden und die Ausgabe auf der Konsole anzeigen. In diesem Fall würde es "Hallo Welt!" ausgeben.
 
-Durch das Befolgen dieser Schritte können Sie einen Java-Code im Texteditor erstellen, kompilieren und ausführen, ohne eine integrierte Entwicklungsumgebung (IDE) zu verwenden.
+Durch das Befolgen dieser Schritte können Sie einen Java-Code im Texteditor erstellen, kompilieren und ausführen, ohne eine integrierte Entwicklungsumgebung (IDE) zu verwenden. Dies ist auf Dauer aber sehr mühsam, wie Sie vielleicht an diesem kleinen Beispiel schon bemerkt haben. 
 
-**Installation von Eclipse**
+### Installation von Eclipse
 
-Führen Sie diese Schritte auf Ihrem Laptop oder Rechner zu Hause durch, so dass Sie für das Semester ausgerüstet sind. Auf den Rechnern der Hochschule ist alles bereits installiert. 
+Wir werden im 1. Semester mit der IDE (dies ist die Abkürzung für integrierte Entwicklungsumgebung von engl. integrated development environment) arbeiten. Eine IDE macht Ihne das Leben sehr viel leichter. Sie sollten, wenn möglich, Eclipse auch auf Ihrem privaten Rechner installieren, um auch zu Hause üben zu können. 
+
+Führen Sie also diese Schritte auf Ihrem Laptop oder Rechner zu Hause durch, so dass Sie für das Semester ausgerüstet sind. Auf den Rechnern der Hochschule ist alles bereits installiert. 
 
 1. Öffnen Sie Ihren Webbrowser und besuchen Sie die offizielle Eclipse-Website unter https://www.eclipse.org/downloads/.
 
@@ -461,7 +463,7 @@ Erstellen Sie nun Ihr gewünschtes Programm. Zum Ausführen des Programms dann e
 ### Übungen
 
 **Aufgabe 1:** 
-Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. 
+Recherchieren Sie ein Pfannkuchenrezept und versuchen Sie die einzelnen Schritte nachzuvollziehen. Natürlich dürfen Sie dieses Rezept auch nachkochen. Was sind die Variablen und Methoden in dem Rezept?
 
 **Aufgabe 2:** 
 Erstellen Sie mit Hilfe eines einfachen Texteditors ein Programm `HalloStudent.java`, welches Ihren Namen auf Konsole ausgibt. 
@@ -471,7 +473,9 @@ Erstellen Sie mit Hilfe eines einfachen Texteditors ein Programm `HalloStudent.j
 * Suchen Sie den erzeugten Binärcode
 
 **Aufgabe 3:** 
-Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse
+Programmieren mit Eclipse: Machen Sie Aufgabe 2 mit Eclipse.
+
+Wenn Sie ein kleines Programm auf der Kommandozeile ausführen können, dieses auch in der IDE läuft und Sie dazu verstanden haben, welche Schritte im Hintergrund ausgeführt wurden, dann sind Sie bereit für das nächste Kapitel. 
 
 
 
@@ -1725,7 +1729,10 @@ class StringBilder{
 ### Zeichenkettenoperationen
 
 Beispiel:
+
+```
 String satz = „Dies ist ein Satz.“;
+```
 
 Was für Methoden können auf diesem String aufrufen werden? 
 
@@ -1757,6 +1764,27 @@ public class Zeichenkettenoperationen {
 - Mit `indexOf()`, `lastIndexOf()`, `contains()` kann man in Strings suchen
 - Veränderungen können mit `replace()`, `replaceFirst()`, `replaceAll()` erfolgen
 
+**Aufgabe**
+
+Suchen Sie sich geeignete Methoden in der Java API der Klasse [String](https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/String.html)
+um den String "Iss" jeweils geeignet weiter zu verarbeiten. Dabei sollte jeweils das Wort im Kommentar erscheinen.
+
+```java
+public class Iss {
+    public static void main(String[] args) {
+        String satz = "Iss";
+        // Eis
+
+        // Heiss
+
+        // Heisser
+
+        //Hosenschei**er
+   }
+}
+```
+@LIA.java(Iss)
+
 
 **Weitere Beispiele**
 
@@ -1781,9 +1809,105 @@ class StringWeiteresBeispiel{
 @LIA.java(StringWeiteresBeispiel)
 
 ### Übungen
+
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 04.
 
+
+## Exkurs: Debugging (WIP)
+
+TODO: EF
+
+
 ## Klassen, Objekte, Methoden
+
+
+## Exkurs: Rekursion (WIP)
+
+* Eine Rekursion ein Objekt oder ein Vorgang, der sich selbst als Teil enthält oder mithilfe von sich selbst definierbar ist. 
+Eine rekursive Funktion ist somit eine Funktion, die sich selbst aufruft.
+* Rekursion kann anstelle von Schleifen genutzt werden
+
+**Beispiel: Fakultät**
+
+* Wie wird die Fakultät berechnet? Recherchieren Sie zwei verschiedene Berechnungsmöglichkeiten.
+* Sind Ihre gefundenen Berechnungsmöglichkeiten rekursiv oder iterativ?
+
+### Fakultät
+
+
+Eine iterative Berechnungsmöglichkeit der Fakultät:
+
+![Iterative Berechnung Fakultät](fakultaetIterativ.png)
+
+Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
+
+![Rekrusive Berechnung Fakultät](fakultaetRekursiv.png)
+
+So kann man sich die rekursive Berechnung vorstellen.
+![Fakultätsberechnung](fakultaet.png)
+
+Achtung:
+
+Es darf keine unendliche Rekursion entstehen. D.h. Sie brauchen eine Abbruchbedingung. Ansonsten führt dies zu einem Laufzeitfehler. Der rekursive Funktionsaufruf erfolgt nur, wenn die Abbruchbedingung nicht erfüllt ist
+
+Hier ein Mustercode für die Rekursion: 
+
+```java
+public static typ funktion(typ parameter){
+  if (bedingung){return ergebnis;
+  }else{return wert op funktion(neuerParameter);
+  }
+}
+```
+
+* Rekursion führt für bestimmte Problemstellungen zu prägnanten, knappen und eleganten Algorithmen.
+* Rekursionen verbrauchen meist mehr Arbeitsspeicher. Deshalb kann durch zu große Rekursionstiefe auch ein Stack Overflow entstehen.
+
+**Aufgabe**
+
+Vervollständigen Sie die beiden Programme, so dass jeweils die Fakultät berechnet wird:
+
+```java
+class FakultaetIterativ{
+    public static void main(String args[]){
+        int n = 4;
+        System.out.println(n + "! = " + fakultaet(n));
+    }
+
+    public static int fakultaet(int n ){
+        int fakultaet = 1;
+
+        // Fügen Sie hier den passenden Code ein
+
+        return fakultaet;
+    }
+    
+}
+```
+@LIA.java(FakultaetIterativ)
+
+
+```java
+class FakultaetRekursiv{
+    public static void main(String args[]){
+        int n = 4;
+        System.out.println(n + "! = " + fakultaet(n));
+    }
+
+    public static int fakultaet(int n ){
+        if ( // Bedingung? ){
+            return // was wird zurück gegeben bei Abbruchbedingungen?
+        } else {
+            // was wird zurück gegeben? rekursiver Aufruf 
+    }
+}
+```
+@LIA.java(FakultaetRekursiv)
+
+### Übung
+TODO: Bionomi rekursiv
+Zahlensumme rekursiv -> Debug-Perspektive
+
 ## Vererbung
 ## Abstrakte Klassen, Interfaces
 ## Collections & Maps
