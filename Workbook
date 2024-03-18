@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.1
+version: 0.1.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -484,7 +484,7 @@ Wenn Sie ein kleines Programm auf der Kommandozeile ausführen können, dieses a
 Schauen Sie sich folgendes Beispiel an und überlegen Sie sich für jede Zeile, was das Programm tun könnte und welche Ausgabe der Code Ihrer Meinung nach erzeugt.
 
 ```java
-public class Variablen {
+class Variablen {
     public static void main(String[] args) {
 
         byte b = 1;
@@ -566,7 +566,7 @@ Datentyp Variablenname = Wert;
 In einem kleinen Programm könnte das so aussehen: 
 
 ```java
-public class Schuhgroesse {
+class Schuhgroesse {
     public static void main(String[] args) {
         int schuhgroesse = 42;
         System.out.println("Meine Schuhgröße ist: " + schuhgroesse);
@@ -580,6 +580,7 @@ Hinweis: Man muss einer Variable nicht sofot einen Wert geben. Dies kann auch sp
 
 Hier finden Sie eine Übersicht über verschiedene primitive Datentypen, das sind die elementaren Datentypen:
 
+<!-- data-type="None" -->
 | Datentyp   | Bit   | Minimum   | Maximum   |
 | :--------- | :--------- | :--------- | :--------- |
 | byte    | 8-Bit     | -128    | 127    |
@@ -591,6 +592,7 @@ Hier finden Sie eine Übersicht über verschiedene primitive Datentypen, das sin
 
 Weiterhin gibt es noch die beiden Datentypen `boolean` und `char`: 
 
+<!-- data-type="None" -->
 | Datentyp   | Bit   |Werte   |
 | :--------- | :--------- | :--------- | 
 | boolean    | 1 Byte     | true / false   | 
@@ -615,7 +617,7 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
 Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
 
 ```java
-public class Temperatur {
+class Temperatur {
     public static void main(String[] args) {
         double temperatur = 18.1;
         System.out.println("Die Temperatur ist: " + temperatur + " Grad.");
@@ -659,7 +661,7 @@ Ausdrücke werden von innen nach außen ausgewertet, d.h. bei verschachtelten Au
 Bei Zuweisungen wird erst die rechte Seite berechnet und dann erst die links genannte Variable aktualisiert. Überlegen Sie, was folgender Programmcode somit ausgibt. Probieren Sie dies dann aus.
 
 ```java
-public class Wert {
+class Wert {
     public static void main(String[] args) {
        int wert = 10;
        System.out.println("Der Wert ist: " + wert);
@@ -693,7 +695,7 @@ Von den Standardoperatoren `+`, `-`, `*` (Mal), `/` (geteilt durch) für Zahlen 
 
 
 ```java
-public class Operatoren1 {
+class Operatoren1 {
     public static void main(String[] args) {
         int x = 5;
         x += 5; // Gleichbedeutend mit x = x + 5
@@ -706,7 +708,7 @@ public class Operatoren1 {
 Was ist `y` am Ende des folgenden Programmcodes? Fügen Sie auch hier eine Zeile für die Ausgabe hinzu, um Ihre Überlegung zu überprüfen.
 
 ```java
-public class Operatoren2 {
+class Operatoren2 {
     public static void main(String[] args) {
         int y = 2;
         y *= y; // Gleichbedeutend mit y = y * y;
@@ -720,7 +722,7 @@ Häufig zählen wir Variablen um eins nach oben oder eins nach unten, hier gibt 
 
 
 ```java
-public class Operatoren3 {
+class Operatoren3 {
     public static void main(String[] args) {
         int i = 0;
         System.out.println(i++); // Gibt 0 aus und erhöht dann i auf 1
@@ -736,7 +738,7 @@ public class Operatoren3 {
 Weniger verbreitet sind die Formen `++i` und `--i`, die zuerst `i` inkrementieren bzw. dekrementieren und dann den Wert zurückliefern. Dies liefert folgendes, doch etwas überraschende Eregebnis:
 
 ```java
-public class Operatoren4 {
+class Operatoren4 {
     public static void main(String[] args) {
         int i = 0;
         System.out.println(++i); // Erhöht i zuerst auf 1 und gibt dann 1 aus
@@ -751,7 +753,7 @@ public class Operatoren4 {
 Nützlich ist der Modulo-Operator `%` - er liefert den Rest bei einer Ganzzahlendivision, z.B.:
 
 ```java
-public class Operatoren5 {
+class Operatoren5 {
     public static void main(String[] args) {
         int zahl = 22;
         int divisor = 4;
