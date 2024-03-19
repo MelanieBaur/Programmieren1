@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.1.1
+version: 0.2.0
 narrator: Deutsch Female
 mode: Textbook
 
@@ -52,12 +52,14 @@ Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](
 Eine Programmiersprache zu lernen, ist unabdingbare Voraussetzung für eine Tätigkeit in der Informatik, z.B. als Entwickler, Projektleiter, Softwarearchitekt, denn die Computer führen exakt den Code aus, den sie vorgesetzt bekommen und die Compiler übersetzen genau das was im Programmtext steht in Maschinencode. 
 
 Sie als Programmierer:
-* Analysieren Problemen
+
+* Analysieren Probleme
 * Überlegen sich Lösungen
 * Übersetzen Lösungen in Programmtext
 Der Computer ist nicht kreativ und findet keine Lösungen. Dafür gibt es die glorreiche Tätigkeit des Programmierens.
 
 Um dies zu können, müssen Sie viel üben:
+
 * Kennen Sie einen Trainer der Bundesliga, der nicht Profi-Fußballer war? 
 * Haben Sie Schwimmen oder Radfahren aus Büchern erlernt? 
 * Sind Sie zur praktischen Fahrprüfung erstmals Auto gefahren?
@@ -71,6 +73,7 @@ Was könnte Beispiele für kleine Programme sein?
 * Zwei Zahlen miteinander vergleichen
 
 Das können Sie sicherlich auch, aber Computer können das:
+
 * Sehr schnell: Milliarden von Operationen pro Sekunde
 * Sehr genau: Milliarden von Zahlen speichern und exakt so wieder abrufen
 
@@ -578,7 +581,7 @@ class Schuhgroesse {
 Hinweis: Man muss einer Variable nicht sofot einen Wert geben. Dies kann auch später geschehen. Die Variable erhält dann zunächst einen Standardwert - je nach Datentyp. 
 
 
-Hier finden Sie eine Übersicht über verschiedene primitive Datentypen, das sind die elementaren Datentypen:
+Hier finden Sie eine Übersicht über verschiedene primitive Datentypen, das sind die elementaren Datentypen. 
 
 <!-- data-type="None" -->
 | Datentyp   | Bit   | Minimum   | Maximum   |
@@ -600,6 +603,14 @@ Weiterhin gibt es noch die beiden Datentypen `boolean` und `char`:
 
 Primitive Typen werden immer klein geschrieben. 
 
+Hinweis: Ein char ist intern als Zahlen codiert (z.B. A → 65) – deshalb kann mit char gerechnet werden.
+
+Weiterhin gibt es Referenztypen, welche auf Klassen basieren (z.B. String). Diese werden groß geschrieben. 
+
+Java ist eine streng typisierte Sprache, d.h. Java erlaubt es nicht, Variablen die für einen Typ deklariert sind mit Werten aus einem anderen Typ zu belegen. Beim Übersetzen des Quellcodes wird geprüft, ob alle Werte zu den geforderten Typen passen – also auch Variablenwerte und Variablentypen.
+Eclipse prüft dies bereits beim Schreiben und meldet ggf. einen Fehler
+
+
 Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
 
 * Am Anfang muss ein Buchstabe (oder `_`) stehen.
@@ -608,10 +619,15 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
 * Nicht erlaubt sind Sonderzeichen wie `!, ?, *, /, … `
 * Groß- und Kleinschreibung ist relevant. Das bedeutet, dass Variablennamen wie `glueckszahl` und `gluecksZahl` unterschiedlich sind.
 * Variablennamen sollten zusammengeschrieben werden, also ohne Leerzeichen.
+* Schlüsselwörrter dürfen nicht als Variablennamen verwendet werden, da sie zum Sprachumfang von Java gehören
+
 * Eine häufige Konvention ist die Verwendung von „CamelCase“:
+
   * Variablen, Methoden und Pakete beginnen klein und jedes neue Wort beginnt groß, z.B. kleinAnfangenUndJedesWortGrossBeginnen.
   * Klassennamen beginnen groß und jedes neue Wort beginnt groß, z.B. GrossAnfangenUndJedesWortGrossBeginnen.
 
+**Merke:**
+Gute Variablennamen sind nicht zu kurz und nicht zu lang. Sie sind immer aussagekräftig (z.B. int alterInTagen), nur temporäre Variablen dürfen auch mal kürzer sein (z.B. in Schleifen, vgl. folgendes Kapitel). Der Typ der Variable sollte nicht im Namen aufgeführt werden. Der Compiler meldet zurück, ob der Name gültig ist, nicht ob dieser sinnvoll gewählt ist.
 
 ### Variablen zuweisen
 Die Initialisierung hat den Variablen direkt bei der Speicherreservierung einen Wert zugewiesen. Nachdem eine Variable angelegt wurde können wir ihr einen (neuen) Wert zuweisen:
@@ -635,7 +651,7 @@ Für Ausdrücke gibt es verschiedene Aufbauten:
 
 * Literale - das sind konstante Werte, die direkt im Programmtext geschrieben werden, z.B. `8`, `17.4`, `'a'`, `"Hallo Welt"`
 * Variablen - der Name einer bestehenden Variable, dieser wird bei der Auswertung des Ausdrucks mit dem aktuellen Wert der Variable ersetzt, z.B. `schuhgroesse`
-* Methodenaufrufe - siehe unten. Es wird Code, der unter dem Methodennamen abgespeichert ist ausgeführt und das Ergebnis zurück geliefert, z.B. `readInt()`, manche Methoden nehmen Parameter (wiederum Ausdrücke), z.B. `System.out.println("Hallo Welt")`
+* Methodenaufrufe - es wird Code, der unter dem Methodennamen abgespeichert ist, ausgeführt und das Ergebnis zurück geliefert, z.B. `readInt()`, manche Methoden nehmen Parameter (wiederum Ausdrücke), z.B. `System.out.println("Hallo Welt")`
 * Operationen: hier werden eine oder mehrere (meistens zwei) Ausdrücke mit einem Operator verknüpft, z.B. `schuhgroesse + wunschEinkommen`
 
 In Java müssen wir den Wert eines Ausdrucks einer Variable zuweisen:
@@ -691,7 +707,7 @@ class Wert {
 
 Von den Standardoperatoren `+`, `-`, `*` (Mal), `/` (geteilt durch) für Zahlen gibt es auch jeweils eine Version, die gleich die Zuweisung integriert. 
 
-Überlegen Sie, welchen Wert `x` hat. Fügen Sie eine Zeile im Programmcode für die Ausgabe hinzu und überprüfen Sie Ihre Überlegung.
+Überlegen Sie, welchen Wert `x` im folgenden Programm hat. Fügen Sie eine Zeile im Programmcode für die Ausgabe hinzu und überprüfen Sie Ihre Überlegung.
 
 
 ```java
@@ -765,6 +781,104 @@ class Operatoren5 {
 @LIA.java(Operatoren5)
 
 Weitere Operatoren sind Vergleichsoperatoren (`==`, `!=`, `<=`, `>=`, `<`, `>`), Bit-Operatoren (`&`, `|`, `<<`, `>>`) und logische Operatoren (`&&`, `||`)
+
+
+### Sichtbarkeit von Variablen
+„Sichtbar“ bedeutet: Die Variable kann vom folgendem Code verwendet werden. Variablen sind erst sichtbar, nachdem sie deklariert wurden.
+
+Neben den Variablen, die wir innerhalb einer Methode deklarieren (bisher in der main-Methode), gibt es auch noch statische Klassenvariablen. Diese sind in der gesamten Klasse sichtbar und das Programm kann hierauf zugreifen, sobald es gestartet wurde. Eine statische Klassenvariable kann von mehreren Methoden einer Klasse verwendet werden. Sie wird im Rumpf einer Klassendeklaration geschrieben (nicht im Rumpf einer Methodendeklaration). 
+
+Hier ein Beispiel:
+
+```java
+class Klassenvariable {
+    public static int zahl = 10; //statische Klassenvariable
+
+    public static void main(String[] args) {
+        int neueZahl = zahl + 10; //lokale Variable, nur innerhalb der Methode sichtbar
+        System.out.println(neueZahl);
+   }
+}
+```
+@LIA.java(Klassenvariable)
+
+* `static` bedeutet für uns zunächst etwa "von Anfang an vorhanden", "der Klasse zugeordnet"
+* Variablen ohne den Modifier `static` sind den Objekten zugeordnet (ab Kapitel Klassen und Objekte)
+* Lokale Variablen sind nur innerhalb des Blocks sichtbar
+
+Weiterhin gibt es noch statische Klassenkonstanten. Diese werden mit dem Schlüsselwort `final` deklariert. Hier sind Änderungen nur an einer Stelle möglich. Dies erleichter die Lesbarkeit. 
+
+```
+\\ statt den Wert als Literal fest im Code anzugeben
+double umfang = 2.0 * radius * 3.14159;
+double flaeche = radius * radius* 3.14159;
+
+\\ wird der Wert als Klassenkonstante deklariert
+public static final double PI = 3.14159;
+double umfang = 2.0 * radius * PI;
+double flaeche = radius * radius * PI;
+
+```
+Konstanten werden groß geschrieben. 
+
+**Lebensdauer von Variablen**
+
+Klassenvariable: beginnt mit dem Laden der Klasse und endet mit dem Ende des Programms
+Lokale Variable: beginnt mit der Deklaration im Block und endet mit dem Blockende (schließende })
+
+
+### Konvertierung
+In Java können verschiedene primitive Datentypen durch Umwandlung konvertiert werden. Dabei unterscheidet man zwei Fälle: 
+
+* Widening = Erweitern: eine Variable von einem Typ mit einem kleinen Wertebereich wird in eine Variable von einem Typ mit einem größeren Wertebereich umgewandelt. Dies stellt in der Regel kein Problem dar.
+
+
+```java
+class Widening {
+    public static void main(String[] args) {
+		byte kleinsterTyp = 5;
+		short kleinerTyp = kleinsterTyp;
+		int grosserTyp = kleinerTyp;
+		
+		System.out.println(grosserTyp);
+   }
+}
+```
+@LIA.java(Widening)
+
+* Narrowing = Eingrenzen: Gegenteil zu Widening -> hier ist Casting erforderlich
+
+```java
+class Narrowing {
+    public static void main(String[] args) {
+		byte kleinsterTyp = 5;
+		short kleinerTyp = kleinsterTyp;
+		int grosserTyp = kleinerTyp;
+		
+		// Type Mismatch
+		// kleinerTyp = grosserTyp;
+		
+		// so geht's mit Narrowing
+		kleinerTyp = (short) grosserTyp;
+   }
+}
+```
+@LIA.java(Narrowing)
+
+Was ergibt dann folgendes Beispiel?
+
+```java
+class Konvertierung {
+    public static void main(String[] args) {
+		short zahl = 128;
+		byte kleinesByte = (byte) zahl;
+		// Was kommt hier heraus?
+		System.out.println(kleinesByte);
+   }
+}
+```
+@LIA.java(Konvertierung)
+
 
 ### Übungen
 
@@ -894,7 +1008,7 @@ In Programmiersprachen werden häufig Vergleiche zwischen Werten mittels Operato
   
 - `"Müller".equals("Meier")`: Überprüft die Gleichheit von zwei Strings, in diesem Fall, ob der String "Müller" gleich dem String "Meier" ist.
 
-Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Ändern und ergänzen Sie folgendes Programm so, dass in der if-Verzweigung `"Der if-Block wurde ausgeführt` ausgegeben wird. 
+Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Ändern und ergänzen Sie folgendes Programm so, dass in der if-Verzweigung `"Der if-Block wurde ausgeführt"` ausgegeben wird. 
 
 
 ```java
@@ -924,7 +1038,7 @@ class IfAnweisung{
 
 
 
-Welche Anweisungen eigenen sich für Bedingungen?
+Welche Anweisungen eignen sich für Bedingungen?
 
 1. 4<10
 [(x)] wahr
@@ -944,7 +1058,7 @@ Welche Anweisungen eigenen sich für Bedingungen?
 
 5. 4 == 4 && 5 == 5 
 [(x)] wahr
-[()] falsch
+[( )] falsch
 
 
 Ändern und ergänzen Sie folgendes Programm nun so, dass der if-Block dann ausgeführt wird, wenn f < 5 und gleichzeitig t = 7 ist. 
@@ -1092,7 +1206,7 @@ Die Syntax einer `switch`-Anweisung sieht folgendermaßen aus:
 - break ist optional – wenn es fehlt, wird die Bearbeitung mit dem nächsten case (ohne Prüfung!) fortgesetzt – aber Vorsicht: Fehler durch vergessene break sind schwierig zu finden.
 - der default-Zweig ist optional; es ist höchstens einer zulässig
 
-Testen Sie Ihr Wissen nun, in dem Sie ein Programm schreiben das den heutigen Wochentag als Variable initalisiert und dann Ihre Vorlesungen für den jeweiligen Wochentag auf der Konsole ausgibt.
+Testen Sie Ihr Wissen nun, indem Sie ein Programm schreiben das den heutigen Wochentag als Variable initalisiert und dann Ihre Vorlesungen für den jeweiligen Wochentag auf der Konsole ausgibt. Nutzen Sie hierfür am Besten Eclipse. Wenn Sie wollen, können Sie es aber auch direkt im Workbook erstellen.
 
 ```java
 class Stundenplan{
@@ -1101,7 +1215,7 @@ class Stundenplan{
     }
 }
 ```
-@LIA.java(class Stundenplan)
+@LIA.java(Stundenplan)
 
 
 ### Zählschleife ("normale for-Schleife")
@@ -1136,6 +1250,8 @@ Wie müssen Sie das Programm abändern, um die ungeraden Zahlen von 1 bis 20 auf
 - Teile des Kopfes können leer bleiben (z.B. stellt for(;;) eine Endlosschleife dar).
 
 **Weiteres Beispiel**
+
+Was wird im folgenden Programm berechnet?
 
 ```java
 class Zaehlschleife2{
