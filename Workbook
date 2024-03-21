@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.2.0
+version: 0.2.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1346,6 +1346,41 @@ Bei der ewigen while-Schleife wird die while-Anweisung  solange wiederholt, bis 
 Die `while`-Schleife ist besonders nützlich, wenn die Anzahl der Iterationen im Voraus nicht bekannt ist, sondern von einer Bedingung abhängt.
 
 
+### Do-While-Schleife
+Die Do-While-Schleife ist eine Schleife mit Test der Bedingung am Ende des Schleifenkörpers. Das bedeutet, die Schleife wird mindestens einmal durchlaufen. 
+
+Sie hat folgende Syntax:
+```
+do {
+  Anweisung;
+} while (Bedingung);
+```
+
+Die Schleife wird solange durchlaufen, solange die Bedingung wahr ist. Wie immer muss die Bedingung muss ein boolescher Ausdruck sein. Weiterhin muss die Anweisung muss Bedingung ändern, sonst hat man eine Endlosschleife.
+
+<p align="center">
+<img src="dowhile.png" alt="Do-While-Schleife" width="20%">
+</p>
+
+
+Welche Ausgabe erzeugt folgendes Beispiel?
+
+```java
+class DoWhileBeispiel{
+    public static void main(String args[]){
+        int z = 0;
+        do {
+            System.out.println("Ausgabe ist: " + z);
+            z = z+1;
+        } while (z<5);
+
+        System.out.println("-------------------");
+        System.out.println("Zu Ende ist bei: " + z);     
+    }
+}
+```
+@LIA.java(DoWhileBeispiel)
+
 
 ### Übungen
 
@@ -1931,12 +1966,44 @@ class StringWeiteresBeispiel{
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 04.
 
 
-## Exkurs: Debugging (WIP)
+## Exkurs: Debugging in Eclipse
 
-TODO: EF
+Debugging ist ein unverzichtbarer Schritt in der Softwareentwicklung, bei dem Fehler oder Bugs in einem Programm gefunden und behoben werden. Es ist von entscheidender Bedeutung, um sicherzustellen, dass die Software reibungslos funktioniert und die gewünschten Ergebnisse liefert. Durch Debugging können Entwickler Probleme erkennen, verstehen und lösen, was letztendlich zu einer verbesserten Qualität und Benutzererfahrung der Software führt.
+
+**Breakpoints**
+
+- Um Breakpoints zu setzen, klicken Sie mit der rechten Maustaste in die vertikale Leiste neben dem Code und drücken `Toggle Breakpoint`, wie im Bild gezeigt.
+- Alternativ können Sie auch doppelt auf die Leiste klicken, um einen Breakpoint zu setzen oder mit der Maus über die Zeile gehen und die Tastenkombination `Strg + Umschalt + B` verwenden
+
+![](Debugger-1.png)
+
+- Der blaue Punkt kennzeichnet einen Breakpoint
+
+![](Debugger-2.JPG)
+
+- Ein Breakpoint ist wie eine Art Halt-Zeichen, das man in einen Code einfügt, um ihn an einer bestimmten Stelle anzuhalten. Wenn das Programm während der Ausführung auf diesen Breakpoint trifft, hält es an und man kann den Zustand des Codes genauer untersuchen
+
+**Debuggen**
+
+- Starten Sie Ihr Programm im Debug-Modus, indem Sie auf den Käfer (Bug) neben dem Run-Button klicken und darauf die Debug-Perspective öffnen (Switch klicken).
+
+![](Debugger-3.png)
+
+- Step Over: Mit dieser Funktion kann man den nächsten Befehl ausführen, ohne in die Details einer Methode oder Funktion einzutauchen. Wenn man Step Over verwendet und die nächste Anweisung eine Methodeaufruf ist, wird die Methode komplett ausgeführt, und die Ausführung springt zur nächsten Zeile im aktuellen Kontext.
+
+- Step Into: Im Gegensatz zu Step Over taucht man mit Step Into in die Details einer Methode oder Funktion ein. Wenn die nächste Anweisung eine Methode oder Funktion ist, springt man in diese Methode und kann die Ausführung schrittweise innerhalb dieser Methode fortsetzen.
+
+![](Debugger-4.png)
+
+ - Auf der rechten Seite des Debuggers können zusätzliche Informationen angezeigt werden, wie zum Beispiel aktuelle Werte von Variablen und Ausdrücken. Diese Informationen helfen dabei, den Zustand der Anwendung während des Debugging-Prozesses besser zu verstehen. Durch die Anzeige von Variablenwerten und anderen relevanten Informationen können Sie schnell erkennen, wie sich der Code verhält und potenzielle Probleme identifizieren.
+
+![](Debugger-5.JPG)
 
 
 ## Klassen, Objekte, Methoden
+### Methoden
+
+### Klassen und Objekte
 
 
 ## Exkurs: Rekursion (WIP)
@@ -2031,3 +2098,4 @@ Zahlensumme rekursiv -> Debug-Perspektive
 ## Collections & Maps
 ## Exceptions
 ## Generics (optional)
+## Dateien (projektrelevant)
