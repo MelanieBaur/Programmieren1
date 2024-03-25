@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.1
+version: 0.5.2
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1077,7 +1077,7 @@ class If{
 
 
 
-**if/else Anweisungen**
+### if/else-Anweisungen
 
 Die `else`-Anweisung erweitert die Kontrollstruktur von `if`, um einen Zweig hinzuzufügen, der ausgeführt wird, wenn die Bedingung der `if`-Anweisung nicht erfüllt ist. 
 
@@ -1191,7 +1191,7 @@ class Urlaubstage{
 
 
 
-**switch/case**
+### switch/case-Statement
 
 Die switch-Anweisung bietet eine alternative Methode zur Kontrollstruktur if, insbesondere wenn eine Variable auf verschiedene Werte geprüft werden soll und abhängig vom Wert unterschiedliche Aktionen ausgeführt werden sollen.
 
