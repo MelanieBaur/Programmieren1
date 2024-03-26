@@ -2281,6 +2281,7 @@ public class Autobauer {
 Achtung: Sobald in der Klasse Auto ein eigener Konstruktor definiert wird, wird der Standardkonstruktor, den wir zuvor genutzt haben (ohne Parameter) nicht mehr automatisch erzeugt. 
 
 Vorteile: 
+
 * Im Konstruktor können wir die Objektvariablen initialisieren. 
 * Wir können den Standardkonstruktor mit Standardwerten vorbelegen.
 * Konstruktoren mit Parametern sind sinnvoll, wenn die Objektvariablen nicht mit Standardwerten, sondern aus den Parametern initialisiert werden sollen.
