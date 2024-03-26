@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.3
+version: 0.5.4
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1056,7 +1056,7 @@ Welche Anweisungen eignen sich für Bedingungen?
 [(x)] wahr
 [( )] falsch
 
-5. 4 == 4 && 5 == 5 
+5. true || 4>10
 [(x)] wahr
 [( )] falsch
 
