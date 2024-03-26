@@ -2314,7 +2314,7 @@ public class Auto {
 
 * Erstellen Sie eine Klasse Laptop mit den Feldern modell, benutzer und id (welche Variablentypen brauchen Sie?)
 * Es gibt auch einen Konstruktor Laptop(String modell, String benutzer).
-Die Klasse hat eine statische Variable gesamtAnzahl, die bei jedem Anlegen eines neuen Laptops hochgezählt wird 
+* Die Klasse hat eine statische Variable gesamtAnzahl, die bei jedem Anlegen eines neuen Laptops hochgezählt wird 
 * Das Feld id jeder Laptop-Instanz bekommt beim Anlegen des neuen Laptops den aktuellen Wert von gesamtAnzahl
 * Erstellen Sie eine separate Klasse mit einer Main-Methode
 * Legen Sie mehrere Laptops an und geben Sie die Laptop-IDs und Gesamtanzahl der Laptops aus
