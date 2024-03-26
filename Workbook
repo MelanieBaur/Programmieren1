@@ -38,12 +38,14 @@ Klicken Sie nun auf </> im kleinen Kreis unter der Code-Zeile, so wird der Code 
 Natürlich sollen Sie nicht nur lesen, sondern insbesondere auch viel selbst machen. Hier kommt die erste Aufgabe.
 
 **Aufgabe:**
+
 Geben Sie nun statt "Hallo Welt" einen anderen Text zwischen den Anführungszeichen ein. Führen Sie den Code erneut aus. Was fällt Ihnen auf?
 
 Auf der rechten Seiten unterhalb des Codes, können Sie nun mit den Pfeilen zwischen den verschiedenen Codes hin- und herwechseln. Gehen Sie mit dem Pfeil nach links zurück auf den ursprünglichen Code und dann mit dem Pfeil nach rechts wieder zu Ihrem neuen Code.
 
 
 **Übungen:**
+
 Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) zu jedem Kapitel Übungen bereit gestellt. Sie werden im Laufe des Buchs immer wieder zu diesen Übungen aufgefordert. Führen Sie die Aufgaben gewissenhaft aus. Bei Problemen fragen Sie einfach in der nächsten Mentoringstunde. 
 
 
@@ -2100,7 +2102,7 @@ Wir betrachten erneut folgende Methode:
 
 
 
-**Modifikatoren**
+**1. Modifikatoren**
 
 Es gibt folgende Sichtbarkeitsmodifikatoren, welche angebeben, von wo aus die Methode aufgerufen werden kann:
 
@@ -2114,7 +2116,8 @@ Weiterhin gibt es auch statische und nicht-statische Methoden:
 * static: der Klasse zugeordnet
 * ohne Modifier („non-static“): den Objekten zugeordnet (→ später: Objektorientierung)
 
-**Rückgabetyp**
+**2. Rückgabetyp**
+
 Der Rückgabetyp gibt an, welchen Typ das Ergebnis haben wird. Rückgabetypen können sein:
 
 * die primitiven Typen
@@ -2123,7 +2126,7 @@ Der Rückgabetyp gibt an, welchen Typ das Ergebnis haben wird. Rückgabetypen k�
 
 Hat eine Methode einen Rückgabetyp (nicht void), so muss der zurückzugebende Wert durch `return ergebnis;` definiert werden, im Beispiel `return flaeche;`
 
-**Methodennamen**
+**3. Methodennamen**
 
 Beachten Sie bei der Wahl eines Methodennamen folgende Konventionen:
 
@@ -2132,7 +2135,7 @@ Beachten Sie bei der Wahl eines Methodennamen folgende Konventionen:
 * Der Name beschreibt, was die Methode tut
 * Typischerweise enthalten Namen ein Verb, zum Beispiel: public String getName();
 
-**Parameter / Aufruf der Methode**
+**4. Parameter / Aufruf der Methode**
 
 Methodendefinition:
 
@@ -2154,11 +2157,13 @@ double mw = mittelwert(10.5, 5.3);
 
 Formale und aktuelle Parameter müssen vom gleichen Typ und der gleichen Reihenfolge sein!
 
-**Methodenrumpf**
+**5. Methodenrumpf**
+
 Der Methodenrumpf enthält die Anweisungen, durch `;` getrennt. Grundsätzlich darf ein Rumpf beliebig lang sein. Sinnvoll ist jedoch max. eine Bildschirmseite. Leerzeichen und -zeilen im Rumpf werden vom Compiler ignoriert, sind aber für die Lesbarkeit wichtig. Die Ausführung einer Methode startet am Anfang und endet bei `return` (oder am Ende).
 
 
 **Übungen**
+
 1. Berechnen Sie den Mittelwert zweier Zahlen. Schreiben Sie hierfür in Eclipse ein Programm mit einer Methode `berechneMittelwert`.
 
 2. Machen Sie die ersten Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
