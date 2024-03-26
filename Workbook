@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.4
+version: 0.5.5
 narrator: Deutsch Female
 mode: Textbook
 
@@ -948,7 +948,7 @@ Und noch ein paar Tipps für die Arbeit in Eclipse:
 * Umbenennen: rechte Maustaste -> Refactor -> Rename
 
 
-## Kontrollflusss
+## Kontrollfluss
 
 Der Kontrollfluss in Java ermöglicht es uns, den Ablauf unseres Codes zu steuern, indem wir Entscheidungen treffen und Schleifen verwenden. Kontrollflussstrukturen wie bedingte Anweisungen und Schleifen ermöglichen es uns, unseren Code dynamisch zu gestalten und verschiedene Pfade je nach Bedingungen oder Anforderungen auszuführen.
 
@@ -1624,7 +1624,8 @@ while (zaehler < 3) {
 ```
 
 **Übung**
-Versuchen Sie nun die obigen Erkenntnisse in ein lauffähiges Programm zu packen.
+
+Versuchen Sie nun die obigen Erkenntnisse in ein lauffähiges Programm zu packen. Probieren Sie an dieser Stelle auch explizit die Verwendung einer for-each-Schleife aus. Wiederholen Sie bei Bedarf das entsprechende Kapitel. 
 
 ```java
 class MeinArray{
@@ -2041,7 +2042,7 @@ Bisher bestand unser Javaprogramm aus folgenden Einzelteilen:
 In diesem Kapitel wollen wir:
 
 * Weitere Methoden erstellen: Es können für Teilberechnungen weitere Methoden definiert werden, die dann von der main-Methode aufgerufen werden.
-* Weitere Klassen erstellen
+* Weitere Klassen erstellen, so dass diese als Ansammlung gleichartiger Objekte genutzt werden können
 
 
 ### Methoden
@@ -2171,6 +2172,184 @@ Der Methodenrumpf enthält die Anweisungen, durch `;` getrennt. Grundsätzlich d
 
 ### Klassen und Objekte
 
+Ab jetzt wollen wir objektorientiert programmieren. D.h. wir wollen Objekte formulieren, die wir wiederverwenden können. Eine Klasse dient uns hierbei als Ansammlung gleichartiger Objekte (auch Instanzen der Klasse genannt). In der Klasse werden dabei Komponenten festgelegt, aus denen jedes Objekt dieser Klasse bestehen soll. 
+
+#### Objekte
+
+Jedes Objekt gehört zu einer Klasse. Die Idee dahinter ist, dass die Klasse als Bauplan verstanden werden kann, von dem beliebig viele Objekte abgeleitet werden können. Diese Objekte sind alle gleichartig. Sie besitzen die selben Datendefinitionen und führen die selben Methoden aus. Sie verhalten sich alle gleich, sie unterscheiden sich lediglich in den Werten. Der Vorteil ist: Es muss nur eine Klasse geschrieben werden, die die Daten und Methoden der zukünftigen Objekte definiert.  Von dieser Klasse können dann beliebig viele Objekte erzeugt („instanziiert“) werden.
+
+Beispiel: 
+
+Sie wollen ein Auto bauen. Jedes Auto hat vier Räder und eine Farbe. Die Farbe unterscheidet sich jedoch von Auto zu Auto und kann weiß, rot oder blau sein. Die Klasse Auto enthält somit den Bauplan für das Auto: Jedes Auto wird mit vier Rädern gebaut und beim Bau legen Sie fest, welche Farbe das Auto haben soll. 
+
+Die Anzahl der Räder ist somit eine statische Variable für Ihre Klasse Auto, d.h. sie ist für alle Autos gleich. Die Farbe ist eine Objekteigenschaft des Autos und kann sich von Auto zu Auto unterscheiden. 
+
+Der Bauplan sähe dann wie folgt aus:
+
+```java
+public class Auto {
+	public static int anzahlRaeder = 4; // Klassenvarialbe, für alle Objekte der Klasse gleich
+	public String farbe; // Objektvariable, auch Feld genannt (von englisch "field")
+
+    public void fahren(){ // Objektmethode (non-static)
+        System.out.println("Das Auto fährt.");
+    }
+}
+```
+
+Um nun ein Auto zu bauen, können Sie Objekte der Klasse `Auto` erzeugen. Dies passiert in diesem Beispiel in der Klasse `Autobauer`.
+
+```java
+public class Autobauer {
+	public static void main(String[] args) {
+		Auto meinAuto = new Auto(); // Erzeugung eines neuen Auto-Objekts mit dem new-Konstruktor
+		meinAuto.farbe = "weiß"; // Der Zugriff auf die Felder des Objekts erfolgt mit einem Punkt "."
+
+        Auto deinAuto = new Auto(); // Erzeugung eines weiteren Auto-Objekts
+        deinAuto.farbe = "blau"; // Das zweite Auto hat eine andere Farbe, Achtung: Die Farbe kann nur in Zusammenhang mit einem Objekt abgefragt werden
+
+        System.out.println(meinAuto.anzahlRaeder);  
+        System.out.println(meinAuto.farbe);
+        meinAuto.fahren(); // Zugriff auf die Methoden erfolgt durch die Qualifikation mit der Objektvariablen - meinAuto ist das Objekt, fahren() der qualifizierte Zugriff
+        
+
+        System.out.println(deinAuto.anzahlRaeder);
+        System.out.println(deinAuto.farbe);
+	}
+}
+```
+
+Hier werden zwei Auto-Objekte erzeugt:
+
+* meinAuto mit der Farbe weiß
+* deinAuto mit der Farbe blau
+
+Jedes Auto hat automatisch vier Räder, denn dies war eine statische Variable, keine Objektvariable.
+Jedes Auto hat eine eigene Farbe. Der Zugriff auf die Farbe funktioniert also nur bei Angabe des Objekts (welches Auto? meinAuto oder deinAuto).
+
+Jedes Auto hat ferner die Methode fahren(). 
+
+**Übung**
+
+Bauen Sie obiges Beispiel in Eclipse nach. Sie benötigen hierfür zwei Klassen. Legen Sie zwei Autos mit unterschiedlichen Farben an. Greifen Sie auf die Felder des Autos zu und geben Sie diese aus. Lassen Sie das Auto fahren. 
+
+
+
+#### Konstruktoren
+
+Objekte werden oft mit bestimmten Werten erzeugt. Hierbei unterstützt der Konstruktor. 
+Der Konstruktor ist eine Methode zur Initialisierung eines Objekts. Dieser weist einige Besonderheiten / Eigenschaften auf:
+
+* Wird immer mit einer Objekterzeugung verwendet (new-Operator)
+* Kann nicht außerhalb einer Objekterzeugung verwendet werden
+* Name ist immer gleich Klassenname
+* Hat keinen Rückgabetyp
+* Wird nicht vererbt (siehe Kapitel Vererbung)
+* Java stellt immer einen Standardkonstruktor (ohne Parameter) bereit
+* Wird ein eigener Konstruktor definiert, steht der Standardkonstruktor nicht mehr zur Verfügung
+
+Konstruktoren können direkt mit Parametern initalisiert werden. Am Beispiel des Autos:
+
+```java
+public class Auto {
+	public static int anzahlRaeder = 4; 
+	public String farbe; 
+
+    //Konstruktor
+	public Auto(String farbe) {
+		this.farbe = farbe; //Zugriff mit this auf das Objekt selbst
+	}
+
+    public void fahren(){ 
+        System.out.println("Das Auto fährt.");
+    }
+}
+```
+
+Nutzung in der Klasse Autobauer:
+
+```java
+public class Autobauer {
+	public static void main(String[] args) {
+        // Direkt bei der Erzeugung meines Auto-Objekts bekommt dieses die Farbe weiß
+		Auto meinAuto = new Auto("weiß");
+		
+	}
+}
+```
+
+Achtung: Sobald in der Klasse Auto ein eigener Konstruktor definiert wird, wird der Standardkonstruktor, den wir zuvor genutzt haben (ohne Parameter) nicht mehr automatisch erzeugt. 
+
+Vorteile: 
+* Im Konstruktor können wir die Objektvariablen initialisieren. 
+* Wir können den Standardkonstruktor mit Standardwerten vorbelegen.
+* Konstruktoren mit Parametern sind sinnvoll, wenn die Objektvariablen nicht mit Standardwerten, sondern aus den Parametern initialisiert werden sollen.
+
+Erweitertes Beispiel: 
+
+```java
+public class Auto {
+
+	public static int anzahlRaeder = 4;
+	public String farbe;
+	
+    //Wird bei der Objekterzeugung keine Farbe angegeben, so ist das Auto automatisch schwarz
+	public Auto() {
+		this.farbe = "schwarz";
+	}
+
+    // Ein zweiter Konstruktor, der mir erlaubt, die Farbe bei der Objekterzeugung zu definieren
+	public Auto(String farbe) {
+		this.farbe = farbe;
+	}
+
+	public void fahren() {
+		System.out.println("Das Auto fährt." + this.farbe);
+	}
+	
+}
+```
+
+**Übung**
+
+* Erstellen Sie eine Klasse Laptop mit den Feldern modell, benutzer und id (welche Variablentypen brauchen Sie?)
+* Es gibt auch einen Konstruktor Laptop(String modell, String benutzer).
+Die Klasse hat eine statische Variable gesamtAnzahl, die bei jedem Anlegen eines neuen Laptops hochgezählt wird 
+* Das Feld id jeder Laptop-Instanz bekommt beim Anlegen des neuen Laptops den aktuellen Wert von gesamtAnzahl
+* Erstellen Sie eine separate Klasse mit einer Main-Methode
+* Legen Sie mehrere Laptops an und geben Sie die Laptop-IDs und Gesamtanzahl der Laptops aus
+
+
+#### Kapselung -  WIP
+
+### Ablage
+
+<!-- data-type="None" -->
+|    | Klassen   | Objekte   | 
+| :--------- | :--------- | :--------- | 
+| Erzeugung | automatisch bei Programmstart | explizit mit `new` während der Laufzeit |
+| Anzahl | genaue eine | beliebig viele |
+
+<!-- data-type="None" -->
+|    | Klassenvariable   | Instanzvariablen   | 
+| :--------- | :--------- | :--------- | 
+| Erzeugung | mit der Klasse | mit dem Objekt |
+| Anzahl | pro Klasse | pro Objekt |
+| Modifier | static | keiner |
+| Verwendung | von der Klasse und Objekten | nur von den Objekten |
+
+<!-- data-type="None" -->
+|    | Klassenmethode  | Instanzmethoden   | 
+| :--------- | :--------- | :--------- | 
+| Erzeugung | mit der Klasse | mit der Klasse |
+| Anzahl | pro Klasse | pro Klasse |
+| Modifier | static | keiner |
+| Verwendung | von der Klasse und Objekten | nur von den Objekten |
+
+Hinweis: die main-Methode ist eine besondere Klassenmethode
+
+
+
 
 ## Exkurs: Rekursion (WIP)
 
@@ -2184,7 +2363,6 @@ Eine rekursive Funktion ist somit eine Funktion, die sich selbst aufruft.
 * Sind Ihre gefundenen Berechnungsmöglichkeiten rekursiv oder iterativ?
 
 ### Fakultät
-
 
 Eine iterative Berechnungsmöglichkeit der Fakultät:
 
