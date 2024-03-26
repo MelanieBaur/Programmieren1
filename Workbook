@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.2
+version: 0.5.3
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1008,7 +1008,7 @@ In Programmiersprachen werden häufig Vergleiche zwischen Werten mittels Operato
   
 - `"Müller".equals("Meier")`: Überprüft die Gleichheit von zwei Strings, in diesem Fall, ob der String "Müller" gleich dem String "Meier" ist.
 
-Diese Bedingungen können in `if`-Schleifen verwendet werden, um Entscheidungen im Code zu treffen. Ändern und ergänzen Sie folgendes Programm so, dass in der if-Verzweigung `"Der if-Block wurde ausgeführt"` ausgegeben wird. 
+Diese Bedingungen können in `if`-Verzweigungen verwendet werden, um Entscheidungen im Code zu treffen. Ändern und ergänzen Sie folgendes Programm so, dass in der if-Verzweigung `"Der if-Block wurde ausgeführt"` ausgegeben wird. 
 
 
 ```java
@@ -1261,7 +1261,7 @@ class Zaehlschleife2{
         for(int i = 1; i<=n; i++) {
             fakultaet *= i;
         }
-        System.out.println(n + "! ? " + fakultaet);
+        System.out.println(n + "! = " + fakultaet);
     }
 }
 ```
@@ -1350,13 +1350,14 @@ Die `while`-Schleife ist besonders nützlich, wenn die Anzahl der Iterationen im
 Die Do-While-Schleife ist eine Schleife mit Test der Bedingung am Ende des Schleifenkörpers. Das bedeutet, die Schleife wird mindestens einmal durchlaufen. 
 
 Sie hat folgende Syntax:
+
 ```
 do {
   Anweisung;
 } while (Bedingung);
 ```
 
-Die Schleife wird solange durchlaufen, solange die Bedingung wahr ist. Wie immer muss die Bedingung muss ein boolescher Ausdruck sein. Weiterhin muss die Anweisung muss Bedingung ändern, sonst hat man eine Endlosschleife.
+Die Schleife wird solange durchlaufen, solange die Bedingung wahr ist. Wie immer muss die Bedingung muss ein boolescher Ausdruck sein. Weiterhin muss die Anweisung die Bedingung ändern, sonst hat man eine Endlosschleife.
 
 <p align="center">
 <img src="dowhile.png" alt="Do-While-Schleife" width="20%">
