@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.5
+version: 0.5.6
 narrator: Deutsch Female
 mode: Textbook
 
@@ -1384,6 +1384,112 @@ class DoWhileBeispiel{
 ```
 @LIA.java(DoWhileBeispiel)
 
+### Beispiel
+
+Machen Sie sich mit folgendem Coding vertraut und überlegen Sie, was die Ausgabe ist. 
+
+```java
+public class Anwendung2_For {
+	public static void main(String[] args) {
+		for (int i = 1 ; i < 4 ; i = i + 1) {
+			System.out.println("i = " + i);
+		}	
+	}
+}
+```
+@LIA.java(Anwendung2_For)
+
+Überlegen Sie danach, wie Sie obigen Code in eine äquivalente `while`-Schleife und anschließend in eine äquivalente `do-while`-Schleife umbauen können.
+
+```java
+public class Ueberlegung{
+	public static void main(String[] args) {
+    // hier können Sie die Schleifen ausprobieren
+
+    }	
+}
+```
+@LIA.java(Ueberlegung)
+
+Die Lösungen finden Sie untenstehend. Zunächst die `while`-Schleife:
+
+```java
+public class Anwendung1_While{
+	public static void main(String[] args) {
+		int i = 1;	
+		while (i < 4) {
+			System.out.println("i = " + i);
+			i = i + 1;
+        }
+    }	
+}
+```
+@LIA.java(Anwendung1_While)
+
+Und nun die `do-while`-Schleife:  
+
+```java
+public class Anwendung3_DoWhile{
+	public static void main(String[] args) {
+        int i = 1;
+		boolean mindestensEinmal = true;
+
+		do {
+			if (mindestensEinmal == true) {
+				System.out.println("i = " + i);
+			}
+			i = i + 1;
+		} while (i < 4);
+    }	
+}
+```
+@LIA.java(Anwendung3_DoWhile)
+
+Nun schauen wir den Ersatz einer `if`-Bedingung durch eine `while`-Schleife:
+
+```java
+public class Anwendung1_If {
+	public static void main(String[] args) {
+		int i = 3;
+
+		if (i < 18) {
+			System.out.println("noch nicht volljährig");
+		}
+	}
+}
+```
+@LIA.java(Anwendung1_If)
+
+Verwenden Sie nun ausschließlich eine `while`-Schleife. Das Ergebnis soll das gleiche sein:
+
+```java
+public class Ueberlegung2{
+	public static void main(String[] args) {
+    // hier können Sie die while-Schleife ausprobieren
+
+    }	
+}
+```
+@LIA.java(Ueberlegung2)
+
+Hier finden Sie die Lösung:
+
+```java
+public class Anwendung2_While{
+	public static void main(String[] args) {
+		int i = 3;
+		boolean nurEinmal = true;
+
+		while (i < 18 && nurEinmal == true) {
+			System.out.println("noch nicht volljährig");
+			nurEinmal = false;
+		}
+	}
+}
+```
+@LIA.java(Anwendung2_While)
+
+Wenn Sie diese Beispiele verstanden haben, können Sie zu den Übungen weiter gehen.
 
 ### Übungen
 
@@ -1393,7 +1499,6 @@ Berechnen Sie die Summe aller Zahlen von 0 bis zu einer vorgegebenen größten Z
 Lösen Sie das Problem auf mindestens drei verschiedene Arten. 
 
 **Weitere Aufgaben:**   Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 02.
-
 
 
 
