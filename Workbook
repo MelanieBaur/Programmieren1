@@ -2651,8 +2651,40 @@ Zahlensumme rekursiv -> Debug-Perspektive
 
 
 ## Vererbung
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06.
+
 ## Abstrakte Klassen, Interfaces
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07.
+
+
 ## Collections & Maps
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08.
+
 ## Exceptions
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 09.
+
 ## Generics (optional)
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 10.
+
 ## Dateien (projektrelevant)
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 11.
+
+## Abschlussprojekt
