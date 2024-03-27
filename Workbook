@@ -2524,9 +2524,15 @@ Fortführung der Übung Laptop:
 * Ihre bereits angelegten Variablen werden nun private
 * Greifen Sie nun aus der main-Methode auf die Variablen zu und geben Sie Modell, Benutzer, Laptop-ID aller Laptops aus und die Gesamtanzahl
 
+### UML-Klassendiagramme 
+
+
+### Übungen
+
+Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
+
 
 ### Ablage
-
 
 <!-- data-type="None" -->
 |    | Klassen   | Objekte   | 
@@ -2551,7 +2557,6 @@ Fortführung der Übung Laptop:
 | Verwendung | von der Klasse und Objekten | nur von den Objekten |
 
 Hinweis: die main-Methode ist eine besondere Klassenmethode
-
 
 
 
@@ -2640,6 +2645,10 @@ class FakultaetRekursiv{
 ### Übung
 TODO: Bionomi rekursiv
 Zahlensumme rekursiv -> Debug-Perspektive
+
+## Exkurs: Arbeiten mit Eclipse
+
+
 
 ## Vererbung
 ## Abstrakte Klassen, Interfaces
