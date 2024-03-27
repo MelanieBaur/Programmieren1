@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.5.6
+version: 0.6.0
 narrator: Deutsch Female
 mode: Textbook
 
@@ -2429,7 +2429,101 @@ public class Auto {
 * Legen Sie mehrere Laptops an und geben Sie die Laptop-IDs und Gesamtanzahl der Laptops aus
 
 
-### Kapselung -  WIP
+### Kapselung
+
+Wir wollen nun sicherstellen, dass die Datenfelder nicht von außerhalb direkt zugänglich sind um unbefugten Zugriff zu verhindern. Datenfelder können somit `private` gemacht werden, damit niemand von außerhalb zugreifen kann. 
+Wenn der Zustand des Objekts nun geändert oder zurück gegeben werden soll, geschieht das mit `Getter`- bzw. `Setter`-Methoden. Hierbei können auch Validierungsregeln eingebaut werden (if-Statement).
+
+**Getter und Setter**
+
+Getter und Setter sind öffentliche (=public) Methoden, mit denen man den Wert der Datenfelder zurückgeben (get) oder ändern (set) kann. Als Methodennamen wählt man `getWert()` bzw. `setWert()`. 
+
+Getter liefern den Wert einer privaten Variablen. Sie sind folgendermaßen aufgebaut: 
+
+```
+public Typ getWert(){
+  return wert;
+}
+```
+
+Setter setzen den Wert einer privaten Variablen. Sie sind folgendermaßen aufgebaut: 
+
+```
+public void setWert(Typ wert){
+ this.wert = wert;
+}
+```
+
+Der Parameter `wert` überdeckt die Instanzvariable in der Methode. Die Qualifikation mit `this` (dem Objekt selbst) erlaubt den Zugriff auf die überdeckte Variable. Das bedeutet also: Bei überdeckten Instanzvariablen bezeichnet das Schlüsselwort `this` das Objekt selbst und damit den Zugriff auf die Instanzvariablen des Objekts. 
+
+Mit passenden Modifikatoren wird die Umgehung der öffentlichen Methoden verhindert: 
+* public: von überall aufrufbar
+* protected: innerhalb des Pakets oder Unterklassen in einem anderen Paket (siehe Kapitel Vererbung)
+* ohne („package private“): innerhalb des Pakets
+* private: innerhalb der Klasse
+
+Man kann immer nur höchstens einen Sichtbarkeitsmodifikator verwenden. Weiterhin sollte man genau überlegen, welche Methoden von wo aufgerufen werden können sollte und somit welche Methoden private gemacht werden muss und welche öffentlich bleiben kann. Die Grundregel ist so viel wie möglich Daten zu verstecken – Nutzer unserer Klasse/unserer Objekte sehen nur das öffentliche Interface. Alles, was wir versteckt haben, können wir ändern, ohne etwas kaputt zu machen. 
+
+Wenn wir bei Objekten immer nur Getter/Setter haben, dann lagern wir die Logik aus. Besser sind domänenspezifische Methoden, wie zum Beispiel:
+
+* Methode `double berechneLaenge()` für Objekte einer Klasse `Linie` statt per `getStart()` und `getEnd()` den Start und Endpunkt und von diesen dann mit `getX()` und `getY()` die Koordinaten zu bekommen und dann immer wieder von neuen die Länge zu berechnen
+* Methode `double bruttoPreis()` für eine Rechung anstatt `getNettoPreis()` und `getSteuersatz()` abzufragen und dann die Berechnung selbst durchzuführen
+
+**Regeln zum Information Hiding**
+
+Zusammengehörige Daten / Methoden sollten in einer Klasse zusammengefasst werden. 
+Nicht zusammengehörige Daten / Funktionen sollten in verschiedene Klassen aufgeteilt werden.
+Insbesondere die `main`-Methode gehört in eine separate Klasse!
+Zusammengehörige Klassen werden dann in ein Paket zusammen gefasst. 
+Die Daten in einer Klasse sind immer `private` deklariert. Auf diese werden kann kontrolliert über über `public` / `protected` Methoden zugegriffen werden. Unterstützende Methoden sind wiederum `private`.
+
+![Informationhiding](Informationhiding.png)
+
+Die Abbildung zeigt: In der Mitte sind die privaten Daten sind "gekapselt". Der graue Kreis zeigt die Zugriffsmethoden auf die private Daten. Die Klasse A greift dann auf Daten über die Zugriffsmethoden zu.
+
+**Beispiel**
+
+Mit diesen Erkenntnissen erweitern wir unser Auto:
+
+```java
+public class Auto {
+	private String farbe; //die Farbe unseres Autos ist nun privat
+
+    // Getter: gibt die Farbe des Autos zurück
+    public String getFarbe() {
+		return farbe;
+	}
+
+    // Setter: Methode, um die Farbe des Autos zu setzen
+	public void setFarbe(String farbe) {
+		this.farbe = farbe;
+	}
+}
+```
+
+```java
+public class Autobauer {
+	public static void main(String[] args) {
+		Auto meinAuto = new Auto();		
+		meinAuto.setFarbe("weiß");
+		System.out.println("Mein Auto hat die Farbe: " + meinAuto.getFarbe());
+	}
+}
+```
+
+Versuchen Sie dieses Beispiel nachzuvollziehen! 
+* Welcher Konstruktor wird benutzt?
+* Funktioniert der Zugriff mit `meinAuto.farbe`? Warum, bzw. warum nicht?
+* Welche Rückgabewerte und welche Parameter haben die Methoden `setFarbe()` und `getFarbe()`?
+
+
+**Übung**
+Fortführung der Übung Laptop:
+
+* Fügen Sie nun Ihrer Laptopklasse Getter und Setter hinzu
+* Ihre bereits angelegten Variablen werden nun private
+* Greifen Sie nun aus der main-Methode auf die Variablen zu und geben Sie Modell, Benutzer, Laptop-ID aller Laptops aus und die Gesamtanzahl
+
 
 ### Ablage
 
