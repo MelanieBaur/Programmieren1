@@ -1272,21 +1272,27 @@ class Zaehlschleife2{
 
 ### For-Each-Schleife (Mengenschleife)
 
-Die Schleife führt den Rumpf für jedes Element der Menge aus. 
+Die `for-each`-Schleife benötigt eine Sammlung gleichartiger Objekte. Ein Array, das im Kapitel `Arrays` besprochen wird, ist ein Beispiel hierfür. Im Vorgriff wird die Kontrollstruktur trotzdem bereits an dieser Stelle erklärt. Gehen Sie zu diesem Kapitel nochmals zurück, sobald Sie das Kapitel `Arrays` durchgearbeitet haben. 
+
+Die `for-each`-Schleife führt den Rumpf für jedes Element der angegebenen Menge aus. Es ist somit nicht erforderlich einen Index oder die Größe des Arrays zu berücksichtigen. Dies hilft, Fehler zu vermeiden. 
+
+
 
 ```java
 class ForEach{
     public static void main(String args[]){
-        String[] f = {"eins", "zwei", "drei"}; //Dies ist ein Array und wird im nächsten Kapitel erklärt
-        for(String s : f) {
-            System.out.println(s);
+        String[] array = {"eins", "zwei", "drei"}; //Dies ist ein Array und wird im nächsten Kapitel erklärt
+        for(String wort : array) {
+            System.out.println(wort);
         }
     }
 }
 ```
 @LIA.java(ForEach)
 
-Dies schauen wir uns später noch genauer an, wenn wir verschiedene Mengen betrachten, z.B. im Zusammenhang mit Collections.
+Die `for-each`-Schleife schauen wir uns später noch genauer an, wenn wir verschiedene Mengen betrachten, z.B. im Zusammenhang mit Collections.
+
+Erklärung für Fortgeschrittene: Intern wird bei der `for-each`-Schleife ein Iterator benutzt, welcher automatisch durch die Sammlung der gleichartigen Objekte zählt und die Schleife beendet, wenn alle Elemente durchlaufen sind. Iteratoren schauen wir uns auch später an. 
 
 
 ### While-Schleife
@@ -1384,7 +1390,7 @@ class DoWhileBeispiel{
 ```
 @LIA.java(DoWhileBeispiel)
 
-### Beispiel
+### Beispiele
 
 Machen Sie sich mit folgendem Coding vertraut und überlegen Sie, was die Ausgabe ist. 
 
@@ -1642,7 +1648,6 @@ class Mittelwert{
 * Erstellen Sie nun ein eigenes Programm, in welchem Sie ein Array der Länge 10 mit beliebigen Werten befüllen und die Werte des Array dann aufsummieren. Nutzen Sie hierfür eine geeignete Schleife. Geben Sie die Summe anschließend auf der Konsole aus.
 
 ### Arrays: Basics
-
 
 **Datentyp von Arrays**
 
@@ -2275,11 +2280,9 @@ Der Methodenrumpf enthält die Anweisungen, durch `;` getrennt. Grundsätzlich d
 2. Machen Sie die ersten Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
 
 
-### Klassen und Objekte
+### Objekte
 
 Ab jetzt wollen wir objektorientiert programmieren. D.h. wir wollen Objekte formulieren, die wir wiederverwenden können. Eine Klasse dient uns hierbei als Ansammlung gleichartiger Objekte (auch Instanzen der Klasse genannt). In der Klasse werden dabei Komponenten festgelegt, aus denen jedes Objekt dieser Klasse bestehen soll. 
-
-#### Objekte
 
 Jedes Objekt gehört zu einer Klasse. Die Idee dahinter ist, dass die Klasse als Bauplan verstanden werden kann, von dem beliebig viele Objekte abgeleitet werden können. Diese Objekte sind alle gleichartig. Sie besitzen die selben Datendefinitionen und führen die selben Methoden aus. Sie verhalten sich alle gleich, sie unterscheiden sich lediglich in den Werten. Der Vorteil ist: Es muss nur eine Klasse geschrieben werden, die die Daten und Methoden der zukünftigen Objekte definiert.  Von dieser Klasse können dann beliebig viele Objekte erzeugt („instanziiert“) werden.
 
@@ -2340,7 +2343,7 @@ Bauen Sie obiges Beispiel in Eclipse nach. Sie benötigen hierfür zwei Klassen.
 
 
 
-#### Konstruktoren
+### Konstruktoren
 
 Objekte werden oft mit bestimmten Werten erzeugt. Hierbei unterstützt der Konstruktor. 
 Der Konstruktor ist eine Methode zur Initialisierung eines Objekts. Dieser weist einige Besonderheiten / Eigenschaften auf:
@@ -2426,9 +2429,10 @@ public class Auto {
 * Legen Sie mehrere Laptops an und geben Sie die Laptop-IDs und Gesamtanzahl der Laptops aus
 
 
-#### Kapselung -  WIP
+### Kapselung -  WIP
 
 ### Ablage
+
 
 <!-- data-type="None" -->
 |    | Klassen   | Objekte   | 
