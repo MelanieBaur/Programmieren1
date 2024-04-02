@@ -2090,16 +2090,17 @@ Debugging ist ein unverzichtbarer Schritt in der Softwareentwicklung, bei dem Fe
 
 **Breakpoints**
 
+- Ein Breakpoint ist wie eine Art Halt-Zeichen, das man in einen Code einfügt, um ihn an einer bestimmten Stelle anzuhalten. Wenn das Programm während der Ausführung auf diesen Breakpoint trifft, hält es an und man kann den Zustand des Codes genauer untersuchen.
 - Um Breakpoints zu setzen, klicken Sie mit der rechten Maustaste in die vertikale Leiste neben dem Code und drücken `Toggle Breakpoint`, wie im Bild gezeigt.
-- Alternativ können Sie auch doppelt auf die Leiste klicken, um einen Breakpoint zu setzen oder mit der Maus über die Zeile gehen und die Tastenkombination `Strg + Umschalt + B` verwenden
+- Alternativ können Sie auch doppelt auf die Leiste klicken, um einen Breakpoint zu setzen oder mit der Maus über die Zeile gehen und die Tastenkombination `Strg + Umschalt + B` verwenden.
 
 ![](Debugger-1.png)
 
-- Der blaue Punkt kennzeichnet einen Breakpoint
+- Der blaue Punkt kennzeichnet einen Breakpoint:
 
 ![](Debugger-2.JPG)
 
-- Ein Breakpoint ist wie eine Art Halt-Zeichen, das man in einen Code einfügt, um ihn an einer bestimmten Stelle anzuhalten. Wenn das Programm während der Ausführung auf diesen Breakpoint trifft, hält es an und man kann den Zustand des Codes genauer untersuchen
+
 
 **Debuggen**
 
