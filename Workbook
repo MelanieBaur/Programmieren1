@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.6.0
+version: 0.6.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -2530,6 +2530,8 @@ Fortführung der Übung Laptop:
 ### UML-Klassendiagramme 
 
 
+
+
 ### Übungen
 
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
@@ -2649,7 +2651,85 @@ class FakultaetRekursiv{
 TODO: Bionomi rekursiv
 Zahlensumme rekursiv -> Debug-Perspektive
 
+
 ## Exkurs: Arbeiten mit Eclipse
+
+In diesem Kapitel erhalten Sie weitere Tipps zum Arbeiten mit Eclipse:
+
+Über die rechte Maustaste -> Source können Sie:
+
+* Generate Getters and Setters: Getter und Setter erzeugen. Wählen Sie hierfür jeweils die Variablen aus, für die Sie Getter und Setter erzeugen möchten
+* Generate Constructor using Fields: Wählen Sie auch hier jeweils die Variablen aus, die Ihr Konstruktor beinhalten soll
+
+### Kommentare
+
+Hier erhalten Sie ein Überblick, über verschiedene Kommentarmöglichkeiten:
+
+Einzeilige Kommentare 
+
+* Werden zeilenweise verwendet, sie beginnen mit einem Doppelschrägstrich // und enden mit dem Zeilenende
+* Für kurze Erklärungen
+
+Blockkommentare 
+
+* Werden für Erklärungen benutzt, die sich über mehrere Zeilen erstrecken
+* Sie beginnen mit einem Schrägstrich und Multiplikations-Zeichen /* und enden mit Multiplikations-Zeichen und Schrägstrich */
+
+Dokumentationskommentare 
+
+* Werden zu Dokumentationszwecken eingesetzt
+* Mit javadoc kann anschließend automatisch eine umfangreiche HTML-Dokumentation generiert werden.
+* Dokumentationskommentare beginnen mit einem Schrägstrich und zwei Multiplikations-Zeichen /** und enden mit Multiplikations-Zeichen und Schrägstrich */
+* Stehen immer vor dem Element, welches sie beschreiben sollen
+
+**Methodenkommntare**
+Methodenkommentare beschreiben, was die Methode macht
+
+* Beginnt mit /** und endet mit */
+* Schlüsselwörter (Tags) wie 
+    * @param: Beschreibung der Parameter der Methode
+    * @return: Rückgabewert
+    * Und viele mehr
+
+Weitere Schlüsselwörter: author, version, since, see …
+
+Beispiel: 
+```java
+/**
+* Diese Methode berechnet das Maximum für zwei Zahlen.
+*
+* @param zahl1 Die erste Zahl.
+* @param zahl2 Die zweite Zahl.
+* @return Die größere der beiden Zahlen.
+*/
+
+public static int max(int zahl1, int zahl2) {
+    return zahl1 > zahl2 ? zahl1 : zahl2;
+    }
+```
+
+**Tipps für Eclipse**
+
+* Source -> Toggle Comment bzw. Ctrl+7
+
+* Source -> Add block Comment 
+* Source -> Remove block Comment
+
+* Source -> Generate Element Comment
+* Eingabe von /** und return -> generiert Kommentar
+
+
+### Refacotring
+
+Refactoring bedeutet Strukturverbesserung von Quelltexten mit dem Ziel, Quelltext lesbarer, leichter wiederverwendbar und erwei­terbar zu gestalten. Dazu gehört zum Beispiel kurze, übersichtliche Methoden bauen und Methoden mit vielen Parameter vermeiden, mit dem Ziel
+Clean Code zu erzeugen.
+
+**Refactoring in Eclipse**
+
+Zeilen markieren, die in neue Methode gepackt werden sollen, rechte Maustate Refactor -> Extract Method. Im Dialogfenster: Name für Methode angeben und Modifikatoren wählen. Notwendige Paramter werden von Eclipse erkannt. Danach OK klicken.
+
+Probieren Sie dies an einem eigenen Beispiel aus.
+
 
 
 
@@ -2730,12 +2810,9 @@ Die Lösung heißt Vererbung, eine Besonderheit, die es nur in der objektorienti
 
 
 Vererbung erlaubt, 
-
-    - gemeinsame Teile einmal in einer Klasse zusammenzufassen
-
-    - spezielle Teile in eigenen Klassen zu beschreiben
-
-    - die gemeinsamen Teile in den speziellen Klassen zu erben
+* gemeinsame Teile einmal in einer Klasse zusammenzufassen
+* spezielle Teile in eigenen Klassen zu beschreiben
+* die gemeinsamen Teile in den speziellen Klassen zu erben
 
 
 Eine Klasse kann also Eigenschaften und Methoden von einer anderen Klasse erben, indem sie von dieser Klasse ableitet. Die Erbschaftsbeziehung wird definiert über Schlüsselwort `extends` (z.B. class B extends A).
@@ -2770,7 +2847,7 @@ public class Haustier {
 }
 ```
 
-Spezielles Verhalten steht in dern Unterklassen (auch Subklassen oder Kindklassen genannt). Über das Schlüsselwort `extends` wird angezeigt, dass der Klasse Hund Katze  die Eigenschaften und Methoden der Klasse Haustiere zur Verfügung stehen.
+Spezielles Verhalten steht in den Unterklassen (auch Subklassen oder Kindklassen genannt). Über das Schlüsselwort `extends` wird angezeigt, dass der Klasse Hund Katze  die Eigenschaften und Methoden der Klasse Haustiere zur Verfügung stehen.
 
 
 ```java
@@ -2778,7 +2855,7 @@ public class Hund extends Haustier {
 	public void bellen() {
 		System.out.println("wau, wau");
 	}
-   }
+}
 ```
 
 ```java
@@ -2786,7 +2863,7 @@ public class Katze extends Haustier {
 	public void miauen() {
 		System.out.println("miau, miau");
 	}
-   }
+}
 ```
 
 Fehlt die Angabe einer Oberklasse wie bisher, so ist dei Oberklasse die Klasse `Object`, quasi die Mutter aller Klassen.
@@ -2810,7 +2887,7 @@ Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hf
 
 ### Vererbung von Methoden und Variablen
 
-Was passiert mit den Instanzmethoden?
+Was passiert mit den Instanzmethoden bei der Vererbung?
 
 Für `public` und `protected` Methoden gilt:
 - Werden geerbt: Verwendbar, als wären sie direkt in der Unterklassen definiert
@@ -2854,9 +2931,9 @@ Was kann folgender Hund? Wir ändern die Klasse Hund folgendermaßen ab:
 public class Hund extends Haustier {
 	public void bellen() {
 		System.out.println("wau, wau");
-	}
+    }
 
-    	@Override
+    @Override
 	public void schlafen() {
 		super.schlafen();
 		System.out.println("Ich bin ein Langschläfer.");
@@ -2964,7 +3041,7 @@ void Person() {}
 ```
 Person() {
     super();
-    }
+}
 ```
 
 [(x)] erlaubt
