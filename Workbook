@@ -2719,7 +2719,7 @@ public static int max(int zahl1, int zahl2) {
 * Eingabe von /** und return -> generiert Kommentar
 
 
-### Refacotring
+### Refactoring
 
 Refactoring bedeutet Strukturverbesserung von Quelltexten mit dem Ziel, Quelltext lesbarer, leichter wiederverwendbar und erwei­terbar zu gestalten. Dazu gehört zum Beispiel kurze, übersichtliche Methoden bauen und Methoden mit vielen Parameter vermeiden, mit dem Ziel
 Clean Code zu erzeugen.
