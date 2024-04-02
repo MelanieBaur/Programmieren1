@@ -2140,7 +2140,9 @@ class Mutter{
 }
 ```
 
-Eine detaillierte Erklärung finden Sie im Buch Schrödinger programmiert Java, ab S. 153.
+Versuchen Sie nun mit Hilfe des Debuggers nachzuvollziehen, wann welche Objekte neu angelegt werden. 
+
+Lösung: Eine detaillierte Erklärung finden Sie im Buch Schrödinger programmiert Java, ab S. 153.
 
 
 ## Klassen, Objekte, Methoden
