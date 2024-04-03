@@ -2668,8 +2668,11 @@ In diesem Kapitel erhalten Sie weitere Tipps zum Arbeiten mit Eclipse:
 
 Über die rechte Maustaste -> Source können Sie:
 
-* Generate Getters and Setters: Getter und Setter erzeugen. Wählen Sie hierfür jeweils die Variablen aus, für die Sie Getter und Setter erzeugen möchten
-* Generate Constructor using Fields: Wählen Sie auch hier jeweils die Variablen aus, die Ihr Konstruktor beinhalten soll
+* Generate Getters and Setters: Getter und Setter erzeugen. Wählen Sie hierfür jeweils die Instanzariablen aus, für die Sie Getter und Setter erzeugen möchten
+* Generate Constructor using Fields: Wählen Sie auch hier jeweils die Instanzariablen aus, die Ihr Konstruktor beinhalten soll
+* Generate toString(): Erzeugt Ihnen eine toString()-Methode, wählen Sie hier die Instanzariablen aus, die mit ausgegebenw erden sollen
+
+
 
 ### Kommentare
 
