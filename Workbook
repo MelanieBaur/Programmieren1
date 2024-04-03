@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.6.2
+version: 0.6.3
 narrator: Deutsch Female
 mode: Textbook
 
@@ -3142,6 +3142,7 @@ In dem Beispiel ist die Vererbung von Haustier zu Hund und Katze eingezeichnet (
 Es gibt neben der Vererbung aber auch eine weitere Verbindung zwischen Klassen, die Delegation.
 
 **Delegation**
+
 Im Gegensatz zur Vererbung, bei der eine Klasse die Eigenschaften einer anderen Klasse übernimmt, wird bei der Delegation eine Aufgabe an eine andere Klasse weitergegeben. Dies bedeutet, dass diese Klasse ein Objekt einer anderen Klasse als Instanzvariable verwendet. Die Delegation kann als eine hat-ein-Beziehung zwischen Objekten betrachtet werden, bei der ein Objekt bestimmte Methodenaufrufe an ein anderes Objekt weiterleitet. Die Vererbung dagegen kann als eine ist-ein-Beziehung betrachtet werden. 
 
 Eine Katze ist ein Haustier: Vererbung
@@ -3224,6 +3225,7 @@ Weitere Beziehungen in UML-Diagrammen sind z.B. Interfaces mit einer gestrichelt
 
 Mit folgendem Programm können einfach Klassendiagramme erstellt werden:
 [yEd](https://www.yworks.com/yed-live/)
+Gehen Sie hierzu auf neues Diagramm erstellen und wählen Sie rechts UML aus. Dann stehen Ihnen (abstrakte) Klassen und Interfaces, jeweils mit verschiedenen Beziehungen zur Verfügung.
 
 
 ### Übungen
