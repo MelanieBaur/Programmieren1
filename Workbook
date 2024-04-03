@@ -2531,8 +2531,11 @@ Fortführung der Übung Laptop:
 
 ### UML-Klassendiagramme 
 
+TODO: Delegation und UML-Klassendiagramme
 
 
+### Speicherverwaltung
+TODO
 
 ### Übungen
 
@@ -2874,7 +2877,7 @@ public class Katze extends Haustier {
 }
 ```
 
-Fehlt die Angabe einer Oberklasse wie bisher, so ist dei Oberklasse die Klasse `Object`, quasi die Mutter aller Klassen.
+Fehlt die Angabe einer Oberklasse wie bisher, so ist die Oberklasse die Klasse `Object`, quasi die Mutter aller Klassen.
 
 **Einfachvererbung**
 
@@ -2887,6 +2890,18 @@ Java ist eine Sprache mit Einfachvererbung, das bedeutet, dass Klassen immer nur
 Eine Unterklasse darf man erneut erweitern, so entstehen Hierarchien von Klassen, welche einen Baum bilden, dessen Wurzel die Klasse `Object` ist. 
 
 ![](Vererbung-3.png.jpg)
+
+
+**Mutterklasse `Object`**
+
+* `Object` ist in Java die Elternklasse jeder weiteren Klasse und somit die allgemeinste Klasse
+* Alle anderen Klassen teilen die Eigenschaften der Klasse `Object`
+* Beispiel: Die Methode `public boolean equals(Object obj)` vergleicht die Speicheradressen, die Klassen Integer, String liefern für semantischen Vergleich jeweils eigenen Code, analog müssen eigene Klassen eigenen Code liefern, wenn der Vergleich der Speicheradressen nicht das gewünschte Ergebnis ergibt
+
+Recherchieren Sie in der Java-Dokumentation, welche Methoden die Klasse `Object` liefert. 
+
+TODO: toString Beispiel einfügen
+
 
 **Übung**
 
