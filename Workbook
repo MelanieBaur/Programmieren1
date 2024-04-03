@@ -2285,6 +2285,20 @@ Der Methodenrumpf enthält die Anweisungen, durch `;` getrennt. Grundsätzlich d
 2. Machen Sie die ersten Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
 
 
+**Methoden überladen**
+
+Namensgleiche Methoden mit unterschiedlichen Parametern nennt man überladen. 
+
+Beispiel: 
+
+`double mittelwert(double a, double b)`
+und
+`double mittelwert(double[] a)`
+
+Der Compiler erkennt an Hand der Anzahl und der Datentypen der Parameter, welche Methode gemeint ist. Methoden mit gleichem Namen und gleichen Parametern (d.h. mit gleicher Signatur) innerhalb einer Klasse sind nicht erlaubt (auch nicht mit unterschiedlichen Rückgabetypen). 
+
+
+
 ### Objekte
 
 Ab jetzt wollen wir objektorientiert programmieren. D.h. wir wollen Objekte formulieren, die wir wiederverwenden können. Eine Klasse dient uns hierbei als Ansammlung gleichartiger Objekte (auch Instanzen der Klasse genannt). In der Klasse werden dabei Komponenten festgelegt, aus denen jedes Objekt dieser Klasse bestehen soll. 
@@ -2529,9 +2543,6 @@ Fortführung der Übung Laptop:
 * Ihre bereits angelegten Variablen werden nun private
 * Greifen Sie nun aus der main-Methode auf die Variablen zu und geben Sie Modell, Benutzer, Laptop-ID aller Laptops aus und die Gesamtanzahl
 
-### UML-Klassendiagramme 
-
-TODO: Delegation und UML-Klassendiagramme
 
 
 ### Speicherverwaltung
@@ -2899,12 +2910,27 @@ Eine Unterklasse darf man erneut erweitern, so entstehen Hierarchien von Klassen
 
 * `Object` ist in Java die Elternklasse jeder weiteren Klasse und somit die allgemeinste Klasse
 * Alle anderen Klassen teilen die Eigenschaften der Klasse `Object`
-* Beispiel: Die Methode `public boolean equals(Object obj)` vergleicht die Speicheradressen, die Klassen Integer, String liefern für semantischen Vergleich jeweils eigenen Code, analog müssen eigene Klassen eigenen Code liefern, wenn der Vergleich der Speicheradressen nicht das gewünschte Ergebnis ergibt
+* Beispiel: Die Methode `public boolean equals(Object obj)` vergleicht die Speicheradressen (nicht die semantische Gleichheit!). Die Klassen Integer, String liefern für semantischen Vergleich jeweils eigenen Code, analog müssen eigene Klassen eigenen Code liefern, wenn der Vergleich der Speicheradressen nicht das gewünschte Ergebnis ergibt
 
 Recherchieren Sie in der Java-Dokumentation, welche Methoden die Klasse `Object` liefert. 
 
-TODO: toString Beispiel einfügen
 
+Ein häufiges Beispiel ist das Überschreiben der toString()-Methode. Diese sieht standardmäßig folgendermaßen aus:
+
+```java
+    public String toString() {
+        return getClass().getName() + "@" + Integer.toHexString(hashCode());
+    }
+```
+
+Sie liefert also eine String Repräsentation des Objekts (genauer den qualifizierten Klassennamen (also den Paketnamen plus den Klassennamen) gefolgt von einem `@` und dem Hashcode). Dies ist jedoch meist nicht, was wir ausgeben wollen. Somit müssen wir die toString()-Methode mit etwas Sinnvollem überschreiben. Was eine sinnvolle Ausgabe ist, hängt von der entsprechenden Klasse ab. 
+
+```java
+@Override
+public String toString(){
+    return "Meine Variable: " + meineVariable;
+}
+```
 
 **Übung**
 
@@ -3100,6 +3126,102 @@ Zurück zu unserer Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hf
 -> Objekte können spezialisiertes Verhalten hinzufügen 
 
 -> Man muss nicht über Verhalten-Details Bescheid wissen, sondern nur wissen, dass ein Verhalten angeboten wird
+
+
+### UML-Klassendiagramme 
+Die UML (= Unified Modeling Language) ist eine graphische Modellierungssprache mit welcher Objekte, Zustände und Prozesse eines Systems dargetsellt werden können. Hierbei gibt es verschiedene Diagrammtypen, je nachdem wie das Softwaresystem betrachtet werden soll. Wir nutzen in diesem Kurs das Klassendiagramm , welches eine Übersicht über die verschiedenen Klassen gibt und wie diese in Beziehung zueinander stehen. 
+
+Im Klassendiagramm werden die Elemente, d.h. die Attribute und Methoden dargestellt, wie im folgenden Beispiel:
+
+![HaustierKlassendiagramm](Haustier.png)
+
+In dem Beispiel ist die Vererbung von Haustier zu Hund und Katze eingezeichnet (mit einem nicht-ausgefüllten Pfeil)
+
+Es gibt neben der Vererbung aber auch eine weitere Verbindung zwischen Klassen, die Delegation.
+
+**Delegation**
+Im Gegensatz zur Vererbung, bei der eine Klasse die Eigenschaften einer anderen Klasse übernimmt, wird bei der Delegation eine Aufgabe an eine andere Klasse weitergegeben. Dies bedeutet, dass diese Klasse ein Objekt einer anderen Klasse als Instanzvariable verwendet. Die Delegation kann als eine hat-ein-Beziehung zwischen Objekten betrachtet werden, bei der ein Objekt bestimmte Methodenaufrufe an ein anderes Objekt weiterleitet. Die Vererbung dagegen kann als eine ist-ein-Beziehung betrachtet werden. 
+
+Eine Katze ist ein Haustier: Vererbung
+Ein Fotoapparat hat ein Objektiv: Delegation
+
+Ein Mitarbeiter ist ein Nutzer: Vererbung
+Ein Nutzer hat eine Adresse: Delegation
+
+
+Betrachten Sie nun folgendes Beispiel und versuchen Sie die Delegation nachzuvollziehen:
+
+```java
+class Professor {
+    public void lehren() {
+        System.out.println("Professor hält eine Vorlesung.");
+    }
+
+    public void benoten() {
+        System.out.println("Professor benotet Hausaufgabe.");
+    }
+}
+```
+
+```java
+class Student {
+    private Professor professor;
+
+    public Student(Professor professor) {
+        this.professor = professor;
+    }
+
+    public void vorlesungBesuchen() {
+        professor.lehren();
+    }
+
+    public void hausaufgabeEinreichen() {
+        System.out.println("Student reicht Hausaufgabe ein.");
+    }
+
+    public void noteErhalten() {
+        professor.benoten();
+    }
+}
+```
+
+```java
+public class Delegation {
+    public static void main(String[] args) {
+        Professor professor = new Professor();
+        Student student = new Student(professor);
+
+        student.vorlesungBesuchen();
+        student.hausaufgabeEinreichen();
+        student.noteErhalten();
+    }
+}
+```
+
+Die Professor-Klasse ist für das Unterrichten und Bewerten von Arbeiten zuständig, während die Student-Klasse Vorlesungen besucht, Aufgaben einreicht und Rückmeldung vom Professor erhält. Die Student-Klasse hat eine Referenz auf ein Professor-Objekt, und wenn die Methoden der Student-Klasse aufgerufen werden, wird diese Funktionalität an die entsprechenden Methoden der Professor-Klasse delegiert.
+
+
+**Assoziationen**
+
+Klassen stehen in Beziehungen zueinander. Eine Assoziation wird mit einer durchgezogenen Linie repräsentiert. 
+
+Es werden hier zwei besondere Fälle unterschieden:
+
+* Aggregation: Die Teile können existieren, wenn auch das Ganze (noch) nicht existiert.
+Die Aggregation wird mit einer durchgezogenen Linie mit einer nicht ausgefüllten Raute an einem Ende dargestellt. Die Raute befindet sich immer auf der Seite des "Ganzen". Die Abbildung zeigt: Jedes Regal besitzt 1 bis beliebig viele Bücher. Jedes Buch befindet sich in 0 bis 1 Regalen.
+
+![aggregation](aggregation.png)
+
+* Komposition: Die Teile können nicht ohne das Ganze existieren.
+Die Komposition wird mit einer durchgezogenen Linie mit einer ausgefüllten Raute an einem Ende dargestellt
+Die Multiplizität auf der Seite des Ganzen muss zwangsläufig 1 sein! Die Abbildung zeigt: Jedes Buch besitzt 1 bis beliebig viele Seiten. Und jede Seite existiert in genau einem Buch. 
+
+![komposition](komposition.png)
+
+Weitere Beziehungen in UML-Diagrammen sind z.B. Interfaces mit einer gestrichelten Linie gekennzeichnet (siehe Kapitel Interfaces).
+
+Mit folgendem Programm können einfach Klassendiagramme erstellt werden:
+[yEd](https://www.yworks.com/yed-live/)
 
 
 ### Übungen
