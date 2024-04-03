@@ -1975,17 +1975,17 @@ class StringBilder{
 
 
 - Die Objekte können dynamisch ihre Größe ändern.
-- Optional kann man im Konstruktor der Klassen `StringBuffer` und `StringBuilder` bereits eine Größe mitgeben.
+- Optional kann man im Konstruktor der Klassen `StringBuffer` und `StringBuilder` bereits eine Größe mitgeben. Konstruktoren lernen wir im Kapitel Konstruktoren bei den Objekten.
 
 - Die Klassen `StringBuffer` und `StringBuilder` bieten die gleichen Methoden an.
 - Die beiden Klassen unterscheiden sich in der Arbeitsweise:
 
-    - `StringBuffer` ist synchronisiert (= Thread-sicher bei zeitgleichem Zugriff mehrerer Programmteile)
+  - `StringBuffer` ist synchronisiert (= Thread-sicher bei zeitgleichem Zugriff mehrerer Programmteile)
 
   - `StringBuilder` ist nicht synchronisiert (und etwas schneller)
-- Weitere Methoden
+- Weitere Methoden sind zum Beispiel:
 
-    - delete(), deleteCharAt()
+  - delete(), deleteCharAt()
 
   - replace()
 
@@ -2009,7 +2009,7 @@ Methoden: `charAt(int index)`, `length()`, `substring(int beginIndex)` etc.
 - Länge eines Strings: `length()`
 - Zerlegen eines Strings: `substring()`, `split()`
 
-Suchen Sie in der Java Documentation nach weiteren Methoden, die Sie auf Strings aufrufen können. Überlegen Sie sich, was jeweils mit dem String passiert. 
+Suchen Sie in der Java Documentation nach weiteren Methoden, die Sie auf Strings aufrufen können. Überlegen Sie sich, was jeweils mit dem String passiert. Betrachten Sie auch hierzu folgendes Beispiel und versuchen Sie die einzelnen Schritte nachzuvollziehen.
 
 
 ```java
@@ -2028,11 +2028,10 @@ public class Zeichenkettenoperationen {
 ```
 @LIA.java(Zeichenkettenoperationen)
 
-- Vergleichsoperationen in Java funktionieren nur für primitive Datentypen und nicht für Referenztypen wie z.B. String
-- Zeichenketten vergleicht man mit `equals()`, nicht mit == !
-- Wenn Teile von Strings verglichen werden sollen, kann man z.B. `endsWith()`, `startsWith()` oder `regionMatches()` verwenden
-- Mit `indexOf()`, `lastIndexOf()`, `contains()` kann man in Strings suchen
-- Veränderungen können mit `replace()`, `replaceFirst()`, `replaceAll()` erfolgen
+- Vergleichsoperationen in Java funktionieren nur für primitive Datentypen und nicht für Referenztypen wie z.B. String. Dies bedeutet, Zeichenketten vergleicht man immer mit `equals()`, nicht mit ==. Der Vergleich mit == vergleicht die Gleichheit der zugrunde liegenden Objekte, während die Methode `equals()` die Gleichheit der Strings überprüft.
+- Wenn Teile von Strings verglichen werden sollen, kann man z.B. `endsWith()`, `startsWith()` oder `regionMatches()` verwenden.
+- Mit Hilfe der Methoden `indexOf()`, `lastIndexOf()`, `contains()` kann man in Strings suchen.
+- Veränderungen können mit `replace()`, `replaceFirst()`, `replaceAll()` erfolgen.
 
 **Aufgabe**
 
@@ -2056,6 +2055,9 @@ public class Iss {
 @LIA.java(Iss)
 
 Die Übung entstammt dem Buch Schrödinger programmiert Java, S. 152. Dort finden Sie auch eine Lösung.
+
+Hinweis: Benutzen Sie u.a. die Methoden substring(), toLowerCase(), replaceAll() und konkatenieren Sie geeignet die Strings.
+
 
 **Weitere Beispiele**
 
