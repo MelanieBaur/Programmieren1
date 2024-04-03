@@ -2544,9 +2544,33 @@ Fortführung der Übung Laptop:
 * Greifen Sie nun aus der main-Methode auf die Variablen zu und geben Sie Modell, Benutzer, Laptop-ID aller Laptops aus und die Gesamtanzahl
 
 
-
 ### Speicherverwaltung
-TODO
+
+Wir haben schon den Heap als Speicherbereich für Objekte kennengelernt. Im Gegensatz zum Stack, der variablen Speicherplatz für Methoden und primitive Datentypen bereitstellt, kann der Heap dynamisch wachsen und schrumpfen, um Platz für die Erstellung und Freigabe von Objekten zu bieten.
+
+Wenn ein neues Objekt mit dem new-Operator erstellt wird, wird Speicher im Heap allokiert, um das Objekt zu speichern. Der Zugriff auf den Heap erfolgt über eine Referenzvariable auf diese Objekte. Diese Referenzvariablen werden auf dem Stack gespeichert, während die tatsächlichen Objekte im Heap existieren.
+
+`Haustier haustier = new Haustier();`
+
+`haustier` ist eine Referenzvariable vom Typ `Haustier`. Der Operator `new` legt ein neues Objekt vom Typ `Haustier` auf dem Heap an. Der Zuweisungsoperator = verknüpft die Referenzvariable `haustier` mit dem soeben erstellen Objekt auf dem Heap. Diese Verknüpfung stellt eine Referenz (= Verweis) auf das Objekt dar. Es können auch mehrere Variablen auf das gleiche Objekt zeigen.
+
+Java verwendet einen Garbage Collector, der automatisch nicht mehr verwendete Objekte erkennt und Speicher freigibt. Dies hat den Vorteil, dass Sie als Entwickler sich nicht um die Speicherfreigabe kümmern müssen. Wenn der Heap überläuft, stürzt das Programm mit einem `OutOfMemory` Fehler ab. 
+
+Schauen wir uns den Stack nun noch genauer an. Der Stack ist ein Speicherbereich, der für die Ausführung von Methoden und die Speicherung von lokalen Variablen verwendet wird. Jede Methode in Java wird auf einem eigenen Stackframe ausgeführt, der alle für die Ausführung der Methode erforderlichen Informationen enthält, einschließlich der Parameter und lokalen Variablen.
+
+Wenn eine Methode aufgerufen wird, wird ein neuer Stackframe für diese Methode erstellt und auf den Stapel gelegt. Alle Variablen, die innerhalb dieser Methode deklariert werden, sowie die Methodenparameter, werden im Speicher dieses Stackframes gespeichert. Wenn die Methode abgeschlossen ist, wird ihr Stackframe entfernt und der Speicherplatz für lokale Variablen freigegeben.
+
+Da auch der Stack eine begrenzte Größe hat, kann es zu einem `Stack Overflow` kommen, wenn zu viele Methodenaufrufe ineinander verschachtelt sind und der verfügbare Speicherplatz auf dem Stack nicht mehr ausreicht. 
+
+Die oberste Methode auf dem Stack ist immer die aktuelle Methode, die unterste Methode, die main()-Methode, da diese als erstes aufgerufen wurde. Der Stack ist somit ein LIFO-Speicher, das bedeutet last in first out.
+
+**Zusammengefasst:** Speicherressourcen werden über den Heap und den Stack verwaltet. Der Heap wird für die Speicherung von Objekten verwendet, während der Stack für die Ausführung von Methoden und die Speicherung von lokalen Variablen dient. 
+
+Hinweis: Bei Programmabsturz sehen Sie den Stacktrace. 
+
+**Übung**
+
+Gehen Sie zu einem Programm zurück, in welchem Sie die Rekursion geübt haben (z.B. Fakultät). Schauen Sie sich im Debug-Modus den Stack an und beobachten Sie, wie dieser beim rekursiven Aufruf der Methode immer weiter anwächst.
 
 ### Übungen
 
