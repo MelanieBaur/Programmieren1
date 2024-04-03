@@ -50,7 +50,7 @@
 		<node id="n0">
 			<data key="d0">1</data>
 			<data key="d5">
-				<y:RectD X="81.96875" Y="104.28125" Width="165.875" Height="141.9375"/>
+				<y:RectD X="81.96875" Y="91.78125" Width="165.875" Height="141.9375"/>
 			</data>
 			<data key="d7">
 				<uml:UMLNodeStyle fill="{y:GraphMLReference 1}" highlightFill="{y:GraphMLReference 2}">
@@ -102,11 +102,16 @@
 					<y:FreeNodePortLocationModelParameter Ratio="0.5,0.9930525401650021"/>
 				</data>
 			</port>
+			<port name="p7">
+				<data key="d16">
+					<y:FreeNodePortLocationModelParameter Ratio="0.5,0.9930525401650021"/>
+				</data>
+			</port>
 		</node>
 		<node id="n1">
 			<data key="d0">2</data>
 			<data key="d5">
-				<y:RectD X="-16.40625" Y="270" Width="165.875" Height="108.75"/>
+				<y:RectD X="-16.40625" Y="275.625" Width="165.875" Height="108.75"/>
 			</data>
 			<data key="d7">
 				<uml:UMLNodeStyle fill="{y:GraphMLReference 1}" highlightFill="{y:GraphMLReference 2}">
@@ -143,7 +148,7 @@
 		<node id="n2">
 			<data key="d0">3</data>
 			<data key="d5">
-				<y:RectD X="180.5625" Y="270.75" Width="165.875" Height="108"/>
+				<y:RectD X="180.5625" Y="276" Width="165.875" Height="108"/>
 			</data>
 			<data key="d7">
 				<uml:UMLNodeStyle fill="{y:GraphMLReference 1}" highlightFill="{y:GraphMLReference 2}">
@@ -182,24 +187,28 @@
 					<y:FreeNodePortLocationModelParameter Ratio="0.5,0.009090909090909094"/>
 				</data>
 			</port>
+			<port name="p5">
+				<data key="d16">
+					<y:FreeNodePortLocationModelParameter Ratio="0.5,0.009090909090909094"/>
+				</data>
+			</port>
 		</node>
-		<edge id="e0" source="n0" target="n2" sourceport="p5" targetport="p4">
+		<edge id="e0" source="n0" target="n1" sourceport="p6" targetport="p2">
 			<data key="d12">
 				<x:List>
 					<y:Bend Location="164.90625,258.484375"/>
-					<y:Bend Location="270,258.484375"/>
-					<y:Bend Location="270,270"/>
+					<y:Bend Location="66.53125,258.484375"/>
 				</x:List>
 			</data>
 			<data key="d13">
 				<y:GraphMLReference ResourceKey="4"/>
 			</data>
 		</edge>
-		<edge id="e1" source="n0" target="n1" sourceport="p6" targetport="p2">
+		<edge id="e1" source="n0" target="n2" sourceport="p7" targetport="p5">
 			<data key="d12">
 				<x:List>
 					<y:Bend Location="164.90625,258.484375"/>
-					<y:Bend Location="66.53125,258.484375"/>
+					<y:Bend Location="263.5,258.484375"/>
 				</x:List>
 			</data>
 			<data key="d13">

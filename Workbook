@@ -3133,7 +3133,9 @@ Die UML (= Unified Modeling Language) ist eine graphische Modellierungssprache m
 
 Im Klassendiagramm werden die Elemente, d.h. die Attribute und Methoden dargestellt, wie im folgenden Beispiel:
 
-![HaustierKlassendiagramm](Haustier.png)
+<p align="center">
+<img src="Haustier.png" alt="HaustierKlassendiagramm" width="50%">
+</p>
 
 In dem Beispiel ist die Vererbung von Haustier zu Hund und Katze eingezeichnet (mit einem nicht-ausgefüllten Pfeil)
 
@@ -3227,6 +3229,7 @@ Mit folgendem Programm können einfach Klassendiagramme erstellt werden:
 ### Übungen
 
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06.
+
 
 ## Abstrakte Klassen, Interfaces
 
