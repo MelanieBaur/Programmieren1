@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.6.1
+version: 0.6.2
 narrator: Deutsch Female
 mode: Textbook
 
@@ -2565,18 +2565,37 @@ Hinweis: die main-Methode ist eine besondere Klassenmethode
 
 
 
-## Exkurs: Rekursion (WIP)
+## Exkurs: Rekursion
 
-* Eine Rekursion ein Objekt oder ein Vorgang, der sich selbst als Teil enthält oder mithilfe von sich selbst definierbar ist. 
-Eine rekursive Funktion ist somit eine Funktion, die sich selbst aufruft.
-* Rekursion kann anstelle von Schleifen genutzt werden
+Eine Rekursion ist ein Vorgang, der sich selbst als Teil enthält oder mithilfe von sich selbst definierbar ist. Eine rekursive Funktion ist somit eine Funktion, die sich selbst aufruft. Rekursion kann zum Beispiel anstelle von Schleifen genutzt werden. 
 
 **Beispiel: Fakultät**
 
 * Wie wird die Fakultät berechnet? Recherchieren Sie zwei verschiedene Berechnungsmöglichkeiten.
 * Sind Ihre gefundenen Berechnungsmöglichkeiten rekursiv oder iterativ?
 
+Bei der Rekursion muss aufgepasst werden, dass keine unendliche Rekursion entsteht. D.h. man braucht immer eine Abbruchbedingung, ansonsten führt dies zu einem Laufzeitfehler. Der rekursive Funktionsaufruf erfolgt nur, wenn die Abbruchbedingung nicht erfüllt ist. 
+
+Hier finden Sie einen Mustercode für die Rekursion: 
+
+```java
+public static typ funktion(typ parameter){
+  if (bedingung){
+    return ergebnis; //Rekursionsabbruch
+  } else {
+    return wert operation funktion(neuerParameter); //Rekursionsaufruf
+  }
+}
+```
+
+* Rekursion führt für bestimmte Problemstellungen zu prägnanten, knappen und eleganten Algorithmen.
+* Rekursionen verbrauchen meist mehr Arbeitsspeicher. Deshalb kann durch zu große Rekursionstiefe auch ein Stack Overflow entstehen.
+
+
+
 ### Fakultät
+
+Schauen wir uns die Iteration am Beispiel der Fakultät genauer an. Evtl. haben Sie diese beiden Berechnungsmöglichkeiten bereits recherchiert.
 
 Eine iterative Berechnungsmöglichkeit der Fakultät:
 
@@ -2589,26 +2608,10 @@ Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
 So kann man sich die rekursive Berechnung vorstellen.
 ![Fakultätsberechnung](fakultaet.png)
 
-Achtung:
-
-Es darf keine unendliche Rekursion entstehen. D.h. Sie brauchen eine Abbruchbedingung. Ansonsten führt dies zu einem Laufzeitfehler. Der rekursive Funktionsaufruf erfolgt nur, wenn die Abbruchbedingung nicht erfüllt ist
-
-Hier ein Mustercode für die Rekursion: 
-
-```java
-public static typ funktion(typ parameter){
-  if (bedingung){return ergebnis;
-  }else{return wert op funktion(neuerParameter);
-  }
-}
-```
-
-* Rekursion führt für bestimmte Problemstellungen zu prägnanten, knappen und eleganten Algorithmen.
-* Rekursionen verbrauchen meist mehr Arbeitsspeicher. Deshalb kann durch zu große Rekursionstiefe auch ein Stack Overflow entstehen.
 
 **Aufgabe**
 
-Vervollständigen Sie die beiden Programme, so dass jeweils die Fakultät berechnet wird:
+Vervollständigen Sie die beiden Programme mit Hilfe der obigen Definitionen, so dass jeweils die Fakultät berechnet wird:
 
 ```java
 class FakultaetIterativ{
@@ -2648,8 +2651,10 @@ class FakultaetRekursiv{
 @LIA.java(FakultaetRekursiv)
 
 ### Übung
-TODO: Bionomi rekursiv
-Zahlensumme rekursiv -> Debug-Perspektive
+
+Sie können in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen nun die Aufgabe Binominal und Pascal lösen. 
+
+Betrachten Sie Ihre Lösung auch jeweils in der Debug-Perspektive und achten Sie darauf, welche Methoden auf dem Stack liegen. 
 
 
 ## Exkurs: Arbeiten mit Eclipse
@@ -2694,6 +2699,7 @@ Methodenkommentare beschreiben, was die Methode macht
 Weitere Schlüsselwörter: author, version, since, see …
 
 Beispiel: 
+
 ```java
 /**
 * Diese Methode berechnet das Maximum für zwei Zahlen.
