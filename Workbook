@@ -3215,9 +3215,7 @@ Dieses Verhalten beschreibt man als Polymorphismus und wird im folgenden genauer
 
 Eine Variable vom Typ einer Oberklasse kann ein beliebiges Objekt seiner Unterklasse aufnehmen. Alle Methoden, die in der Oberklasse definiert sind, können aufgerufen werden: Da das Unterklassenobjekt alle Methoden der Oberklasse erbt, erweitert oder implementiert, kann man sich darauf verlassen, dass alle Methoden der Oberklasse verfügbar sind. Ausgeführt wird (natürlich) der Code des aktuellen Objekts. Methoden, die nur in der Unterklasse vorliegen, können nicht aufgerufen werden (sie sind da, sind aber nicht sichtbar).
 
--> Objekte können spezialisiertes Verhalten hinzufügen 
-
--> Man muss nicht über Verhalten-Details Bescheid wissen, sondern nur wissen, dass ein Verhalten angeboten wird
+Das bedeutet nun: Objekte können spezialisiertes Verhalten hinzufügen. Man muss dabei nicht über Verhalten-Details Bescheid wissen, sondern nur wissen, dass ein Verhalten angeboten wird.
 
 
 ### UML-Klassendiagramme 
