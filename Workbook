@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.6.3
+version: 0.7.0
 narrator: Deutsch Female
 mode: Textbook
 
@@ -3135,9 +3135,79 @@ Zurück zu unserer Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hf
 
 
 
-### Typumwandlung (TODO)
+### Typumwandlung
+Wir haben Typumwandlungen schon beim Casting von primitiven Datentypen kennengelernt. Unter `Casting` versteht man das Umwandeln von einem Typ in einen anderen Typ.
+
+Zur Erinnerung: Hier wurden verschiedene primitive Datentypen durch Typ­ Umwandlung ineinander konvertiert. Wir haben zwischen zwischen Widening (Erweitern) und Narrowing (Eingrenzen) unterschieden.
+Im Fall von primitiven Datentypen bedeutet Widening, dass eine Variable von einem Typ mit einem kleinen Wertebereich in eine Variable von einem Typ mit einem größeren Wertebereich umgewandelt wird
+Narrowing bedeutet genau das Gegenteil, der Wertebereich wird also kleiner. Widening ist in der Regel kein Problem, Narrowing kann aber gefährlich sein, da einzelne Werte hierbei verloren gehen können!
+
+Ein ähnliches Vorgehen ist nun auch bei der Typumwandlung von Objekten möglich, denn nicht nur primitive Datentypen können durch Casting umgewandelt werden, sondern auch Objekte. 
+
+* Wenn ein Typ in einen anderen Typ umgewandelt werden kann, heißt dies `kompatibel`. 
+* `Downcasting`: Umwandlung eines in der Hierarchie höher liegenden Typs in einen tieferen
+* `Upcasting`: Umwandlung eines in der Hierarchie tiefer liegenden Typs in einen höher liegenden
+
+Beim Casting (insbesondere beim Downcasting) muss überprüft werden, ob die Umwandlung funktionieren kann. Dies geschicht mit den instanceof-Operator. Dieser gibt true oder false zurück. 
+
+Merke: Ein Objekt vom Typ der Unterklasse ist auch vom Typ der Oberklasse.
+    
+Verwendung:
+
+```
+Referenzvariable instanceof Klassenname
+```
+
+Folgende Grafik verdeutlich dies:
+
+<p align="center">
+<img src="Tier.png" alt="HaustierKlassendiagramm" width="50%">
+</p>
 
 
+Beispiel: 
+
+```
+Tier katze = new Katze();
+```
+
+`katze` ist eine Referenzvariable vom Typ `Tier`, die auf eine konkrete Instanz `Katze` zeigt. 
+`katze` kann schlafen, aber nicht miauen, da sie ein Tier ist.
+
+```
+Tier gleicheKatze = (Katze) katze;
+```
+
+`gleicheKatze` kann miauen, da die Referenzvariable vom Typ Katze ist.
+
+Gebrauch des instaceof-Operators in diesem Szenario:
+
+```
+if (katze instanceof Katze){
+    Tier gleicheKatze = (Katze) katze;
+}
+```
+
+Merke: Die konkrete Objektinstanz ändert sich hierdurch nicht, d.h. es wird kein neues Objekt auf dem Heap gelegt. 
+
+**Übung**
+
+Erzeugen Sie den Code zu obigem UML-Diagramm. Probieren Sie folgende Szenarien aus:
+
+* Erzeugen Sie ein Tier vom Typ Hund (Tier tier = new Hund(...)). Was kann dieses Tier?
+* Wandeln Sie mit Casting das tier in einen Hund um. Was kann das Tier jetzt?
+* Implementieren Sie Schlafmethoden, sowohl im Tier als auch im Hund. Überprüfen Sie, welche Methode wird jeweils aufgerufen?
+
+
+Was passiert bei folgenden Aufrufen?
+
+* Katze katze = new Tier();
+* Katze katze = (Katze) new Tier();
+
+Überlegen Sie sich, warum diese Aufrufe nicht möglich sind?
+
+Hinweis:
+Nicht jedes Tier ist eine Katze und nicht jedes Tier kann einfach in eine Katze umgewandelt werden. 
 
 **Polymorphismus**
 
