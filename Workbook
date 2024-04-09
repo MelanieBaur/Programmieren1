@@ -3209,7 +3209,6 @@ Was passiert bei folgenden Aufrufen?
 Hinweis:
 Nicht jedes Tier ist eine Katze und nicht jedes Tier kann einfach in eine Katze umgewandelt werden. 
 
-Dieses Verhalten beschreibt man als Polymorphismus und wird im folgenden genauer erklärt.
 
 **Polymorphismus**
 
