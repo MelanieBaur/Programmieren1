@@ -2066,7 +2066,7 @@ Versuchen Sie nun auch folgenden Code nachzuvollziehen. Welche Ausgaben werden g
 ```java
 class StringWeiteresBeispiel{
     public static void main(String args[]){
-        String wort = "Urinstrinkt";
+        String wort = "Urinstinkt";
         boolean sindGleich = wort.equals("Ur" + "instinkt");
         System.out.println(sindGleich); 
 
