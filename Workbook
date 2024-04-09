@@ -3204,19 +3204,21 @@ Was passiert bei folgenden Aufrufen?
 * Katze katze = new Tier();
 * Katze katze = (Katze) new Tier();
 
-Überlegen Sie sich, warum diese Aufrufe nicht möglich sind?
+Überlegen Sie sich, warum diese Aufrufe nicht möglich sind.
 
 Hinweis:
 Nicht jedes Tier ist eine Katze und nicht jedes Tier kann einfach in eine Katze umgewandelt werden. 
 
+Dieses Verhalten beschreibt man als Polymorphismus und wird im folgenden genauer erklärt.
+
 **Polymorphismus**
 
-- Eine Variable vom Typ einer Oberklasse kann ein beliebiges Objekt seiner Unterklasse aufnehmen
-- Alle Methoden, die in der Oberklasse definiert sind, können aufgerufen werden
+* Eine Variable vom Typ einer Oberklasse kann ein beliebiges Objekt seiner Unterklasse aufnehmen
+* Alle Methoden, die in der Oberklasse definiert sind, können aufgerufen werden
 
-    - Da das Unterklassenobjekt alle Methoden der Oberklasse erbt, erweitert oder implementiert, kann man sich darauf verlassen, dass - alle Methoden der Oberklasse verfügbar sind
-    - Ausgeführt wird (natürlich) der Code des aktuellen Objekts
-    - Methoden, die nur in der Unterklasse vorliegen, können nicht aufgerufen werden (sie sind da, sind aber nicht sichtbar)
+    * Da das Unterklassenobjekt alle Methoden der Oberklasse erbt, erweitert oder implementiert, kann man sich darauf verlassen, dass alle Methoden der Oberklasse verfügbar sind
+    * Ausgeführt wird (natürlich) der Code des aktuellen Objekts
+    * Methoden, die nur in der Unterklasse vorliegen, können nicht aufgerufen werden (sie sind da, sind aber nicht sichtbar)
 
 -> Objekte können spezialisiertes Verhalten hinzufügen 
 
