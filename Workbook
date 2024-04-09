@@ -2646,6 +2646,7 @@ Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
 ![Rekrusive Berechnung Fakultät](fakultaetRekursiv.png)
 
 So kann man sich die rekursive Berechnung vorstellen.
+
 ![Fakultätsberechnung](fakultaet.png)
 
 
