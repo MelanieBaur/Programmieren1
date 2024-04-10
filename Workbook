@@ -1747,7 +1747,7 @@ class MeinArray{
 ```
 @LIA.java(MeinArray)
 
-### Wachsende Arrays (für IF relevant)
+### Wachsende Arrays
 
 * Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt
 * Möchten man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
