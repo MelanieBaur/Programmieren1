@@ -1749,15 +1749,12 @@ class MeinArray{
 
 ### Wachsende Arrays
 
-* Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt
-* Möchten man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
-bisherige Array in das neue Array umkopiert werden 
-* Diese Aktionen werden von der Standardfunktion `copyOf` effizient erledigt
-* Die Klasse `java.util.Arrays` enthält zahlreiche Funktionen zur Manipulation von Arrays wie z.B. das eben erwähnte `copyOf`
+Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt. Möchte man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
+bisherige Array in das neue Array umkopiert werden. Diese Aktionen werden von der Standardfunktion `copyOf` effizient erledigt. Die Klasse `java.util.Arrays` enthält zahlreiche Funktionen zur Manipulation von Arrays wie z.B. das eben erwähnte `copyOf`. 
 
 **Hintergrund:** 
 In Java gibt es bereits sehr, sehr viele vorgefertigte Methoden, die wir nutzen können. Erklärungen hierzu finden Sie unter: [Java API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/module-summary.html). Mit diesem Link werden wir das kommende Jahr sehr viel arbeiten. 
-Unter java.util finden Sie die Klasse `Arrays`, die Methoden zum Manipulieren von Arrays enthält. So auch das oben genannte `java.util.Arrays`
+Unter java.util finden Sie die Klasse `Arrays`, die Methoden zum Manipulieren von Arrays enthält. So auch das oben genannte `java.util.Arrays. 
 
 * Welche Länge hat in folgendem Code welches Array?
 * Was ist die Ausgabe der Schleife?
@@ -1780,7 +1777,7 @@ class ArrayKopie{
 ```
 @LIA.java(ArrayKopie)
 
-* Mit der Methode `arraycopy` der Klasse `System` können Sie die Kopie noch genauer steuern:
+Mit der Methode `arraycopy` der Klasse `System` können Sie die Kopie noch genauer steuern:
 
 ```java
 class ArrayKopie2{
@@ -1801,7 +1798,7 @@ class ArrayKopie2{
 
 Hinweis: die Argumente einer Methode sind die Parameter, die in den Klammern der Methode stehen. Methoden lernen wir bald genauer kennen. 
 
-Lösungshinweis: Sie finden die Methode im Module `java.base`, im Paket `java.lang` und im Klassensystem unterhalb von `java.lang.Object`.
+Lösungshinweis: Sie finden die Methode im Module `java.base`, im Paket `java.lang` und im Klassensystem in der Klasse `System`, welche sich unterhalb von `java.lang.Object` befindet.
 
 
 ### Mehrdimensionale Arrays
