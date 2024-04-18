@@ -3319,12 +3319,321 @@ Gehen Sie hierzu auf neues Diagramm erstellen und wählen Sie rechts UML aus. Da
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06.
 
 
-## Abstrakte Klassen, Interfaces
+## Abstrakte Klassen, Interfaces (WIP)
+
+In diesem Kapitel beschäftigen wir uns mit abstrakten Klassen, Interfaces und geschachtelte Klassen, die die Flexibilität und Modularität von Java-Programmen stark verbessern können. 
+Diese Konzepte bieten Möglichkeiten, wie Klassen miteinander interagieren und wie Verhaltensweisen und Eigenschaften von Objekten definiert werden können.
+
+Abstrakte Klassen ermöglichen es uns, Klassen zu definieren, die nicht direkt instanziiert werden können, sondern als Vorlage für konkrete Unterklassen dienen. Durch die Verwendung von abstrakten Methoden können wir sicherstellen, dass bestimmte Verhaltensweisen in Unterklassen implementiert werden müssen, während bereits vorhandene Methoden in der abstrakten Klasse wiederverwendet werden können.
+
+Interfaces definieren eine Schnittstelle, die von Klassen implementiert werden kann. Sie bieten eine Möglichkeit, Verträge zwischen verschiedenen Teilen des Codes herzustellen, indem sie eine Sammlung von Methoden ohne Implementierungen bereitstellen. Dadurch wird die Interoperabilität zwischen verschiedenen Klassen  verbessert, und es ermöglicht die Umsetzung von Polymorphismus.
+
+Geschachtelte Klassen sind Klassen, die innerhalb einer anderen Klasse definiert sind. Sie bieten eine Möglichkeit, die Struktur unseres Codes zu organisieren und den Zugriff auf Klassen zu kontrollieren. Geschachtelte Klassen können statisch oder nicht-statisch sein und haben Zugriff auf alle Mitglieder der äußeren Klasse, einschließlich privater Mitglieder.
+
+
+### Abstrakte Klassen
+Bisher haben wir gemeinsames Verhalten in einer gemeinsamen Oberklasse festgelegt. Manchmal ist es aber aus Anwendersicht nicht sinnvoll, von diesen Klassen ein Objekt zu erzeugen. 
+
+Betrachten Sie hierzu folgendes Beispiel. Dreieck und Kreis sind beides geometrische Figuren, von denen man den Umfang berechnen kann. Die Berechnung des Umfangs erfolgt jedoch auf unterschiedliche Art und Weise, so dass es nicht sinnvoll erscheint, diese Methode in der gemeinsamen Oberklasse `Figur` bereits zu implementieren. Man bekommt somit zwangsläufig eine Dopplung der Methode. Ebenso erscheint es unter Umständen wenig sinnvoll, ein Objekt vom Typ `Figur` zu erzeugen, sondern nur konkrete Figure, wie z.B. Dreiecke oder Kreise.
+
+Beispiel:
+
+<p align="center">
+<img src="Figur.png" alt="UMLAbstrakteKlasse" width="60%">
+</p>
+
+Diese Problem kann mit Hilfe von abstrakten Klassen gelöst werden. Dies bedeutet: Die Klasse `Figur` wird als `abstract` markiert. Dann können von dieser Klasse keine Objekte erzeugt werden. Weiterhin können Methoden auch unimplementiert vererbt werden. Die konkreten Unterklassen müssen für diese Methoden dann eine Implementation bereitstellen. 
+
+Abstrakte Klassen werden im UML-Klassendiagramm kursiv geschrieben oder als `abstract` markiert
+
+<p align="center">
+<img src="FigurAbstrakt.png" alt="UMLAbstrakteKlasse2" width="60%">
+</p>
+
+Im Code werden abstrakte Klassen mit dem Schlüsselwort `abstract` gekennzeichnet. 
+
+Methoden abstrakter Klassen können zusätzlich `abstract` markiert werden. Abstrakte Methoden enthalten keine Implementierung. Dies zwingt eine nicht abstrakte Unterklasse eine Implementierung zu liefern. Wenn eine Klasse nicht alle abstrakten Methoden der abstrakten Oberklasse implementiert, muss sie selbst wieder abstrakt sein.
+
+
+```
+// abstrakte Klasse
+public abstract class Figur{
+
+    // abstrakte Methode ohne Implementierung
+    public abstract double berechneUmfang(){
+
+    }
+}
+```
+
+
+**Aufgabe 1:** 
+
+Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
+
+**Frage 1**
+
+Gibt es abstrakte Klassen ohne abstrakte Methoden?
+
+[(x)] Ja
+[( )] Nein
+
+**Frage 2**
+
+Gibt es konkrete Klassen mit abstrakten Methoden?
+
+[( )] Ja
+[(x)] Nein
+
+**Frage 3**
+
+Müssen Unterklassen die abstrakten Methoden der Oberklasse implementieren?
+
+[( )] Ja
+[(x)] Nein
+
+**Frage 4**
+
+Stehen abstrakte Klassen immer oben in der Hierarchie?
+
+[( )] Ja
+[(x)] Nein
+
+**Frage 5**
+
+Können abstrakte Klassen nur instanziiert werden, wenn sie einen Konstruktor mit Parametern haben?
+
+[( )] Ja
+[(x)] Nein
+
+
+**Aufgabe 2:** 
+Lesen Sie die Aufgabe privater Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07. Erstellen Sie das UML-Klassendiagramm und implementieren Sie die Klassen.
+
+
+### Interfaces
+
+Ein Interface ist eine Sammlung von abstrakten Methoden, die eine Klasse implementieren kann. Es enthält lediglich Methodensignaturen, aber keine konkreten Implementierungen. 
+Klassen können nun ein oder mehrere Interfaces implementieren, und somit für die darin definierten Methoden eine konkrete Implementierung bereitstellen. 
+Interfaces werden verwendet, um eine Vertragsvereinbarung zwischen verschiedenen Teilen des Codes / zwischen verschiedenen Klassen herzustellen. 
+Sie ermöglichen es, dass verschiedene Klassen unabhängig voneinander die gleiche Funktionalität bereitstellen, indem sie die im Interface definierten Methoden implementieren. 
+Interfaces werden häufig verwendet, um Polymorphismus zu ermöglichen und die Flexibilität und Erweiterbarkeit des Codes zu verbessern.
+
+Eingeleitet wird ein Interface durch das Schlüsselwort `interface`. Beispiel:
+
+```
+// Interface
+public interface Berechenbar{
+    double berechneUmfang();
+    double berechneFlaeche();
+}
+```
+
+Alle Klassen, die das Interface `Berechenbar` implementieren, müssen nun eine konkrete Implementierung für die beiden Methoden berechneUmfang() und berechneFlaeche() bereitstellen.
+
+Die Klasse `Kreis` könnte dann beispielsweise so aussehen:
+
+```
+public class Kreis extends Figur implements FlächeBerechnbar {
+    private double radius;
+
+    public Kreis(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double berechneFläche() {
+        return Math.PI * Math.pow(radius, 2);
+    }
+}
+```
+
+
+Hinweise:
+
+* Klassen erben nicht von Interfaces sondern implementieren diese Interfaces.
+* Interfaces können nicht instanziiert werden.
+* Eine Klasse kann mehrere Interfaces implementieren.
+
+Wann nimmt man nun Verwerbung und wann ein Interface? Leitfragen können sein: 
+
+* Vererbung: Unterklasse Student ist eine Person.
+* Interfaces: Implementierende Klasse Student hat eine Brille.
+
+In der Regel werden Interfaces verwendet
+
+* Für Objekte mit ähnlichen Eigenschaften (die im gleichen Methodennamen zum Ausdruck kommt) – aber nicht in einer (sinnvollen) gemeinsamen Oberklasse
+* Zur Definition eines bestimmten Aspekts einer Anwendung, der von einer Klasse erfüllt ist
+
+Es gilt wieder Polymorphismus:
+
+* Variablen von einem Interface-Typ können alle Objekte enthalten, deren Klassen (oder Oberklassen) dieses Interface implementieren.
+* Es können dann wieder nur die Methoden aufgerufen werden, die das Interface definiert.
+
+Ein Interface kann als „Vertrag“ verstanden werden:
+
+* Das Interface gibt die Bedingungen vor, die ein Programmierer einhalten muss, wenn er das Interface implementiert.
+* Interfaces können als Vorgaben für andere Programmierer verwendet werden.
+
+Interfaces trennen also die Schnittstelle von der Implementierung. Für ein Interface kann es viele implementierende Klassen geben. 
+Wenn zwei verschiedene Interfaces die gleiche Methode haben, muss die Klasse, die beide Interfaces implementiert, nur eine Implementierung liefern.
+
+Auch Schnittstellen können Hierarchien bilden. Das abzuleitende Interface (Subinterface) kann dann eigene Methoden hinzufügen. Die Klasse, die dieses Interface implementiert, muss dann auch die von den Superinterfaces (Oberinterfaces) geerbten Methoden implementieren.
+
+```
+public interface KannManEssen(){
+    void essen();
+}
+
+// Abzuleitendes Interface (Subinterface) kann eigene Methoden hinzufügen
+public interface IstLecker extends KannManEssen{
+    void geniessen();
+}
+
+// Klasse muss alle Methoden implementieren, auch die von den Superinterfaces geerbten Methoden
+public class Pizza implements IstLecker{
+    @Override
+    public void essen(){
+    }
+
+    @Override
+    public void geniessen(){
+    }
+}
+
+```
+
+Auch Datenfelder in Interfaces möglich. Diese sind automatisch immer `public static final`. Konstanten können auch in eigenen Klassen stehen, sogenannte Konstantenklassen (besser als in Interfaces)
+
+
+**Aufgabe 1:** 
+
+Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
+
+**Frage 1**
+
+Kann ein Interface instanziiert werden?
+
+[( )] Ja
+[(x)] Nein
+
+
+**Frage 2**
+
+Besitzt ein Interface Konstruktoren?
+
+
+[( )] Ja
+[(x)] Nein
+
+**Frage 3**
+
+Kann eine abstrakte Klasse instanziiert werden?
+
+[( )] Ja
+[(x)] Nein
+
+**Frage 4**
+
+Besitzt eine abstrakte Klasse Konstruktoren?
+
+[(x)] Ja
+[( )] Nein
+
+**Aufgabe 2:** 
+Fügen Sie Ihrem privaten Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 nun ein eigenes Interface hinzu.
+
+
+### Geschachtelte Klassen
+TODO: MB
 
 ### Übungen
 
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07.
 
+
+## Exkurs: Enums
+
+Enumerationen (kurz: Enums) sind spezielle Typen, die eine Menge von konstanten Werten repräsentieren. 
+Sie bieten eine Möglichkeit, eine begrenzte Menge von konkreten Werten zu definieren, die eine Variable annehmen kann.
+Enums werden oft verwendet, um eine Gruppe von verwandten Konstanten zu definieren, die in einem klar definierten Kontext verwendet werden sollen. 
+
+Beispiele sind die Tage der Woche, Monate des Jahres, die Richtungen (Norden, Süden, Osten, Westen) oder die Zustände eines Objekts (z.B. "aktiv", "inaktiv", "ausgefallen"), Farben, Prioriäten (z.B. "niedrig", "normal", "hoch").
+
+Angelegt werden Sie in Eclipse mit rechte Maustaste auf das Projekt / Paket -> New -> Enum.
+
+```
+// Schlüsselwort enum
+public enum Wochentag {
+    MONTAG, DIENSTAG, MITTWOCH, DONNERSTAG, FREITAG, SAMSTAG, SONNTAG
+}
+```
+
+Vorteil von Enums sind, dass keine Vermischung verschiedener Typen mehr möglich ist. Enums können auch durchwandert werden, wie im folgenden Beispiel.
+
+```
+public class HierNunMeineKlasse{
+    public static void main(String[] args){   
+        Wochentag montag = Wochentag.MONTAG;
+        System.out.println(montag);
+
+        for (Wochentag wochentag : Wochentag.values()){
+            System.out.println(wochentag);
+        }
+    }
+}
+```
+
+Weiterhin können Enumerations zusätzliche Werte aufnehmen:
+
+```
+public enum Prioritaet{
+    //Impliziter Aufruf des Konstruktors
+    NIEDRIG(-1), NORMAL(0), HOCH(1);
+    private int wert;
+    
+    //Privater Konstruktor
+    private Prioritaet(int wert){
+        this.wert = wert;
+        }
+    
+    public int wert(){
+        return wert;
+    }
+}
+```
+
+Verwendung in einer Klasse:
+
+```
+Prioritaet prio = Prioritaet.HOCH;
+System.out.println(prio.wert()); 
+```
+
+Enums können auch einfach innerhalb eines switch-Statements verwendet werden:
+
+```
+Prioritaet prio = Prioritaet.HOCH;
+
+switch (prio){
+    case HOCH:
+        ...
+        break;
+    case NORMAL:
+        ...
+        break;
+    case NIEDRIG:
+        ...
+        break;
+    default:
+        break;
+}
+```
+
+
+### Übung
+
+Sie können in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen nun die Aufgaben Jahreszeiten und Monate lösen. 
 
 ## Collections & Maps
 
