@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.7.0
+version: 0.7.1
 narrator: Deutsch Female
 mode: Textbook
 
@@ -2395,7 +2395,7 @@ Nutzung in der Klasse Autobauer:
 ```java
 public class Autobauer {
 	public static void main(String[] args) {
-        // Direkt bei der Erzeugung meines Auto-Objekts bekommt dieses die Farbe weiß
+		// Direkt bei der Erzeugung meines Auto-Objekts bekommt dieses die Farbe weiß
 		Auto meinAuto = new Auto("weiß");
 		
 	}
@@ -2458,7 +2458,7 @@ Getter liefern den Wert einer privaten Variablen. Sie sind folgendermaßen aufge
 
 ```
 public Typ getWert(){
-  return wert;
+    return wert;
 }
 ```
 
@@ -2466,7 +2466,7 @@ Setter setzen den Wert einer privaten Variablen. Sie sind folgendermaßen aufgeb
 
 ```
 public void setWert(Typ wert){
- this.wert = wert;
+    this.wert = wert;
 }
 ```
 
@@ -2528,12 +2528,14 @@ public class Autobauer {
 ```
 
 Versuchen Sie dieses Beispiel nachzuvollziehen! 
+
 * Welcher Konstruktor wird benutzt?
 * Funktioniert der Zugriff mit `meinAuto.farbe`? Warum, bzw. warum nicht?
 * Welche Rückgabewerte und welche Parameter haben die Methoden `setFarbe()` und `getFarbe()`?
 
 
 **Übung**
+
 Fortführung der Übung Laptop:
 
 * Fügen Sie nun Ihrer Laptopklasse Getter und Setter hinzu
@@ -2561,7 +2563,9 @@ Da auch der Stack eine begrenzte Größe hat, kann es zu einem `Stack Overflow` 
 
 Die oberste Methode auf dem Stack ist immer die aktuelle Methode, die unterste Methode, die main()-Methode, da diese als erstes aufgerufen wurde. Der Stack ist somit ein LIFO-Speicher, das bedeutet last in first out.
 
-**Zusammengefasst:** Speicherressourcen werden über den Heap und den Stack verwaltet. Der Heap wird für die Speicherung von Objekten verwendet, während der Stack für die Ausführung von Methoden und die Speicherung von lokalen Variablen dient. 
+**Zusammengefasst:** 
+
+Speicherressourcen werden über den Heap und den Stack verwaltet. Der Heap wird für die Speicherung von Objekten verwendet, während der Stack für die Ausführung von Methoden und die Speicherung von lokalen Variablen dient. 
 
 Hinweis: Bei Programmabsturz sehen Sie den Stacktrace. 
 
@@ -2572,6 +2576,12 @@ Gehen Sie zu einem Programm zurück, in welchem Sie die Rekursion geübt haben (
 ### Übungen
 
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
+
+
+Hinweise zu den Übungsaufgaben: 
+
+* Bibliothek: Fügen Sie das Überschreiben der Methoden `toString()` und `equals(Object o)` erst hinzu, wenn Sie das Kapitel Vererbung durchgearbeitet haben. 
+
 
 
 ### Ablage
@@ -3319,7 +3329,7 @@ Gehen Sie hierzu auf neues Diagramm erstellen und wählen Sie rechts UML aus. Da
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06.
 
 
-## Abstrakte Klassen, Interfaces (WIP)
+## Abstrakte Klassen, Interfaces und geschachtelte Klassen
 
 In diesem Kapitel beschäftigen wir uns mit abstrakten Klassen, Interfaces und geschachtelte Klassen, die die Flexibilität und Modularität von Java-Programmen stark verbessern können. 
 Diese Konzepte bieten Möglichkeiten, wie Klassen miteinander interagieren und wie Verhaltensweisen und Eigenschaften von Objekten definiert werden können.
@@ -3545,11 +3555,246 @@ Fügen Sie Ihrem privaten Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-p
 
 
 ### Geschachtelte Klassen
-TODO: MB
+Die bisher besprochenen Klassen befinden sich direkt innerhalb von Paketen. Wir nennen Sie auch Top-Level-Klassen. Eine Klasse darf sich aber auch innerhalb einer anderer Klasse befinden. Hier unterscheiden wir vier verschiedene Typen: 
+
+1. Statischer geschachtelter Typ:
+
+```
+class Out { static class In{} }
+```
+
+2. Innerer Typ (nichtstatischer geschachtelter Typ):
+```
+class Out { class In{} }
+```
+
+4. Lokaler (innerer) Typ:
+
+```
+class Out { methode(){ class In{} }}
+```
+
+4. Anonyme innere Klasse
+```
+class Out {methode() {
+            Runnable r = new Runnable(){public void run(){}; }}
+
+```
+
+Nichtstatische geschachtelte Typen heißen `innere Typen`. Hierzu zählen die Typen 2.-4.
+
+Innere Typen haben immer eine Referenz auf ihren äußeren Typen. Eine geschachtelte Klasse heißt auch Mitgliedsklasse. 
+Die Laufzeitumgebung kennt nur Top-Level-Typen. Auch geschachtelte Typen werden letztendlich zu ganz „normalen“ Klassendateien.
+Klassen, Interfaces und Aufzählungen können verschachtelt sein. Man spricht auch allgemeiner von „geschachtelten Typen“.
+
+Wir schauen nun die oben aufgezählten vier Typen genauer an:
+
+**1. Statischer geschachtelter Typ**
+
+Ein Synonym für den statischen, geschachtelten Typ ist auch „statische Mitgliedsklasse“ (oder statische Memberklasse). Warum brauchen wir diesen?
+Die statische Mitgliedsklasse gehört inhaltlich zur umschließenden Klasse und wird eigentlich nur von ihr verwendet.
+Wir nutzen Sie um eine Eigenschaft darzustellen, welche für die umschließende Klasse zu komplex wäre, um hierfür einen prototypischen Datentyp zu verwenden, aber auch zu speziell, um eine Top-Level-Klasse zu begründen. Beispiel: GUI-Programmierung (siehe Swing in PRO2)
+
+Die Funktionalität statischer Mitgliedsklassen entspricht den Top-Level-Klassen. Sie bilden „eine Art kleines Unterpaket“ mit eigenem Namensraum.
+Es sind keine Objekte der äußeren Klasse nötig. Manche Autoren zählen die statischen Mitgliedsklassen zu den Top-Level-Klassen.
+
+Die statische geschachtelte Klasse liegt analog zu Top-Level-Klassen im gleichen Paket. Der Zugriff erfolgt über `AeussererTyp.GeschachtelterTyp`.
+Top-Level-Klassen können public oder paketsichtbar sein.
+Geschachtelte Klassen dürfen zusätzlich protected oder private sein. Die Semantik ist analog zu entsprechenden statischen Variablen.
+Der Compiler generiert aus geschachtelten Typen normale Klassendateien nach dem Muster `AeussererTyp$GeschachtelterTyp.class`.
+
+Beispiel:
+
+```java
+public class Bank{
+// Variablen der Bank
+// Konstruktor der Bank
+
+    // statische Memberklasse
+    public static class Tresor{
+        // Zugriff auf private Variablen der Bank nicht möglich
+        void oeffnen();
+    }
+}
+```
+
+Verwendung:
+
+```java
+public class BankAnwendung{
+
+    public static void main(String[] args){
+        // Da die statische Memberklasse Tresor public ist, 
+        // kann außerhalb von Bank eine neue Instanz von Tresor erzeugt werden        
+        Bank.Tresor tresor = new Bank.Tresor();
+        tresor.oeffnen;
+    }
+}
+```
+
+Sie können nun den ersten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
+
+**2. Nichtstatischer geschachtelter Typ**
+
+Ein nichtstatischer geschachtelter Typ (Synonym nichtstatische Memberklasse) ist ein innerer Typ, der mit einer Objekteigenschaft vergleichbar ist.
+Eine Instanz der inneren Klasse hat Zugriff auf alle Eigenschaften der äußeren Klasse (auch auf private Attribute).
+Innere Klassen dürfen selbst keine statischen Eigenschaften deklarieren.
+Um eine Instanz einer inneren Klasse zu erzeugen, muss schon eine Instanz der äußeren Klasse existieren.
+Statische geschachtelten Typen dagegen existieren auch ohne Instanz der äußeren Klasse. 
+
+Für die Objekterzeugung wird also vorausgesetzt, dass es bereits eine Instanz der äußeren Klasse gibt: 
+
+`referenz.new InnereKlasse(…)`, wobei referenz eine Referenz vom Typ der äußeren Klasse darstellt.
+
+Beispiel:
+
+```java
+public class Bank{
+// Variablen der Bank
+// Konstruktor der Bank
+
+    // statische Memberklasse
+    class Tresor{
+        // Zugriff auf private Variablen der Bank möglich
+        private double vermoegen;
+        public Tresor (double vermoegen){
+            this.vermoegen = vermoegen;
+        }
+    }
+}
+```
+
+Verwendung:
+
+```java
+public class BankAnwendung{
+
+    public static void main(String[] args){
+        // Zuerst Instanz der äußeren Klasse nötig, 
+        // dann kann Instanz der nichtstatischen Memberklasse erstellt werden
+
+        Bank bank = new Bank();   
+        Bank.Tresor tresor = bank.new Tresor(100.0);
+    }
+}
+```
+
+Die Qualifizierung `AeussererTyp.GeschachtelterTyp` bedeutet nicht, dass `AeussererTyp` ein Paket ist, in dem die Klasse `GeschachtelterTyp` existiert.
+Die Doppelbelegung des Punktes kann zu Verwechslungen zwischen inneren Klassen und Paketen führen. Deshalb sollte die Namenskonvention beachtet werden:
+
+* Klassennamen beginnen mit Großbuchstaben
+* Paketnamen beginnen mit Kleinbuchstaben
+
+Der Compiler generiert folgende Klassen:
+
+* AeussererTyp.class
+* AeussererTyp$GeschachtelterTyp.class
+
+Sie können nun den zweiten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
+
+**3. Lokaler (innerer) Typ**
+
+Lokale Klassen stehen in Anweisungsblöcken von Methoden, Konstruktoren und Initiatialisierungsblöcken. Es gibt keine Sichtbarkeitsmodifizierer. Es gibt weder Klassenattribute noch Klassenmethoden.
+Finale Konstanten sind möglich. Es gibt keine lokalen Schnittstellen. Das bedeutet: Auf die lokale Klasse kann immer nur innerhalb des jeweiligen Kontextes zugegriffen werden. 
+
+Beispiel:
+
+```java
+public class Bank{
+    private double vermoegen = 40.0;
+
+    public double getVermoegen() {
+        {
+        // Lokale Klasse ohne Sichtbarkeitsmodifikator, 
+        // lokale Klasse nur sichtbar im Kontext des Getters in diesem Beispiel
+        
+        class Tresor{
+            private double vermoegen = 50.0;
+            private double getInhalt(){
+                return vermoegen;
+            }
+        }
+        // Innerhalb des Kontexts können Instanzen erzeugt werden und private Methoden aufrufen
+        Tresor tresor = new Tresor();
+        return vermoegen + tresor.getInhalt;
+        }
+    }
+}
+```
+
+Verwendung:
+
+```java
+public class BankAnwendung{
+
+    public static void main(String[] args){
+        Bank bank = new Bank();   
+        System.out.println(bank.getVermoegen());
+    }
+}
+```
+
+Überlegen Sie sich, welches Vermögen hier ausgegeben wird.
+
+Sie können nun den dritten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
+
+**4. Anonyme innere Klasse**
+
+Anonyme innere Klassen haben keinen Namen und erzeugen immer automatisch ein Objekt. Es gibt nur eine einzige Instanz, d.h. im Gegensatz zu lokalen Klassen kann von anonymen Klassen nur eine einzige Objektinstanz erzeugen werden. 
+
+```
+new KlasseOderSchnittstelle() {
+    /* Eigenschaften der inneren Klasse */
+}
+```
+
+Im Block { } können Methoden und Attribute deklariert oder Methoden überschrieben werden. `new Klassentyp(…){…}` erzeugt eine Unterklasse von Klassentyp. Es lassen sich Argumente für den Konstruktor der Oberklasse angeben. `new Schnittstellenname (…){…}` bewirkt, dass die Schnittstelle Schnittstellenname implementiert wird. Es lassen sich keine zusätzlichen extends oder implements angeben.
+
+Beispiel:
+
+```java
+public class Bank{
+    private double vermoegen = 40.0;
+
+    public double getVermoegen() {
+        {
+            Tresor tresor = new Tresor(){
+                @Override
+                public double getInhalt() {
+                    return 50.0;
+                }
+            };
+            return vermoegen + tresor.getInhalt();
+        }
+    }
+}        
+```
+
+```java
+public abstrac class Tresor(){
+    public abstract double getInhalt();
+}
+```
+
+Verwendung:
+
+```java
+public class BankAnwendung{
+
+    public static void main(String[] args){
+        Bank bank = new Bank();   
+        System.out.println(bank.getVermoegen());
+    }
+}
+```
+
+Überlegen Sie sich wiederum, welches Vermögen hier ausgegeben wird.
+
+Sie können nun den vierten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
 
 ### Übungen
 
-Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07.
+Machen Sie nun alle offenen Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07.
 
 
 ## Exkurs: Enums
