@@ -2203,7 +2203,7 @@ Der Klassenkörper-Block besteht aus Variablendeklarationen und Methoden. Die in
 Wir betrachten erneut folgende Methode:
 
 ```java
-    //Modifikator: private
+    //Modifikatoren: private und static
     //Rückgabetyp: double
     //Methodenname: berechneUmfang
     //Parameterliste: double radius
@@ -2243,7 +2243,7 @@ Hat eine Methode einen Rückgabetyp (nicht void), so muss der zurückzugebende W
 
 Beachten Sie bei der Wahl eines Methodennamen folgende Konventionen:
 
-*Methoden beginnen mit einem kleinen Buchstaben
+* Methoden beginnen mit einem kleinen Buchstaben
 * Längere Namen werden in CamelCase geschrieben
 * Der Name beschreibt, was die Methode tut
 * Typischerweise enthalten Namen ein Verb, zum Beispiel: public String getName();
@@ -2319,7 +2319,7 @@ public class Auto {
         System.out.println("Das Auto fährt.");
     }
 }
-```
+```@LIA.java(Auto)
 
 Um nun ein Auto zu bauen, können Sie Objekte der Klasse `Auto` erzeugen. Dies passiert in diesem Beispiel in der Klasse `Autobauer`.
 
@@ -2329,19 +2329,19 @@ public class Autobauer {
 		Auto meinAuto = new Auto(); // Erzeugung eines neuen Auto-Objekts mit dem new-Konstruktor
 		meinAuto.farbe = "weiß"; // Der Zugriff auf die Felder des Objekts erfolgt mit einem Punkt "."
 
-        Auto deinAuto = new Auto(); // Erzeugung eines weiteren Auto-Objekts
-        deinAuto.farbe = "blau"; // Das zweite Auto hat eine andere Farbe, Achtung: Die Farbe kann nur in Zusammenhang mit einem Objekt abgefragt werden
+		Auto deinAuto = new Auto(); // Erzeugung eines weiteren Auto-Objekts
+		deinAuto.farbe = "blau"; // Das zweite Auto hat eine andere Farbe, Achtung: Die Farbe kann nur in Zusammenhang mit einem Objekt abgefragt werden
 
-        System.out.println(meinAuto.anzahlRaeder);  
-        System.out.println(meinAuto.farbe);
-        meinAuto.fahren(); // Zugriff auf die Methoden erfolgt durch die Qualifikation mit der Objektvariablen - meinAuto ist das Objekt, fahren() der qualifizierte Zugriff
+		System.out.println(meinAuto.anzahlRaeder);  
+		System.out.println(meinAuto.farbe);
+		meinAuto.fahren(); // Zugriff auf die Methoden erfolgt durch die Qualifikation mit der Objektvariablen - meinAuto ist das Objekt, fahren() der qualifizierte Zugriff
         
 
-        System.out.println(deinAuto.anzahlRaeder);
-        System.out.println(deinAuto.farbe);
+		System.out.println(deinAuto.anzahlRaeder);
+		System.out.println(deinAuto.farbe);
 	}
 }
-```
+```@LIA.java(Autobauer)
 
 Hier werden zwei Auto-Objekte erzeugt:
 
