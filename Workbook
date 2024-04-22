@@ -2319,7 +2319,7 @@ public class Auto {
         System.out.println("Das Auto fährt.");
     }
 }
-```@LIA.java(Auto)
+```
 
 Um nun ein Auto zu bauen, können Sie Objekte der Klasse `Auto` erzeugen. Dies passiert in diesem Beispiel in der Klasse `Autobauer`.
 
@@ -2341,7 +2341,7 @@ public class Autobauer {
 		System.out.println(deinAuto.farbe);
 	}
 }
-```@LIA.java(Autobauer)
+```
 
 Hier werden zwei Auto-Objekte erzeugt:
 
