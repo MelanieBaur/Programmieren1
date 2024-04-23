@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.7.1
+version: 0.7.2
 narrator: Deutsch Female
 mode: Textbook
 
@@ -3881,6 +3881,178 @@ switch (prio){
 Sie können in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen nun die Aufgaben Jahreszeiten und Monate lösen. 
 
 ## Collections & Maps
+
+Wir haben bisher mit Arrays gearbeitet um primitive Datentypen oder Objekte des gleichen Typs zu speichern. Sie haben schon gemerkt, dass das Arbeiten mit Arrays zum Teil sehr mühsam sein kann, da sie eine feste Länge haben und es keine vordefinierten Methoden für das Hinzufügen, Entfernen oder Suchen von Elementen gibt. 
+
+In diesem Kapitel werden wir uns Collections und Maps beschäftigen, welche zwei wesentliche Bestandteile des Java Collections Frameworks sind. Collections und Maps bieten viele Vorteile. Sie können dynmisch ihre Größe ändern, was das Hinzufügen oder Entfernen von Elementen erleichtert, sie bieten Methoden für gängige Operationen, was die Verwendung bequemer macht und sie unterstützen Generics (siehe Kapitel Generics), was das Daten mit jedem Datentyp ermöglicht.
+
+Collections sammeln Elemente (gleichen Typs) und stellen Methoden zum Eintragen, Suchen und Durchwandern zur Verfügung.
+Interfaces (Set, List, Queue, Deque) definieren hierbei das allgemeine Verhalten (d.h. sie definieren nur Methoden, haben aber keine Implementierung). 
+Die konkrete Implementierung wird dann in der konkreten Klassen (z.B. ArrayList, LinkedList) zur Verfügung gestellt, jeweils mit unterschiedlichen Techniken. 
+
+Collections sind im Paket java.util enthalten. 
+Siehe auch:  https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/doc-files/coll-overview.html
+
+Eine Übersicht über die in dieser Vorlesung behandelten Klassen gibt auch folgende Grafik:
+
+![Overview over collections](CollectionsMapsOverview.png)
+
+Oben Sehen Sie die Interfaces des Collection Frameworks (hellgrau hinterlegt), links die Interfaces, welche zu java.util.Collection gehört, rechts die Interfaces von java.util.Map.
+Unten im Bild (dunkelgrau hinterlegt) stehen dann die konkreten Klassen mit den jeweiligen Implementierungen. 
+Streng genommen sind Maps keine Collections, sie können jedoch wie Collections genutzt werden, so dass wir dies
+
+Die allgemeine Form der Deklaration einer Collection lautet:
+
+```
+CollectionIF<Typ> coll = new CollectionKlasse<>();
+// zum Beispiel
+List<Konto> konten = new ArrayList<>();
+```
+
+`List` ist hierbei die Deklaration der Variablen auf Basis des Interfaces. Dies hat den Vorteil, dass die konkrete Implementierung später ausgetauscht werden kann.
+`Konto` ist die Angabe des Typs, der gesammelt werden soll. 
+`konten` ist der Name der Variablen. 
+
+Mit `ArrayList<>()` rufen Sie den Konstruktor der konkreten, implementierenden Klasse auf, alternativ kann der Typ in den Diamond-Klammern wiederholt werden. 
+
+In folgender Tabelle erhalten Sie einen Überblick über die Interfaces des Java-Collection-Frameworks:
+
+| Interface  | Charakteristik   | Nutzung   |
+| :--------- | :--------- | :--------- |
+| Set<T>     | Ungeordnete Menge von Elementen | Prüfung auf "enthalten" |
+| SortedSet<T>     | Geordnete Menge von Elementen (gemäß Sortierung) | Prüfung auf "enthalten" |
+| List<T>     | Indizierte Menge von Elementen | Zugriff über Index |
+| Deque<T>     | Geordnete Menge von Elementen (als Stack oder Queue) | Einfügen vornde oder hinten, Auslesen gemäß Einfügereihenfolge |
+| Map<K,V>     | Über Schlüssel indizierte Menge von Elementen | Assoziativer Zugriff key -> value |
+
+Nachfolgende Tabelle gibt Ihnen nun einen Überblick über die konkreten Implementierungen der jeweiligen Interfaces. 
+
+| Interface  | Klasse   | Charakteristik  | Nutzung  |
+| :--------- | :--------- | :--------- | :--------- |
+| Set    | HashSet  | Hash-Werte   |   |
+| SortedSet    | TreeSet  | sortierter Baum |    |
+| List    | ArrayList  | Array-Datentyp |Effizienz beim Zugriff  |
+| List    | LinkedList  | Knoten und Zeiger   | Effizienz beim Einfügen  |
+| Deque    | ArrayDeque  | Array-Datentyp    | Effizienz beim Zugriff    |
+| Deque    | LinkedList  | Knoten und Zeiger   | Effizienz beim Einfügen   |
+| Map    | HashMap  | Keys als HashSet    |    |
+| SortedMap    | TreeMap  | Keys als TreeSet     |     |
+
+**Methoden des Interface Collection**
+
+* `add(E e)` fügt Element e ein
+* `clear()` leert die Liste
+* `contains(Object o)` prüft, ob o in der Liste ist
+* `isEmpty()` prüft, ob Liste leer ist
+* `remove(Object o)` entfernt das (zuerst) vorkommende o aus der Liste
+* `size()` liefert die Anzahl der vorhandenen Elemente
+
+Weitere Methoden finden Sie unter:
+https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html
+
+
+**Methoden des Interface Map**
+
+TODO
+
+### Listen
+
+Eine Liste ist ein geordnete Sammlung von Elementen, d.h. sie speichert Elemente in einer bestimmten Reihenfolge, die durch ihren Index zugänglich ist. Elemente können auch mehrfach vorkommen. Man kann Elemente zu einer Liste dynamisch hinzufügen und entfernen.
+
+Das Interface java.util.List erweitert das Collection-Interface und fügt weitere Methoden in Bezug auf die Position eines Elements hinzu:
+
+* `add(E e)` fügt das Element e am Ende an
+* `add(int i, E e)` fügt das Element e an der Stelle i ein – alle Elemente danach werden verschoben.
+* `get(int i)`  liefert das Element an der Position i
+* `set(int i, E e)` ersetzt das Element an der Stelle i mit e 
+* `remove(E e)` entfernt das (zuerst) vorkommende e aus der Liste – alle Elemente danach werden verschoben.
+* `remove(int i)` entfernt das Element an der Stelle i – alle Elemente danach werden verschoben
+
+
+Implementierende Klassen (im Paket java.util):
+
+* ArrayList: Grundlage ist ein Array
+* LinkedList: Verkettete Elemente, jedes Listenelement beinhaltet ein Hilfsobjekt
+
+Deklaration (Beispiel):
+
+* List<Integer> list = new ArrayList<>();
+* List<Integer> list = new LinkedList<>();
+
+Vergleichen wir nun die Implementierungen. Dies hilft Ihnen dann auchzu entscheiden, wann Sie welche Implementierung nutzen sollten:
+
+Zugriff auf ein Element
+
+* ArrayList: Schnell
+* LinkedList: Zeitaufwändig
+
+Element einfügen oder löschen
+
+* ArrayList: Zeitaufwändig
+* LinkedList: Schnell
+
+Größe des reservierten Speicherplatzes
+
+* ArrayList: Ggf. Anlage eines neuen, größeren Arrays nötig
+* LinkedList: Speicheranforderungen immer nur für neues Element
+
+Ihr Programm läuft mit beiden Implementierungen (es arbeitet ja auf dem Interface „List“.) Die Wahl der Implementierung bestimmt „nur“ die Performance.
+
+**ArrayList**
+
+Definiert ein Feld (Array) mit prinzipiell unbeschränkter Größe, welches bei Bedarf dynamisch wächst.
+Bei der Deklaration muss deshalb keine Größe mit gegeben werden, es sollte jedoch ein „Typparameter“ mitgegeben werden. 
+Dieser Parameter kann nur eine Klasse sein – deshalb muss statt den primitiven Typen deren Hüllklasse verwendet werden.
+
+Beispiel: `List<Integer> list = new ArrayList<>();`
+
+Beispiel-Operationen für ArrayList<T> (T steht für den Typ der abgespeichert werden soll):
+
+* `add(T t)` fügt das Element t am Ende an
+* `get(int i)` liefert das Element an der Position i – wie beim Feld beginnt der Index bei 0
+* `add(int i, T t)` fügt das Element t an der Stelle i ein – alle Elemente danach werden verschoben.
+* `set(int i, T t)` ersetzt das Element an der Stelle i mit t 
+* `remove(T t)` entfernt das (zuerst) vorkommende t aus der Liste – alle Elemente danach werden verschoben.
+* `remove(int i)` entfernt das Element an der Stelle i – alle Elemente danach werden verschoben.
+* `size()` liefert die Anzahl der vorhandenen Elemente
+* `clear()` leert die Liste
+* `contains(T t):boolean` prüft ob t in der Liste ist
+
+Wie zuvor erfolgt eine `ArrayOutOfBoundsException` bei illegalem Zugriff.
+
+Betrachten Sie nun folgendes Beispiel zur Nutzung einer Liste.
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class BeispielArrayList {
+    public static void main(String[] args){
+        List<String> monate = new ArrayList<String>();
+        monate.add("Januar");
+        monate.add("Februar");
+        System.out.println("Größe der Liste: " + monate.size());
+        System.out.println("Erster Monat: " + monate.get(0));
+    }
+}
+```
+@LIA.java(BeispielArrayList)
+
+Die Klasse `Collections` bietet statische Methoden zur Verarbeitung von Arrays. Erweitern Sie das Beispiel, in dem Sie weitere Monate hinzufügen und dann den Befehl `Collections.sort(monate)` hinzuführen. Vergessen Sie nicht, hierfür den passenden Import aufzurufen: `import java.util.Collections;` 
+
+* Was ist mit Ihrer Liste passiert? Geben Sie die Liste aus. 
+* Nach welchen Kriterien wurde diese sortiert und warum?
+* Probieren Sie weitere Methoden für ArrayLists aus.
+* Sie wollen nun eine LinkedList statt einer ArrayList verwenden. An welcher Stelle müssen Sie den Code ändern?
+
+
+### Mengen
+
+### Schlangen / Kellerspeicher
+
+### Maps
+
+### Iteratoren
 
 ### Übungen
 
