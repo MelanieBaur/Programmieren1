@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.7.2
+version: 0.7.4
 narrator: Deutsch Female
 mode: Textbook
 
@@ -2358,11 +2358,10 @@ Jedes Auto hat ferner die Methode fahren().
 Bauen Sie obiges Beispiel in Eclipse nach. Sie benötigen hierfür zwei Klassen. Legen Sie zwei Autos mit unterschiedlichen Farben an. Greifen Sie auf die Felder des Autos zu und geben Sie diese aus. Lassen Sie das Auto fahren. 
 
 
-
 ### Konstruktoren
 
 Objekte werden oft mit bestimmten Werten erzeugt. Hierbei unterstützt der Konstruktor. 
-Der Konstruktor ist eine Methode zur Initialisierung eines Objekts. Dieser weist einige Besonderheiten / Eigenschaften auf:
+Der Konstruktor ist eine Art spezielle Methode, die speziell zur Initialisierung eines Objekts verwendet wird. Dieser weist einige Besonderheiten / Eigenschaften auf:
 
 * Wird immer mit einer Objekterzeugung verwendet (new-Operator)
 * Kann nicht außerhalb einer Objekterzeugung verwendet werden
@@ -3897,7 +3896,7 @@ Eine Übersicht über die in dieser Vorlesung behandelten Klassen gibt auch folg
 
 ![Overview over collections](CollectionsMapsOverview.png)
 
-Oben Sehen Sie die Interfaces des Collection Frameworks (hellgrau hinterlegt), links die Interfaces, welche zu java.util.Collection gehört, rechts die Interfaces von java.util.Map.
+Oben sehen Sie die Interfaces des Collection Frameworks (hellgrau hinterlegt), links die Interfaces, welche zu java.util.Collection gehört, rechts die Interfaces von java.util.Map.
 Unten im Bild (dunkelgrau hinterlegt) stehen dann die konkreten Klassen mit den jeweiligen Implementierungen. 
 Streng genommen sind Maps keine Collections, sie können jedoch wie Collections genutzt werden, so dass wir dies
 
@@ -3938,7 +3937,7 @@ Nachfolgende Tabelle gibt Ihnen nun einen Überblick über die konkreten Impleme
 | Map    | HashMap  | Keys als HashSet    |    |
 | SortedMap    | TreeMap  | Keys als TreeSet     |     |
 
-**Methoden des Interface Collection**
+>**Methoden des Interface Collection**
 
 * `add(E e)` fügt Element e ein
 * `clear()` leert die Liste
@@ -3951,9 +3950,14 @@ Weitere Methoden finden Sie unter:
 https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html
 
 
-**Methoden des Interface Map**
+>**Methoden des Interface Map**
 
-TODO
+* `put(key, value)`: Verknüpft den angegebenen Wert mit dem angegebenen Schlüssel in dieser Map
+* `get(key)`: Gibt den Wert zurück, auf den der angegebene Schlüssel abgebildet ist, oder null, wenn diese Map keine Abbildung für den Schlüssel enthält
+
+Weitere Methoden finden Sie unter:
+https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/util/Map.html
+
 
 ### Listen
 
@@ -3998,7 +4002,7 @@ Größe des reservierten Speicherplatzes
 
 Ihr Programm läuft mit beiden Implementierungen (es arbeitet ja auf dem Interface „List“.) Die Wahl der Implementierung bestimmt „nur“ die Performance.
 
-**ArrayList**
+>**ArrayList**
 
 Definiert ein Feld (Array) mit prinzipiell unbeschränkter Größe, welches bei Bedarf dynamisch wächst.
 Bei der Deklaration muss deshalb keine Größe mit gegeben werden, es sollte jedoch ein „Typparameter“ mitgegeben werden. 
@@ -4045,24 +4049,634 @@ Die Klasse `Collections` bietet statische Methoden zur Verarbeitung von Arrays. 
 * Probieren Sie weitere Methoden für ArrayLists aus.
 * Sie wollen nun eine LinkedList statt einer ArrayList verwenden. An welcher Stelle müssen Sie den Code ändern?
 
+>**Übungen**
+
+Sie können nun die Aufgaben Wochentage, Wunschliste und Kofferpacken aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08 machen.
 
 ### Mengen
 
-### Schlangen / Kellerspeicher
+Eine Menge (engl. Set) eine Sammlung von einzigartigen Elementen, das bedeutet jedes Element kann in einer Menge nur einmal vorkommen. 
+
+Implementierende Klassen (im Paket java.util) sind unter anderem
+
+* HashSet: Aufbauend auf der HashMap (siehe „Assoziativspeicher“)
+* TreeSet: Balancierte Binärbäume, sortierbar
+* LinkedHashSet: Klasse behält die Einfügereihenfolge bei
+
+Deklaration (Beispiel):
+
+* Set<Integer> set = new HashSet<>();
+* Set<Integer> set = new TreeSet<>();
+
+Das Interface java.util.List erweitert das Collection-Interface und fügt weitere, spezifische Methoden hinzu:
+
+* `addAll()` bedeutet die Vereinigung zweier Mengen
+* `removeAll()` bedeutet die Differenz zweier Mengen
+* `retainAll()` bedeutet die Schnittmenge zweier Mengen
+* `containsAll()` berechnet, ob eine Menge eine Teilmenge einer anderen Menge ist
+
+Beispiel: 
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class BeispielSet {
+	public static void main(String[] args) {
+		Set<Integer> zahlen = new HashSet<>();
+		zahlen.add(1);
+		zahlen.add(2);
+		zahlen.add(3);
+		zahlen.add(1);
+		System.out.println(zahlen);
+		
+		// Mit Set.of können unveränderliche Mengen erzeugt werden
+		Set<Integer> geradeZahlen = Set.of(2,4,6,8);
+		System.out.println(geradeZahlen);
+		// diese Anweisung liefert eine Fehlermeldung
+		// geradeZahlen.add(10);
+	}
+}
+```
+@LIA.java(BeispielSet)
+
+>**Aufgabe**
+
+* Erstellen Sie eine HashSet A mit allen geraden Zahlen von 2 bis 40.
+* Erstellen Sie eine HashSet B mit allen Teilern von 20. 
+* Geben Sie die beiden Menge aus.
+* Bilden Sie nun die Schnittmenge, so dass in A diejenigen Elemente erhalten bleiben, die auch in B vorkommen. Geben Sie die Lösungsmenge aus.
+* Nutzen Sie nun eine TreeSet für die gleiche Aufgabe. Was fällt auf?
+
+>**Übungen**
+
+Sie können nun die Aufgaben MathSet und Tator aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08 machen.
+
+### Queues
+
+Das Interface Queue (deutsch: Schlange) erweitert das Collection-Interface. Das Interface Deque (= „double ended queue“) erweitert wiederum das Queue-Interface. 
+
+>**Queues**
+
+Die Verarbeitung einer Queue erfolgt nach dem FIFO-Prinzip: First In, First Out. Das Element, welches zuerst hinzugefügt wurde, wird auch zuerst entfernt.
+Implementierende Klassen (im Paket java.util) von dem Interface Queue sind z.B. LinkedList und die ArrayDeque.
+
+Die Deklaration sieht für eine Queue beispielsweise folgendermaßen aus:
+
+```
+Queue<String> queue = new LinkedList<>();
+```
+
+Methoden der Queue sind:
+
+* Zum Hinzufügen von Elementen: `add(e)` bzw. `offer(e)`
+* Zum Entfernen von Elementen: `remove()` bzw. `poll()`
+* Zum Abfragen des ersten Elements (ohne diese zu entfernen): `element()` bzw. `peek()`
+
+Unterschiede der jeweils zwei Methoden für obige Operationen liegen in den Rückgabewerten:
+
+* `add(e)` liefert true zurück, wenn das Element erfolgreich hinzugefügt werden konnte, ansonsten wird eine Exception geworfen (IllegalStateException), für eine genauer Erklärung, siehe Kapitel Exception
+* `offer(e)` liefert nur einen Booleschen Wert zurück
+* `poll()` gibt null zurück, sollte kein Element mehr in der Queue sein, während `remove()` eine Exception wirft (NoSuchElementException)
+* `peek()` gibt null zurück, sollte kein Element mehr in der Queue sein, während `element()` eine Exception wirft (NoSuchElementException)
+
+Eine Übersicht zur Queue finden Sie auch hier: https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/util/Queue.html#element()
+
+
+Beispiel:
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BeispielQueue {
+
+	public static void main(String[] args) {
+		Queue<String> schlange = new LinkedList<>();
+		schlange.offer("Herr Maier");
+		schlange.offer("Frau Müller");
+		schlange.offer("Herr Mustermann");
+		while (schlange.peek()!= null) {
+			System.out.println("Hallo " + schlange.poll());
+		}
+	}
+}
+```
+@LIA.java(BeispielQueue)
+
+
+>**Deques**
+
+Eine Deque (Double Ended Queue) kann nun im Gegensatz zu einer Queue Elemente an beiden Enden verwalten und sowohl als Stapel (LIFO - Last-In-First-Out) als auch als Schlange (FIFO - First-In-First-Out) verwendet werden kann. Implementierende Klassen (im Paket java.util) von dem Interface Deque sind z.B. LinkedList und die ArrayDeque. Sie erkennen hier, dass eine LinkedList die Interfaces List, Queue und Deque (und weitere) implementiert.
+
+Spezielle Methoden, die für eine Deque relevant sind, sind `addFirst(e)`, `offerFirst(e)`, `addLast(e)`, `offerLast(e)`, `removeFirst()`, `pollFirst()`, `removeLast()`, `pollLast()`,`getFirst()`, `peekFirst()`, `getLast()` und `peekLast()`,, um Elemente hinzuzufügen, zu entfernen und auf die ersten und letzten Elemente zuzugreifen.
+
+Eine Überischt zur Deque finden Sie auch hier: https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/util/Deque.html
+
+Beispiel:
+
+```java
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class BeispielDeque {
+	public static void main(String[] args) {
+		Deque<String> deque = new LinkedList<String>();
+		deque.offer("Erstens"); // entspricht offerLast()
+		deque.offerFirst("Zweitens");
+		deque.offerLast("Drittens");
+		
+		// Wie sieht die Deque nun aus?
+		while (!deque.isEmpty()) {
+			System.out.println(deque.poll()); //entspricht pollFirst()
+		}
+	}
+}
+```
+@LIA.java(BeispielDeque)
+
+>**Übungen**
+
+Sie können nun die Aufgabe Fährterminal aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08 machen.
 
 ### Maps
+In diesem Abschnitt schauen wir uns nun das Interface Map an, welches ebenso im Paket java.util zu finden ist. Es ist jedoch keine Erweiterung des Interfaces Collection, wird jedoch oft im Zusammenhang des Collection-Frameworks mitangeführt. Ein für Sie relevantes Subinterface von Map ist die SortedMap.
+
+Eine Map stellt Schlüssel-Wert-Paare dar, wobei jeder Schlüssel eindeutig ist und einem bestimmten Wert zugeordnet wird. Eine Map kann keinen duplizierten Schlüssel enthalten. Wenn ein Schlüssel bereits vorhanden ist und ein neuer Wert für ihn zugewiesen wird, wird der alte Wert überschrieben. Es gibt jedoch (im Gegensatz zur List), keine Position eines Schlüssels oder eines Wertes.
+
+Folgende zwei Methoden sind hierbei die wichtigsten:
+
+* `put(key, value)`: Verknüpft den angegebenen Wert mit dem angegebenen Schlüssel in dieser Map
+* `get(key)`: Gibt den Wert zurück, auf den der angegebene Schlüssel abgebildet ist, oder null, wenn diese Map keine Abbildung für den Schlüssel enthält
+
+Implementierende Klassen von Map sind zum Beispiel HashMap und TreeMap. Eine implementierende Klasse von SortedMap ist ebenso TreeMap.
+
+Bei der HashMap müssen die Schlüsselobjekte die Methoden equals() und hashCode() implementieren.
+Bei der TreeMap muss die Ordnung der Elemente mit den Interfaces Comparable oder Comparator festgelegt sein.
+
+Die Deklaration sieht dann jeweils folgendermaßen aus:
+
+```
+Map<Integer,String> map = new HashMap<>();
+Map<Integer,String> map = new TreeMap<>();
+```
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class BeispielMap {
+
+	public static void main(String[] args) {
+
+		Map<String, Integer> tageImMonat = new HashMap<>();
+		tageImMonat.put("Januar", 31);
+		tageImMonat.put("Februar", 28);
+		tageImMonat.put("März", 31);
+		tageImMonat.put("April", 30);
+
+		Set<String> alleSchluessel = tageImMonat.keySet();
+		for (String schluessel : alleSchluessel) {
+			System.out.println(schluessel + ": " + tageImMonat.get(schluessel) + " Tage");
+		}
+	}
+}
+```
+@LIA.java(BeispielMap)
+
+Schauen Sie sich obiges Beispiel an. Was sind die Schlüssel und was sind die Werte? Denken Sie daran, Schlüssel sind eindeutig, Werte können jedoch mehrfach vorkommen. 
+
+Nachfolgend ein weiteres Beispiel, welches weitere Methoden von Maps benutzt.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapDemo {
+	public static void main(String[] args) {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(1, "eins");
+		map.put(2, "zwei");
+		map.put(3, "drei");
+		map.put(4, "vier");
+		
+		for(String value : map.values()) {
+			System.out.println(value);
+		}
+		
+		for (Integer key : map.keySet()) {
+			System.out.println(key);
+		}
+		
+		map.replace(3, "three");
+		System.out.println(map);
+	}
+}
+```
+@LIA.java(MapDemo)
+
+>**Übungen**
+
+Sie können nun die Aufgabe Fussball-Map aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08 machen.
 
 ### Iteratoren
 
+Iteratoren liefern nacheinander alle Elemente einer Collection. Das Interface Iterator befindet sich ebenso im Paket java.util und gehört ebenso zum Collection-Framework. Jede Collection besitzt einen Iterator. 
+Ein Iterator ist prinzipiell wie eine Mengenschleife, aber der Iterator kann Elemente auch löschen! Einen Iterator `iterator` zu einer Collection `collection` wird mit der Methode `collection.Iterator()` erhalten 
+
+Methoden eines Iterators sind:
+
+* `hasNext()`: gibt true zurück, wenn es noch mehr Elemente gibt
+* `next()`: gibt das nächste Element zurück
+* `remove()`: löscht das letzte Element
+
+Beispiel: 
+
+```java
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class BeispielIterator {
+
+	public static void main(String[] args) {
+
+		List<String> liste = new ArrayList<>();
+
+		liste.add("drei");
+		liste.add("vier");
+		liste.add("eins");
+		liste.add("zwei");
+		
+		// herkömmlich
+		for(String element : liste) {
+			System.out.println(element);
+		}
+		
+		System.out.println("----");
+		
+		// mit Iterator
+		Iterator<String> iterator = liste.iterator();
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}	
+	}
+}
+```
+@LIA.java(BeispielIterator)
+
+>**Übungen**
+
+Sie können nun die Aufgabe digitaler Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08 machen.
+
+
 ### Übungen
 
-Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08.
+Machen Sie nun die verbleibenden Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08, falls Sie noch nicht alle gelöst haben.
 
 ## Exceptions
+
+
+>**Beispiel 1**
+
+```java
+public class BeispielArray {
+    public static void main(String[] args) {
+        int[] meinArray = new int[10];
+        System.out.println(meinArray[2]);
+   }
+}
+```
+@LIA.java(BeispielArray)
+
+```java
+public class BeispielArray {
+    public static void main(String[] args) {
+        int[] meinArray = new int[10];
+        System.out.println(meinArray[10]); //Zugriff auf ein Array mit falschem Index
+   }
+}
+```
+
+![](Exception-1.png)
+
+>**Beispiel 2**
+
+```java
+public class EndlosRekursion {
+    public static void main(String[] args) {
+        endlosRekursion();
+   }
+
+    public static void endlosRekursion() {
+        endlosRekursion();
+   }
+}
+```
+![](Exception-2.png)
+
+<h3 style="text-align:center">Fehlerarten in Java</h3>
+
+![](Exceptions-3.JPG)
+
+- Exception ist die Mutterklasse aller Ausnahmen, während java.lang.Error die Mutterklasse aller Fehler ist.
+- Beide Klassen haben die gemeinsame Oberklasse java.lang.Throwable.
+- Alles, was "throwable" ist, kann innerhalb eines Programms von einer Methode an die aufrufende Methode geworfen werden.
+- In Java unterscheidet man zwischen Fehlern und Ausnahmen (Exceptions).
+- Ausnahmen sind in der Regel behandelbare Fehlerfälle, während Fehler schwerwiegende Probleme darstellen, die normalerweise nicht behandelt werden können.
+- Exceptions sind Klassen, die von java.lang.Exception abgeleitet sind.
+
+![](Exception-4.JPG)
+
+>**Strukturierte Fehlerbehandlung**
+
+- Im Fall behebbarer Fehler wird eine "Ausnahme" mit Informationen über den Fehler erzeugt.
+- Die Ausnahme wird an die jeweils aufrufende Methode weitergereicht.
+
+
+  * Wenn diese Methode untätig bleibt ⟶ Ausnahme wird hochgereicht
+  * Eine aufrufende Methode kann den Fehler „abfangen“
+  * Im „worst-case“ bricht die Programmausführung ab
+ 
+- Wenn wir Fehler und Ausnahmen nicht behandeln und auf diese reagieren, wird der geworfene Fehler auf der Konsole ausgegeben
+⟶ Wir wollen diese an der richtigen Stelle behandeln
+
+### Exceptions werfen und fangen
+
+```java
+public class BeispielNullpointer {
+    public static void main(String[] args) {
+        String[] meinStringArray = new String[10];
+
+        try {
+        System.out.println(meinStringArray[2].equals("null"));
+        } 
+        catch(NullPointerException e) {
+        System.out.println("Vergleich mit Null nicht möglich");
+        }
+   }
+}
+```
+@LIA.java(BeispielNullpointer)
+
+- `try-Block` überprüft, ob etwas nicht funktioniert
+- `catch-Block` zum Behandeln der Ausnahme
+
+  
+  * `NullPointerException` = Exception, die man abfangen möchte
+
+  * `e` = Beinhaltet Informationen über das Problem, ist gängige Namenskonvention für Exceptions
+- Das Programm läuft nach der Ausnahme normale weiter
+
+
+>**Finally-Block**
+
+```java
+public class BeispielNullpointer {
+    public static void main(String[] args) {
+        String[] meinStringArray = new String[10];
+
+        try {
+        System.out.println(meinStringArray[2].equals("null"));
+        } 
+        catch(NullPointerException e) {
+        System.out.println("Vergleich mit Null nicht möglich");
+        e.printStackTrace();
+        }
+        finally {
+        System.out.println("Dies wird immer ausgeführt.");
+        }
+   }
+}
+```
+@LIA.java(BeispielNullpointer)
+
+- `finally`-Block (optional) wird immer ausgeführt, egal ob Exception geworfen wird oder nicht; muss am Schluss stehen
+
+
+  - Zweck des `finally`-Blocks: z.B. Schließen von Dateien
+
+  - Falls im finally-Block ein Fehler auftreten kann, müssen ggf. weitere `try`-Blöcke stehen
+- `printStackTrace()` ist die Standardfehlerausgabe der Exception
+
+>**Mehrere Catch-Blöcke**
+
+Es sind auch mehrere catch-Blöcke möglich:
+
+
+Wenn die erste catch-Anweisung nicht zur Art des aufgetretenen Fehlers passt, werden der Reihe nach alle übrigen catch-Anweisungen untersucht, und die erste übereinstimmende wird ausgeführt
+
+```java
+public class BeispielNullpointer {
+    public static void main(String[] args) {
+        String[] meinStringArray = new String[10];
+
+        try {
+        System.out.println(meinStringArray[10]);
+        } 
+        catch(NullPointerException e) {
+        System.out.println("Vergleich mit Null nicht möglich");
+        e.printStackTrace();
+        } 
+        catch(Exception e) {
+        System.out.println("Ein Problem ist aufgetreten");
+        }
+        finally {
+        System.out.println("Dies wird immer ausgeführt");
+        }
+   }
+}
+```
+@LIA.java(BeispielNullpointer)
+
+>**Mehrere Exceptions in einem Catch-Block**
+
+In einem catch-Block mehrere Exceptions fangen:
+
+- Klassennamen durch | (Strich) getrennt angeben
+- Es gibt nicht für jede der gefangenen Exceptions eine eigene Variable, sondern nur eine gemeinsame
+
+
+```java
+public class BeispielNullpointer {
+    public static void main(String[] args) {
+        String[] meinStringArray = new String[10];
+
+        try {
+        System.out.println(meinStringArray[10]);
+        } 
+        catch(NullPointerException | ArrayIndexOutOfBoundsException e) {
+        System.out.println("Vergleich mit Null nicht möglich oder falscher Index");
+        e.printStackTrace();
+        } 
+        finally {
+        System.out.println("Dies wird immer ausgeführt");
+        }
+   }
+}
+```
+@LIA.java(BeispielNullpointer)
+
+>**Übersich: Aufbau try/catch/finally**
+
+- Es gibt immer mindestens zwei Blöcke:
+
+
+  * try / (catch)+
+  * try / (catch)* / finally
+
+
+
+- Notation:
+
+
+  * +: Mindestens ein catch
+  * *: Kein oder beliebig viele catch
+
+>**Eigene Exceptions**
+
+- Exceptions sind nicht anderes als Klassen, die von java.lang.Exception ableiten
+- Über den Konstruktor kann direkt eine angepasste Fehlernachricht mitgegeben werden
+- Eclipse warnt, dass keine serialVersionUID angegben wird --> für den Augenblick ignorieren
+
+
+```java
+public class DivisionsCheckException extends Exception {
+
+    public DivisionsCheckException() {
+        super("Division war nicht erfolgreich");
+    }
+
+     public DivisionsCheckException() {
+        super(message);
+    }
+
+}
+```
+
+>**Behandeln vs. Weiterleiten**
+
+```java
+public class DivisionTest {
+    public static void main(String[] args) {
+
+        try {
+            System.out.println(dividieren(10, 3));
+        } catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+
+    static int dividieren(int a, int b) throws DivisionsCheckException { // Über throws angeben, dass Methode eine Exception werfen könnte
+        int c = a / b;
+
+        if (a % b != 0) {
+            throw new DivisionsCheckException("Division geht nicht auf"); // Innerhalb der Methode Exception mit Schlüsselword throw werfen, damit wird die Ausnahme ausgelöst
+        }
+    }
+   }
+}
+```
+@LIA.java(BeispielArray)
+
+>**Weitere Anmerkungen zu Exceptions**
+
+- Exceptions sind normale Klassen, d.h. man kann eigene Unterklassen erstellen
+- Dies macht z.B. Sinn, wenn eine Exception ein Spezialfall einer anderen Exception darstellt
+- Bei catch-Blöcken auf richtige Reihenfolge achten (erst die spezielle, dann die allgemeine Exception fangen) 
+- In einem catch-Block können mehrere Exceptions gefangen werden (Klassennamen durch | getrennt angeben)
+- Beim Fangen der allgemeinen Exception java.lang.Exception verliert man Flexibilität
+- Exceptions sollten dort behandelt werden, wo man angemessen, auf die Exception reagieren kann
+- Exceptions mit angepassten, nutzerfreundlichen Meldungen versehen
+- Produktive Programme:
+
+
+  * Unter ein Drittel des Codes für eigentliche Funktionalität
+  * Über zwei Drittel des Codes für die Fehler-/Ausnahmenbehandlung
+
+### Unchecked Exceptions
+- Bisher: `Checked Exceptions` (überprüfte/geprüfte Exceptions):
+  
+  
+  * Compiler prüft, ob Exception behandelt wird
+  * Beschreiben fachliche Fehler
+- `Unchecked Exceptions` (ungeprüfte Exceptions):
+  
+  
+  * Werden vom Compiler nicht beachtet
+  * Sind Laufzeitfehler
+  * Treten auf, wenn der Code fehlerhaft programmiert ist bzw. Schwachstellen hat
+  * Haben Oberklasse `java.lang.RuntimeException`
+  * Beschreiben technische Fehler
+
+>**Übersicht einiger Runtime-Exceptions**
+
+![](Exception-5.svg)
+
+| Exception                      | Beschreibung                                                                                                                |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| ArithmeticException            | Wird geworfen, wenn du beim Rechnen mit den Zahlen nicht aufpasst, z.B. durch Division durch Null.                          |
+| ArrayIndexOutOfBoundsException | Tritt auf, wenn du versuchst, auf einen Array-Index außerhalb des Arrays zuzugreifen.                                       |
+| ClassCastException             | Tritt auf, wenn du versuchst, eine Objektreferenz in einen nicht kompatiblen Typ umzuwandeln.                               |
+| IllegalArgumentException       | Tritt auf, wenn ein ungültiger Parameter an eine Methode übergeben wurde.                                                   |
+| NumberFormatException          | Wird geworfen, wenn bei der Umwandlung eines Strings in eine Zahl ein nicht-zahlartiger Wert übergeben wird.                |
+| IllegalStateException          | Tritt auf, wenn eine Methode in einem ungültigen Zustand des Programms aufgerufen wurde.                                    |
+| NullPointerException           | Tritt auf, wenn du versuchst, auf eine Methode auf einer Objektreferenz zuzugreifen, die den Wert null hat.                 |
+
+
+> **Defensiv Programmieren**
+| Code, der eine Exception werfen könnte                            | Exception, die geworfen werden könnte | Nicht fangen, sondern besser ...                                                                                                     |
+|-------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| int x = array[index];                                             | ArrayIndexOutOfBoundsException         | ... mit index < array. length vorher prüfen, ob das Array überhaupt eine entsprechende Größe hat.                                                    |
+| String name = (String) objekt;                                    | ClassCastException                     | ... mit dem instanceof-Operator prüfen, ob die Klassen kompatibel sind.                                                                   |
+| (String name = null; name.toLowerCase();)                         | NullPointerException                   | ... mit name != null prüfen, ob die entsprechende Variable überhaupt initialisiert ist.           |
+
+### Errors
+
+- Errors sind schwerwiegende Fehler, die man nicht mehr beheben kann
+- Errors werden ebenfalls von Throwable abgeleitet
+- Werden nicht vom Compiler geprüft und müssen daher auch nicht abgefangen werden
+
+![](Exception-8.png.svg)
+
+> **Übersicht über einige Fehler**
+
+| Fehler                      | Beschreibung                                                                                                                         |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| ExceptionInInitializerError | Gibt's, wenn in einem statischen Initialisierungsblock etwas schiefgegangen ist.                                                     |
+| IOError                     | Steht für einen Fehler bei der Ein- oder Ausgabe.                                                                                    |
+| NoClassDefFoundError        | Wird geworfen, wenn eine Klasse nicht gefunden wurde.                                                                                |
+| StackOverflowError          | Früher oder später hat er dich auch, der `StackOverflowError`, und zwar, wenn der Stack übergelaufen ist. Beispiel gibt's gleich.    |
+| OutOfMemoryError            | Dem begegnet auch jeder Java-Entwickler mindestens ... ach was weiß ich ... oft genug halt, immer dann, wenn kein Platz mehr auf dem Heap ist. |
+
+### Zusammenfassung
+> **Schlüsselwörter**
+Es gibt fünf Schlüsselworte:
+
+- `throws`: Methode kann einen Fehler erzeugen
+- `throw`: Methode erzeugt tatsächlich einen Fehler
+- `try`: Start eines Blocks, innerhalb dessen ein Fehler abgefangen werden kann
+- `catch`: Behandeln eines Fehlers --> Die Ausnahmen sollen von „speziell“ zu „allgemein“ angeordnet sein
+- `finally`: Abschluss eines Blocks zur Fehlerbehandlung, der bei normaler Verarbeitung und im Fehlerfall aufgerufen wird
+
+> **Zusammenfassung - Teil 1**
+
+- Ausnahmen werden über `Exception`-Klassen abgebildet
+- Diese Klassen leiten von der Klasse `Exception` ab, die wiederum von der Klasse `Throwable` ableitet
+- Alles, was `Throwable` ist, kann mit `throw` geworfen werden und mit `try-catch` gefangen werden
+- Eine `RuntimeException` (und alle Unterklassen) muss nicht gefangen werden („`unchecked Exceptions`“)
+- Unchecked Exceptions mit defensiver Programmierung verhindern
+
+> **Zusammenfassung - Teil 2**
+
+- Bei checked Exceptions sorgt der Compiler dafür, dass sie behandelt werden (fangen oder weiterwerfen)
+- Wenn eine Methode eine checked Exception wirft, muss sie nach dem `throws` in der Methodendeklaration angegeben werden
+
 
 ### Übungen
 
 Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 09.
+
 
 ## Generics (optional)
 
