@@ -2971,7 +2971,9 @@ Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hf
 
 ### Vererbung von Methoden und Variablen
 
-Was passiert mit den Instanzmethoden bei der Vererbung?
+Schauen wir uns nun an, was mit Instanzmethoden und Variablen bei der Vererbung passiert. 
+
+>**Was passiert mit den Instanzmethoden bei der Vererbung?**
 
 Für `public` und `protected` Methoden gilt:
 - Werden geerbt: Verwendbar, als wären sie direkt in der Unterklassen definiert
@@ -2992,7 +2994,7 @@ Wenn Überschreiben verboten werden soll: Schlüsselwort `final` benutzen!
 - Überschreiben der ganze Klasse verboten
 - final markierte Klassen lassen sich nicht ableiten
 
-Was passiert mit den Variablen bei der Vererbung?
+>**Was passiert mit den Variablen bei der Vererbung?**
 
 - Vererbt werden Variablen, die `public` oder `protected` sind (oder package-private falls Unterklasse und Oberklasse im gleichen Package liegen). Die Verwendung funktioniert dann genau wie bei Variablen, die direkt in der Unterklasse definiert sind.
 - Auf `private` Variablen kann nicht zugegriffen werden – es sei denn, es gibt geerbte `public` und `protected` Methoden (z.B. Getter und Setter)
