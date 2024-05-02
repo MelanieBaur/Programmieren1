@@ -37,14 +37,14 @@ Klicken Sie nun auf </> im kleinen Kreis unter der Code-Zeile, so wird der Code 
 
 Natürlich sollen Sie nicht nur lesen, sondern insbesondere auch viel selbst machen. Hier kommt die erste Aufgabe.
 
->**Aufgabe:**
+>**Aufgabe**
 
 Geben Sie nun statt "Hallo Welt" einen anderen Text zwischen den Anführungszeichen ein. Führen Sie den Code erneut aus. Was fällt Ihnen auf?
 
 Auf der rechten Seiten unterhalb des Codes, können Sie nun mit den Pfeilen zwischen den verschiedenen Codes hin- und herwechseln. Gehen Sie mit dem Pfeil nach links zurück auf den ursprünglichen Code und dann mit dem Pfeil nach rechts wieder zu Ihrem neuen Code.
 
 
->**Übungen:**
+>**Übungen**
 
 Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) zu jedem Kapitel Übungen bereit gestellt. Sie werden im Laufe des Buchs immer wieder zu diesen Übungen aufgefordert. Führen Sie die Aufgaben gewissenhaft aus. Bei Problemen fragen Sie einfach in der nächsten Mentoringstunde. 
 
@@ -248,7 +248,7 @@ Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigen
 
 ---
 
->**Aufgabe 1:** 
+>**Quiz** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -275,7 +275,7 @@ Was macht der Befehl `java`?
 
 ###  Kommandozeile
 
->**Arbeiten mit der Kommandozeile unter Windows:**
+>**Arbeiten mit der Kommandozeile unter Windows**
 
 Zunächst machen wir ein paar Übungen auf der Kommandozeile:
 
@@ -422,7 +422,7 @@ Führen Sie also diese Schritte auf Ihrem Laptop oder Rechner zu Hause durch, so
 </p>
 
 
->**Führung durch Eclipse:**
+>**Führung durch Eclipse**
 
 Absolvieren Sie dann die Anleitung zum Erstellen eine Hello World-Projekts:
 
@@ -430,7 +430,7 @@ Absolvieren Sie dann die Anleitung zum Erstellen eine Hello World-Projekts:
 <img src="installation_5b.JPG" alt="Hello World" width="75%">
 </p>
 
->**Start des ersten Projekts:**
+>**Start des ersten Projekts**
 
 Ein Eclipse-Projekt starten Sie unter:
 <p align="center">
@@ -629,7 +629,7 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
   * Variablen, Methoden und Pakete beginnen klein und jedes neue Wort beginnt groß, z.B. kleinAnfangenUndJedesWortGrossBeginnen.
   * Klassennamen beginnen groß und jedes neue Wort beginnt groß, z.B. GrossAnfangenUndJedesWortGrossBeginnen.
 
->**Merke:**
+>**Merke**
 Gute Variablennamen sind nicht zu kurz und nicht zu lang. Sie sind immer aussagekräftig (z.B. int alterInTagen), nur temporäre Variablen dürfen auch mal kürzer sein (z.B. in Schleifen, vgl. folgendes Kapitel). Der Typ der Variable sollte nicht im Namen aufgeführt werden. Der Compiler meldet zurück, ob der Name gültig ist, nicht ob dieser sinnvoll gewählt ist.
 
 ### Variablen zuweisen
@@ -1028,7 +1028,9 @@ class IfAnweisung{
 
 
 
->**Logische Operatoren können wie folgt aussehen:**
+>**Logische Operatoren**
+
+Logische Operatoren können wie folgt aussehen:
 
 | Operator | Beschreibung                                                                                        |
 |----------|-----------------------------------------------------------------------------------------------------|
@@ -1753,7 +1755,7 @@ class MeinArray{
 Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt. Möchte man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
 bisherige Array in das neue Array umkopiert werden. Diese Aktionen werden von der Standardfunktion `copyOf` effizient erledigt. Die Klasse `java.util.Arrays` enthält zahlreiche Funktionen zur Manipulation von Arrays wie z.B. das eben erwähnte `copyOf`. 
 
->**Hintergrund:** 
+>**Hintergrund** 
 In Java gibt es bereits sehr, sehr viele vorgefertigte Methoden, die wir nutzen können. Erklärungen hierzu finden Sie unter: [Java API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/module-summary.html). Mit diesem Link werden wir das kommende Jahr sehr viel arbeiten. 
 Unter java.util finden Sie die Klasse `Arrays`, die Methoden zum Manipulieren von Arrays enthält. So auch das oben genannte `java.util.Arrays. 
 
@@ -2563,7 +2565,7 @@ Da auch der Stack eine begrenzte Größe hat, kann es zu einem `Stack Overflow` 
 
 Die oberste Methode auf dem Stack ist immer die aktuelle Methode, die unterste Methode, die main()-Methode, da diese als erstes aufgerufen wurde. Der Stack ist somit ein LIFO-Speicher, das bedeutet last in first out.
 
->**Zusammengefasst:** 
+>**Zusammengefassung** 
 
 Speicherressourcen werden über den Heap und den Stack verwaltet. Der Heap wird für die Speicherung von Objekten verwendet, während der Stack für die Ausführung von Methoden und die Speicherung von lokalen Variablen dient. 
 
@@ -3099,7 +3101,7 @@ Tipp: In Eclipse hilft Ihnen die rechte Maustaste, um Konstruktoren, die kaputt 
 Merke:
 Der erste Aufruf innerhalb eines Konstruktors ist immer der Aufruf eines anderen Konstruktors. Einzige Ausnahme: Der Konstruktor der Mutter aller Klassen Object
 
->**Quiz:**
+>**Quiz**
 
 Welche Konstruktoren sind erlaubt und welche nicht?
 
@@ -3386,7 +3388,7 @@ public abstract class Figur{
 ```
 
 
->**Aufgabe 1:** 
+>**Quiz** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -3426,7 +3428,7 @@ Können abstrakte Klassen nur instanziiert werden, wenn sie einen Konstruktor mi
 [(x)] Nein
 
 
->**Aufgabe 2:** 
+>**Aufgabe** 
 Lesen Sie die Aufgabe privater Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07. Erstellen Sie das UML-Klassendiagramm und implementieren Sie die Klassen.
 
 
@@ -3525,7 +3527,7 @@ public class Pizza implements IstLecker{
 Auch Datenfelder in Interfaces möglich. Diese sind automatisch immer `public static final`. Konstanten können auch in eigenen Klassen stehen, sogenannte Konstantenklassen (besser als in Interfaces)
 
 
->**Aufgabe 1:** 
+>**Quiz** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -3559,7 +3561,7 @@ Besitzt eine abstrakte Klasse Konstruktoren?
 [(x)] Ja
 [( )] Nein
 
->**Aufgabe 2:** 
+>**Aufgabe** 
 Fügen Sie Ihrem privaten Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 nun ein eigenes Interface hinzu.
 
 
