@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.7.4
+version: 0.8
 narrator: Deutsch Female
 mode: Textbook
 
@@ -37,14 +37,14 @@ Klicken Sie nun auf </> im kleinen Kreis unter der Code-Zeile, so wird der Code 
 
 Natürlich sollen Sie nicht nur lesen, sondern insbesondere auch viel selbst machen. Hier kommt die erste Aufgabe.
 
-**Aufgabe:**
+>**Aufgabe:**
 
 Geben Sie nun statt "Hallo Welt" einen anderen Text zwischen den Anführungszeichen ein. Führen Sie den Code erneut aus. Was fällt Ihnen auf?
 
 Auf der rechten Seiten unterhalb des Codes, können Sie nun mit den Pfeilen zwischen den verschiedenen Codes hin- und herwechseln. Gehen Sie mit dem Pfeil nach links zurück auf den ursprünglichen Code und dann mit dem Pfeil nach rechts wieder zu Ihrem neuen Code.
 
 
-**Übungen:**
+>**Übungen:**
 
 Um viel zu üben, denn das ist das wichtigste beim Programmieren, werden [hier](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) zu jedem Kapitel Übungen bereit gestellt. Sie werden im Laufe des Buchs immer wieder zu diesen Übungen aufgefordert. Führen Sie die Aufgaben gewissenhaft aus. Bei Problemen fragen Sie einfach in der nächsten Mentoringstunde. 
 
@@ -128,7 +128,7 @@ Bei Java gibt es noch die Besonderheit, dass es eine Art virtuelle Maschinenspra
 Aber hierzu später mehr
 
 
-**Welcher Code wird ausgeführt?**
+>**Welcher Code wird ausgeführt?**
 
 Das Betriebssystem startet den binären Code bei der ersten Anweisung - aber wo ist das in unserem Code der höheren Programmiersprache?
 
@@ -248,7 +248,7 @@ Auf den Rechner in der Hochschule ist alles bereits installiert. Auf Ihrem eigen
 
 ---
 
-**Aufgabe 1:** 
+>**Aufgabe 1:** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -275,7 +275,7 @@ Was macht der Befehl `java`?
 
 ###  Kommandozeile
 
-**Arbeiten mit der Kommandozeile unter Windows:**
+>**Arbeiten mit der Kommandozeile unter Windows:**
 
 Zunächst machen wir ein paar Übungen auf der Kommandozeile:
 
@@ -342,7 +342,7 @@ Um die Eingabeaufforderung zu schließen, geben Sie einfach ein:
 exit
 ```
 
-**Kommandozeile und Java-Code**
+>**Kommandozeile und Java-Code**
 
 Um einen Java-Code im Texteditor zu erstellen und dann auf der Kommandozeile zu kompilieren und auszuführen, können Sie die folgenden Schritte befolgen:
 
@@ -422,7 +422,7 @@ Führen Sie also diese Schritte auf Ihrem Laptop oder Rechner zu Hause durch, so
 </p>
 
 
-**Führung durch Eclipse:**
+>**Führung durch Eclipse:**
 
 Absolvieren Sie dann die Anleitung zum Erstellen eine Hello World-Projekts:
 
@@ -430,7 +430,8 @@ Absolvieren Sie dann die Anleitung zum Erstellen eine Hello World-Projekts:
 <img src="installation_5b.JPG" alt="Hello World" width="75%">
 </p>
 
-**Start des ersten Projekts:**
+>**Start des ersten Projekts:**
+
 Ein Eclipse-Projekt starten Sie unter:
 <p align="center">
 <img src="installation_5d.JPG" alt="Java Projekt starten" width="75%">
@@ -628,7 +629,7 @@ Bei der Benennung von Variablen ist es wichtig, einige Regeln zu beachten:
   * Variablen, Methoden und Pakete beginnen klein und jedes neue Wort beginnt groß, z.B. kleinAnfangenUndJedesWortGrossBeginnen.
   * Klassennamen beginnen groß und jedes neue Wort beginnt groß, z.B. GrossAnfangenUndJedesWortGrossBeginnen.
 
-**Merke:**
+>**Merke:**
 Gute Variablennamen sind nicht zu kurz und nicht zu lang. Sie sind immer aussagekräftig (z.B. int alterInTagen), nur temporäre Variablen dürfen auch mal kürzer sein (z.B. in Schleifen, vgl. folgendes Kapitel). Der Typ der Variable sollte nicht im Namen aufgeführt werden. Der Compiler meldet zurück, ob der Name gültig ist, nicht ob dieser sinnvoll gewählt ist.
 
 ### Variablen zuweisen
@@ -823,7 +824,7 @@ double flaeche = radius * radius * PI;
 ```
 Konstanten werden groß geschrieben. 
 
-**Lebensdauer von Variablen**
+>**Lebensdauer von Variablen**
 
 Klassenvariable: beginnt mit dem Laden der Klasse und endet mit dem Ende des Programms
 Lokale Variable: beginnt mit der Deklaration im Block und endet mit dem Blockende (schließende })
@@ -998,7 +999,7 @@ Ist die Bedingung wahr, werden die Anweisungen der nächsten Zeile, bzw. des Blo
 
 
 
-**Wie können diese Bedingungen aussehen?**
+>**Wie können diese Bedingungen aussehen?**
 
 In Programmiersprachen werden häufig Vergleiche zwischen Werten mittels Operatoren durchgeführt, um Bedingungen zu überprüfen. Hier sind einige gängige Vergleiche:
 
@@ -1027,7 +1028,7 @@ class IfAnweisung{
 
 
 
-**Logische Operatoren können wie folgt aussehen:**
+>**Logische Operatoren können wie folgt aussehen:**
 
 | Operator | Beschreibung                                                                                        |
 |----------|-----------------------------------------------------------------------------------------------------|
@@ -1168,7 +1169,7 @@ class Temperatur2{
 @LIA.java(Temperatur2)
 
 
-**Der bedingte Ausdruck**
+>**Der bedingte Ausdruck**
 
 - Der bedingte Ausdruck ist keine Anweisung sondern ein Operatorausdruck, also etwas, das in einem Ausdruck (z.B. einer Formel) eingesetzt werden kann. Vergleichbar mit der WENN( ; ; ) Formel in Excel: (Bedingung) ? Ausdruck1 : Ausdruck2
  
@@ -1244,7 +1245,7 @@ class Zaehlschleife{
 Wie müssen Sie das Programm abändern, um die ungeraden Zahlen von 1 bis 20 aufzusummieren?
 
 
-**Anmerkungen**
+>**Anmerkungen**
 
 - Eine im Schleifenkopf deklarierte Variable ist nur innerhalb der Schleife sichtbar.
 - `break` verlässt die Schleife
@@ -1336,7 +1337,7 @@ class WhileBeispiel{
 ```
 @LIA.java(WhileBeispiel)
 
-**Die "ewige" while-Schleife**
+>**Die "ewige" while-Schleife**
 
 Bei der ewigen while-Schleife wird die while-Anweisung  solange wiederholt, bis die Bedingung ´false´ liefert. Dieser Fall tritt hier jedoch nie ein, so dass das Programm immer weiter läuft.
 
@@ -1345,7 +1346,7 @@ Bei der ewigen while-Schleife wird die while-Anweisung  solange wiederholt, bis 
 </p>
 
 
-**Anmerkungen**
+>**Anmerkungen**
 
 - Die Bedingung der `while`-Schleife wird vor der Ausführung des Codeblocks überprüft. Wenn die Bedingung falsch ist, wird der Codeblock nicht ausgeführt und die Schleife wird beendet.
 - Es ist wichtig, sicherzustellen, dass sich die Bedingung im Verlauf der Schleife ändert, um eine Endlosschleife zu vermeiden.
@@ -1649,12 +1650,12 @@ class Mittelwert{
 
 ### Arrays: Basics
 
-**Datentyp von Arrays**
+>**Datentyp von Arrays**
 
 Der Datentyp eines Arrays ergibt sich aus dem Basisdatentyp (der Datentyp jedes einzelnen Elements) mit angehängten eckigen Klammern `[]`, also z.B.
 `int[], double[], boolean[], char[]`.
 
-**Initialisierung von Arrays**
+>**Initialisierung von Arrays**
 
 Arrays müssen immer initialisiert werden, sonst passiert sowas:
 
@@ -1703,7 +1704,7 @@ Die Anzahl der Element im Array `a` ergibt sich mit `a.length`. Niemals nehmen w
 message[message.length - 1]
 ```
 
-**Ausgabe von Arrays**
+>**Ausgabe von Arrays**
 
 Es gibt verschiedene Möglichkeiten, Arrays auszugeben. Eine davon, die Ihnen bereits bekannt ist, ist diese:
 
@@ -1733,7 +1734,7 @@ while (zaehler < 3) {
 }
 ```
 
-**Übung**
+>**Übung**
 
 Versuchen Sie nun die obigen Erkenntnisse in ein lauffähiges Programm zu packen. Probieren Sie an dieser Stelle auch explizit die Verwendung einer for-each-Schleife aus. Wiederholen Sie bei Bedarf das entsprechende Kapitel. 
 
@@ -1752,7 +1753,7 @@ class MeinArray{
 Arrays werden bei der Erzeugung mit fester, nicht mehr änderbarer Größe erzeugt. Möchte man die Größe eines Array-Objektes nachträglich ändern, so muss neues Array-Objekt erzeugt werden und das
 bisherige Array in das neue Array umkopiert werden. Diese Aktionen werden von der Standardfunktion `copyOf` effizient erledigt. Die Klasse `java.util.Arrays` enthält zahlreiche Funktionen zur Manipulation von Arrays wie z.B. das eben erwähnte `copyOf`. 
 
-**Hintergrund:** 
+>**Hintergrund:** 
 In Java gibt es bereits sehr, sehr viele vorgefertigte Methoden, die wir nutzen können. Erklärungen hierzu finden Sie unter: [Java API](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/module-summary.html). Mit diesem Link werden wir das kommende Jahr sehr viel arbeiten. 
 Unter java.util finden Sie die Klasse `Arrays`, die Methoden zum Manipulieren von Arrays enthält. So auch das oben genannte `java.util.Arrays. 
 
@@ -1923,7 +1924,7 @@ class StringBeispiel{
 ```
 @LIA.java(StringBeispiel)
 
-**Unveränderbare Zeichenketten**
+>**Unveränderbare Zeichenketten**
 
 Objekte der Klasse `String` sind unveränderlich.
 
@@ -1954,7 +1955,7 @@ class Mutter{
 
 ### Veränderbare Zeichenketten
 
-- Objekte der Klassen `StringBuffer` und `StringBuilder` sind veränderbar. Analysieren Sie folgendes Beispiel:
+- Objekte der Klassen `StringBuffer` und `StringBuilder` sind veränderbar. Analysieren Sie folgendes Beispiel (vgl. Schröder programmiert Java, S. 163):
 
 ```java
 class StringBilder{
@@ -2030,7 +2031,7 @@ public class Zeichenkettenoperationen {
 - Mit Hilfe der Methoden `indexOf()`, `lastIndexOf()`, `contains()` kann man in Strings suchen.
 - Veränderungen können mit `replace()`, `replaceFirst()`, `replaceAll()` erfolgen.
 
-**Aufgabe**
+>**Aufgabe**
 
 Suchen Sie sich geeignete Methoden in der Java API der Klasse [String](https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/lang/String.html)
 um den String "Iss" jeweils geeignet weiter zu verarbeiten. Dabei sollte jeweils das Wort im Kommentar erscheinen.
@@ -2051,14 +2052,14 @@ public class Iss {
 ```
 @LIA.java(Iss)
 
-Die Übung entstammt dem Buch Schrödinger programmiert Java, S. 152. Dort finden Sie auch eine Lösung.
+Die Übung entstammt dem Buch Schrödinger programmiert Java von Philipp Ackermann (S. 152). Dort finden Sie auch eine Lösung.
 
 Hinweis: Benutzen Sie u.a. die Methoden substring(), toLowerCase(), replaceAll() und konkatenieren Sie geeignet die Strings.
 
 
 **Weitere Beispiele**
 
-Versuchen Sie nun auch folgenden Code nachzuvollziehen. Welche Ausgaben werden generiert und warum?
+Versuchen Sie nun auch folgenden Code nachzuvollziehen. Die Idee hiervon entstammt ebenfalls aus dem Buch Schrödinger programmiert Java (S. 145). Welche Ausgaben werden generiert und warum?
 
 ```java
 class StringWeiteresBeispiel{
@@ -2087,7 +2088,7 @@ Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.i
 
 Debugging ist ein unverzichtbarer Schritt in der Softwareentwicklung, bei dem Fehler oder Bugs in einem Programm gefunden und behoben werden. Es ist von entscheidender Bedeutung, um sicherzustellen, dass die Software reibungslos funktioniert und die gewünschten Ergebnisse liefert. Durch Debugging können Entwickler Probleme erkennen, verstehen und lösen, was letztendlich zu einer verbesserten Qualität und Benutzererfahrung der Software führt.
 
-**Breakpoints**
+>**Breakpoints**
 
 - Ein Breakpoint ist wie eine Art Halt-Zeichen, das man in einen Code einfügt, um ihn an einer bestimmten Stelle anzuhalten. Wenn das Programm während der Ausführung auf diesen Breakpoint trifft, hält es an und man kann den Zustand des Codes genauer untersuchen.
 - Um Breakpoints zu setzen, klicken Sie mit der rechten Maustaste in die vertikale Leiste neben dem Code und drücken `Toggle Breakpoint`, wie im Bild gezeigt.
@@ -2101,7 +2102,7 @@ Debugging ist ein unverzichtbarer Schritt in der Softwareentwicklung, bei dem Fe
 
 
 
-**Debuggen**
+>**Debuggen**
 
 - Starten Sie Ihr Programm im Debug-Modus, indem Sie auf den Käfer (Bug) neben dem Run-Button klicken und darauf die Debug-Perspective öffnen (Switch klicken).
 
@@ -2117,7 +2118,7 @@ Debugging ist ein unverzichtbarer Schritt in der Softwareentwicklung, bei dem Fe
 
 ![](Debugger-5.JPG)
 
-**Übung**
+>**Übung**
 
 Wir benutzen das Beispiel aus dem vorherigen Kapitel um nachvollziehen, wann ein neues Objekt angelegt wird. Kopieren Sie hierzu folgendes Coding in Eclipse: 
 
@@ -2275,14 +2276,14 @@ Formale und aktuelle Parameter müssen vom gleichen Typ und der gleichen Reihenf
 Der Methodenrumpf enthält die Anweisungen, durch `;` getrennt. Grundsätzlich darf ein Rumpf beliebig lang sein. Sinnvoll ist jedoch max. eine Bildschirmseite. Leerzeichen und -zeilen im Rumpf werden vom Compiler ignoriert, sind aber für die Lesbarkeit wichtig. Die Ausführung einer Methode startet am Anfang und endet bei `return` (oder am Ende).
 
 
-**Übungen**
+>**Übungen**
 
 1. Berechnen Sie den Mittelwert zweier Zahlen. Schreiben Sie hierfür in Eclipse ein Programm mit einer Methode `berechneMittelwert`.
 
 2. Machen Sie die ersten Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 05.
 
 
-**Methoden überladen**
+>**Methoden überladen**
 
 Namensgleiche Methoden mit unterschiedlichen Parametern nennt man überladen. 
 
@@ -2353,7 +2354,7 @@ Jedes Auto hat eine eigene Farbe. Der Zugriff auf die Farbe funktioniert also nu
 
 Jedes Auto hat ferner die Methode fahren(). 
 
-**Übung**
+>**Übung**
 
 Bauen Sie obiges Beispiel in Eclipse nach. Sie benötigen hierfür zwei Klassen. Legen Sie zwei Autos mit unterschiedlichen Farben an. Greifen Sie auf die Felder des Autos zu und geben Sie diese aus. Lassen Sie das Auto fahren. 
 
@@ -2434,7 +2435,7 @@ public class Auto {
 }
 ```
 
-**Übung**
+>**Übung**
 
 * Erstellen Sie eine Klasse Laptop mit den Feldern modell, benutzer und id (welche Variablentypen brauchen Sie?)
 * Es gibt auch einen Konstruktor Laptop(String modell, String benutzer).
@@ -2449,7 +2450,7 @@ public class Auto {
 Wir wollen nun sicherstellen, dass die Datenfelder nicht von außerhalb direkt zugänglich sind um unbefugten Zugriff zu verhindern. Datenfelder können somit `private` gemacht werden, damit niemand von außerhalb zugreifen kann. 
 Wenn der Zustand des Objekts nun geändert oder zurück gegeben werden soll, geschieht das mit `Getter`- bzw. `Setter`-Methoden. Hierbei können auch Validierungsregeln eingebaut werden (if-Statement).
 
-**Getter und Setter**
+>**Getter und Setter**
 
 Getter und Setter sind öffentliche (=public) Methoden, mit denen man den Wert der Datenfelder zurückgeben (get) oder ändern (set) kann. Als Methodennamen wählt man `getWert()` bzw. `setWert()`. 
 
@@ -2482,9 +2483,9 @@ Man kann immer nur höchstens einen Sichtbarkeitsmodifikator verwenden. Weiterhi
 Wenn wir bei Objekten immer nur Getter/Setter haben, dann lagern wir die Logik aus. Besser sind domänenspezifische Methoden, wie zum Beispiel:
 
 * Methode `double berechneLaenge()` für Objekte einer Klasse `Linie` statt per `getStart()` und `getEnd()` den Start und Endpunkt und von diesen dann mit `getX()` und `getY()` die Koordinaten zu bekommen und dann immer wieder von neuen die Länge zu berechnen
-* Methode `double bruttoPreis()` für eine Rechung anstatt `getNettoPreis()` und `getSteuersatz()` abzufragen und dann die Berechnung selbst durchzuführen
+* Methode `double bruttoPreis()` für eine Rechnung anstatt `getNettoPreis()` und `getSteuersatz()` abzufragen und dann die Berechnung selbst durchzuführen
 
-**Regeln zum Information Hiding**
+>**Regeln zum Information Hiding**
 
 Zusammengehörige Daten / Methoden sollten in einer Klasse zusammengefasst werden. 
 Nicht zusammengehörige Daten / Funktionen sollten in verschiedene Klassen aufgeteilt werden.
@@ -2496,7 +2497,7 @@ Die Daten in einer Klasse sind immer `private` deklariert. Auf diese werden kann
 
 Die Abbildung zeigt: In der Mitte sind die privaten Daten sind "gekapselt". Der graue Kreis zeigt die Zugriffsmethoden auf die private Daten. Die Klasse A greift dann auf Daten über die Zugriffsmethoden zu.
 
-**Beispiel**
+>**Beispiel**
 
 Mit diesen Erkenntnissen erweitern wir unser Auto:
 
@@ -2533,7 +2534,7 @@ Versuchen Sie dieses Beispiel nachzuvollziehen!
 * Welche Rückgabewerte und welche Parameter haben die Methoden `setFarbe()` und `getFarbe()`?
 
 
-**Übung**
+>**Übung**
 
 Fortführung der Übung Laptop:
 
@@ -2562,13 +2563,13 @@ Da auch der Stack eine begrenzte Größe hat, kann es zu einem `Stack Overflow` 
 
 Die oberste Methode auf dem Stack ist immer die aktuelle Methode, die unterste Methode, die main()-Methode, da diese als erstes aufgerufen wurde. Der Stack ist somit ein LIFO-Speicher, das bedeutet last in first out.
 
-**Zusammengefasst:** 
+>**Zusammengefasst:** 
 
 Speicherressourcen werden über den Heap und den Stack verwaltet. Der Heap wird für die Speicherung von Objekten verwendet, während der Stack für die Ausführung von Methoden und die Speicherung von lokalen Variablen dient. 
 
 Hinweis: Bei Programmabsturz sehen Sie den Stacktrace. 
 
-**Übung**
+>**Übung**
 
 Gehen Sie zu einem Programm zurück, in welchem Sie die Rekursion geübt haben (z.B. Fakultät). Schauen Sie sich im Debug-Modus den Stack an und beobachten Sie, wie dieser beim rekursiven Aufruf der Methode immer weiter anwächst.
 
@@ -2615,7 +2616,7 @@ Hinweis: die main-Methode ist eine besondere Klassenmethode
 
 Eine Rekursion ist ein Vorgang, der sich selbst als Teil enthält oder mithilfe von sich selbst definierbar ist. Eine rekursive Funktion ist somit eine Funktion, die sich selbst aufruft. Rekursion kann zum Beispiel anstelle von Schleifen genutzt werden. 
 
-**Beispiel: Fakultät**
+>**Beispiel: Fakultät**
 
 * Wie wird die Fakultät berechnet? Recherchieren Sie zwei verschiedene Berechnungsmöglichkeiten.
 * Sind Ihre gefundenen Berechnungsmöglichkeiten rekursiv oder iterativ?
@@ -2645,18 +2646,18 @@ Schauen wir uns die Iteration am Beispiel der Fakultät genauer an. Evtl. haben 
 
 Eine iterative Berechnungsmöglichkeit der Fakultät:
 
-![Iterative Berechnung Fakultät](fakultaetIterativ.png)
+<img src="FakultaetIterativ.png" alt="Iterative Berechnung Fakultät" width="30%">
 
 Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
 
-![Rekrusive Berechnung Fakultät](fakultaetRekursiv.png)
+<img src="fakultaetRekursiv.png" alt="Rekursive Berechnung Fakultät" width="30%">
 
 So kann man sich die rekursive Berechnung vorstellen.
 
 ![Fakultätsberechnung](fakultaet.png)
 
 
-**Aufgabe**
+>**Aufgabe**
 
 Vervollständigen Sie die beiden Programme mit Hilfe der obigen Definitionen, so dass jeweils die Fakultät berechnet wird:
 
@@ -2737,7 +2738,7 @@ Dokumentationskommentare 
 * Dokumentationskommentare beginnen mit einem Schrägstrich und zwei Multiplikations-Zeichen /** und enden mit Multiplikations-Zeichen und Schrägstrich */
 * Stehen immer vor dem Element, welches sie beschreiben sollen
 
-**Methodenkommntare**
+>**Methodenkommntare**
 Methodenkommentare beschreiben, was die Methode macht
 
 * Beginnt mit /** und endet mit */
@@ -2764,7 +2765,7 @@ public static int max(int zahl1, int zahl2) {
     }
 ```
 
-**Tipps für Eclipse**
+>**Tipps für Eclipse**
 
 * Source -> Toggle Comment bzw. Ctrl+7
 
@@ -2780,7 +2781,7 @@ public static int max(int zahl1, int zahl2) {
 Refactoring bedeutet Strukturverbesserung von Quelltexten mit dem Ziel, Quelltext lesbarer, leichter wiederverwendbar und erwei­terbar zu gestalten. Dazu gehört zum Beispiel kurze, übersichtliche Methoden bauen und Methoden mit vielen Parameter vermeiden, mit dem Ziel
 Clean Code zu erzeugen.
 
-**Refactoring in Eclipse**
+>**Refactoring in Eclipse**
 
 Zeilen markieren, die in neue Methode gepackt werden sollen, rechte Maustate Refactor -> Extract Method. Im Dialogfenster: Name für Methode angeben und Modifikatoren wählen. Notwendige Paramter werden von Eclipse erkannt. Danach OK klicken.
 
@@ -2857,7 +2858,7 @@ public class Katze {
 }
 ```
 
-Der Großteil des Codes ist komlett gleich. Nur eine Methode unterscheidet sich vom Hund zur Katze. 
+Der Großteil des Codes ist komplett gleich. Nur eine Methode unterscheidet sich vom Hund zur Katze. 
 
 Sie haben bisher gelernt, dass Klassen Objekte beschreiben, die sich gleich verhalten und gleiche Eigenschaften besitzen. Manchmal gibt es jedoch Objekte, die nicht gleich aber doch sehr ähnlich wie andere Objekt sind, wie z.B. ein Hund und eine Katze viele gemeinsame Eigenschaften und Verhaltensweisen haben (sie haben einen Namen, ein Alter, können schlafen etc.), aber doch unterschiedlich sind in anderen Dingen (sie machen andere Laute). 
 Weiterhin hat jede Klasse die gleichen Objektvariablen und dazugehörige Setter und Getter, plus evtl. Konstruktoren etc. Wenn wir Katze und Hund als eigenständige Klassen implementieren, haben wir viel doppelten Code. Dies ist arbeitsintensiv und fehleranfällig. 
@@ -2924,7 +2925,7 @@ public class Katze extends Haustier {
 
 Fehlt die Angabe einer Oberklasse wie bisher, so ist die Oberklasse die Klasse `Object`, quasi die Mutter aller Klassen.
 
-**Einfachvererbung**
+>**Einfachvererbung**
 
 Java ist eine Sprache mit Einfachvererbung, das bedeutet, dass Klassen immer nur eine Oberklasse haben:
 
@@ -2937,7 +2938,7 @@ Eine Unterklasse darf man erneut erweitern, so entstehen Hierarchien von Klassen
 ![](Vererbung-3.png.jpg)
 
 
-**Mutterklasse `Object`**
+>**Mutterklasse `Object`**
 
 * `Object` ist in Java die Elternklasse jeder weiteren Klasse und somit die allgemeinste Klasse
 * Alle anderen Klassen teilen die Eigenschaften der Klasse `Object`
@@ -2963,9 +2964,9 @@ public String toString(){
 }
 ```
 
-**Übung**
+>**Übung**
 
-Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06 sich das Codegerüst herunterladen und einen Überblick verschaffen. Legen Sie einen Elefant und eine Ente an und leiten Sie vom richtigen Tier ab. Überschreiben Sie noch kenie Methoden. Legen Sie in der Anwendungsklasse einen Elefant und eine Ente an.
+Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06 sich das Codegerüst herunterladen und einen Überblick verschaffen. Legen Sie einen Elefant und eine Ente an und leiten Sie vom richtigen Tier ab. Überschreiben Sie noch keine Methoden. Legen Sie in der Anwendungsklasse einen Elefant und eine Ente an.
 
 
 ### Vererbung von Methoden und Variablen
@@ -2990,6 +2991,13 @@ Wenn Überschreiben verboten werden soll: Schlüsselwort `final` benutzen!
  `final`  für Klassen:
 - Überschreiben der ganze Klasse verboten
 - final markierte Klassen lassen sich nicht ableiten
+
+Was passiert mit den Variablen bei der Vererbung?
+
+- Vererbt werden Variablen, die `public` oder `protected` sind (oder package-private falls Unterklasse und Oberklasse im gleichen Package liegen). Die Verwendung funktioniert dann genau wie bei Variablen, die direkt in der Unterklasse definiert sind.
+- Auf `private` Variablen kann nicht zugegriffen werden – es sei denn, es gibt geerbte `public` und `protected` Methoden (z.B. Getter und Setter)
+- Eine Unterklassen kann durch neue Variablen erweitert werden, die es in der Oberklasse nicht gibt
+
 
 Zurück zu unserem Beispiel:
 
@@ -3024,13 +3032,13 @@ public class Hund extends Haustier {
 }
 ```
 
-An Hand der @Override Annotation erkennt der Compiler, dass die Methode schlafen überschrieben werden soll. Danach erfolgt der Methodenaufruf der Oberklasse mit super.methode(), in dem Fall mit super.schlafen(). 
+Anhand der @Override Annotation erkennt der Compiler, dass die Methode schlafen überschrieben werden soll. Danach erfolgt der Methodenaufruf der Oberklasse mit `super.methode()`, in dem Fall mit super.schlafen(). 
 
-Hinweis: Methodenaufrufe über super können an einer beliebigen Stelle in den Methoden der Kindklasse auftauchen. Aufruf des Elternkonstruktors super() muss immer als erstes im Kindkonstruktor stehen, siehe nächstes Teilkapitel.
+Hinweis: Methodenaufrufe über `super` können an einer beliebigen Stelle in den Methoden der Kindklasse auftauchen. Aufruf des Elternkonstruktors `super()` muss immer als erstes im Kindkonstruktor stehen, siehe nächstes Teilkapitel.
 
 Welche Ausgabe wird erzeugt, wenn Sie ein Objekt des Typs Hund erstellen und auf diesem die Methoden schalfen aufrufen? Überprüfen Sie Ihre Vermutung mit Hilfe von Eclipse.
 
-**Übung**
+>**Übung**
 
 Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06 die Methoden geraeuschErzeugen() überschreiben.
 
@@ -3038,13 +3046,13 @@ Sie können in der Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hf
 ### Vererbung Konstruktoren
 
 Java stellt immer einen Standardkonstruktor (ohne Parameter) bereit. Wird ein eigener Konstruktor definiert, steht der Standardkonstruktor nicht mehr zur Verfügung. 
-Folgende Hinweise zu, was nicht vererbit wird:
+Folgende Hinweise zu, was nicht vererbt wird:
 
 - Hat die Oberklasse hat einen eigenen Konstruktor definiert, muss die Unterklasse ebenfalls einen eigenen definieren
 - Der Konstruktor der Oberklasse kann (im Konstruktor der Unterklasse) durch super(Parameterliste) aufgerufen werden 
 - Aufruf des gewünschten Konstruktors der Elternklasse muss immer am Anfang des Codings im Konstruktor stehen
 
-**Konstruktorkette reparieren**
+>**Konstruktorkette reparieren**
 Nehmen wir an, in der Klasse Haustier, sei folgender Konstruktor definiert:
 
 ```java
@@ -3089,7 +3097,7 @@ Tipp: In Eclipse hilft Ihnen die rechte Maustaste, um Konstruktoren, die kaputt 
 Merke:
 Der erste Aufruf innerhalb eines Konstruktors ist immer der Aufruf eines anderen Konstruktors. Einzige Ausnahme: Der Konstruktor der Mutter aller Klassen Object
 
-**Quiz:**
+>**Quiz:**
 
 Welche Konstruktoren sind erlaubt und welche nicht?
 
@@ -3131,7 +3139,7 @@ Person() {
 [( )] falsch
 
 
-**Übung**
+>**Übung**
 Zurück zu unserer Aufgabe Typen aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 06.
 
 * Existieren in den Klassen Konstruktoren?
@@ -3181,12 +3189,12 @@ Tier katze = new Katze();
 `katze` kann schlafen, aber nicht miauen, da sie ein Tier ist.
 
 ```
-Tier gleicheKatze = (Katze) katze;
+Katze gleicheKatze = (Katze) katze;
 ```
 
 `gleicheKatze` kann miauen, da die Referenzvariable vom Typ Katze ist.
 
-Gebrauch des instaceof-Operators in diesem Szenario:
+Gebrauch des `instaceof`-Operators in diesem Szenario:
 
 ```
 if (katze instanceof Katze){
@@ -3196,7 +3204,7 @@ if (katze instanceof Katze){
 
 Merke: Die konkrete Objektinstanz ändert sich hierdurch nicht, d.h. es wird kein neues Objekt auf dem Heap gelegt. 
 
-**Übung**
+>**Übung**
 
 Erzeugen Sie den Code zu obigem UML-Diagramm. Probieren Sie folgende Szenarien aus:
 
@@ -3216,7 +3224,7 @@ Hinweis:
 Nicht jedes Tier ist eine Katze und nicht jedes Tier kann einfach in eine Katze umgewandelt werden. 
 
 
-**Polymorphismus**
+>**Polymorphismus**
 
 Eine Variable vom Typ einer Oberklasse kann ein beliebiges Objekt seiner Unterklasse aufnehmen. Alle Methoden, die in der Oberklasse definiert sind, können aufgerufen werden: Da das Unterklassenobjekt alle Methoden der Oberklasse erbt, erweitert oder implementiert, kann man sich darauf verlassen, dass alle Methoden der Oberklasse verfügbar sind. Ausgeführt wird (natürlich) der Code des aktuellen Objekts. Methoden, die nur in der Unterklasse vorliegen, können nicht aufgerufen werden (sie sind da, sind aber nicht sichtbar).
 
@@ -3236,7 +3244,7 @@ In dem Beispiel ist die Vererbung von Haustier zu Hund und Katze eingezeichnet (
 
 Es gibt neben der Vererbung aber auch eine weitere Verbindung zwischen Klassen, die Delegation.
 
-**Delegation**
+>**Delegation**
 
 Im Gegensatz zur Vererbung, bei der eine Klasse die Eigenschaften einer anderen Klasse übernimmt, wird bei der Delegation eine Aufgabe an eine andere Klasse weitergegeben. Dies bedeutet, dass diese Klasse ein Objekt einer anderen Klasse als Instanzvariable verwendet. Die Delegation kann als eine hat-ein-Beziehung zwischen Objekten betrachtet werden, bei der ein Objekt bestimmte Methodenaufrufe an ein anderes Objekt weiterleitet. Die Vererbung dagegen kann als eine ist-ein-Beziehung betrachtet werden. 
 
@@ -3299,7 +3307,7 @@ public class Delegation {
 Die Professor-Klasse ist für das Unterrichten und Bewerten von Arbeiten zuständig, während die Student-Klasse Vorlesungen besucht, Aufgaben einreicht und Rückmeldung vom Professor erhält. Die Student-Klasse hat eine Referenz auf ein Professor-Objekt, und wenn die Methoden der Student-Klasse aufgerufen werden, wird diese Funktionalität an die entsprechenden Methoden der Professor-Klasse delegiert.
 
 
-**Assoziationen**
+>**Assoziationen**
 
 Klassen stehen in Beziehungen zueinander. Eine Assoziation wird mit einer durchgezogenen Linie repräsentiert. 
 
@@ -3308,13 +3316,13 @@ Es werden hier zwei besondere Fälle unterschieden:
 * Aggregation: Die Teile können existieren, wenn auch das Ganze (noch) nicht existiert.
 Die Aggregation wird mit einer durchgezogenen Linie mit einer nicht ausgefüllten Raute an einem Ende dargestellt. Die Raute befindet sich immer auf der Seite des "Ganzen". Die Abbildung zeigt: Jedes Regal besitzt 1 bis beliebig viele Bücher. Jedes Buch befindet sich in 0 bis 1 Regalen.
 
-![aggregation](aggregation.png)
+<img src="aggregation.png" alt="aggregation" width="40%">
 
 * Komposition: Die Teile können nicht ohne das Ganze existieren.
 Die Komposition wird mit einer durchgezogenen Linie mit einer ausgefüllten Raute an einem Ende dargestellt
 Die Multiplizität auf der Seite des Ganzen muss zwangsläufig 1 sein! Die Abbildung zeigt: Jedes Buch besitzt 1 bis beliebig viele Seiten. Und jede Seite existiert in genau einem Buch. 
 
-![komposition](komposition.png)
+<img src="komposition.png" alt="komposition" width="40%">
 
 Weitere Beziehungen in UML-Diagrammen sind z.B. Interfaces mit einer gestrichelten Linie gekennzeichnet (siehe Kapitel Interfaces).
 
@@ -3376,7 +3384,7 @@ public abstract class Figur{
 ```
 
 
-**Aufgabe 1:** 
+>**Aufgabe 1:** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -3416,7 +3424,7 @@ Können abstrakte Klassen nur instanziiert werden, wenn sie einen Konstruktor mi
 [(x)] Nein
 
 
-**Aufgabe 2:** 
+>**Aufgabe 2:** 
 Lesen Sie die Aufgabe privater Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07. Erstellen Sie das UML-Klassendiagramm und implementieren Sie die Klassen.
 
 
@@ -3515,7 +3523,7 @@ public class Pizza implements IstLecker{
 Auch Datenfelder in Interfaces möglich. Diese sind automatisch immer `public static final`. Konstanten können auch in eigenen Klassen stehen, sogenannte Konstantenklassen (besser als in Interfaces)
 
 
-**Aufgabe 1:** 
+>**Aufgabe 1:** 
 
 Führen Sie nun folgendes Quiz durch und testen Sie Ihr Wissen: 
 
@@ -3549,7 +3557,7 @@ Besitzt eine abstrakte Klasse Konstruktoren?
 [(x)] Ja
 [( )] Nein
 
-**Aufgabe 2:** 
+>**Aufgabe 2:** 
 Fügen Sie Ihrem privaten Zoo aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 nun ein eigenes Interface hinzu.
 
 
@@ -3588,7 +3596,7 @@ Klassen, Interfaces und Aufzählungen können verschachtelt sein. Man spricht au
 
 Wir schauen nun die oben aufgezählten vier Typen genauer an:
 
-**1. Statischer geschachtelter Typ**
+>**1. Statischer geschachtelter Typ**
 
 Ein Synonym für den statischen, geschachtelten Typ ist auch „statische Mitgliedsklasse“ (oder statische Memberklasse). Warum brauchen wir diesen?
 Die statische Mitgliedsklasse gehört inhaltlich zur umschließenden Klasse und wird eigentlich nur von ihr verwendet.
@@ -3633,7 +3641,7 @@ public class BankAnwendung{
 
 Sie können nun den ersten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
 
-**2. Nichtstatischer geschachtelter Typ**
+>**2. Nichtstatischer geschachtelter Typ**
 
 Ein nichtstatischer geschachtelter Typ (Synonym nichtstatische Memberklasse) ist ein innerer Typ, der mit einer Objekteigenschaft vergleichbar ist.
 Eine Instanz der inneren Klasse hat Zugriff auf alle Eigenschaften der äußeren Klasse (auch auf private Attribute).
@@ -3691,7 +3699,7 @@ Der Compiler generiert folgende Klassen:
 
 Sie können nun den zweiten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
 
-**3. Lokaler (innerer) Typ**
+>**3. Lokaler (innerer) Typ**
 
 Lokale Klassen stehen in Anweisungsblöcken von Methoden, Konstruktoren und Initiatialisierungsblöcken. Es gibt keine Sichtbarkeitsmodifizierer. Es gibt weder Klassenattribute noch Klassenmethoden.
 Finale Konstanten sind möglich. Es gibt keine lokalen Schnittstellen. Das bedeutet: Auf die lokale Klasse kann immer nur innerhalb des jeweiligen Kontextes zugegriffen werden. 
@@ -3737,7 +3745,7 @@ public class BankAnwendung{
 
 Sie können nun den dritten Teil der Übung Würfel aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 07 machen. 
 
-**4. Anonyme innere Klasse**
+>**4. Anonyme innere Klasse**
 
 Anonyme innere Klassen haben keinen Namen und erzeugen immer automatisch ein Objekt. Es gibt nur eine einzige Instanz, d.h. im Gegensatz zu lokalen Klassen kann von anonymen Klassen nur eine einzige Objektinstanz erzeugen werden. 
 
@@ -3883,7 +3891,7 @@ Sie können in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmier
 
 Wir haben bisher mit Arrays gearbeitet um primitive Datentypen oder Objekte des gleichen Typs zu speichern. Sie haben schon gemerkt, dass das Arbeiten mit Arrays zum Teil sehr mühsam sein kann, da sie eine feste Länge haben und es keine vordefinierten Methoden für das Hinzufügen, Entfernen oder Suchen von Elementen gibt. 
 
-In diesem Kapitel werden wir uns Collections und Maps beschäftigen, welche zwei wesentliche Bestandteile des Java Collections Frameworks sind. Collections und Maps bieten viele Vorteile. Sie können dynmisch ihre Größe ändern, was das Hinzufügen oder Entfernen von Elementen erleichtert, sie bieten Methoden für gängige Operationen, was die Verwendung bequemer macht und sie unterstützen Generics (siehe Kapitel Generics), was das Daten mit jedem Datentyp ermöglicht.
+In diesem Kapitel werden wir uns Collections und Maps beschäftigen, welche zwei wesentliche Bestandteile des Java Collections Frameworks sind. Collections und Maps bieten viele Vorteile. Sie können dynamisch ihre Größe ändern, was das Hinzufügen oder Entfernen von Elementen erleichtert, sie bieten Methoden für gängige Operationen, was die Verwendung bequemer macht und sie unterstützen Generics (siehe Kapitel Generics), was das Daten mit jedem Datentyp ermöglicht.
 
 Collections sammeln Elemente (gleichen Typs) und stellen Methoden zum Eintragen, Suchen und Durchwandern zur Verfügung.
 Interfaces (Set, List, Queue, Deque) definieren hierbei das allgemeine Verhalten (d.h. sie definieren nur Methoden, haben aber keine Implementierung). 
@@ -4171,7 +4179,7 @@ Eine Deque (Double Ended Queue) kann nun im Gegensatz zu einer Queue Elemente an
 
 Spezielle Methoden, die für eine Deque relevant sind, sind `addFirst(e)`, `offerFirst(e)`, `addLast(e)`, `offerLast(e)`, `removeFirst()`, `pollFirst()`, `removeLast()`, `pollLast()`,`getFirst()`, `peekFirst()`, `getLast()` und `peekLast()`,, um Elemente hinzuzufügen, zu entfernen und auf die ersten und letzten Elemente zuzugreifen.
 
-Eine Überischt zur Deque finden Sie auch hier: https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/util/Deque.html
+Eine Übersicht zur Deque finden Sie auch hier: https://docs.oracle.com/en/java/javase/21/docs//api/java.base/java/util/Deque.html
 
 Beispiel:
 
@@ -4427,7 +4435,7 @@ public class BeispielNullpointer {
   * `NullPointerException` = Exception, die man abfangen möchte
 
   * `e` = Beinhaltet Informationen über das Problem, ist gängige Namenskonvention für Exceptions
-- Das Programm läuft nach der Ausnahme normale weiter
+- Das Programm läuft nach der Ausnahme normal weiter
 
 
 >**Finally-Block**
