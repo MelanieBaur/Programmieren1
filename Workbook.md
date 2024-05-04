@@ -1502,7 +1502,7 @@ Wenn Sie diese Beispiele verstanden haben, können Sie zu den Übungen weiter ge
 
 ### Übungen
 
-**Aufgabe 1:**  
+**Aufgabe 1  
 Berechnen Sie die Summe aller Zahlen von 0 bis zu einer vorgegebenen größten Zahl. Für das Beispiel 5 wäre das also 0+1+2+3+4+5 = 15.
 
 Lösen Sie das Problem auf mindestens drei verschiedene Arten. 
@@ -2648,7 +2648,7 @@ Schauen wir uns die Iteration am Beispiel der Fakultät genauer an. Evtl. haben 
 
 Eine iterative Berechnungsmöglichkeit der Fakultät:
 
-<img src="FakultaetIterativ.png" alt="Iterative Berechnung Fakultät" width="30%">
+<img src="fakultaetIterativ.png" alt="Iterative Berechnung Fakultät" width="30%">
 
 Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
 
@@ -2978,10 +2978,12 @@ Schauen wir uns nun an, was mit Instanzmethoden und Variablen bei der Vererbung 
 >**Was passiert mit den Instanzmethoden bei der Vererbung?**
 
 Für `public` und `protected` Methoden gilt:
+
 - Werden geerbt: Verwendbar, als wären sie direkt in der Unterklassen definiert
 - Können überschrieben werden: eine Unterklasse kann geerbte Methoden durch Methoden mit gleicher Signatur redefinieren mit der Annotation `@Override` –  - auf die ursprüngliche Methode kann mit dem `super`-Qualifier zugegriffen werden 
 
 Für `private` Methoden gilt:
+
 - Sind in Unterklassen nicht sichtbar
 - Können nicht überschrieben werden
 - Gleiche Methode in Unterklasse sind möglich (gleicher Rückgabetyp, gleicher Name, gleiche Parameter)
@@ -2989,10 +2991,12 @@ Für `private` Methoden gilt:
 Wenn Überschreiben verboten werden soll: Schlüsselwort `final` benutzen!
 
  `final`  für Methoden:
+
 - Einzelne Methoden können gezielt mit final als nicht überschreibbar markiert werden
 - Beispiel: public final void methode()
 
  `final`  für Klassen:
+
 - Überschreiben der ganze Klasse verboten
 - final markierte Klassen lassen sich nicht ableiten
 
