@@ -2648,7 +2648,7 @@ Schauen wir uns die Iteration am Beispiel der Fakultät genauer an. Evtl. haben 
 
 Eine iterative Berechnungsmöglichkeit der Fakultät:
 
-<img src="fakultaetIterativ.png" alt="Iterative Berechnung Fakultät" width="30%">
+<img src="fakultaetIterativ.png" alt="Iterative Berechnung Fakultät" width="40%">
 
 Versus eine rekursive Berechnungsmöglichkeit der Fakultät:
 
@@ -3583,7 +3583,7 @@ class Out { static class In{} }
 class Out { class In{} }
 ```
 
-4. Lokaler (innerer) Typ:
+3. Lokaler (innerer) Typ:
 
 ```
 class Out { methode(){ class In{} }}
