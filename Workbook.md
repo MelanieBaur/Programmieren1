@@ -3786,7 +3786,7 @@ public class Bank{
 ```
 
 ```java
-public abstrac class Tresor(){
+public abstract class Tresor{
     public abstract double getInhalt();
 }
 ```
