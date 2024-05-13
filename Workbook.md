@@ -3722,6 +3722,7 @@ public class Bank{
         {
         // Lokale Klasse ohne Sichtbarkeitsmodifikator, 
         // lokale Klasse nur sichtbar im Kontext des Getters in diesem Beispiel
+        // geschweifte Klammer machen Kontext deutlich
         
         class Tresor{
             private double vermoegen = 50.0;
@@ -3825,7 +3826,7 @@ Angelegt werden Sie in Eclipse mit rechte Maustaste auf das Projekt / Paket -> N
 ```
 // Schlüsselwort enum
 public enum Wochentag {
-    MONTAG, DIENSTAG, MITTWOCH, DONNERSTAG, FREITAG, SAMSTAG, SONNTAG
+    MONTAG, DIENSTAG, MITTWOCH, DONNERSTAG, FREITAG, SAMSTAG, SONNTAG;
 }
 ```
 
