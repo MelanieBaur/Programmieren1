@@ -3202,7 +3202,7 @@ Katze gleicheKatze = (Katze) katze;
 
 `gleicheKatze` kann miauen, da die Referenzvariable vom Typ Katze ist.
 
-Gebrauch des `instaceof`-Operators in diesem Szenario:
+Gebrauch des `instanceof`-Operators in diesem Szenario:
 
 ```
 if (katze instanceof Katze){
