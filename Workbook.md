@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.8
+version: 0.9
 narrator: Deutsch Female
 mode: Textbook
 
@@ -4737,14 +4737,252 @@ Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.i
 
 ## Generics (optional)
 
-### Übungen
+Generics erlauben es, Klassen und Methoden so zu definieren, dass sie mit beliebigen Datentypen arbeiten können, ohne dabei auf die Typsicherheit zu verzichten. Anstatt mit allgemeinen Objekten zu arbeiten und später Typumwandlungen durchzuführen, können hier präzise Typen angegeben werden. Dadurch werden viele potenzielle Laufzeitfehler bereits zur Kompilierzeit abgefangen. Wir haben dies bereits bei Collections verwendet, ohne genau zu wissen, was wir da tun. 
 
-Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 10.
+Schauen Sie sich hierzu folgendes Einführungsbeispiel an: 
+
+
+```java
+List<String> meineListe = new ArrayList<>();
+meineListe.add("Hallo Du");
+String eintrag = meineListe.get(0);
+```
+
+In diesem Beispiel ist List<String> eine generische Liste, die nur String-Objekte enthält. Dies erhöht die Typsicherheit, da versehentliche Einfügungen von Objekten anderen Typs zur Kompilierzeit erkannt werden.
+
+Die Vorteile von Generics sind also: 
+
+* Typsicherheit: Fehler werden früher erkannt, da Typkonflikte bereits zur Kompilierzeit identifiziert werden.
+* Wiederverwendbarkeit: Generische Klassen und Methoden können mit verschiedenen Datentypen verwendet werden, wodurch der Code flexibler und allgemeiner wird.
+* Lesbarkeit: Der Code wird klarer und verständlicher, da keine expliziten Typumwandlungen erforderlich sind.
+
+
+>**Verwendungsbeispiel Maps -- und ein Problem**
+
+Das folgende Beispiel verdeutlicht nochmal das Problem, welches entsteht, wenn Collections nicht typisiert werden:
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class MapDemo {
+    public static void main(String[] args)  {
+
+        // Neues Telefonbuch
+        Map telefonbuch = new HashMap();
+
+        // Einträge anlegen: ein Paar aus Schlüssel und Wert
+        telefonbuch.put("Doro", "071183673");
+        telefonbuch.put("Anke", "017927343");   // Hier passt jeder Typ rein!
+        telefonbuch.put("Chris","017292828");
+        telefonbuch.put("Bert", "017198338");
+
+        // Was ist Chris' Telefonnummer?
+        System.out.println("Chris\' Nummer: "+ telefonbuch.get("Chris"));
+        
+        // Alle gespeicherten Werte ausgeben
+        Set keyset = telefonbuch.keySet();
+        for(Object name: keyset) {
+            System.out.println(name+": "+telefonbuch.get(name));
+        }
+
+        // Aber: Es wurde String in die Map gesteckt,
+        // (zunächst ein Object zurückbekommen)
+        String nummerChris = (String) telefonbuch.get("Chris"); 
+        // Das heißt: Der Entwickler muss den richtigen Typ wieder herstellen
+    }
+}
+```
+@LIA.java(MapDemo)
+
+
+
+>**Hintergrund Typprüfung**
+
+Schauen Sie sich folgendes Beispiel an und überlegen Sie sich, was hier wann passiert.
+
+```java
+public class KurzeDemo {
+    public static void main(String[] args) {
+        Object object = Integer.valueOf(42);
+        String string = (String) object;
+    }
+}
+```
+@LIA.java(KurzeDemo)
+
+Die Typprüfung geschieht zu zwei Zeitpunkten:
+
+* Durch den Compiler (vor der Ausführung): Code ist ok
+* Durch die JVM (während der Ausführung)
+
+Das Ziel bei Generics ist, dass schon der Compiler mehr Informationen über die Typen erhalten soll.
+
+Das heißt, wir wollen als Lösungsmöglichkeit nicht eine explizite Typumwandlung durch Casting (wie im Beispiel oben) nutzen, sondern Generics: Typ ist bei der Deklaration „generisch“ und erst beim Programmieren konkret. Dies hat viele Vorteile:
+
+* Compiler kann korrekte Nutzung überprüfen
+* Datenstrukturen und Algorithmen können vom Datentyp unabhängig, d.h. generisch sein (z.B. Sortieralgorithmen)
+* Häufigster Einsatz: „Typsichere“ Container-Klassen, welche die Schnittstelle Collection implementieren
+
+>**Verwendung von Generischen Typen**
+
+Und nun das obige Beispiel mit der Nutzung von Generics:
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class MapDemo2 {
+    static void main(String[] args)  {
+
+        // Neues Telefonbuch vom generischen Typ Map<K,V>
+    	// Konkret benötigte Typen (Typparameter) werden beim Anlegen eines neuen Objekts spezifiziert
+    	Map<String, String> telefonbuch = new HashMap<String, String>(); 
+
+    	
+        // Einträge anlegen: ein Paar aus Schlüssel und Wert
+        telefonbuch.put("Doro", "071183673");
+        telefonbuch.put("Anke", "017927343");   
+        telefonbuch.put("Chris","017292828");
+        telefonbuch.put("Bert", "017198338");
+
+        // Was ist Chris' Telefonnummer?
+        System.out.println("Chris\' Nummer: "+ telefonbuch.get("Chris"));
+        
+        // Alle gespeicherten Werte ausgeben
+        Set<String> keyset = telefonbuch.keySet();
+        for(String name: keyset) {
+            System.out.println(name+": "+telefonbuch.get(name));
+        }
+
+        // Automatisch bekommt man nun einen String
+        String nummerChris = telefonbuch.get("Chris"); 
+    }
+}
+```
+@LIA.java(MapDemo2)
+
+### Generische Klassen
+
+Generische Klassen ermöglichen es, Klassen mit Typ-Parametern zu definieren, sodass sie mit verschiedenen Datentypen arbeiten können, ohne dabei die Typsicherheit zu verlieren. 
+Dieses Konzept verbessert die Wiederverwendbarkeit und Flexibilität des Codes erheblich.
+
+Eine generische Klasse wird mit einem oder mehreren Typ-Parametern definiert, die als Platzhalter für die tatsächlichen Datentypen fungieren. 
+Diese Typ-Parameter werden in spitzen Klammern (<>) angegeben und können bei der Instanziierung der Klasse durch konkrete Typen ersetzt werden. 
+Dadurch kann eine einzige Klassendefinition mit unterschiedlichen Datentypen verwendet werden.
+
+Betrachten wir dies am Beispiel eines generischen Kartons. Dies ist ein Karton, in dem wir alles Mögliche verpacken können.
+
+>**Beispiel Karton**
+
+Typvariable steht zu Beginn der Klassendeklaration. Dadurch wird der Originaltyp Karton zum generischen Typ Karton<E>.
+Typparameter wird im Code wie ein normaler Typ genutzt, aber es kann kein entsprechendes Objekt erzeugt werden
+
+Haufige Namen für Typvariablen sind:
+
+- E: Entity
+- T: Type
+- K: Key
+
+```java
+public class Karton<E> { //Generischer Typ (Platzhalter für eine beliebige Klasse oder ein beliebiges Interface)
+    private E inhalt; 
+    public Karton(E inhalt) { //Parametertyp im Konstruktur
+        this.inhalt = inhalt;
+    }
+    public E getInhalt() { //Rückgabetyp von Methoden
+        return inhalt;
+    }
+    public void setInhalt(E inhalt) { //Parametertyp in Methoden
+        this.inhalt = inhalt
+    }
+}
+```
+
+Unterschied:
+
+- Ohne Generics: Erst zur Laufzeit bekannt, welchen Typ der „inhalt“ des Kartons hat (könnte eine ClassCastException auslösen)
+- Mit Generics: Information bereits zur Compilezeit bekannt
+
+>**Bezeichnungen**
+
+| Begriff                    | Beispiel        |
+|----------------------------|-----------------|
+| Generischer Typ            | Set<T>          |
+| Typvariable (formal type parameter)                | T               |
+| Parametrisierter Typ       | Set<Long>       |
+| Typparameter (actual type parameter)               | Long            |
+| Originaltyp (raw type)     | Set             |
+
+>**Mehr zur Typvariable**
+
+- Typvariable T kann für fast alles stehen:
+
+
+  * Klassen
+  
+  * Schnittstellen
+  
+  * Aufzählungen von Typen
+  
+  * Arrays von Typen
+
+  * (aber keine primitiven Datentypen!)
+
+
+- Typvariable T kann selbst wieder ein generischer Typ sein.
+
+  * List<Map<Integer,String>> (deklariert als List<T> und Map<K,V>)
+
+### Generische Schnittstellen
+
+Nicht nur Klassen können generisch sein, sonderen auch Interfaces. Wir haben dies bereits beim Interface Comparable gesehen.
+
+>**Schnittstelle Comparable & Set**
+
+```java
+public interface Comparable<T> {
+int compareTo(T o);
+}
+
+public interface Set<E> extends Collection<E> {
+    boolean add(E e);
+    int size();
+    boolean isEmpty();
+    boolean contains(Object o);
+    Iterator<E> iterator();
+    Object[] toArray();
+    <T> T[] toArray(T[] a);
+…
+}
+```
+
+>**Benutzungsmuster**
+
+Implementierung einer generischen Schnittstelle durch Angabe eines konkreten Typs:
+
+```java 
+public interface Comparable<T> {
+    int compareTo(T o);
+}
+
+public final class Integer extends Number implements Comparable<Integer> { 
+    //Hinweis: Primitive Datentypen können nicht als generischer Typ verwendet werden
+
+    public int compareTo( Integer anotherInteger ) { ... }
+    ...
+}
+```
+
+### Weiteres zu Generics
+
+Wenn Sie sich weiter mit Generics beschäftigen möchten und nicht bis zum zweiten Semester warten wollen, können Sie das entsprechende Kapitel im Buch "Java ist auch eine Insel" von Christian Ullenboom hier online lesen: https://openbook.rheinwerk-verlag.de/javainsel/12_001.html#u12
+
+
 
 ## Dateien (projektrelevant)
 
-### Übungen
-
-Machen Sie die Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 11.
 
 ## Abschlussprojekt
