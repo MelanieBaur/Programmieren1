@@ -4984,5 +4984,5 @@ Wenn Sie sich weiter mit Generics beschäftigen möchten und nicht bis zum zweit
 
 ## Dateien (projektrelevant)
 
-
 ## Abschlussprojekt
+Um sich auf die Projektaufgabe vorzubereiten, können Sie die Aufgabe UML-Shop in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen lösen.
