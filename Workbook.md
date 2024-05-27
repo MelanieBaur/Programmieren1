@@ -4353,7 +4353,13 @@ Sie können nun die Aufgabe digitaler Würfel aus der [Aufgaben-Datenbank](https
 Machen Sie nun die verbleibenden Aufgaben aus der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus Kapitel 08, falls Sie noch nicht alle gelöst haben.
 
 ## Exceptions
+In diesem Kapitel beschäftigen wir uns mit der Behandlung von Fehlern, was in der Programmierung ein wichtiger Bestandteil ist. Hierbei werden `Exceptions` und `Errors` unterschieden. 
 
+`Exceptions` sind dabei unerwartete Ereignisse, die während der Ausführung eines Programms auftreten und den normalen Programmfluss unterbrechen. Sie können durch Programmierfehler, unvorhersehbare Bedingungen oder systembedingte Probleme verursacht werden. 
+
+`Errors` hingegen sind schwerwiegende Probleme, die meistens auf systembedingte Fehler zurückzuführen sind und außerhalb der Kontrolle des Entwicklers liegen. Beispiele sind `OutOfMemoryError` und `StackOverflowError`. Diese sollten in der Regel nicht abgefangen werden, da sie auf kritische Probleme hinweisen, die eine Fortsetzung des Programms unmöglich machen.
+
+Betrachten wir zunächst ein paar Beispiele:
 
 >**Beispiel 1**
 
@@ -4366,6 +4372,8 @@ public class BeispielArray {
 }
 ```
 @LIA.java(BeispielArray)
+
+Versuchen Sie das Beispiel dermaßen abzuändern, dass auf ein Arrayfeld mit falschem Index zugegriffen wird. Sie können den Code dennoch im Workbook laufen lassen. Sie sehen als Ausgabe dann die Meldung der Exception.  
 
 ```java
 public class BeispielArray {
@@ -4395,18 +4403,24 @@ public class EndlosRekursion {
 
 <h3 style="text-align:center">Fehlerarten in Java</h3>
 
+Wie oben bereits erwähnt, gibt es zwei Fehlerarten: `Exceptions` und `Errors`. Beides sind Objekte, die von der Klasse Throwable abgeleitet sind, wie in folgender Grafik ersichtlich. 
+
 ![](Exceptions-3.JPG)
+
+Hier die wichtigsten Punkte zusammengefasst.
 
 - Exception ist die Mutterklasse aller Ausnahmen, während java.lang.Error die Mutterklasse aller Fehler ist.
 - Beide Klassen haben die gemeinsame Oberklasse java.lang.Throwable.
 - Alles, was "throwable" ist, kann innerhalb eines Programms von einer Methode an die aufrufende Methode geworfen werden.
-- In Java unterscheidet man zwischen Fehlern und Ausnahmen (Exceptions).
+- In Java unterscheidet man zwischen Fehlern (Errors) und Ausnahmen (Exceptions).
 - Ausnahmen sind in der Regel behandelbare Fehlerfälle, während Fehler schwerwiegende Probleme darstellen, die normalerweise nicht behandelt werden können.
 - Exceptions sind Klassen, die von java.lang.Exception abgeleitet sind.
 
 ![](Exception-4.JPG)
 
 >**Strukturierte Fehlerbehandlung**
+
+Wie werden Fehler nun strukturiert behandelt?
 
 - Im Fall behebbarer Fehler wird eine "Ausnahme" mit Informationen über den Fehler erzeugt.
 - Die Ausnahme wird an die jeweils aufrufende Methode weitergereicht.
@@ -4416,58 +4430,68 @@ public class EndlosRekursion {
   * Eine aufrufende Methode kann den Fehler „abfangen“
   * Im „worst-case“ bricht die Programmausführung ab
  
-- Wenn wir Fehler und Ausnahmen nicht behandeln und auf diese reagieren, wird der geworfene Fehler auf der Konsole ausgegeben
-⟶ Wir wollen diese an der richtigen Stelle behandeln
+Wenn wir Fehler und Ausnahmen nicht behandeln und auf diese reagieren, wird der geworfene Fehler auf der Konsole ausgegeben. Das bedeutet, wir wollen diese an der richtigen Stelle behandeln und wie das funktioniert, wird nun in den folgenden Unterkapiteln erklärt.
 
 ### Exceptions werfen und fangen
 
+Um eine Exception zu behandeln, verwendet man in Java die Schlüsselwörter `try`, `catch`, `finally` und `throw`.
+
+* `try`: Der Code, der potenziell eine Exception verursachen könnte, wird in einem try-Block platziert.
+* `catch`: Falls eine Exception auftritt, wird sie von einem catch-Block abgefangen, der die Ausnahme behandelt.
+* `finally`: Dieser Block wird immer ausgeführt, unabhängig davon, ob eine Exception aufgetreten ist oder nicht. Er eignet sich für Aufräumarbeiten wie das Schließen von Ressourcen.
+* `throw`: Mit diesem Schlüsselwort wird eine Exception manuell ausgelöst.
+
+Betrachten wir hierzu folgendes Beispiel, zunächst nur mit `try` und `catch`:
+
 ```java
-public class BeispielNullpointer {
+public class BeispielNullpointer1 {
     public static void main(String[] args) {
         String[] meinStringArray = new String[10];
 
         try {
-        System.out.println(meinStringArray[2].equals("null"));
+            System.out.println(meinStringArray[2].equals("null"));
         } 
         catch(NullPointerException e) {
-        System.out.println("Vergleich mit Null nicht möglich");
+            System.out.println("Vergleich mit Null nicht möglich");
         }
    }
 }
 ```
-@LIA.java(BeispielNullpointer)
+@LIA.java(BeispielNullpointer1)
 
-- `try-Block` überprüft, ob etwas nicht funktioniert
-- `catch-Block` zum Behandeln der Ausnahme
+- Der `try-Block` überprüft, ob etwas nicht funktioniert
+- Der `catch-Block` ist dann zum Behandeln der Ausnahme da
 
   
-  * `NullPointerException` = Exception, die man abfangen möchte
+  * In diesem Fall eine `NullPointerException`, also eine Exception, die man abfangen möchte
 
-  * `e` = Beinhaltet Informationen über das Problem, ist gängige Namenskonvention für Exceptions
+  * `e` beinhaltet Informationen über das Problem, dies ist die gängige Namenskonvention für `Exceptions`
 - Das Programm läuft nach der Ausnahme normal weiter
 
 
 >**Finally-Block**
 
+Nun ein Beispiel mit zusätzlichem`finally`-Block:
+
 ```java
-public class BeispielNullpointer {
+public class BeispielNullpointer2 {
     public static void main(String[] args) {
         String[] meinStringArray = new String[10];
 
         try {
-        System.out.println(meinStringArray[2].equals("null"));
+            System.out.println(meinStringArray[2].equals("null"));
         } 
         catch(NullPointerException e) {
-        System.out.println("Vergleich mit Null nicht möglich");
-        e.printStackTrace();
+            System.out.println("Vergleich mit Null nicht möglich");
+            e.printStackTrace();
         }
         finally {
-        System.out.println("Dies wird immer ausgeführt.");
+            System.out.println("Dies wird immer ausgeführt.");
         }
    }
 }
 ```
-@LIA.java(BeispielNullpointer)
+@LIA.java(BeispielNullpointer2)
 
 - `finally`-Block (optional) wird immer ausgeführt, egal ob Exception geworfen wird oder nicht; muss am Schluss stehen
 
@@ -4481,61 +4505,62 @@ public class BeispielNullpointer {
 
 Es sind auch mehrere catch-Blöcke möglich:
 
-
-Wenn die erste catch-Anweisung nicht zur Art des aufgetretenen Fehlers passt, werden der Reihe nach alle übrigen catch-Anweisungen untersucht, und die erste übereinstimmende wird ausgeführt
+Wenn die erste `catch`-Anweisung nicht zur Art des aufgetretenen Fehlers passt, werden der Reihe nach alle übrigen `catch`-Anweisungen untersucht, und die erste übereinstimmende wird ausgeführt
 
 ```java
-public class BeispielNullpointer {
+public class BeispielNullpointer3 {
     public static void main(String[] args) {
         String[] meinStringArray = new String[10];
 
         try {
-        System.out.println(meinStringArray[10]);
+            System.out.println(meinStringArray[10]);
         } 
         catch(NullPointerException e) {
-        System.out.println("Vergleich mit Null nicht möglich");
-        e.printStackTrace();
+            System.out.println("Vergleich mit Null nicht möglich");
+            e.printStackTrace();
         } 
         catch(Exception e) {
-        System.out.println("Ein Problem ist aufgetreten");
+            System.out.println("Ein Problem ist aufgetreten");
         }
         finally {
-        System.out.println("Dies wird immer ausgeführt");
+            System.out.println("Dies wird immer ausgeführt");
         }
    }
 }
 ```
-@LIA.java(BeispielNullpointer)
+@LIA.java(BeispielNullpointer3)
 
 >**Mehrere Exceptions in einem Catch-Block**
 
-In einem catch-Block mehrere Exceptions fangen:
+In einem `catch`-Block kann man auch mehrere Exceptions fangen:
 
 - Klassennamen durch | (Strich) getrennt angeben
 - Es gibt nicht für jede der gefangenen Exceptions eine eigene Variable, sondern nur eine gemeinsame
 
 
 ```java
-public class BeispielNullpointer {
+public class BeispielNullpointer4 {
     public static void main(String[] args) {
         String[] meinStringArray = new String[10];
 
         try {
-        System.out.println(meinStringArray[10]);
+            System.out.println(meinStringArray[10]);
         } 
         catch(NullPointerException | ArrayIndexOutOfBoundsException e) {
-        System.out.println("Vergleich mit Null nicht möglich oder falscher Index");
-        e.printStackTrace();
+            System.out.println("Vergleich mit Null nicht möglich oder falscher Index");
+            e.printStackTrace();
         } 
         finally {
-        System.out.println("Dies wird immer ausgeführt");
+            System.out.println("Dies wird immer ausgeführt");
         }
    }
 }
 ```
-@LIA.java(BeispielNullpointer)
+@LIA.java(BeispielNullpointer4)
 
->**Übersich: Aufbau try/catch/finally**
+>**Übersicht: Aufbau try/catch/finally**
+
+Zusammengefasst:
 
 - Es gibt immer mindestens zwei Blöcke:
 
@@ -4551,12 +4576,13 @@ public class BeispielNullpointer {
   * +: Mindestens ein catch
   * *: Kein oder beliebig viele catch
 
+
 >**Eigene Exceptions**
 
-- Exceptions sind nicht anderes als Klassen, die von java.lang.Exception ableiten
-- Über den Konstruktor kann direkt eine angepasste Fehlernachricht mitgegeben werden
-- Eclipse warnt, dass keine serialVersionUID angegben wird --> für den Augenblick ignorieren
+- Exceptions sind nicht anderes als Klassen, die von java.lang.Exception ableiten, d.h. wir können auch eigene Exceptions erstellen.
+- Über den Konstruktor kann direkt eine angepasste Fehlernachricht mitgegeben werden, falls dies gewünscht wird. 
 
+Schauen Sie sich beide Punkte im untenstehenden Beispiel an.
 
 ```java
 public class DivisionsCheckException extends Exception {
@@ -4565,36 +4591,53 @@ public class DivisionsCheckException extends Exception {
         super("Division war nicht erfolgreich");
     }
 
-     public DivisionsCheckException() {
+     public DivisionsCheckException(String message) {
         super(message);
     }
 
 }
 ```
 
+
+Achtung: Wenn Sie eine eigene Exception erstellen, warnt Eclipse, dass keine serialVersionUID angegben wird. Dies können Sie in diesem Semesternoch ignorieren.
+
+
 >**Behandeln vs. Weiterleiten**
+
+Bisher haben wir die Exception behandelt. Dies bedeutet, dass diese direkt im `catch`-Block aufgefangen und dort eine entsprechende Reaktion oder Fehlerbehebung vorgenommen wird. Weiterleiten dagegen bedeutet, dass die Exception nicht direkt behandelt, sondern an eine höhere Ebene der Programmausführung weitergegeben wird, indem sie mit dem Schlüsselwort `throws` in der Methodensignatur angegeben wird.
+
+Vergleichen Sie hierzu folgendes Beispiel:
 
 ```java
 public class DivisionTest {
-    public static void main(String[] args) {
+    
+	public static void main(String[] args) {
+		
+		// "Behandeln"
+            try {
+				System.out.println(dividieren(10, 3));
+			} catch (DivisionsCheckException e) {
+				e.printStackTrace();
+			}        
+    }
 
-        try {
-            System.out.println(dividieren(10, 3));
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-
-    static int dividieren(int a, int b) throws DivisionsCheckException { // Über throws angeben, dass Methode eine Exception werfen könnte
+    // Über throws angeben, dass Methode eine Exception werfen könnte
+    static int dividieren(int a, int b) throws DivisionsCheckException { 
         int c = a / b;
 
         if (a % b != 0) {
-            throw new DivisionsCheckException("Division geht nicht auf"); // Innerhalb der Methode Exception mit Schlüsselword throw werfen, damit wird die Ausnahme ausgelöst
+            // Innerhalb der Methode Exception mit Schlüsselword throw werfen, damit wird die Ausnahme ausgelöst
+            throw new DivisionsCheckException("Division geht nicht auf"); 
         }
-    }
+		return c;
    }
 }
 ```
-@LIA.java(BeispielArray)
+
+
+Aufgabe: 
+
+Programmieren Sie obiges Beispiel in Eclipse nach und erstellen Sie die dazugehörige notwendige Exception. Von welcher Exception würde Sie Ihre spezielle `DivisionsCheckException` ableiten? 
 
 >**Weitere Anmerkungen zu Exceptions**
 
@@ -4607,24 +4650,23 @@ public class DivisionTest {
 - Exceptions mit angepassten, nutzerfreundlichen Meldungen versehen
 - Produktive Programme:
 
+Generell kann man grob sagen: Unter ein Drittel des Codes ist für eigentliche Funktionalität und über zwei Drittel des Codes sind für die Fehler-/Ausnahmenbehandlung.
 
-  * Unter ein Drittel des Codes für eigentliche Funktionalität
-  * Über zwei Drittel des Codes für die Fehler-/Ausnahmenbehandlung
 
 ### Unchecked Exceptions
 - Bisher: `Checked Exceptions` (überprüfte/geprüfte Exceptions):
   
   
   * Compiler prüft, ob Exception behandelt wird
-  * Beschreiben fachliche Fehler
+  * Beschreiben fachliche Fehler, d.h. diese müssen vom Entwickler vorhergesehen und explizit behandelt werden
+
 - `Unchecked Exceptions` (ungeprüfte Exceptions):
-  
-  
+    
   * Werden vom Compiler nicht beachtet
   * Sind Laufzeitfehler
   * Treten auf, wenn der Code fehlerhaft programmiert ist bzw. Schwachstellen hat
   * Haben Oberklasse `java.lang.RuntimeException`
-  * Beschreiben technische Fehler
+  * Beschreiben technische Fehler, d.h. diese müssen nicht explizit behandelt werden
 
 >**Übersicht einiger Runtime-Exceptions**
 
@@ -4632,16 +4674,19 @@ public class DivisionTest {
 
 | Exception                      | Beschreibung                                                                                                                |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| ArithmeticException            | Wird geworfen, wenn du beim Rechnen mit den Zahlen nicht aufpasst, z.B. durch Division durch Null.                          |
-| ArrayIndexOutOfBoundsException | Tritt auf, wenn du versuchst, auf einen Array-Index außerhalb des Arrays zuzugreifen.                                       |
-| ClassCastException             | Tritt auf, wenn du versuchst, eine Objektreferenz in einen nicht kompatiblen Typ umzuwandeln.                               |
+| ArithmeticException            | Wird geworfen, wenn beim Rechnen mit den Zahlen nicht aufpasst wird, z.B. durch Division durch Null.                          |
+| ArrayIndexOutOfBoundsException | Tritt auf, wenn versucht wird, auf einen Array-Index außerhalb des Arrays zuzugreifen.                                       |
+| ClassCastException             | Tritt auf, wenn versucht wird, eine Objektreferenz in einen nicht kompatiblen Typ umzuwandeln.                               |
 | IllegalArgumentException       | Tritt auf, wenn ein ungültiger Parameter an eine Methode übergeben wurde.                                                   |
 | NumberFormatException          | Wird geworfen, wenn bei der Umwandlung eines Strings in eine Zahl ein nicht-zahlartiger Wert übergeben wird.                |
 | IllegalStateException          | Tritt auf, wenn eine Methode in einem ungültigen Zustand des Programms aufgerufen wurde.                                    |
-| NullPointerException           | Tritt auf, wenn du versuchst, auf eine Methode auf einer Objektreferenz zuzugreifen, die den Wert null hat.                 |
+| NullPointerException           | Tritt auf, wenn versucht wird, auf eine Methode auf einer Objektreferenz zuzugreifen, die den Wert null hat.                 |
 
 
 > **Defensiv Programmieren**
+
+Das Ziel hier für heißt defensiv programmieren. Dies bedeutet, den Code so zu schreiben, dass er robust gegenüber unerwarteten Eingaben oder Zuständen ist, indem er potenzielle Fehlerquellen proaktiv abfängt und behandelt. Im Zusammenhang mit Unchecked Exceptions wie `NullPointerException` oder `ArrayIndexOutOfBoundsException` bedeutet dies, präventive Prüfungen und Validierungen durchzuführen, um solche Ausnahmen zu vermeiden, bevor sie auftreten. Betrachten Sie hierzu untenstehende Beispiele:
+
 | Code, der eine Exception werfen könnte                            | Exception, die geworfen werden könnte | Nicht fangen, sondern besser ...                                                                                                     |
 |-------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | int x = array[index];                                             | ArrayIndexOutOfBoundsException         | ... mit index < array. length vorher prüfen, ob das Array überhaupt eine entsprechende Größe hat.                                                    |
@@ -4650,9 +4695,7 @@ public class DivisionTest {
 
 ### Errors
 
-- Errors sind schwerwiegende Fehler, die man nicht mehr beheben kann
-- Errors werden ebenfalls von Throwable abgeleitet
-- Werden nicht vom Compiler geprüft und müssen daher auch nicht abgefangen werden
+Zuletzt betrachten wir `Errors`. Dies sind schwerwiegende Fehler, die man nicht mehr beheben kann. `Errors` werden ebenfalls von `Throwable` abgeleitet. Sie werden jedoch nicht vom Compiler geprüft und müssen daher auch nicht abgefangen werden.
 
 ![](Exception-8.png.svg)
 
@@ -4660,11 +4703,11 @@ public class DivisionTest {
 
 | Fehler                      | Beschreibung                                                                                                                         |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| ExceptionInInitializerError | Gibt's, wenn in einem statischen Initialisierungsblock etwas schiefgegangen ist.                                                     |
+| ExceptionInInitializerError | In einem statischen Initialisierungsblock hat etwas nicht funktioniert.                                                      |
 | IOError                     | Steht für einen Fehler bei der Ein- oder Ausgabe.                                                                                    |
 | NoClassDefFoundError        | Wird geworfen, wenn eine Klasse nicht gefunden wurde.                                                                                |
-| StackOverflowError          | Früher oder später hat er dich auch, der `StackOverflowError`, und zwar, wenn der Stack übergelaufen ist. Beispiel gibt's gleich.    |
-| OutOfMemoryError            | Dem begegnet auch jeder Java-Entwickler mindestens ... ach was weiß ich ... oft genug halt, immer dann, wenn kein Platz mehr auf dem Heap ist. |
+| StackOverflowError          | Der Stack ist übergelaufen.     |
+| OutOfMemoryError            | Es gibt keinen Platz mehr auf dem Heap. |
 
 ### Zusammenfassung
 > **Schlüsselwörter**
@@ -4676,16 +4719,13 @@ Es gibt fünf Schlüsselworte:
 - `catch`: Behandeln eines Fehlers --> Die Ausnahmen sollen von „speziell“ zu „allgemein“ angeordnet sein
 - `finally`: Abschluss eines Blocks zur Fehlerbehandlung, der bei normaler Verarbeitung und im Fehlerfall aufgerufen wird
 
-> **Zusammenfassung - Teil 1**
+> **Zusammenfassung**
 
 - Ausnahmen werden über `Exception`-Klassen abgebildet
 - Diese Klassen leiten von der Klasse `Exception` ab, die wiederum von der Klasse `Throwable` ableitet
 - Alles, was `Throwable` ist, kann mit `throw` geworfen werden und mit `try-catch` gefangen werden
 - Eine `RuntimeException` (und alle Unterklassen) muss nicht gefangen werden („`unchecked Exceptions`“)
 - Unchecked Exceptions mit defensiver Programmierung verhindern
-
-> **Zusammenfassung - Teil 2**
-
 - Bei checked Exceptions sorgt der Compiler dafür, dass sie behandelt werden (fangen oder weiterwerfen)
 - Wenn eine Methode eine checked Exception wirft, muss sie nach dem `throws` in der Methodendeklaration angegeben werden
 
