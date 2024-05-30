@@ -1,7 +1,7 @@
 <!--
 author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
 language: de
-version: 0.9
+version: 1.0
 narrator: Deutsch Female
 mode: Textbook
 
@@ -4984,5 +4984,434 @@ Wenn Sie sich weiter mit Generics beschäftigen möchten und nicht bis zum zweit
 
 ## Dateien (projektrelevant)
 
+In diesem Kapitel werden wir uns mit dem Umgang mit Dateien beschäftigen, was ein wesentlicher Bestandteil vieler Anwendungen darstellt. 
+Hierfür beschäftigen wir uns zunächst mit Datenströmen. Danach werden Sie lernen, wie man Dateien erstellt, liest und schreibt.
+
+
+### Datenströme
+
+In Java gibt es das Konzept der sogenannten `Streams` oder Datenströme. Man unterscheidet zwischen:
+
+- **Eingabeströmen (Input-Streams)**: Diese werden verwendet, um Daten aus einer Datenquelle in ein Java-Programm zu lesen.
+- **Ausgabeströmen (Output-Streams)**: Diese werden verwendet, um Daten aus einem Java-Programm in ein Datenziel zu schreiben. Dieses Ziel wird auch als **Datensenke** bezeichnet.
+
+Vorgehen
+
+- Öffnen des Streams
+- Einlesen bzw. Ausgeben des Streams
+- Schließen des Streams
+
+
+Für jeden Datentyp der richtige Strom:
+
+> Byte-Streams
+  
+Byte-Streams sind dazu da, Daten in Form von "einzelnen" Bytes zu lesen und zu schreiben. Dies ermöglicht prinzipiell die Verarbeitung aller Dateien. Sie sind jedoch in der Regel dazu da, Binärdateien (Bilder, MP3, Videos) zu verarbeiten. 
+
+Wenn Sie z.B. eine Text-Datei einlesen, die folgendermaßen aussieht,
+
+```
+Das ist ein Text, 
+der so tut, 
+als sei er eine Binaerdatei, 
+dabei ist es ein Text.
+```
+
+dann kann man den Inhalt in ein Character casten und wieder auf der Konsole ausgeben. 
+
+**Byte-Streams (einlesen)**
+
+```java
+try (InputStream eingabe = new FileInputStream(new File("./keineBinaerDatei.txt"))) {
+    int zeichen;
+    while ((zeichen = einbgabe.read()) != -1) {
+        // System.out.print(zeichen); Ausgabe: 68971153210511511632101105110328410...
+        System.out.print((char)zeichen); //Ausgabe: Das ist ein Text, 
+                                        //der so tut, 
+                                        //als sei er eine Binärdatei,
+                                        // dabei ist es ein Text.
+    }
+} catch (IOException e) {
+
+}
+```
+
+Anmerkungen zum Code:
+
+* `InputStream` : Dies ist die abstrakte Basisklasse für Eingabe-Streams.
+* `FileInputStream` : Diese Klasse öffnet einen Eingabestrom zum Lesen einer Datei.
+* `File` : Dies repräsentiert die Datei, mit `new File` wird eine Objektreferenz erzeugt.
+* `read()` : Diese Methode liest ein Byte des Eingabestroms, -1 bedeutet „Dateiende“. Der Rückgabewert ist vom Typ int, weil 257 Werte dargestellt werden müssen.
+
+**Byte-Streams (ausgeben)**
+
+Als nächstes sehen Sie ein Beispiel für das Schreiben eines Textes in eine Datei.
+
+```java
+    try(OutputStream ausgabe = new FileOutputStream(new File("meineDatei.txt"), true)) {
+		ausgabe.write("Hallo, dies ist mein Text.\n".getBytes()); //Schreibe "Hallo, dies ist mein Text die Datei meineDatei.txt 
+	} catch (IOException e) {
+	
+    }
+```
+
+* `OutputStream`: Dies ist die abstrakte Basisklasse für Ausgabe-Streams.
+* `FileOutputStream`: Diese Klasse öffnet einen Ausgabestrom zum Schreiben in eine Datei.
+* `write()`: Diese Methode schreibt das angegebene Byte-Array in den Ausgabestrom. Hier wird `"Hallo, dies ist mein Text.\n".getBytes()` verwendet, um den Text in ein Byte-Array zu konvertieren und dann in die Datei zu schreiben.
+* `true` = Anhängen an bestehende Datei
+
+> Character-Streams
+
+Zweck: Verarbeiten von Textdateien
+
+**Character-Streams: Zeichenweises Einlesen**
+
+Character-Streams sind darauf ausgelegt, Daten in Form von einzelnen Zeichen zu lesen und zu schreiben. Hierbei können verschiedene Zeichencodierungen berücksichtigt werden.
+
+```java
+    try (FileReader dateiLeser = new FileReader(new File("./meineDatei.txt"))) {
+        int zeichen;
+        while ((zeichen = dateiLeser.read()) != -1) {
+           System.out.print((char)zeichen);
+        }
+    } catch (IOException e) {
+    }
+```
+
+* `FileReader`: Ist eine Klasse, die Text aus Zeichen-Dateien liest, wobei standardmäßig ein Puffer verwendet wird. Die Umwandlung von Bytes in Zeichen erfolgt dabei entweder unter Verwendung eines angegebenen Zeichensatzes oder des Standard-Zeichensatzes des Betriebssystems.
+* `read()`: Die read()-Methode liest das nächste Zeichen aus dem Eingabestrom und gibt es als ASCII-Wert zurück. Wenn das Ende der Datei erreicht ist, wird -1 zurückgegeben.
+
+**Character-Streams: Zeilenweises Einlesen**
+
+Der BufferedReader kann Daten in einem Puffer speichern und somit die Anzahl der tatsächlichen Leseoperationen reduzieren. Dies reduziert die Verarbeitungsdauer erheblich.
+
+```java
+    try (BufferedReader dateiLeser = new BufferedReader(new FileReader(new File("./meineDatei.txt")))) {
+        String zeichen;
+        while ((zeichen = dateiLeser.readLine()) != null) {
+           System.out.print(zeichen);
+        }
+    } catch (IOException e) {
+    }
+```
+* `BufferedReader` : Liest Text zeilenweise aus einem Character-Input-Stream und verbessert die Leistung durch Pufferung (Speichern von Daten vorübergehend zur Verbesserung der Leistung).
+* `readLine()` (Methode der Klasse `BufferedReader`): Textzeilen werden aus einer Datei gelesen. Die Schleife wiederholt diesen Vorgang, bis das Dateiende erreicht ist.
+
+**Character-Streams: Zeilenweises Schreiben**
+
+Genaus wie "gepuffert" eingeleesen werden kann, kann der eingelesene Puffer auch wieder in die Datei geschrieben werden. 
+
+```java
+    try (BufferedWriter dateiSchreiber = new BufferedWriter(new FileWriter(new File("./meineDatei.txt"), true))) {
+        String zeichen;
+        dateiSchreiber.write("Hallo, mein Text.");
+    } catch (IOException e) {
+    }
+```
+
+* `BufferedWriter`: Schreibt Text in einen Character-Output-Stream und nutzt Pufferung zur Leistungssteigerung.
+* `write`: Schreibt den angegebenen Text ("Hallo, mein Text.") in den Ausgabestrom, der von dem `BufferedWriter` verwaltet wird. In diesem Fall wird der Text in die Datei "./meineDatei.txt" geschrieben.
+
+>Fazit: Files lesen und schreiben
+
+- Schritt 1: File-Objekt anlegen (File-Konstruktor mit Pfad zum File rufen)
+- Schritt 2: Aus File-Objekt lesen (z.B. mit FileReader)
+- Schritt 2a: Eingabe zeilenweise puffern (z.B. mit BufferedReader)
+- Schritt 3: Input verarbeiten
+- Schritt 4: Ressource schließen (am besten automatisch, Verwendung von try with resource)
+
+
+>try with ressource
+
+Anmerkung zu Schritt 4:
+
+Dank try with resource muss man sich beim Arbeiten mit Dateien, Datenbanken und anderen Ressourcen im finally-Block nicht mehr selbst um das Schließen der Ressource kümmern. 
+Voraussetzung hier für ist, dass die Ressource das Interface java.lang.AutoCloseable implementiert, wie z.B. der BufferedReader. 
+Die Ressource wird in den runden Klammern hinter dem try erstellt. Exceptions werden weiterhin geworfen und müssen gefangen werden. 
+Aber im finally-Block muss die Ressource nicht mehr geschlossen werden. 
+
+```java
+try(// Erstellen bzw. öffnen einer Ressource ){
+    //Hier wird etwas mi der Ressource gemacht
+} catch(IrgendeineException e){
+    //Behandle die Exception
+} finally {
+    //Hier wird wieder irgendetwas gemacht
+}
+```
+
+Im konkreten Beispiel:
+```java
+try(BufferedReader br = new BufferedReader(new FileReader("datei.txt"))){
+    System.out.println(br.readLine());
+} catch(FileNotFoundException e){
+    e.printStackTrace();
+} 
+```
+
+>Zusammenfassung
+
+Es gibt vier abstrakte Basisklassen zum Lesen und Schreiben von Bytes bzw. Characters:
+
+
+| Basisklasse für  | Bytes | Zeichen   |
+| :--------- | :--------- | :--------- |
+| Eingabe    | InputStream   | Reader    |
+| Ausgabe    | OutputStream   | Writer    |
+
+In diesen Klassen sind alle wesentlichen Methoden für das Lesen und Schreiben enthalten. Mehr über die darin enthaltenen Methoden können Sie im Buch [Java ist auch eine Insel](https://openbook.rheinwerk-verlag.de/javainsel/20_004.html#u20.4) von Christian Ullenboom nachlesen. 
+
+### java.nio.file
+
+In Java gibt es ein Paket namens `java.nio.file`, das ab Java 1.4 verfügbar ist. Dieses Paket hilft uns beim Arbeiten mit Dateien und Verzeichnissen. Hier sind die grundlegenden Konzepte und wie man sie einfach versteht:
+
+**java.nio.file.Path**
+
+`Path` ist eine Klasse in `java.nio.file`, die uns ermöglicht, Referenzen (Verweise) auf Dateien oder Verzeichnisse zu erstellen. Man kann sich `Path` wie einen Zeiger vorstellen, der auf eine Datei oder ein Verzeichnis zeigt.
+
+
+- Helferklasse Files enthält Methoden zur Verwaltung von Dateien und Verzeichnissen
+
+
+- **Beispiel:** 
+
+  ```java
+  Path path = Paths.get("example.txt");
+  ```
+  Die Helferklasse `Paths` liefert über `get()` eine Path-Instanz.
+
+Das Interface `Path` bietet Methoden zur Verarbeitung des betreffenden Pfads:
+
+- Absoluter Pfad: `toAbsolutePath()`. Dies ist ein vollständiger Pfad, der den gesamten Verzeichnispfad von der Wurzel bis zur Zieldatei oder zum Zielverzeichnis angibt. 
+- Kanonischer Pfad: `toRealPath()`. Dies ist die kürzeste und doch eindeutige Form eines absoluten Pfads, bei der alle symbolischen Links und relative Pfadkomponenten wie "." und ".." aufgelöst sind.
+
+Ein absoluter Pfad ist dabei ein vollständiger Pfad, der den gesamten Verzeichnispfad von der Wurzel bis zur Zieldatei oder zum Zielverzeichnis angibt. Ein kanonischer Pfad ist die kürzeste und eindeutigste Form eines absoluten Pfads, bei der alle symbolischen Links und relative Pfadkomponenten wie "." und ".." aufgelöst sind.
+
+```java
+Path datei = Paths.get("datei.txt");
+System.out.println(datei.toAbsolutePath()); 
+try {
+    System.out.println(datei.toRealPath()); 
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+- Pfade können mit `resolve()` kombiniert werden. Betrachten Sie hierzu folgendes Beispiel aus dem Buch von Philipp Ackermann: Schrödinger programmiert Java, Rheinwerk.
+
+```java
+Path Schlafzimmer = Paths.get("C:\\schroedinger\\wohnung\\schlafzimmer");
+Path krawatten = Paths.get("kleiderschrank\\obersteSchublade\\krawatten");
+Path woSindDieKrawatten = schlafzimmer.resolve(krawatten);
+System.out.println(woSindDieKrawatten); //C:\schroedinger\wohnung\schlafzimmer\kleiderschrank\obersteSchublade\krawatten
+
+```
+> Umwandlung zwischen `File` und `Path`
+
+Manchmal muss man zwischen den alten `File`-Objekten, welche aus einem älteren Package `java.io` stammen, und den neuen `Path`-Objekten, welche aus dem "neueren" `java.nio` Package stammen, hin- und herwechseln:
+
+- **Von `File` zu `Path`:**
+  ```java
+  File file = new File("Beispiel.txt");
+  Path path = file.toPath();
+  ```
+- **Von `Path` zu `File`:**
+  ```java
+  Path path = Paths.get("Beispiel.txt");
+  File file = path.toFile();
+  ```
+
+> `java.nio.file.Files`
+
+`Files` ist eine Klasse in `java.nio.file`, die viele nützliche statische Methoden bietet, um mit Dateien und Verzeichnissen zu arbeiten, wie z. B. Erstellen und Löschen von Dateien und Verzeichnissen.
+
+Schauen wir uns zunächst an, wie Dateien und Verzeichnisse erstellt werden können:
+
+**Eine Datei erstellen:**
+
+```java
+Path path = Paths.get("Beispiel.txt");
+Files.createFile(path);
+```
+
+  Hier wird eine neue Datei namens "Beispiel.txt" erstellt.
+
+**Ein Verzeichnis erstellen:**
+
+```java
+Path dir = Paths.get("neuesVerzeichnis");
+Files.createDirectory(dir);
+```
+
+  Hier wird ein neues Verzeichnis namens "neuesVerzeichnis" erstellt.
+
+Als nächstes kommen Beispiele, wie Dateien und Verzeichnisse gelöscht werden können:
+
+**Eine Datei löschen:**
+
+```java
+Path path = Paths.get("deleteDatei.txt");
+Files.delete(path);
+```
+
+  Hier wird die Datei "deleteDatei.txt" gelöscht.
+
+**Ein Verzeichnis löschen:**
+
+```java
+Path dir = Paths.get("deleteVerzeichnis");
+Files.delete(dir);
+```
+
+  Hier wird das Verzeichnis "deleteVerzeichnis" gelöscht.
+
+ **Eine Datei kopieren:**
+
+ Eine Datei zu kopieren funktioniert  auch ohne Streams, Reader, Writer und dergleichen, sondern allein mit der Helferklasse `Files`. Damit wird Lesen und Schreiben noch einfacher.
+
+```java
+Path datei = Paths.get("./resources/eingabe/datei.txt");
+Path andereDatei = Paths.get("./resources/ausgabe/andereDatei.txt");
+Path andereDatei2 = Paths.get("./resources/ausgabe/andereDatei2.txt");
+Path andereDatei3 = Paths.get("./resources/ausgabe/andereDatei3.txt");
+
+try {
+List<String> zeilen = Files.readAllLines(datei, StandardCharsets.ISO_8859_1);
+
+Files.write(andereDatei, zeilen, StandardCharsets.ISO_8859_1);
+
+byte[] ls = System.lineSeparator().getBytes(); 
+
+// Zeilenweise Schreiben in "andereDatei2", jede Zeile gefolgt von einem Zeilenumbruch
+for (String zeile : zeilen) {
+    Files.write(andereDatei2, zeile.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    Files.write(andereDatei2, ls, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+}
+
+// Kopieren der Datei "datei" nach "andereDatei3", vorhandene Datei wird überschrieben
+Files.copy(datei, andereDatei3, StandardCopyOption.REPLACE_EXISTING);
+
+} catch (IOException e) {
+e.printStackTrace();
+}
+``` 
+
+### Zusammenfassendes Beispiel
+
+Zuletzt kommt ein Beispiel, welches zeigt, wie eine Datei eingelesen und verändert wieder abgespeichert werden kann.
+
+Betrachten wir hierzu folgende Textdatei "sporarten.txt":
+
+```
+Schwimmen
+Laufen
+Radfahren
+```
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Scanner;
+
+public class BeispielDateien {
+
+	public static void main(String[] args) {
+		System.out.println("Bisher erfasste Sportarten sind:");
+		dateiEinlesenUndAusgeben();
+		neueSportartErfassen();
+		System.out.println("\nNun sind die Sporarten:");
+		dateiEinlesenUndAusgeben();
+	}
+
+	private static void neueSportartErfassen() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("\nBitte Sportart eingeben: ");
+		String sport = scanner.nextLine();
+		dateiAbspeichern(sport);
+		scanner.close();
+	}
+
+	public static void dateiEinlesenUndAusgeben() {
+		try (BufferedReader in = Files.newBufferedReader(Paths.get("sportarten.txt"), StandardCharsets.UTF_8)) {
+			for (String line; (line = in.readLine()) != null;)
+				System.out.println(line);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void dateiAbspeichern(String eingabe) {
+		try (BufferedWriter out = Files.newBufferedWriter(Paths.get("sportarten.txt"), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
+			out.write(eingabe);
+			out.write(System.lineSeparator());
+		}
+
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+```
+
+Zunächst wird die Datei sportarten.txt eingelesen und der Inhalt auf der Konsole ausgegeben. 
+Der Nutzer wird gebeten, eine weitere Sportart auf der Konsole einzugebenn. 
+Diese wird dann der Datei hinzugefügt. 
+Zum Schluss wird erneut die Liste der Sportarten ausgegeben.
+
+>Übung
+
+Versuchen Sie die verschiedenen Beispiele in diesem Kapitel nachzuimplementieren. 
+
 ## Abschlussprojekt
+
 Um sich auf die Projektaufgabe vorzubereiten, können Sie die Aufgabe UML-Shop in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen lösen.
+
+>**Thema**
+
+Es stehen im Sommersemester 2024 zwei Themen zur Auswahl:
+
+1) **Tracker**: Entwickeln Sie einen Programm zum Tracken von etwas Ihrer Wahl, wie z.B. Sportstunden oder Lernstunden.
+
+
+2) **Vereinsverwaltung**: Entwickeln Sie einen Programm zur Verwaltung von etwas Ihrer Wahl in Ihrem Verein wie z.B. Mitglieder oder Inventar.
+
+>**Projektbeschreibung**
+
+Erstellen Sie zunächst eine ca. zweiseitige Beschreibung des Programm, inkl. einem vorläufigen UML-Diagramm. 
+
+Sie können sich hierfür an folgenden Fragen orientieren:
+
+* Was wollen Sie konkret machen? Z.B. Meine täglichen Sportminuten tracken
+* Welche Funktionalitäten muss bzw. soll das Programm haben? Z.B. Sportart auswählen, Minuten tracken, neue Sportart anlegen, Liste aller absoliverten Sportminuten ausgeben (z.B. sortiert nach Minuten, sortiert nach Sportarten)
+* Wie sieht die grobe Architektur aus? Welche Pakete, Klassen, Hierarchien, Daten etc. gibt es?
+* Wie sieht Ihre grobe Zeitplanung aus?
+
+>**Bewertungskriterien**
+
+1) Inhaltliche Anforderungen
+
+* UML Diagramm
+* Bedienbarkeit über Menü und Übersichtsansicht der Daten in Konsole
+* Sortierbarkeit nach verschiedenen Kriterien
+* Exception Handling bzw. defensive Programmierung
+* Datei einlesen und ausgeben
+
+2) Quantitative Anforderungen
+
+* Funktionalitätsumfang des Programm (doppelte Gewichtung)
+
+3) Qualitative Anforderungen
+
+* Namensgebung und Lesbarkeit des Codes
+* Strukturierung des Programms, inkl. Kapselung
+* Funktionalität der Methoden bzw. Komplexität der Methoden
+
+>**Abschlusspräsentation**
+
+Vorstellung des Programms an Hand des UML-Diagramms und des Programmcodes.
