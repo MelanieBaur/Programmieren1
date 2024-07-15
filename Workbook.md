@@ -5333,7 +5333,7 @@ Ein Nachteil der Serialisierung in Java ist, dass sie ein eigenes, spezifisches 
 Ein weiterer Nachteil ist, dass während der Serialisierung konkurrierender Zugriff anderer Threads auf die zu serialisierenden Objekte und Strukturen ausgeschlossen sein muss. Andernfalls können Inkonsistenzen und Fehler im Serialisierungsprozess auftreten, weshalb zusätzliche Synchronisierungsmaßnahmen erforderlich sind.
 
 
-## Abschlussprojekt
+## Abschlussprojekt (Programmieren 1)
 
 Um sich auf die Projektaufgabe vorzubereiten, können Sie die Aufgabe UML-Shop in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen lösen.
 
