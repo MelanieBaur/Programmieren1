@@ -1,18 +1,18 @@
 <!--
-author: Melanie Baur and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de
+author: Melanie Baur, Sebastian Speiser and further professors and students of HFT Stuttgart, contact: melanie.baur@hft-stuttgart.de, sebastian.speiser@hft-stuttgart.de
 language: de
 version: 1.0
 narrator: Deutsch Female
 mode: Textbook
 
-comment: Vorlesung Programmieren 1 an der HFT Stuttgart
+comment: Vorlesung Programmieren 1 und 2 an der HFT Stuttgart der Bachelor-Studiengänge Informatik und Wirtschaftsinformatik
 
 import: https://raw.githubusercontent.com/liascript/CodeRunner/master/README.md
 
 -->
-# Programmieren 1 in Java
+# Programmieren 1 und 2 in Java
 <article>
-Dieses Online-Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java zunächst in den Studiengängen Informatik und Wirtschaftsinformatik im 1. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert.
+Dieses Online-Buch wird entwickelt an der Hochschule für Technik Stuttgart und dient der Einführung in die Programmierung mit Java zunächst in den Studiengängen Informatik und Wirtschaftsinformatik im 1. und 2. Semester. Es werden somit keine Vorkenntnisse im Programmieren vorausgesetzt. Das Buch befindet sich gerade im Aufbau und wird laufend ergänzt und verbessert. Die Inhalte des 1. Semesters sind Stand Juli 2024 im Buch inkludiert in einer 1. Version. Die Inhalte des 2. Semesters werden zum Wintersemester 24/25 ergänzt.
 
 Als Arbeitsweise wird für die Teilnehmenden der oben genannten Vorlesungen vorgeschlagen, jede Woche ein Kapitel durchzuarbeiten inkl. der zur Verfügung stehenden Programmieraufgaben. Der geschätze Zeitaufwand beträgt ohne Vorkenntnisse pro Woche 16 Stunden. Hiervon werden 6 Stunden an der Hochschule erbracht, ein:e Professor:in und/oder ein:e Assistent:in stehen hierbei für Fragen zur Verfügung. 10 Stunden sollen selbständig absolviert werden.
 
