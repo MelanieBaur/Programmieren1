@@ -4982,19 +4982,27 @@ Wenn Sie sich weiter mit Generics beschäftigen möchten und nicht bis zum zweit
 
 
 
-## Dateien (projektrelevant)
+## Dateiverarbeitung und Datenströme
 
-In diesem Kapitel werden wir uns mit dem Umgang mit Dateien beschäftigen, was ein wesentlicher Bestandteil vieler Anwendungen darstellt. 
-Hierfür beschäftigen wir uns zunächst mit Datenströmen. Danach werden Sie lernen, wie man Dateien erstellt, liest und schreibt.
+Datenströme sind grundlegende Werkzeuge zur Verarbeitung von Daten, die aus verschiedenen Quellen gelesen und in verschiedene Ziele geschrieben werden können. 
 
-
-### Datenströme
-
-In Java gibt es das Konzept der sogenannten `Streams` oder Datenströme. Man unterscheidet zwischen:
+Man unterscheidet hier zwischen:
 
 - **Eingabeströmen (Input-Streams)**: Diese werden verwendet, um Daten aus einer Datenquelle in ein Java-Programm zu lesen.
 - **Ausgabeströmen (Output-Streams)**: Diese werden verwendet, um Daten aus einem Java-Programm in ein Datenziel zu schreiben. Dieses Ziel wird auch als **Datensenke** bezeichnet.
 
+
+Es gibt untersschiedliche Arten von Datenströmen, wie z.B. Zeichenströme (Character Streams) oder Bytestrom (Byte Streams). 
+Zeichenströme werden für die Verarbeitung von Textdaten genutzt, während Bytestrom für die Verarbeitung von binären Daten wie Bildern, Audiodateien oder anderen nicht-textuellen Daten verwendet werden.
+
+Wir beschäftigen uns in diesem Kapitel zunächst mit Datenströmen und werden danach lernen, wie man Dateien erstellt, liest und schreibt.
+
+Im Kapitel Serialisierung beschäftigen wir uns zum Schluss mit Datenströme für Objekte.
+
+
+### Vorgehen
+
+In Java gibt es das Konzept der sogenannten `Streams` oder Datenströme. 
 Vorgehen
 
 - Öffnen des Streams
@@ -5367,6 +5375,212 @@ Zum Schluss wird erneut die Liste der Sportarten ausgegeben.
 >Übung
 
 Versuchen Sie die verschiedenen Beispiele in diesem Kapitel nachzuimplementieren. 
+
+
+
+### Serialisierung 
+
+Serialisierung hilft dabei, Objekte in einen Bytestrom zu konvertieren, um sie in einer Datei zu speichern. 
+Hierbei kommen die Klassen `ObjectOutputStream` und `ObjectInputStream` zum Einsatz, die es ermöglichen, Objekte auf einfache Weise zu speichern und wiederherzustellen. Diese Technik ist besonders nützlich, wenn komplexe Datenstrukturen oder der Zustand von Objekten dauerhaft gesichert oder zwischen Anwendungen ausgetauscht werden sollen.
+
+Schauen wir uns dies nun genauer an:
+
+Die Verwendung der Klassen `ObjectOutputStream` und `ObjectInputStream` ermöglicht es, Objekte in einem binären Format zu speichern und später wieder einzulesen. Diese binäre Speicherung ist spezifisch für Java, was bedeutet, dass die gespeicherten Daten nur von Java-Anwendungen gelesen werden können. Beim Einlesen der Objekte muss die Reihenfolge genau der Reihenfolge entsprechen, in der die Objekte zuvor geschrieben wurden, um die Konsistenz der Daten zu gewährleisten. Weiterhin muss die Klasse zwischen dem Speichern und Einlesen einer Instanz unverändert bleiben, da sonst die Struktur der Daten nicht mehr übereinstimmt. 
+
+Alle Klassen, die das Interface `Serializable` implementieren, sollten ein statisches Feld mit dem Namen `serialVersionUID` haben. Falls dieses fehlt, gibt der Compiler sonst eine Warnung aus. Dieser Wert wird beim Serialisieren in der Zieldatei gespeichert und beim Deserialisieren ausgelesen und mit dem aktuellen Wert in der Klasse verglichen. Wenn der Wert geändert wurde, wird die Deserialisierung mit einer `InvalidClassException` abgebrochen, um Dateninkonsistenzen zu vermeiden.
+
+
+
+
+>**Das Interface java.io.Serializable**
+
+Das Interface `Serializable` kennzeichnet Klassen, deren Instanzen in einen Bytestrom umgewandelt werden können, um sie zu speichern oder zu übertragen. Es ist ein Marker-Interface, das keine Methoden definiert, sondern lediglich signalisiert, dass die Klasse für die Serialisierung geeignet ist. 
+
+>**Beispiel: Notiz**
+
+Im folgenden ein Beispiel, wie das Interface angewendet wird. 
+Die `serialVersionUID` kann mit Eclipse generieren werden (vorausgesetzt eine Klasse implementiert `Serializable`). 
+Dafür `Strg+1` auf dem Klassennamen drücken und „Add generated serial version ID“ auswählen. Die so generierte ID repräsentiert sozusagen die Klasse Notiz mit den Eigenschaften `autor` und `nachricht` in genau dieser Reihenfolge.
+
+
+```java
+import java.io.Serializable;
+
+public class Notiz implements Serializable {
+    private static final long serialVersionUID = -7863523708345649798L;
+
+    private String autor;
+    private String nachricht;
+
+    public Notiz(String autor, String nachricht) {
+        this.autor = autor;
+        this.nachricht = nachricht;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getNachricht() {
+        return nachricht;
+    }
+}
+```
+
+
+
+
+```java
+public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+    String dateiName = "notiz.data";
+
+    Notiz notiz = new Notiz("Schrödinger", "Mein erstes gespeichertes Objekt.");
+    serialize(dateiName, notiz);
+
+    Notiz geleseneNotiz = null;
+    geleseneNotiz = deSerialize(dateiName);
+
+    System.out.println(geleseneNotiz.getAutor());
+    System.out.println(geleseneNotiz.getNachricht());
+}
+```
+
+
+
+```java
+static Notiz deSerialize(String dateiName) throws FileNotFoundException, IOException, ClassNotFoundException {
+    Notiz geleseneNotiz;
+    try (InputStream dateiLeser = new FileInputStream(dateiName);
+            ObjectInputStream objektLeser = new ObjectInputStream(dateiLeser)) {
+        geleseneNotiz = (Notiz) objektLeser.readObject();
+            }
+    return geleseneNotiz;
+}
+
+static void serialize(String dateiName, Notiz notiz) throws IOException, FileNotFoundException {
+    try (OutputStream dateiSchreiber = new FileOutputStream(dateiName);
+        ObjectOutputStream objektSchreiber = new ObjectOutputStream(dateiSchreiber)) {
+            objektSchreiber.writeObject(notiz);
+            objektSchreiber.flush();
+        }
+}
+```
+
+>**Serialisierbare Datentypen**
+
+Primitive Datentypen lassen sich immer serialisieren, da sie direkt in den Bytestrom umgewandelt werden können. Während des Serialisierungsprozesses wird der gesamte Objektbaum rekursiv durchlaufen, sodass alle referenzierten Objekte ebenfalls serialisiert werden. Zyklische Abhängigkeiten und mehrfacher Objektzugriff werden dabei korrekt behandelt, um Endlosschleifen zu vermeiden und sicherzustellen, dass jedes Objekt nur einmal serialisiert wird.
+
+Nicht serialisierbare Objekte können während des Serialisierungsprozesses Laufzeitfehler verursachen, weshalb sichergestellt werden muss, dass alle zu serialisierenden Objekte das Interface `Serializable` implementieren. Klassenattribute (statische Felder) werden jedoch nie serialisiert, da sie zur Klasse selbst und nicht zu den Instanzdaten gehören.
+
+
+**„Negativliste“**
+
+Möchte man, dass gewisse Attribute nicht serialisiert werden, so kann hier das Schlüsselwort `transient` genutzt werden. Wenn also ein Attribut als `transient` deklariert ist, wird es beim Serialisieren der Instanz übersprungen und nicht in den Bytestrom aufgenommen.
+
+```java
+public class SelfSerialize implements Serializable {
+
+    private String name = "Hugon";
+    transient private int gJahr = 2011;
+
+    public static void main(String[] args) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("SelfSerialize.ser"));
+            oos.writeObject(new SelfSerialize());
+
+            InputStream fis = new FileInputStream("SelfSerialize.ser");
+            ObjectInputStream o = new ObjectInputStream(fis);
+            SelfSerialize self = (SelfSerialize) o.readObject();
+
+            System.out.println("self = " + self);
+            System.out.println("self.name = " + self.name);
+            System.out.println("self.gJahr = " + self.gJahr);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+```
+
+**„Positivliste“**
+
+Serialisierbare Attribute einer Klasse lassen sich explizit durch das Array `serialPersistentFields` aufzählen. Dieses Array ist ein statisches und finales Feld der Klasse und enthält `ObjectStreamField`-Objekte, die die Namen und Typen der Felder definieren, die serialisiert werden sollen. Durch die Verwendung von `serialPersistentFields` können Sie präzise kontrollieren, welche Felder der Klasse serialisiert werden, unabhängig davon, ob sie als `transient` deklariert sind oder nicht. Diese Technik bietet eine detaillierte Kontrolle über den Serialisierungsprozess und ermöglicht es, bestimmte Attribute ein- oder auszuschließen.
+
+Schauen Sie das folgende Beispiel durch und wie `private static final ObjectStreamField[] serialPersistentFields = {...}` hier verwendet wird.
+
+```java
+public class SelfSerialize implements Serializable {
+
+    private String name = "Hugon";
+    transient private int gJahr = 2011;
+
+    private static final ObjectStreamField[] serialPersistentFields = new ObjectStreamField[]{
+        new ObjectStreamField("name", String.class),
+        new ObjectStreamField("gJahr", int.class),
+    };
+
+    public static void main(String[] args) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("SelfSerialize.ser"));
+            oos.writeObject(new SelfSerialize());
+
+            InputStream fis = new FileInputStream("SelfSerialize.ser");
+            ObjectInputStream o = new ObjectInputStream(fis);
+            SelfSerialize self = (SelfSerialize) o.readObject();
+
+            System.out.println("self = " + self);
+            System.out.println("self.name = " + self.name);
+            System.out.println("self.gJahr = " + self.gJahr);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+```
+
+>**Objekte speichern – eigene Serialisierung**
+
+Die Serialisierung kann beeinflusst werden, indem die privaten Methoden `writeObject()` und `readObject()` selbst definiert werden, um die Standardserialisierung zu umgehen. Diese Methoden ermöglichen es, den Serialisierungs- und Deserialisierungsprozess individuell anzupassen und spezielle Anforderungen zu erfüllen. Besonders hilfreich ist diese explizite Serialisierung bei verschiedenen Versionen derselben Klasse, da `readObject()` so gestaltet werden kann, dass unterschiedliche Versionen der Klasse unterschiedlich behandelt werden können.
+
+Beachten Sie auch hierzu folgendes Beispiel:
+
+```java
+private void writeObject(ObjectOutputStream out) {
+        String s = name + ";" + gJahr;
+        try {
+            out.writeObject(s);
+        } catch (IOException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Custom deserialization
+    private void readObject(ObjectInputStream in) {
+        try {
+            String s = (String) in.readObject();
+            String[] elems = s.split(";");
+            name = elems[0];
+            gJahr = Integer.parseInt(elems[1]);
+        } catch (IOException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+```
+
+>**Nachteile der Serialisierung**
+
+Ein Nachteil der Serialisierung in Java ist, dass sie ein eigenes, spezifisches Format zur Abspeicherung verwendet, das nur von Java gelesen werden kann. Im Gegensatz dazu wäre ein Format wie XML weitläufiger austauschbar und könnte von vielen verschiedenen Programmen gelesen werden. Zudem speichert die Serialisierung den gesamten Objektgraphen, was bedeutet, dass immer die vollständigen Daten eines Objekts gespeichert werden. Es gibt keine Möglichkeit, nur die Änderungen (Delta-Speicherung) zu speichern, was zu größeren und weniger effizienten Datensätzen führen kann.
+
+Ein weiterer Nachteil ist, dass während der Serialisierung konkurrierender Zugriff anderer Threads auf die zu serialisierenden Objekte und Strukturen ausgeschlossen sein muss. Andernfalls können Inkonsistenzen und Fehler im Serialisierungsprozess auftreten, weshalb zusätzliche Synchronisierungsmaßnahmen erforderlich sind.
+
 
 ## Abschlussprojekt
 
