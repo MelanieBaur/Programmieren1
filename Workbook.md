@@ -5127,213 +5127,7 @@ Zum Schluss wird erneut die Liste der Sportarten ausgegeben.
 
 Versuchen Sie die verschiedenen Beispiele in diesem Kapitel nachzuimplementieren. 
 
-
-
-### Serialisierung 
-
-Serialisierung hilft dabei, Objekte in einen Bytestrom zu konvertieren, um sie in einer Datei zu speichern. 
-Hierbei kommen die Klassen `ObjectOutputStream` und `ObjectInputStream` zum Einsatz, die es ermöglichen, Objekte auf einfache Weise zu speichern und wiederherzustellen. Diese Technik ist besonders nützlich, wenn komplexe Datenstrukturen oder der Zustand von Objekten dauerhaft gesichert oder zwischen Anwendungen ausgetauscht werden sollen.
-
-Schauen wir uns dies nun genauer an:
-
-Die Verwendung der Klassen `ObjectOutputStream` und `ObjectInputStream` ermöglicht es, Objekte in einem binären Format zu speichern und später wieder einzulesen. Diese binäre Speicherung ist spezifisch für Java, was bedeutet, dass die gespeicherten Daten nur von Java-Anwendungen gelesen werden können. Beim Einlesen der Objekte muss die Reihenfolge genau der Reihenfolge entsprechen, in der die Objekte zuvor geschrieben wurden, um die Konsistenz der Daten zu gewährleisten. Weiterhin muss die Klasse zwischen dem Speichern und Einlesen einer Instanz unverändert bleiben, da sonst die Struktur der Daten nicht mehr übereinstimmt. 
-
-Alle Klassen, die das Interface `Serializable` implementieren, sollten ein statisches Feld mit dem Namen `serialVersionUID` haben. Falls dieses fehlt, gibt der Compiler sonst eine Warnung aus. Dieser Wert wird beim Serialisieren in der Zieldatei gespeichert und beim Deserialisieren ausgelesen und mit dem aktuellen Wert in der Klasse verglichen. Wenn der Wert geändert wurde, wird die Deserialisierung mit einer `InvalidClassException` abgebrochen, um Dateninkonsistenzen zu vermeiden.
-
-
-
-
->**Das Interface java.io.Serializable**
-
-Das Interface `Serializable` kennzeichnet Klassen, deren Instanzen in einen Bytestrom umgewandelt werden können, um sie zu speichern oder zu übertragen. Es ist ein Marker-Interface, das keine Methoden definiert, sondern lediglich signalisiert, dass die Klasse für die Serialisierung geeignet ist. 
-
->**Beispiel: Notiz**
-
-Im folgenden ein Beispiel, wie das Interface angewendet wird. 
-Die `serialVersionUID` kann mit Eclipse generieren werden (vorausgesetzt eine Klasse implementiert `Serializable`). 
-Dafür `Strg+1` auf dem Klassennamen drücken und „Add generated serial version ID“ auswählen. Die so generierte ID repräsentiert sozusagen die Klasse Notiz mit den Eigenschaften `autor` und `nachricht` in genau dieser Reihenfolge.
-
-
-```java
-import java.io.Serializable;
-
-public class Notiz implements Serializable {
-    private static final long serialVersionUID = -7863523708345649798L;
-
-    private String autor;
-    private String nachricht;
-
-    public Notiz(String autor, String nachricht) {
-        this.autor = autor;
-        this.nachricht = nachricht;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public String getNachricht() {
-        return nachricht;
-    }
-}
-```
-
-
-
-
-```java
-public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-    String dateiName = "notiz.data";
-
-    Notiz notiz = new Notiz("Schrödinger", "Mein erstes gespeichertes Objekt.");
-    serialize(dateiName, notiz);
-
-    Notiz geleseneNotiz = null;
-    geleseneNotiz = deSerialize(dateiName);
-
-    System.out.println(geleseneNotiz.getAutor());
-    System.out.println(geleseneNotiz.getNachricht());
-}
-```
-
-
-
-```java
-static Notiz deSerialize(String dateiName) throws FileNotFoundException, IOException, ClassNotFoundException {
-    Notiz geleseneNotiz;
-    try (InputStream dateiLeser = new FileInputStream(dateiName);
-            ObjectInputStream objektLeser = new ObjectInputStream(dateiLeser)) {
-        geleseneNotiz = (Notiz) objektLeser.readObject();
-            }
-    return geleseneNotiz;
-}
-
-static void serialize(String dateiName, Notiz notiz) throws IOException, FileNotFoundException {
-    try (OutputStream dateiSchreiber = new FileOutputStream(dateiName);
-        ObjectOutputStream objektSchreiber = new ObjectOutputStream(dateiSchreiber)) {
-            objektSchreiber.writeObject(notiz);
-            objektSchreiber.flush();
-        }
-}
-```
-
->**Serialisierbare Datentypen**
-
-Primitive Datentypen lassen sich immer serialisieren, da sie direkt in den Bytestrom umgewandelt werden können. Während des Serialisierungsprozesses wird der gesamte Objektbaum rekursiv durchlaufen, sodass alle referenzierten Objekte ebenfalls serialisiert werden. Zyklische Abhängigkeiten und mehrfacher Objektzugriff werden dabei korrekt behandelt, um Endlosschleifen zu vermeiden und sicherzustellen, dass jedes Objekt nur einmal serialisiert wird.
-
-Nicht serialisierbare Objekte können während des Serialisierungsprozesses Laufzeitfehler verursachen, weshalb sichergestellt werden muss, dass alle zu serialisierenden Objekte das Interface `Serializable` implementieren. Klassenattribute (statische Felder) werden jedoch nie serialisiert, da sie zur Klasse selbst und nicht zu den Instanzdaten gehören.
-
-
-**„Negativliste“**
-
-Möchte man, dass gewisse Attribute nicht serialisiert werden, so kann hier das Schlüsselwort `transient` genutzt werden. Wenn also ein Attribut als `transient` deklariert ist, wird es beim Serialisieren der Instanz übersprungen und nicht in den Bytestrom aufgenommen.
-
-```java
-public class SelfSerialize implements Serializable {
-
-    private String name = "Hugon";
-    transient private int gJahr = 2011;
-
-    public static void main(String[] args) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("SelfSerialize.ser"));
-            oos.writeObject(new SelfSerialize());
-
-            InputStream fis = new FileInputStream("SelfSerialize.ser");
-            ObjectInputStream o = new ObjectInputStream(fis);
-            SelfSerialize self = (SelfSerialize) o.readObject();
-
-            System.out.println("self = " + self);
-            System.out.println("self.name = " + self.name);
-            System.out.println("self.gJahr = " + self.gJahr);
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-}
-```
-
-**„Positivliste“**
-
-Serialisierbare Attribute einer Klasse lassen sich explizit durch das Array `serialPersistentFields` aufzählen. Dieses Array ist ein statisches und finales Feld der Klasse und enthält `ObjectStreamField`-Objekte, die die Namen und Typen der Felder definieren, die serialisiert werden sollen. Durch die Verwendung von `serialPersistentFields` können Sie präzise kontrollieren, welche Felder der Klasse serialisiert werden, unabhängig davon, ob sie als `transient` deklariert sind oder nicht. Diese Technik bietet eine detaillierte Kontrolle über den Serialisierungsprozess und ermöglicht es, bestimmte Attribute ein- oder auszuschließen.
-
-Schauen Sie das folgende Beispiel durch und wie `private static final ObjectStreamField[] serialPersistentFields = {...}` hier verwendet wird.
-
-```java
-public class SelfSerialize implements Serializable {
-
-    private String name = "Hugon";
-    transient private int gJahr = 2011;
-
-    private static final ObjectStreamField[] serialPersistentFields = new ObjectStreamField[]{
-        new ObjectStreamField("name", String.class),
-        new ObjectStreamField("gJahr", int.class),
-    };
-
-    public static void main(String[] args) {
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("SelfSerialize.ser"));
-            oos.writeObject(new SelfSerialize());
-
-            InputStream fis = new FileInputStream("SelfSerialize.ser");
-            ObjectInputStream o = new ObjectInputStream(fis);
-            SelfSerialize self = (SelfSerialize) o.readObject();
-
-            System.out.println("self = " + self);
-            System.out.println("self.name = " + self.name);
-            System.out.println("self.gJahr = " + self.gJahr);
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-}
-```
-
->**Objekte speichern – eigene Serialisierung**
-
-Die Serialisierung kann beeinflusst werden, indem die privaten Methoden `writeObject()` und `readObject()` selbst definiert werden, um die Standardserialisierung zu umgehen. Diese Methoden ermöglichen es, den Serialisierungs- und Deserialisierungsprozess individuell anzupassen und spezielle Anforderungen zu erfüllen. Besonders hilfreich ist diese explizite Serialisierung bei verschiedenen Versionen derselben Klasse, da `readObject()` so gestaltet werden kann, dass unterschiedliche Versionen der Klasse unterschiedlich behandelt werden können.
-
-Beachten Sie auch hierzu folgendes Beispiel:
-
-```java
-private void writeObject(ObjectOutputStream out) {
-        String s = name + ";" + gJahr;
-        try {
-            out.writeObject(s);
-        } catch (IOException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    // Custom deserialization
-    private void readObject(ObjectInputStream in) {
-        try {
-            String s = (String) in.readObject();
-            String[] elems = s.split(";");
-            name = elems[0];
-            gJahr = Integer.parseInt(elems[1]);
-        } catch (IOException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SelfSerialize.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-```
-
->**Nachteile der Serialisierung**
-
-Ein Nachteil der Serialisierung in Java ist, dass sie ein eigenes, spezifisches Format zur Abspeicherung verwendet, das nur von Java gelesen werden kann. Im Gegensatz dazu wäre ein Format wie XML weitläufiger austauschbar und könnte von vielen verschiedenen Programmen gelesen werden. Zudem speichert die Serialisierung den gesamten Objektgraphen, was bedeutet, dass immer die vollständigen Daten eines Objekts gespeichert werden. Es gibt keine Möglichkeit, nur die Änderungen (Delta-Speicherung) zu speichern, was zu größeren und weniger effizienten Datensätzen führen kann.
-
-Ein weiterer Nachteil ist, dass während der Serialisierung konkurrierender Zugriff anderer Threads auf die zu serialisierenden Objekte und Strukturen ausgeschlossen sein muss. Andernfalls können Inkonsistenzen und Fehler im Serialisierungsprozess auftreten, weshalb zusätzliche Synchronisierungsmaßnahmen erforderlich sind.
-
-
-## Abschlussprojekt (Programmieren 1)
+## Abschlussprojekt
 
 Um sich auf die Projektaufgabe vorzubereiten, können Sie die Aufgabe UML-Shop in der [Aufgaben-Datenbank](https://speiser.hft-pages.io/programmieraufgaben/2024-ss-pro-1/) aus der Kategorie sonstige Übungen lösen.
 
@@ -5437,7 +5231,7 @@ public class MapDemo {
         // Aber: Es wurde String in die Map gesteckt,
         // (zunächst ein Object zurückbekommen)
         String nummerChris = (String) telefonbuch.get("Chris"); 
-        // Das heißt: Der Entwickler muss den richtigen Typ wieder herstellen
+        // Das heißt: Der Entwickler muss den richtigen Typ wiederherstellen
     }
 }
 ```
@@ -5525,9 +5319,9 @@ Betrachten wir dies am Beispiel eines generischen Kartons. Dies ist ein Karton, 
 >**Beispiel Karton**
 
 Typvariable steht zu Beginn der Klassendeklaration. Dadurch wird der Originaltyp Karton zum generischen Typ Karton<E>.
-Typparameter wird im Code wie ein normaler Typ genutzt, aber es kann kein entsprechendes Objekt erzeugt werden
+Typparameter wird im Code wie ein normaler Typ genutzt, aber es kann kein entsprechendes Objekt erzeugt werden.
 
-Haufige Namen für Typvariablen sind:
+Häufige Namen für Typvariablen sind:
 
 - E: Entity
 - T: Type
@@ -5585,7 +5379,7 @@ Unterschied:
 
 ### Generische Schnittstellen
 
-Nicht nur Klassen können generisch sein, sonderen auch Interfaces. Wir haben dies bereits beim Interface Comparable gesehen.
+Nicht nur Klassen können generisch sein, sondern auch Interfaces. Wir haben dies bereits beim Interface Comparable gesehen.
 
 >**Schnittstelle Comparable & Set**
 
@@ -5623,4 +5417,1191 @@ public final class Integer extends Number implements Comparable<Integer> {
 }
 ```
 
+### Erstellung und Nutzung
 
+Für eine Menge von Klassen kann eine Schablone konstruiert werden, wenn mit Ausnahme der Typangaben alle Klassen textuell identisch sind
+
+Durch Auslagerung der Typinformation in den Klassenkopf erhält man aus der Klasse eine Schablone:
+
+```java
+class Var<T> {
+    private T obj = null;
+
+    void setValue(T o) {
+        obj = o;
+    }
+
+    T getValue() {
+        return obj;
+    }
+}
+// T ist eine Typvariable für den sog. formalen Typparameter. 
+// I.d.R. nutzt man für die Platzhalter einzelne Großbuchstaben.
+```
+Instanziieren (Ersetzung der Typparameter durch bekannte Typen) erzeugt eine Schablonenklasse:
+
+```java
+Var<String> varString = new Var<String>();
+Var<Student> varStudent = new Var<Student>();
+```
+Schablonenklassen können wie alle Klassen abgeleitet werden, so können auch „dauerhafte“ Instanziierungen mit vollständiger Typinformation erzeugt werden:
+
+```java
+class VarStudent extends Var<Student> {}
+```
+
+>**Achtung** Fußangeln:
+
+- Die Information über den Typparameter wird nicht in die .class-Datei geschrieben, d.h. `instanceof` funktioniert nicht wie erwartet und `getClass()` liefert die Informationen über die Klassenschablone
+
+- Es gibt **eine** .class-Datei, neue Instanziierungen des Typparameters erzeugen keine neuen Klassen!
+
+>**Generische Schnittstellen**
+
+- Schnittstellen `Comparable` und `Set`:
+
+```java
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+```
+- Arten der Benutzung
+
+
+  - Auflösung des Typs oder
+
+  - Weitergabe der Parametervariable
+
+```java
+public interface Set<E> extends Collection<E> {
+    int size();
+    boolean isEmpty();
+    boolean contains(Object o);
+    Iterator<E> iterator();
+    Object[] toArray();
+    <T> T[] toArray(T[] a);
+    boolean add(E e);
+    boolean remove(Object o);
+    boolean containsAll(Collection<?> c);
+    boolean addAll(Collection<? extends E> c);
+    boolean retainAll(Collection<?> c);
+    boolean removeAll(Collection<?> c);
+    void clear();
+    boolean equals(Object o);
+    int hashCode();
+}
+```
+
+>**Methodenschablone erstellen**
+
+- Klassenschablonen, die nur `static`-Methoden definieren, heißen Methodenschablonen:
+
+```java
+class Utilities {
+    static <T extends Comparable<T>> T min(T a, T b) {
+        return a.compareTo(b) < 0 ? a : b;
+    }
+
+    static <T extends Comparable<T>> T max(T a, T b) {
+        return a.compareTo(b) > 0 ? a : b;
+    }
+    //error: The method compareTo(T) is undefined for type T
+}
+```
+
+>**Beispiel Methodenschablone**
+```java
+class ZufallBeispiel {
+    public static <T> T zufall(T x, T y) {
+        return Math.random() > 0.5 ? x : y;
+    }
+}
+```
+
+Aufruf der Methode (ohne Typangabe)_
+
+```java
+System.out.println(ZufallBeispiel.zufall(„Kino",„Sport"));
+```
+>**Methodenschablonen instanziieren**
+
+- Eine Methodenschablone wird vom Compiler instanziiert, indem die Methode mit passenden Parametern gerufen wird.
+
+- Der Compiler erkennt die Typvariable T anhand der Parameter, eine Methodenschablone darf daher T nicht nur im Rückgabewert haben.
+
+>**Spezialisierte Klassenschablonen**
+
+- Normale Klassenschablonen können mit allen von `java.lang.Object` abgeleiteten Typen instanziiert werden
+- Manche Klassenschablonen benötigen jedoch spezielle Eigenschaften, z.B. Vergleichbarkeit mit `compareTo()`
+- Bei der Definition einer Klassenschablone kann mit `extends` eine Untergrenze für den Typparameter angegeben werden:
+
+```java
+class SArray<T extends Comparable>
+```
+
+- Weitere Obertypen können mit `&` verkettet werden
+
+### Generics in Collections
+>**Collections (Wiederholung)**
+
+- Eine Collection ist eine Klasse, deren Aufgabe die Speicherung von Elementen anderer Klassen ist
+- Collections sind generisch formuliert – der Typ der zu speichernden Objekte wird bei der Initialisierung festgelegt
+- Die Alternative wäre, Collections für den Typ Object zu schreiben – wegen Class Casts wäre der Code fehleranfällig!
+
+- Collections unterscheiden sich in Bezug auf:
+
+
+  - Die Art der Speicherung
+
+  - Die Zugriffsmöglichkeiten und Geschwindigkeiten
+
+- Es gibt keine für alle Zwecke ideale Collection, jede Klasse stellt einen Kompromiss in Bezug auf Zeit, Speicher-verbrauch, Zugriff und Sortierung dar.
+
+>**Entwurfsprinzipien**
+- **Schnittstellen** legen Operationsgruppen für die verschiedenen „Behältertypen“ fest (z.B. `List`, `Map`).
+- **Konkrete Klassen** für „Behältertypen“ erben von der abstrakten Basisklasse (z.B. `ArrayList`, `TreeMap`).
+- **Algorithmen** sind für den „Behältertyp“ verfügbar oder für die Utility-Klasse `Collections` (z.B. Suchen, Sortieren).
+- (Für Entwickler der „Behältertypen“, d.h. weniger für Anwender: ) Die Vielzahl der abstrakten Basisklassen führt zu einer kleinen Zahl von als abstrakt deklarierten Grundoperation am „Behältertyp“.
+
+>**Hierarchie der Collection Interfaces**
+![Overview over collections](CollectionsMapsOverview.png)
+
+Details:
+
+- **Set**:		Menge im mathematischen Sinn
+- **List**:		Indizierte Folge
+- **Queue**:		Warteschlange (z.B. FIFO)
+- **Deque**:		Schlange mit zwei Endpunkten
+- **Map**:		Schlüssel-Wert Paare
+- **SortedSet**:	Sortierte Menge
+- **SortedMap**:	Paare sind nach Schlüssel sortiert
+
+
+>**Schnittstelle Collection<E>**
+<img src="generics-3.png" alt="ProgrammAusfuehren" width="80%">
+<img src="generics-4.png" alt="ProgrammAusfuehren" width="80%">
+
+>**Schnittstelle List<E>**
+
+- Operationen: Indizierter Zugriff (get, set, add, remove), Sortieren, Suche, Iteratoren, Bereichsoperationen
+
+- Implementierende Klassen:
+
+
+  - ArrayList, LinkedList, Stack, ...
+```java
+public static void main(String[] args) {
+    List<Integer> list = new ArrayList<>();
+    list.addAll(Arrays.asList(8, 2, 1, 4, 7, 3));
+
+    list.sort(null);
+
+    for (Integer i : list) {
+        System.out.println(i);
+    }
+}
+```
+
+>**Schnittstelle Queue<E>**
+
+- Operationen: Hinzufügen, Entfernen, Prüfen
+- Reihenfolge meistens FIFO
+- Implementierung: `LinkedList`, `PriorityQueue`, ...
+
+```java
+public static void main(String[] args) throws InterruptedException {
+    Queue<String> queue = new LinkedList<>();
+    queue.add("David");
+    queue.add("Leah");
+    queue.add("Ariel");
+
+    System.out.println("First in queue: " + queue.element());
+    while (!queue.isEmpty()) {
+        System.out.println(queue.remove());
+        Thread.sleep(1000);
+    }
+}
+```
+
+>**Schnittstelle Map<E>**
+
+- Schlüssel-Wert Paare („Mathematischer Funktionsbegriff“)
+- Operationen: CRUD-Operationen, Iteratoren, ...
+- Implementierende Klassen (analog zu Schnittstelle Set<E>): 
+`HashMap`, `TreeMap`, `LinkedHashMap`, …
+
+```java
+public static void main(String[] args) {
+    Map<Integer, Integer> m = new HashMap<>();
+
+    int attempts = 6000;
+    for (int a = 0; a < attempts; a++) {
+        Integer i = (int) (Math.random() * 6 + 1);
+        Integer count = m.get(i);
+        m.put(i, (count == null) ? 1 : count + 1);
+    }
+
+    System.out.println("Entries: " + m.size());
+    System.out.println(m);
+}
+```
+
+### Übungen
+
+## Funktionale Programmierung 1
+
+`Funktionale Programmierung` ist ein Programmierparadigma, das sich auf die Verwendung von Funktionen konzentriert, um Probleme zu lösen. Es unterscheidet sich von anderen Paradigmen wie dem imperativen oder objektorientierten Programmieransatz durch die Art und Weise, wie Programme strukturiert und Zustände verwaltet werden.
+
+Wichtige Konzepte der Funktionalen Programmierung:
+
+- Keine Trennung zwischen Daten und Code:
+   In der funktionalen Programmierung gibt es keine Unterscheidung zwischen Daten und Code. Funktionen können andere Programme und sogar sich selbst verarbeiten.
+
+- Funktionen können in Variablen gespeichert werden:
+   Funktionen können in Variablen gespeichert und als Parameter an andere Funktionen übergeben werden, was eine flexible Nutzung und Kombination ermöglicht.
+
+- Keine Seiteneffekte:
+   Funktionen beeinflussen keine äußeren Zustände und modifizieren keine übergebenen Referenzvariablen. Sie liefern immer denselben Rückgabewert für dieselben Eingabewerte, was zu einer deterministischen Ausführung führt.
+
+Ein Beispiel für funktionale Programmierung in Java ist die Sortierung einer Liste: 
+
+```java
+import java.util.List;
+import java.util.Arrays;
+
+class funktProg {
+    public static void main(String args[]) {
+        List<Integer> numbers = Arrays.asList(3, 1, 4, 1, 5, 9);
+        numbers.sort((a, b) -> a - b);
+        System.out.println(numbers);
+    }
+}
+```
+@LIA.java(funktProg)
+
+>**Programmierparadigmen**
+
+- Verschiedene Paradigmen in der Programmierung:
+  - imperativ
+  - objektorientiert
+  - deklarativ
+  - funktional
+- In manchen Programmiersprachen kommen mehrere Programmierparadigmen gleichzeitig zum Einsatz
+- Java bei uns bisher: imperativ und objektorientiert
+- Ab heute aber auch: deklarativ und funktional
+
+### Funktionale Schnittstellen
+
+>**Methoden in Schnittstellen**
+Es gibt 3 Arten von Methodendeklarationen:
+
+- Kein Schlüsselwort oder abstract: Methode muss in einer abgeleiteten Klasse überschrieben werden
+- Schlüsselwort default: Methode braucht Implementierung, wird Objektmethode
+- Schlüsselwort static: Methode braucht Implementation, wird Klassenmethode
+
+>**Schnittstellen mit Default-Methoden**
+
+Schnittstellen dürfen auch Methoden mit Rümpfen enthalten 
+Im Unterschied zu abstrakten Klassen sind Felder in Schnittstellen verboten
+
+```java
+interface TestInterface {
+    public void berechne (int a, int b); // abstract method
+    default void melde() {               // default method
+        System.out.println("Berechnung durchgefuehrt");
+    }
+}
+```
+
+>**Comparator**
+Die Schnittstelle Comparator enthält 9 static und 7 default Methoden (hier ein Auszug):
+
+```java
+public interface Comparator<T> {
+
+    abstract int compare(T a, T b);
+
+    default Comparator<T> thenComparing 				
+        (Comparator<? super T> other) {
+        // nutzt compare
+    }
+}
+```
+Die default-Methode stützt sich auf compare ab – sobald dies implementiert ist, kann thenComparing genutzt werden
+
+>**Funktionale Schnittstellen**
+
+Idee: Funktionale Schnittstellen dienen zur Erstellung von „Service-Objekten“ mit nur einer relevanten Methode. 
+
+Typische funktionale Schnittstellen sind:
+
+- Comparator<T>, definiert int compare(T o1, T o2);
+- Runnable, definiert void run();
+- ActionListener, definiert actionPerformed(ActionEvent e);
+
+--> Die Schnittstelle `Comparable` ist nicht sinnvoll funktional nutzbar, denn `compareTo(T)` nutzt in der Implementierung normalerweise „this“, also eine Objektvariable.
+
+>**Anonyme innere Klassen und funktionale Schnittstellen**
+Bisher haben Sie solche Service-Objekte durch anonyme innere Klassen implementiert
+
+Dieses Vorgehen hat drei wesentliche Nachteile:
+
+- In komplexen Applikationen z.B. mit Dutzenden von Buttons in einem Fenster müssen beim Laden des Fensters auch Dutzende anonyme innere Klassen geladen und instanziiert werden: Verzögerung für den Nutzer!
+- Eine einmal geladene Klasse wird i.d.R. erst dann entladen, wenn die Applikation als Ganzes terminiert
+- Der Code wird unübersichtlich
+
+### Lambda-Ausdrücke
+
+- Ähnlich wie anonyme innere Klassen, bei denen die Klasse keinen Namen hat (ggf. nur das Objekt), gibt es anonyme Methoden, auch Lambdas genannt
+- Sie implementieren eine funktionale Schnittstelle, sind also selbst Objekte: eine Kernidee der Funktionalen Programmierung
+- Diese Methoden können zur Implementation abstrakter Methoden in funktionalen Schnittstellen genutzt werden!
+
+Ein Lambda-Ausdruck ist aufs Minimum reduziert:
+
+```java
+(a, b) -> a+b
+```
+
+- Parameterliste: Welche Argumente werden gebraucht? 
+- Rumpf: Was soll mit den Argumenten passieren?
+- (Syntax: verbunden durch den Pfeil-Operator)	
+
+>**Beispiel 1: lexikographische Sortierung**
+
+Ziel: Anpassung des Verhaltens von Algorithmen
+
+Mittels anonymer innerer Klasse:
+
+```java
+Arrays.sort(zahlen, new Comparator<Integer>() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o1.toString().compareTo(o2.toString());
+    }
+});
+```
+
+Mittels Lambda-Ausdruck:
+
+```java
+Arrays.sort(zahlen, (Integer o1, Integer o2) ->
+    o1.toString().compareTo(o2.toString()));
+```
+
+>**Beispiel 2: Umgekehrte Sortierung**
+```java
+    List<Integer> liste = new ArrayList<>();
+    Collections.addAll(liste,  1 , 2 , 3 , 4);
+
+    //mit anonymer Klasse
+        liste.sort( new Comparator<Integer>() {
+            @Override
+            public int compare(Integer arg0, Integer arg1) {
+            return arg1 - arg0;
+        }
+    });
+
+    //mit Lambda Ausdruck (Datentyp der Parameter wird abgeleitet)
+    liste.sort( (a,b) -> b-a);
+```
+
+>**Schnittstelle und Lambda**
+Schloss und Schlüssel
+
+Der Compiler prüft bzw. nutzt die Passung zwischen implementierter Schnittstelle und Lambda-Ausdruck:
+
+```java
+    public interface Comparator<T> {
+        abstract int compare(T a, T b);
+    }
+
+    List<Integer> liste = new ArrayList<>();
+    liste.sort( (a,b) -> b-a);
+
+```
+
+>**Beispiel mehrere Comparatoren**
+
+```java
+ArrayList<Person> alp = new ArrayList<>();
+    alp.add(new Person("Hugo",42));
+    alp.add(new Person("Hugo",37));
+    alp.add(new Person("Christof", 38));
+    
+    // Definition von drei Comparatoren
+    Comparator<Person> byAge = (p1, p2) ->{
+        return Integer.compare(p1.getAge(),p2.getAge());  };
+    
+    Comparator<Person> byFirstName = (p1, p2) -> {
+        return p1.getFirstName().compareTo(p2.getFirstName());};
+    
+    Comparator<Person> byAgeThenFirstName =
+             byAge.thenComparing(byFirstName);
+    
+    // dann Ausgabe in Wunschsortierung (freie Wahl des Comparators)	
+```
+
+### Syntax von Lambda-Ausrücken
+
+>**Typinferenz**
+
+(Parameterleiste) -> Rumpf
+
+Parameterleiste:
+
+- Parameter mit Typangabe: Der Compiler nutzt den Typ
+- Parameter ohne Typangabe: Der Compiler ermittelt den Typ
+
+Rumpf und Rückgabetyp:
+
+- Ein Ausdruck (ohne { }-Klammern), in diesem Fall liefert die Methode den Wert des Ausdrucks zurück
+- Ein Block (mit { }-Klammern) mit `return`, in diesem Fall liefert die Methode  ggf. das Argument von `return` zurück
+- Ein Block (mit { }-Klammern) ohne `return`, in diesem Fall ist die Methode `void`
+
+>**Beispiele für anonyme Methoden: Ausdruck**
+
+```
+Ohne Parameter: 	         () -> System.in.read()
+
+Mit typlosem Parameter:    (r) -> r.run() 
+
+Mit getyptem Parameter:    (Callable c, String a)->c.apply(a)
+```
+
+Ein Ausdruck (ohne { }-Klammern) ist nur möglich, wenn keine lokalen Variablen oder Kontrollstrukturen vorkommen
+
+>**Beispiele für anonyme Methoden: Block**
+
+```
+Ohne return, ohne Parameter:  () -> {Thread.sleep(100);}
+Ohne return, mit Parameter:	 (Thread t) -> {t.start(); t.join();}
+Mit return, mit Parameter: 	(int a) -> { int s = 0;
+ 					                               while(--a>0) {s+=a}; 	
+                                		     return s;}
+```
+Ein Block (mit { }-Klammern) ist immer möglich!
+
+### Methodenreferenzen
+Lambdas definieren Funktionen, über die wir das Programm parametrisieren können
+
+Was aber, wenn eine passende Methode im Code schon vorhanden ist, also kein neues Lambda notwendig?
+
+Lösung sind Methodenreferenzen. Aus:
+
+```java
+Arrays.sort(array, (s1,s2) -> myClass.myCompare(s1,s2));
+```
+wird dann mit der Methodenreferenz noch kürzer:
+
+```java
+Arrays.sort(array, myClass::myCompare);
+```
+
+>**Methodenreferenzen: Nutzen**
+
+- Methodenreferenzen (Klassenname::Methodenname) dienen zur besonders schnellen Initialisierung funktionaler Schnittstellen mit benannten Methoden
+- Auch sie können in Variablen gespeichert werden:	
+
+```java
+Runnable runner = System.out::println;
+```
+
+- Die linke und rechte Seite der Zuweisung passen:
+
+
+  - Die Methode `run` der Schnittstelle `Runnable` hat keine Parameter und den Rückgabetyp `void`
+  - Ebenso gibt es eine Methode `println` in `System.out` ohne Parameter und mit Rückgabetyp `void`
+
+>**Interface Function**
+
+**Verwendung**: 
+
+```java
+Function<Integer,Integer> add1 = x -> x + 1; 
+```
+
+![](FunktionaleProgrammierung-1.png)
+
+Wichtigste Methode:
+
+- R apply (T t)
+- Applies this function to the given argument
+
+>**Regeln für Methodenreferenzen**
+- Rückgabewert der ausgewählten Methode muss zuweisungskompatibel mit Schnittstellenmethode sein:
+
+
+  - Rückgabewert void, Methodenreferenz void: ok
+  - Rückgabewert int, Methodenreferenz String oder void: nicht ok
+- Die Parameterliste muss passen:
+
+
+  - Klassenmethode: alle Parameter passen exakt  ```Function<Object,String> stringMaker=String::valueOf;```
+  - Instanzmethode eines konkreten Objekts: alle Parameter passen: ```String meinString = "Hallo"; Function<String, String> fConcat = meinString::concat;```
+  - Instanzmethode ohne konkretes Objekt: this wird erster Parameter, Argumente der Methode werden weitere Parameter ```Comparator<String> stringCompare= String::compareToIgnoreCase;```
+
+### Übungen
+
+## Funktionale Programmierung 2
+
+>**Lambdas: Methoden als Objekte**
+
+- Lambda-Ausdrücke erlauben, Methoden wie Objekte zu behandeln: Der Kern der funktionalen Programmierung
+- Dadurch lassen sich einfache Methoden in knapper funktionaler Schreibweise zu komplexen Methoden kombinieren
+
+>**Streams: Datenverarbeitung am Fließband**
+
+Die folgende SQL-Abfrage berechnet das mittlere Gehalt der erwachsenen Angestellten einer Firma nach Alter sortiert und gruppiert, wobei nur Gruppen von mindestens 10 Personen gewertet werden:
+
+```java
+SELECT AVG(SALARY) FROM EMPLYEE ORDER BY AGE
+    WHERE AGE >= 18 GROUP BY AGE HAVING COUNT(AGE) >= 10
+```
+
+Schätzen Sie ab, wie hoch der Aufwand zur Berechnung dieses Ergebnisses mit einer Programmierung von Schleifen wäre?
+
+Mit Streams lässt sich dieses Problem in nur wenigen Zeilen Code lösen: auch deklarativer Ansatz wie bei SQL!
+
+>**Streams: Folge von Operationen auf Daten**
+
+Pipeline: (Quelle . Verarbeitung . Verarbeitung ... Zusammenfassung)
+
+Zahlreiche Datenquellen (Collections, Dateien, Supplier ...)
+
+- Parallele Verarbeitung möglich (Nutzung aller Cores)
+
+
+  - Umformung
+  - Filterung
+  - Sortierung
+
+**Einfaches Beispiel:**
+
+Gegeben ist eine Liste von Objekten der Klasse `Author` mit den Feldern `fname, vname, age und revenue`
+
+Gesucht sind die beiden umsatzstärksten mindestens 50 Jahre alten Autoren:
+
+```java
+authors.stream().
+        filter((x)->x.age>=50).
+        sorted((x, y)->y.revenue.compareTo(x.revenue)).
+        limit(2).
+        forEach((x)->System.out.printf("%s %s%n", x.vname, x.fname));
+```
+
+- Der Aufruf von filter löscht alle Autoren < 50 Jahren
+- Der Aufruf von sorted sortiert absteigend
+- Der Aufruf von limit löscht alles ab dem 3. Element
+- Der Aufruf von forEach druckt alle verbleibenden Elemente mit der Methode `printf`
+
+>**Eine Warnung**
+
+Achtung: Die im Folgenden behandelten Klassen und Methoden finden sich im Paket java.util
+manchmal auch „Java 8 Streams“ genannt
+
+Die anderen behandelten Stream-Klassen z.B. InputStream, OutputStream, etc. befinden sich im Paket java.io
+
+Beide Klassen verarbeiten Ströme von Daten, aber:
+
+- Die Klassen aus java.io verarbeiten elementare Typen
+- Die Klassen aus java.util verarbeiten Objekte
+
+
+
+### Aufbau von Streams
+
+>**Grundideen hinter Streams**
+
+- Pipelines von Operationen, die einen eingehenden Stream von Objekten verarbeiten
+- Oft Lambda-Ausdruck als Parameter: Wie soll sortiert werden, welches Filterkriterium angewandt?
+
+
+  - basiert auf funktionaler Schnittstelle
+- Meistens gilt im Sinne der funktionalen Programmierung: Die Quelldaten des Streams bleiben unverändert, ein Verarbeitungsschritt erstellt jeweils einen neuen Stream mit den Ergebnissen. –> Verarbeitungsmethoden  ohne internen Zustand
+- Streams können später nicht mehr wiederverwendet werden. Sobald ein Stream zu Ende verarbeitet wurde, wird er geschlossen!
+
+>**Stream-Pipelines**
+- Am Anfang steht immer eine Datenquelle
+
+
+  - Collections, Arrays
+  - Generatoren (z.B. Datenbankabfragen, eigene Methoden)
+- In der Mitte steht die Verarbeitung (intermediäre Operationen)
+
+
+  - Filtern
+  - Umformen
+  - Begrenzen
+
+- Am Ende steht eine Datensenke (terminale Operation)
+
+
+  - Minimum / Maximum / Durchschnitt / Anzahl
+  - Ausgabe in Collection oder Array / Reduktion / Auswertung
+
+
+
+### Streams-Datenquellen
+
+Stream aus einem Array:
+
+```java
+int[] data= {1,2,3};
+Arrays.stream(data).forEach(System.out::println);
+```
+
+Stream aus einer Collection mittels .streams():
+
+```java
+List<String> liste = new LinkedList<String>();
+liste.stream().forEach(System.out::println);
+```
+
+Auch aus Aufzählung möglich: Stream.of()
+
+```java
+Stream.of(1,2,3).forEach(n -> System.out.println(n));
+```
+
+Vorsicht bei Arrays/Collections (mit primitiven Datentypen):
+
+```java
+Stream.of(data).forEach(n -> System.out.println(n));
+// liefert: [Z@4564caa5
+```
+
+Streams können aber auch (potentiell) unendlich lang sein: 
+
+- `Stream.generate(Supplier<T> s)`: Stream mit Elementen, die  durch wiederholten Aufruf von `s.get()` erzeugt werden
+- `Stream.iterate(T t, UnaryOperator<T> f)`: Stream aus `t, f.apply(t)`, `f.apply(f.apply(t))`, ...
+
+In diesen Fällen muss der Stream begrenzt werden, sonst endet die Berechnung nicht
+
+**Beispiel:** Erzeugung eines Streams mit Iterate:
+
+```java
+// Hilfsmethode zum schönen Ausdrucken	
+Consumer print = x->System.out.print(x+" ");
+        
+Stream.iterate(1,x->x+1)
+    .limit(10).forEach(print);
+// Ausgabe: 1 2 3 4 5 6 7 8 9 10		
+        
+Stream.iterate("*", x-> x+"*")
+    .limit(5).forEach(print);
+// Ausgabe: * ** *** **** ***** 
+```
+
+**Beispiel:** Zusammengesetzter Stream
+
+Zwei Streams lassen sich durch die statische Methode ```Stream.concat(Stream<T> a, Stream<T> b)``` 
+verketten:
+
+```java
+ Stream<Integer> stream1 = Stream.of(1, 3, 5);  
+ Stream<Integer> stream2 = Stream.of(2, 4, 6);
+ Stream<Integer> res = Stream.concat(stream1, stream2);
+```
+
+### Intermediäre Operationen
+
+Intermediäre Operationen „aus der Mitte der Pipeline“ 
+
+Diese fortführenden Operationen sind „faul“ (engl. lazy), sie werden erst bei Bedarf ausgeführt, wenn die terminale Operation dies verlangt
+
+Kennzeichnend für die Stream-Verarbeitung ist die Tatsache, dass jede Methode einen Stream in einen neuen Stream wandelt
+
+>**Beispiele aus java.util.Stream:**
+
+- limit(long s): Stream mit max. s Elementen
+- filter(Predicate<T> p): Stream mit den Elementen, für die p.test(..) true ist
+- sorted(Comparator<T> s): Sortierter Stream 
+- distinct(): Stream ohne Doubletten
+
+Mit map(Function<T, R> m) wird ein Stream<T> in einen Stream<R> konvertiert, indem für alle Elemente der Eingabe m.apply() aufgerufen wird:
+
+```java
+     liste.stream()
+                 .map(String::toUpperCase)	
+                 .forEach(System.out::println);
+```
+
+Umwandlung zwischen Objekt-Streams und Streams primitiver Typen möglich mit: `mapToInt(), mapToLong(), mapToDouble() und mapToObj():`
+
+```java
+Stream.of(1.0, 2.0, 3.0, 4.0, 5.0)
+             .mapToInt(Double::intValue)	
+             .mapToObj(x -> "Wert: " + x)
+             .forEach(System.out::println);
+```
+
+
+>**Beispiele: flatMap**
+Bsp. 1: Ein 2-dimensionales String-Array in einen Stream konvertieren: {{1,2},{3,4},{5,6}} über flatMap zu {1,2,3,4,5,6}
+
+```java
+String[][] listOfNamesLists = foo();
+Stream<String> nameStream = 
+    Stream.of(listOfNameLists).
+    flatMap((x)->Stream.of(x));
+```
+
+Bsp. 2: Zu einem Wert jeweils zwei weitere hinzufügen:
+
+```java
+Stream.of( 1 , 5 , 19, 7)
+.flatMap( x -> Stream.of(x,x+1,x+2))
+.forEach(print);
+
+// Ausgabe: 1 2 3 5 6 7 19 20 21 7 8 9 
+```
+
+### Streams-Datensenken
+
+- Durch einen Java Stream Ausdruck (```z.B. IntStream.of(1, 2, 3).map(x -> 2 * x).filter(x -> x > 1).sum();```) wird eine Verkettung der Verarbeitungsstufen erstellt, indem jede „mittlere“ Stream Methode (z.B. „map“, „filter“ etc.) ein neues Stream Objekt erzeugt und verkettet.
+- Am Ende eines Stream-Ausdrucks steht immer eine Datensenke (terminale Operation), deren Rückgabewert in der Regel **kein Stream** ist.
+- Erst durch diese Datensenke wird die Verarbeitung getriggert: Die Quellelemente werden nacheinander durch die Kette von Operationen geschickt, dabei verarbeitet und in der Datensenke „eingesammelt“ (ggf. verteilt auf mehrere parallele „Arbeiter“)
+
+>**Arten von Datensenken**
+
+Es gibt Datensenken:
+
+- Ohne Rückgabewerte, z.B. forEach, forEachOrdered
+- Mit elementaren Rückgabewerten, z.B. count, sum
+- Mit nutzerdefinierten Rückgabewerten, z.B. collect, reduce
+
+>**Datensenken ohne oder mit primitiven Rückgabewerten**
+
+Die Methode forEach(Consumer<T> a) ruft für alle Elemente des Streams die Methode a.accept() auf
+
+- Consumer<T> ist eine funktionale Schnittstelle. Um damit etwas Sinnvolles machen zu können, muss ein Seiteneffekt (drucken, in Datenbank schreiben, ...) existieren
+- Beispiel: ```forEach(System.out::println)```;
+
+Eine Prüfung ob alle (einzelne, keine) Elemente im Stream eine bestimmte Eigenschaft haben, erfolgt mit 
+`allMatch(Predicate<T> p)`, `anyMatch(Predicate<T> p)` sowie `noneMatch(Predicate<T> p)`
+
+```    
+-> Rückgabe: true/false
+```
+
+- Die Methode count() zählt die Elemente im Stream und liefert die Anzahl zurück
+- Die Methoden toArray() und toArray(IntFunction<T[]> f) liefern die Elemente im Stream als Object[] bzw. T[] zurück, f ist normalerweise der Ausdruck (n)->new T[n] 
+
+min(Comparator<T> c) und max(Comparator<T> c) finden das kleinste bzw. größte Element im Stream (bzgl. c) 
+auch möglich: average() und sum()
+Beispiel:
+
+```java
+Stream.of("1", "2", "3", "4")
+            .mapToInt(Integer::parseInt)
+            .max()
+            .ifPresent(System.out::println);  // -> 4
+```
+
+ifPresent() kommt aus der Klasse Optional<T>
+
+>**Kurzer Exkurs: Optional<T>**
+
+Die Klasse Optional funktioniert wie ein Container, der einen Wert enthalten kann oder nicht
+ 
+- Beispiel: Optional<String> x = Optional.of(“Text“);
+
+Abfragen erfolgen über:
+
+- get() liefert den Wert oder eine NoSuchElementException
+- isPresent() prüft, ob ein Wert vorhanden ist
+- orElse(T o) liefert o zurück, falls kein Wert vorhanden ist
+
+Grund: bisher häufige und fehleranfällige Überprüfung notwendig, ob ein Wert null sein kann
+
+- vereinfacht den Umgang mit null‘s und macht den Code kürzer, kontrollierter Umgang mit null‘s wird notwendig
+- Dafür kann null als Element verarbeitet werden
+
+>**Datensenken mit nutzerdefiniertem Typ**
+
+Die wichtigsten Datensenken sind:
+
+- findAny() findet irgendein Element im Stream
+- findFirst() findet das erste Element im Stream
+
+Beispiel: erstes Element eines Streams holen:	
+
+```java		
+    Stream.of("Kurs1", "Kurs2", "Kurs3")
+            .findFirst()
+            .ifPresent(System.out::println); // -> Kurs1
+```
+
+Weitere wichtige Datensenken sind:
+
+- reduce(BinaryOperator<T> a) reduziert alle Elemente im Stream durch wiederholte Anwendung von a.apply() auf (maximal) einen Wert
+
+
+  - zu reduce gibt es auch überladene Methoden, die eine Parallelverarbeitung erlauben
+
+Beispiel für reduce(BinaryOperator<T> a):
+
+```java
+    personenListe.stream()
+            .reduce((p1, p2) -> p1.age > p2.age ? p1 : p2)
+    .ifPresent(System.out::println);
+```
+Beispiel für reduce(T identity, BinaryOperator<T> a):
+
+```java
+    int result = Stream.of(5, 1, 6, 3)
+            .reduce(17, (i1, i2) -> i1 > i2 ? i1 : i2);
+```
+
+Kollektoren sammeln z.B. die Stream-Elemente in eine Collection
+
+- toList() liefert als Ergebnis eine Liste mit allen Elementen
+- toSet() liefert als Ergebnis eine Menge mit allen Elementen
+- toMap(Function<T, K> k, Function <T, U> v) liefert eine Map<K, U> deren Elemente vom Typ K bzw. U durch die Funktionen k bzw. v aus Elementen vom Typ T erzeugt sind
+
+>**Collect-Beispiele**
+
+```java
+// Erstellen eines Streams von Strings und Sammeln in einem Set
+Stream<String> s = Stream.of("a", "b", "c");
+Set<String> names = s.collect(Collectors.toSet());
+// Ergebnis: [a, b, c]
+
+List<Person> persons = new ArrayList<>();
+persons.add(new Person("1", "Isaac", "Newton"));
+persons.add(new Person("2", "Albert", "Einstein"));
+persons.add(new Person("3", "Nicola", "Tesla"));
+
+Map<String, Person> personMap = persons
+    .stream()
+    .collect(Collectors.toMap(Person::getId, p -> p));
+
+System.out.println(personMap.get("2"));
+// Ausgabe: [2, Albert, Einstein]
+```
+
+### Optimierung
+>**Reihenfolge der Operationen**
+
+Beim Aufbau der Pipeline sollte man die Reihenfolge der Operationen optimieren.
+teils erhebliche Performance-Verbesserungen möglich!
+
+Beispiel:
+
+```java
+Stream.of(listeMitNamen)
+    .sorted((n1, n2) -> { return n1.compareTo(n2); })
+    .map(n -> { return n.toUpperCase(); })
+    .filter(n -> { return n.startsWith("A"); })
+    .forEach(n -> System.out.println(n));
+```
+Hier sollte besser zuerst filter vor sorted stehen
+
+>**Parallele Verarbeitung**
+
+- Neben `stream()` kann auch `parallelStream()` für parallele Streams verwendet werden
+
+
+  - Vielleicht das wichtigste Feature der funktionalen Programmierung !!!
+
+
+```java
+Arrays.asList("Name1", "Name2", "Name3", ...)
+    .parallelStream()
+    .filter(s -> { ... })
+    .sorted((s1, s2) -> { ... })
+    .forEachOrdered(s -> { ... });
+```
+Konvertierung zwischen parallelen und sequentiellen  Streams möglich, Operationen teils „intelligent“, z.B. beim Sortieren über `Arrays.parallelSort()`
+
+>**Parallele Verarbeitung: Primzahlen zählen**
+
+```java
+        System.out.println("Primz Start ... ");
+        Instant start = Instant.now();
+        System.out.println(IntStream.range(1, (int) 5E6) 
+            .parallel()
+            .filter( // Prüfen ob Primzahl (Stream im Filter ...) 
+                x -> IntStream.range(2, (int) (Math.sqrt(x)+1))
+                .filter(teiler -> (x % teiler) == 0)  // Teiler gefunden
+                .limit(1)  // Ein Teiler reicht
+                .count() == 0) // Nur die Werte ohne Teiler zählen
+            .count()
+        );
+        System.out.println(Duration.between(start, Instant.now()));
+```
+
+Parallel:
+Primz Start ... 
+348514
+PT1.616196S
+
+Nicht parallel:
+Primz Start ... 
+348514
+PT5.210741S
+
+### Übungen
+
+## Swing
+
+>**Evolution des User Interface ...**
+
+![](swing-1.png)
+
+>**Vergleich: GUI- vs. CUI/CLI-Programme**
+
+| Merkmal               | GUI (Graphical User Interface)                 | CUI/CLI (Character User Interface / Command Line Interface) |
+|-----------------------|------------------------------------------------|-------------------------------------------------------------|
+| **Steuerungsprinzip** | Ereignissteuerung                              | Flusssteuerung                                              |
+| **Eingabemethoden**   | - Tastendruck<br>- Mausklick<br>- Zeitablauf   | - Tastendrücke über die Kommandozeile                       |
+| **Reaktionsmechanismen** | - Reaktion auf verschiedene Ereignisse (z.B. Tastendruck, Mausklick)<br>- Vervollständigung möglich | - Reaktion nur bei Eingabetaste ("Enter")                   |
+| **Feldsteuerung**     | - Freie Wahl der Felder durch Mausklick / Tab  | - Feldreihenfolge bei Eingabe ist fest                      |
+| **Sichtbarkeit der Eingaben** | - Einzelne Tastendrücke sind erkennbar und programmatisch nutzbar | - Einzelne Tastendrücke für das Programm unsichtbar         |
+| **Programmierung**    | - Ideal mit objektorientierter Programmierung (OOP) umsetzbar | - Auch ohne OOP machbar                                     |
+
+>**Grundsätzliches Vorgehen**
+1. Ein Fenster braucht einen Rahmen: Neue Klasse erstellen, z.B. von JFrame ableiten
+2. Ein Fenster braucht eine Scheibe: Ein JPanel als content pane
+3. Auf die Scheibe kommt ein LayoutManager, der die Anordnung der Komponenten kontrolliert
+4. Dann folgen die einzelnen Komponenten
+5. Schließlich implementieren Sie für die Komponenten Reaktionen auf bestimmte Nutzeraktionen
+
+### Layout mit Swing
+
+>**Layout-Manager**
+- „Write once“ erfordert eine Anpassung der Größen der Fensterelemente
+- Größenanpassung erfolgt automatisch durch die Layout-Manager anhand der „natürlichen“ Größe
+- Kenntnis der Dialog-Manager ist wichtig für die Konstruktion guter Dialoge
+
+  ![](swing-2.png)
+
+  ![](swing-3.png)
+
+  ![](swing-4.png)
+
+>**Border-Layout**
+- Verwendung in Dialogen und in einfachen allgemeinen Programmen
+- Beinhaltet 5 Zonen, deren Orientierung durch eine BorderLayout-Konstante definiert wird:
+
+
+  - Oben (PAGE_START)
+  - Mitte (CENTER)
+  - Unten (PAGE_END)
+  - Rechts (LINE_END)
+  - Links (LINE_START)
+  ![](Swing-5.png)
+- Die PAGE_XX- und LINE_XX-Konstanten berücksichtigen die Schreibrichtung
+
+>**Flow-Layout**
+
+- Verwendet zur Aufreihung vieler Elemente
+- Enthaltene Komponenten werden wie Text umgebrochen:
+  ![](Swing-6.png)
+
+  ![](Swing-7.png)
+
+- Sinnvoll vor allem dort, wo die mangelnde Breite des Containers durch Höhe ersetzt werden kann
+- Die Objekte können von links nach rechts oder von rechts nach links angeordnet werden
+- Die Objekte können mit einem horizontalen oder vertikalen Rand umgeben werden
+
+>**Box-Layout**
+- Verwendet zur horizontalen oder vertikalen Anordnung von Komponenten in einer Reihe
+  ![](Swing-8.png)
+
+- Menüs nutzen dieses Layout, Basis-klasse von `DefaultMenuLayout`, 
+- Die einzelnen Elemente werden nicht umgebrochen oder in der Größe verändert.
+- „Überzählige“ Elemente werden am rechten bzw. linken Ende herausgeschoben
+- Nicht zu verwechseln mit Box-Objekten, die Abstände zwischen Komponenten erzeugen
+
+>**Card- und TabbedPane-Layout**
+- Das Card-Layout ist optimal für die Gestaltung von Assistenten-Dialogen geeignet
+- Die Selektion in der oberen Combobox bestimmt die sichtbare Seite unten
+  ![](Swing-9.png)
+
+- Das TabbedPane-Layout wird für Dialoge mit  mehreren „Seiten“ durch das JTabbedPane-Element genutzt.
+- Das JTabbedPane-Element ist viel einfacher nutzbar
+  ![](Swing-10.png)
+
+>**Grid-Layout**
+- Das Grid-Layout ordnet alle Elemente in einem 2-dimensionalen Gitter an und vergrößert die Komponenten falls notwendig
+  ![](Swing-11.png)
+
+- Wahlweise lassen sich die Zeilen- oder die Spaltenzahl definieren
+- Zwischen den Komponenten können Zwischenräume eingefügt werden
+- Das Grid-Layout ist für viele Anwendungen zu unflexibel, das GridBag-Layout wird bevorzugt
+
+>**GridBag-Layout**
+- Entspricht einem GridLayout, bei dem die Elemente mehrere Zellen umfassen können
+- Die Zellen können gewichtet werden, um den Zuwachs an Platz zu verteilen.
+  ![](Swing-12.png)
+
+- Die Zellen können mit einem Abstand umgeben werden, um das Layout aufzulockern
+- Wenn der Inhalt „zu klein“ ist, kann die Zelle um einen bestimmten inneren Abstand vergrößert werden
+
+>**Absolute-, Spring- und Group-Layout**
+- Das Absolute-Layout positioniert alle Elemente (wie der Name sagt) an einer absoluten Position. Es sollte nur für Experimente verwendet werden
+- Das Spring-Layout positioniert die Elemente, als ob diese durch Federn verbunden wären
+- Das Group-Layout positioniert die Elemente so, als wären sie durch Panel verbunden, ohne dass jedoch Panel vorhanden sind
+- Spring- und Group-Layout werden für das Werkzeug-basierte Layout (Matisse) benutzt.
+  ![](Swing-13.png)
+
+>**Manuelles Dialog-Design**
+- Um einen Dialog zu entwerfen, müssen die Elemente entsprechend ihrer Gruppierung in eine Baumstruktur umgewandelt werden.
+- Durch verschachtelte Anordnung von Panel-Objekten können auch Dialoge mit speziellen Layouts entworfen werden
+  ![](Swing-14.png)
+
+- Bei diesem Taschenrechner, sind in der oberen Reihe die Tasten um 33% breiter 
+  ![](Swing-15.png)
+
+- Die Tasten in der oberen Reihe gehören zu einem Panel über 3 Zellen mit GridLayout im „inneren“ Panel
+
+### Dialogelemente
+
+Swing stellt Ihnen alle Dialogelemente zur Verfügung, die Sie aus Software und Webformularen kennen
+
+- Textfelder (verschiedene Sorten)
+- Buttons
+- Auswahlbuttons (Radio-Button)
+- Dropdown-Menüs (ComboBox)
+- Checkbox zum Anhaken
+- ...
+
+>**JRadioButton und JCheckBox**
+
+- JRadioButton imitiert die in Radio- oder Fernsehgeräten üblichen Wahlschalter:
+
+
+  - Eine kleine Zahl von Knöpfen
+  - Druck auf einen Knopf entriegelt alle anderen Knöpfe
+  - Für den Entriegelungseffekt müssen JRadioButton-Objekte einer ButtonGroup zugeordnet sein
+
+  ![](swing-16.png)
+
+- JCheckBox imitiert eine binäre Ankreuzoption auf Formularen:
+
+     ![](swing-17.png)
+
+>**JButton und Aktionen**
+
+- Die Klasse JButton legt klickbare Buttons an (z.B. OK-Button, Weiter-Button, ...)
+- Wird der Button geklickt, muss diese Tatsache registriert und weitergegeben werden
+- Dann kann auf den Button-Klick reagiert werden
+
+>**Aktionen und Listener**
+
+- Ein Klick auf einen Button erzeugt ein ActionEvent
+- Andere Aktionen (z.B. Tippen, Maus bewegen) erzeugen ebenfalls Events
+- Um auf Events zu reagieren, hängt man einen Listener an das Objekt, das Events erzeugen kann
+- Wenn der Listener ein Event gemeldet bekommt, führt er seinen Code aus
+
+ActionListener: Codebeispiel
+
+```java
+ActionListener al = new ActionListener() {
+	public void actionPerformed(ActionEvent e) {
+    		button1.setIcon(icon2);
+    }
+};
+
+button1.addActionListener(al);
+```
+oder
+
+```java
+button1.addActionListener(e–>button1.setIcon(icon2));
+```
+
+>**Listener**
+- Listener können, wie im Beispiel, als anonyme Klasse/Lambda-Ausdruck implementiert werden
+- Alternativ kann man einen Listener schreiben, den man mehrfach in ähnlichen Situationen verwendet
+- Dazu erstellt man eine neue Klasse, die das entsprechende Listener-Interface implementiert (z.B. `ActionListener`)
+- An das Event-generierende Objekt wird dann eine neue Instanz dieser Listener-Klasse gehängt
+
+>**Geteilte Arbeit: Model/View**
+
+Viele Swing-Dialogelemente teilen die Arbeit auf zwei Ebenen auf:
+
+- Die View-Ebene ist für die Darstellung zuständig
+- Die Model-Ebene verantwortet die Fachfunktion
+
+Beispiel JFormattedTextField für eine Datumseingabe:
+
+- Die Anzeige stellt das Datum als 1.10.2012 dar
+- Das Modell prüft, ob ein eingegebener Wert erlaubt ist und wechselt ggf. zum vorherigen Wert zurück
+
+**Vorteile von Model/View**
+
+- Eine Trennung von Modell und Darstellung bietet die Möglichkeit,
+
+
+  - dieselbe Information auf verschiedene Arten zu  präsentieren, z.B. Zahlen binär, oktal oder dezimal,
+  - oder in der Darstellung von den eigentlichen Daten abzuweichen, z.B. durch automatische Umbrüche
+  - sowie Daten zu verwalten, die in der eigentlichen Information fehlen, z.B. die aktuelle Schreibmarke
+- Bei den Textkomponenten heißen die Modelle XXDocument, sonst XXModel
+
+>**JTextField, JTextArea & JTextPane**
+Diese Klassen erben von JTextComponent:
+
+- TextField stellt unformatierte einzeilige Texte dar
+- JTextArea stellt unformatierte mehrzeilige Texte dar
+- JTextPane stellt formatierte mehrzeilige Texte dar
+
+Das zugehörige Modell erbt von Document:
+
+- PlainDocument für unformatierte Texte
+- DefaultStyledDocument für formatierte Texte
+
+Alle Änderungen am Inhalt des Textes werden über das Document kommuniziert
+
+>**Model/View-Aufgabenteilung**
+
+Alle Methoden zur Ein-/Ausgabe werden für die jeweiligen Views aufgerufen:
+
+- Setzen und Abfragen der Schreibmarke
+- Setzen und Abfragen der Selektion
+- Abfangen von Mausklicks und Tastatureingaben
+
+Methoden, die den Dokumentinhalt betreffen, werden für das Modell aufgerufen:
+
+- Setzen und Abfragen des Inhalts
+- Setzen und Abfragen der Formatierung
+
+>**Textein- und -ausgaben**
+
+Für die Textausgabe gibt es in Swing JLabel
+
+- Hat kein Modell, mehrzeilige Ausgaben (oder z.B. Farbe) durch HTML-Steuerzeichen (<br>)
+- Alternativ auch mit einem Bild (Icon)
+- Kann einer Komponente zur Navigation über Mnemonics zugeordnet werden
+
+Für einzeilige Texteingaben existieren drei verschiedene GUI-Objekte:
+
+- JTextField für „normale“ Eingaben
+- JPasswordField für verdeckte Eingaben
+- JFormattedTextField für formatierte Eingaben
+
+>**Benutzung spezieller Texteingaben**
+
+- JPasswordField sollte mit char[] getPassword() ausgelesen werden, da getText() einen String liefert, der u.U. sehr lange im Speicher steht
+- JFormattedTextField kann für die Eingabe von formatierten Texten z.B. Mailadressen von HFT-Studierenden genutzt werden:
+
+```java
+MaskFormatter mf = new MaskFormatter("##LLLL#LLL@hft-...");
+              mf.setPlaceholderChar('_');
+              JFormattedTextField ftf = new JFormattedTextField(mf);
+```
+
+>**Formatierung mit MaskFormatter**
+- Alle nicht zur Formatierung benutzten Zeichen werden in den Text übernommen
+- Die Formatierungszeichen sind wie folgt:
+
+
+  - `#`: Ziffer
+  - `'`: Maskiert ein Formatierungszeichen
+  - `U`: Großbuchstaben
+  - `L`: Kleinbuchstaben
+  - `A`: Buchstaben oder Ziffern
+  - `?`: Beliebige Buchstaben
+  - `*`: Beliebige Zeichen
+  - `H`: Hex-Ziffern
